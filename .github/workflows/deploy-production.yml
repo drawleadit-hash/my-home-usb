@@ -30,7 +30,7 @@ jobs:
         env:
           CI: false
         run: |
-          echo "REACT_APP_BACKEND_URL=https://myhomeusb.com" > .env
+          echo "REACT_APP_BACKEND_URL=https://construction.drawlead.com" > .env
           yarn build
 
       - name: Update backend code on VPS
@@ -85,7 +85,7 @@ jobs:
             cd ${{ secrets.VPS_APP_PATH }}
 
             echo "==> Restoring production frontend .env on VPS"
-            echo "REACT_APP_BACKEND_URL=https://myhomeusb.com" > frontend/.env
+            echo "REACT_APP_BACKEND_URL=https://construction.drawlead.com" > frontend/.env
 
             echo "==> Ensuring swap exists (OOM protection)"
             if [ ! -f /swapfile ]; then
