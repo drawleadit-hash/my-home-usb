@@ -1056,6 +1056,7 @@ export default function MarketingBoard() {
                 </Label>
                 <Switch
                   id="distribution-toggle"
+                  className="data-[state=checked]:bg-green-600"
                   checked={settings?.enabled}
                   onCheckedChange={toggleDistribution}
                 />
