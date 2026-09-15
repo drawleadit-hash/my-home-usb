@@ -105,6 +105,16 @@ jobs:
             fi
             pm2 save
 
+            echo "==> Syncing build to the folder nginx actually serves"
+            NGINX_ROOT=$(nginx -T 2>/dev/null | awk '/^[[:space:]]*server[[:space:]]*\{/ {sn=0; r=""} /server_name/ && /construction\.drawlead\.com/ {sn=1} $1=="root" {gsub(/;/,"",$2); r=$2} sn && r!="" {print r; exit}')
+            echo "nginx root for construction.drawlead.com: ${NGINX_ROOT:-<not found>}"
+            if [ -n "$NGINX_ROOT" ] && [ "$NGINX_ROOT" != "$PWD/frontend/build" ] && [ -f "$NGINX_ROOT/index.html" ]; then
+              cp -a frontend/build/. "$NGINX_ROOT"/
+              echo "Copied new build into $NGINX_ROOT"
+            else
+              echo "No separate nginx root to sync (or it has no index.html) - skipping"
+            fi
+
             echo "==> Verifying deployment"
             ls frontend/build/index.html
             pm2 status
