@@ -1,5 +1,7 @@
 // craco.config.js
 const path = require("path");
+// Load .env.local first so local overrides win (dotenv never overwrites a set var).
+require("dotenv").config({ path: path.resolve(__dirname, ".env.local") });
 require("dotenv").config();
 
 // Check if we're in development/preview mode (not production build)

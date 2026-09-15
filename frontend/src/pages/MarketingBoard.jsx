@@ -3535,7 +3535,7 @@ export default function MarketingBoard() {
               <Input
                 value={credentialsForm.redirect_uri}
                 onChange={(e) => setCredentialsForm(prev => ({ ...prev, redirect_uri: e.target.value }))}
-                placeholder="https://www.myhomeusb.com/api/oauth/sheets/callback"
+                placeholder="https://construction.drawlead.com/api/oauth/sheets/callback"
                 data-testid="sheets-cred-redirect-uri"
               />
               <p className="text-[11px] text-gray-400 mt-1">Must exactly match an Authorized redirect URI on the Google Cloud OAuth Client.</p>

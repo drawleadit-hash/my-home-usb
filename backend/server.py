@@ -64,6 +64,7 @@ class CSRFMiddleware(BaseHTTPMiddleware):
         
         # Also allow the production domain
         production_origins = [
+            "https://construction.drawlead.com",
             "https://myhomeusb.com",
             "https://www.myhomeusb.com",
             "http://myhomeusb.com",
@@ -195,6 +196,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
     allow_origins=os.environ.get('CORS_ORIGINS', 'https://crm-onboard-flow.preview.emergentagent.com').split(',') + [
+        "https://construction.drawlead.com",
         "https://myhomeusb.com",
         "https://www.myhomeusb.com",
         "http://myhomeusb.com",

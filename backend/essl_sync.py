@@ -40,7 +40,7 @@ CONFIG = {
     "DB_DRIVER": "{ODBC Driver 17 for SQL Server}",
 
     # ConstructionOS CRM (SECURE - no password stored)
-    "CRM_API_URL": "https://myhomeusb.com/api",
+    "CRM_API_URL": "https://construction.drawlead.com/api",
     "SYNC_KEY": os.environ.get("ESSL_SYNC_KEY", ""),  # Paste your key here OR set env var
 
     # Settings

@@ -86,7 +86,7 @@ export default function Login() {
       if (!res.data.setup_complete) {
         navigate('/setup', { replace: true });
       }
-      setDemoMode(res.data.demo_mode && !window.location.hostname.includes('myhomeusb.com'));
+      setDemoMode(res.data.demo_mode && !['construction.drawlead.com', 'myhomeusb.com'].some(h => window.location.hostname.includes(h)));
     }).catch(() => {});
   }, [navigate]);
 
