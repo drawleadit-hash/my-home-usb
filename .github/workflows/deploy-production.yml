@@ -50,12 +50,11 @@ jobs:
 
             echo "==> Installing backend deps"
             cd backend
-            if [ -f requirements.txt ]; then
-              if [ -d venv ]; then
-                source venv/bin/activate
-              fi
-              pip install -r requirements.txt || true
+            if [ ! -d venv ]; then
+              echo "No venv found, creating one"
+              python3 -m venv venv
             fi
+            venv/bin/pip install -r requirements.txt || true
             cd ..
 
             echo "==> Preparing fresh build directory"
@@ -92,27 +91,27 @@ jobs:
               fallocate -l 2G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile && echo '/swapfile none swap sw 0 0' >> /etc/fstab || true
             fi
 
-            echo "==> Restarting PM2 backend (retrying on transient resource-throttle kills)"
-            set +e
-            RESTART_OK=0
-            for attempt in 1 2 3; do
-              echo "--- Attempt $attempt ---"
-              pm2 stop all && pm2 start all --update-env
-              if [ $? -eq 0 ]; then
-                RESTART_OK=1
-                break
-              fi
-              echo "Attempt $attempt failed, waiting 15s before retry..."
-              sleep 15
-            done
-            set -e
-            if [ "$RESTART_OK" -ne 1 ]; then
-              echo "PM2 restart failed after 3 attempts"
-              exit 1
+            if [ ! -f backend/.env ]; then
+              echo "WARNING: backend/.env is missing - backend will crash without MONGO_URL/DB_NAME"
+            fi
+
+            echo "==> Starting or restarting PM2 backend"
+            if pm2 describe backend > /dev/null 2>&1; then
+              echo "backend process found, restarting"
+              pm2 restart backend --update-env
+            else
+              echo "No backend process registered in PM2, starting it"
+              pm2 start "$PWD/backend/venv/bin/uvicorn" --name backend --interpreter none --cwd "$PWD/backend" --max-restarts 10 --restart-delay 5000 -- main:app --host 0.0.0.0 --port 8001
             fi
             pm2 save
 
             echo "==> Verifying deployment"
             ls frontend/build/index.html
             pm2 status
+            sleep 10
+            echo "--- Backend health (local) ---"
+            curl -s -o /dev/null -w "setup-status HTTP %{http_code}\n" http://127.0.0.1:8001/api/auth/setup-status || echo "backend not responding on 8001"
+            pm2 logs backend --lines 30 --nostream || true
+            echo "--- nginx web roots (must match $PWD/frontend/build) ---"
+            grep -Rn "server_name\|root " /etc/nginx/sites-enabled/ || true
             echo "===DEPLOY COMPLETE==="
