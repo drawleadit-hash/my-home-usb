@@ -256,7 +256,7 @@ export default function SetupWizard() {
 
         {/* Footer */}
         <p className="text-center text-slate-500 text-xs mt-6">
-          Powered by Construction OS
+          Powered by Drawlead
         </p>
       </div>
     </div>
