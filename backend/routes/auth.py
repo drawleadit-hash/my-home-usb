@@ -330,6 +330,16 @@ class DemoLoginRequest(BaseModel):
 
 DEMO_MODE = os.environ.get("DEMO_MODE", "false").lower() == "true"
 
+# Passwordless demo login is limited to these seeded demo accounts, so real
+# users can never be signed in without a password even when DEMO_MODE is on.
+DEMO_LOGIN_EMAILS = {
+    "admin@constructionos.com", "gm@constructionos.com", "cre@constructionos.com",
+    "accountant@constructionos.com", "pm@constructionos.com", "planning@constructionos.com",
+    "procurement@constructionos.com", "engineer@constructionos.com", "presales@constructionos.com",
+    "sales@constructionos.com", "architect@constructionos.com", "hr@constructionos.com",
+    "raj@client.com", "mohan@client.com", "vendor@balaji.com",
+}
+
 
 @router.post("/auth/demo-login")
 async def demo_login(login_request: DemoLoginRequest, request: Request, response: Response):
@@ -358,6 +368,15 @@ async def demo_login(login_request: DemoLoginRequest, request: Request, response
 
     if not InputValidator.check_nosql_injection(email):
         raise HTTPException(status_code=400, detail="Invalid input detected")
+
+    if email.lower() not in DEMO_LOGIN_EMAILS:
+        audit_entry = AuditLogger.create_audit_entry(
+            user_id="unknown", action=AuditAction.LOGIN_FAILED,
+            resource_type="auth", details={"reason": "not_a_demo_account", "email": email[:50]},
+            ip_address=client_ip, success=False
+        )
+        await db.audit_logs.insert_one(audit_entry)
+        raise HTTPException(status_code=403, detail="Demo login is only available for demo accounts.")
 
     user_doc = await db.users.find_one({"email": email}, {"_id": 0})
 
