@@ -94,7 +94,7 @@ export default function VendorPortal() {
               <Package className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">My Home USB</h1>
+              <h1 className="text-xl font-bold text-gray-900">Drawlead Construction ERP</h1>
               <p className="text-xs text-gray-500">Vendor Portal</p>
             </div>
           </div>

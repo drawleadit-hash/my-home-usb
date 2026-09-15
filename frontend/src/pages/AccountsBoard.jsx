@@ -2348,12 +2348,12 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
       .amount{font-size:24px;text-align:center;color:#059669;margin:20px 0}
       .footer{text-align:center;margin-top:30px;color:#999;font-size:12px}
       @media print{button{display:none}}</style></head><body>
-      <h1>My Home USB</h1><p style="text-align:center;color:#666">Payment Receipt</p>
+      <h1>Drawlead Construction ERP</h1><p style="text-align:center;color:#666">Payment Receipt</p>
       <div class="amount">${fmtFull(entry.amount)}</div>
       <div class="row"><span class="label">Date</span><span class="value">${new Date(entry.approved_at || entry.payment_date || entry.created_at).toLocaleDateString('en-IN')}</span></div>
       <div class="row"><span class="label">Project</span><span class="value">${entry.project_name || 'N/A'}</span></div>
       <div class="row"><span class="label">Mode</span><span class="value">${entry.payment_mode || entry.payment_method || 'Cash'}</span></div>
-      <div class="footer">Generated on ${new Date().toLocaleString('en-IN')}<br>My Home USB - Urban Space Builders</div>
+      <div class="footer">Generated on ${new Date().toLocaleString('en-IN')}<br>Drawlead Construction ERP</div>
       <div style="text-align:center;margin-top:20px">
         <button onclick="window.print()" style="padding:8px 24px;background:#d97706;color:#fff;border:none;border-radius:6px;cursor:pointer">Print / Download PDF</button>
       </div></body></html>`);

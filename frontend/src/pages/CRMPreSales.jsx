@@ -3031,7 +3031,7 @@ function PackageLinkShareDialog({ state, onClose, currentStageId, onMoveToPackag
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `urbanspace-packages-${(clientName || 'client').split(' ')[0].toLowerCase()}.pdf`;
+      a.download = `drawlead-packages-${(clientName || 'client').split(' ')[0].toLowerCase()}.pdf`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

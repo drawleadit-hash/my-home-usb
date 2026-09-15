@@ -2600,7 +2600,7 @@ async def archive_project_send_otp(project_id: str, user: User = Depends(get_cur
                 "html": f"""
                 <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto;">
                     <div style="background: #1F2937; padding: 16px; text-align: center;">
-                        <h2 style="margin: 0; color: #FBBF24;">My Home USB</h2>
+                        <h2 style="margin: 0; color: #FBBF24;">Drawlead Construction ERP</h2>
                     </div>
                     <div style="padding: 24px; background: #fff; border: 1px solid #E5E7EB;">
                         <p style="color: #1F2937;">Hi {user_name},</p>

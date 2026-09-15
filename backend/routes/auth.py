@@ -855,7 +855,7 @@ async def setup_2fa(data: TwoFactorSetupRequest, user: User = Depends(get_curren
     secret = pyotp.random_base32()
     totp = pyotp.TOTP(secret)
     email = user_doc.get("email", "user")
-    provisioning_uri = totp.provisioning_uri(name=email, issuer_name="My Home USB")
+    provisioning_uri = totp.provisioning_uri(name=email, issuer_name="Drawlead Construction ERP")
 
     # Generate QR code as base64
     qr = qrcode.QRCode(version=1, box_size=6, border=2)

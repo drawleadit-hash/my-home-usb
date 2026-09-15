@@ -350,7 +350,7 @@ function ProtectedRoute({ children }) {
         pre_sales: 'Pre Sales', sales: 'Sales', architect: 'Architect',
         marketing_head: 'Marketing Head', drawlead_marketing: 'Drawlead Marketing', client: 'Client', vendor: 'Vendor',
       };
-      document.title = `${roleLabels[user.role] || user.role} | My Home USB`;
+      document.title = `${roleLabels[user.role] || user.role} | Drawlead Construction ERP`;
     }
   }, [user]);
 

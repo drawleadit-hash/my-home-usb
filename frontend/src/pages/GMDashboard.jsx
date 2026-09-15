@@ -1401,7 +1401,7 @@ const GMDashboard = () => {
             </DialogTitle>
             {viewType === 're_project' && (
               <DialogDescription>
-                URBAN SPACE BUILDERS - Ref: {viewItem?.re_project_id}
+                DRAWLEAD - Ref: {viewItem?.re_project_id}
               </DialogDescription>
             )}
           </DialogHeader>
@@ -1690,7 +1690,7 @@ const GMDashboard = () => {
               </Button>
             </DialogTitle>
             <DialogDescription>
-              URBAN SPACE BUILDERS - Ref: {reEditProject?.re_number || reEditProject?.re_project_id}
+              DRAWLEAD - Ref: {reEditProject?.re_number || reEditProject?.re_project_id}
               {reEditProject?.revision > 0 && <span className="ml-2 font-semibold">(Revision RE{reEditProject.revision})</span>}
             </DialogDescription>
           </DialogHeader>

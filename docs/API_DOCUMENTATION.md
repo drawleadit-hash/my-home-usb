@@ -1023,7 +1023,7 @@ Get company settings.
 **Response:**
 ```json
 {
-  "company_name": "Urban Space Builders",
+  "company_name": "Drawlead",
   "logo_url": "https://...",
   "address": "123 Main St, Chennai",
   "phone": "044-12345678",
@@ -1328,4 +1328,4 @@ Official SDKs coming soon:
 
 ---
 
-*© 2026 Urban Space Builders Tech. All rights reserved.*
+*© 2026 Drawlead. All rights reserved.*

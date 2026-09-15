@@ -59,7 +59,7 @@ export default function CreateProspectUserDialog({ open, onOpenChange, lead, onC
   const copy = (txt) => { navigator.clipboard.writeText(txt); toast.success('Copied'); };
   const buildShareText = (c) => {
     const url = window.location.origin;
-    return `*Welcome to Urban Space Builders!*\n\nYour stress-free construction quote is ready.\n\nLogin here: ${url}/login\nEmail: ${c.email}\nPassword: ${c.plain_password}\n\nUse this link on your *mobile* for the best experience.`;
+    return `*Welcome to Drawlead!*\n\nYour stress-free construction quote is ready.\n\nLogin here: ${url}/login\nEmail: ${c.email}\nPassword: ${c.plain_password}\n\nUse this link on your *mobile* for the best experience.`;
   };
 
   return (

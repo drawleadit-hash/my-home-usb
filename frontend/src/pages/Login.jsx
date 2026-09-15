@@ -72,7 +72,7 @@ export default function Login() {
   // Feb 26 2026 — Branding (app name + logo URL) loaded from /api/branding
   // so the Super Admin can change them without a deploy.
   const [branding, setBranding] = useState({
-    app_name: 'My Home USB',
+    app_name: 'Drawlead Construction ERP',
     logo_url: '/logo.webp',
   });
   useEffect(() => {
@@ -177,24 +177,17 @@ export default function Login() {
       >
         {/* Header / Branding */}
         <div className="flex flex-col items-center pt-8 pb-4 px-6">
-          <img
-            src={branding.logo_url || '/logo.webp'}
-            alt={branding.app_name || 'App logo'}
-            className="w-28 object-contain mb-3"
-            style={{ mixBlendMode: 'multiply' }}
-            data-testid="login-logo"
-          />
           <h1
             className="text-3xl font-extrabold tracking-tight text-slate-800"
             data-testid="login-title"
           >
-            {branding.app_name || 'My Home USB'}
+            {branding.app_name || 'Drawlead Construction ERP'}
           </h1>
           <p
             className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-600/80 mt-1"
             data-testid="login-subtitle"
           >
-            Powered by Urban Space Builders
+            Powered by Drawlead
           </p>
         </div>
 

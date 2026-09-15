@@ -372,9 +372,8 @@ export default function ClientPortal() {
         <nav className="bg-white border-b border-gray-200 px-4 py-3 sm:px-6 sm:py-4 print:hidden">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 sm:gap-3">
-              <img src="/logo.webp" alt="My Home USB" className="h-8 w-8 sm:h-9 sm:w-9 object-contain" style={{mixBlendMode: "multiply"}} />
               <div>
-                <h1 className="text-base sm:text-xl font-bold text-gray-900">My Home USB</h1>
+                <h1 className="text-base sm:text-xl font-bold text-gray-900">Drawlead Construction ERP</h1>
                 <p className="text-xs text-gray-500">Client Portal</p>
               </div>
             </div>
@@ -485,9 +484,8 @@ export default function ClientPortal() {
                 <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
             )}
-            <img src="/logo.webp" alt="My Home USB" className="h-8 w-8 sm:h-9 sm:w-9 object-contain" style={{mixBlendMode: "multiply"}} />
             <div>
-              <h1 className="text-base sm:text-xl font-bold text-gray-900">My Home USB</h1>
+              <h1 className="text-base sm:text-xl font-bold text-gray-900">Drawlead Construction ERP</h1>
               <p className="text-xs text-gray-500 hidden sm:block">Client Portal</p>
             </div>
           </div>
@@ -517,7 +515,7 @@ export default function ClientPortal() {
       <div className="hidden print:block p-6 border-b">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold">My Home USB</h1>
+            <h1 className="text-2xl font-bold">Drawlead Construction ERP</h1>
             <p className="text-gray-500">Project Report</p>
           </div>
           <div className="text-right">
@@ -1882,7 +1880,7 @@ export default function ClientPortal() {
 
         {/* Print Footer */}
         <div className="hidden print:block mt-8 pt-4 border-t text-center text-sm text-gray-500">
-          <p>Generated from My Home USB Client Portal • {new Date().toLocaleDateString('en-IN')}</p>
+          <p>Generated from Drawlead Construction ERP Client Portal • {new Date().toLocaleDateString('en-IN')}</p>
         </div>
       </div>
       <MobileBottomNav user={user} />

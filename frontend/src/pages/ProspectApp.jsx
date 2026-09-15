@@ -349,8 +349,8 @@ function LetsBuildTab({ sales }) {
         <div className="inline-flex items-center justify-center h-20 w-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-amber-500 text-white shadow-xl mb-3">
           <Building2 className="h-10 w-10" />
         </div>
-        <p className="text-2xl font-extrabold text-gray-800 leading-tight">Urban Space</p>
-        <p className="text-[11px] text-gray-500 uppercase tracking-widest">Builders</p>
+        <p className="text-2xl font-extrabold text-gray-800 leading-tight">Drawlead</p>
+        <p className="text-[11px] text-gray-500 uppercase tracking-widest">Construction</p>
       </div>
 
       <Card className="border-2 border-dashed border-emerald-300 bg-emerald-50/50">

@@ -716,7 +716,7 @@ export default function REProjectsPage({ embedded = false }) {
               </Button>
             </DialogTitle>
             <DialogDescription>
-              URBAN SPACE BUILDERS - Ref: {selectedProject?.re_number || selectedProject?.re_project_id}
+              DRAWLEAD - Ref: {selectedProject?.re_number || selectedProject?.re_project_id}
               {selectedProject?.revision > 0 && <span className="ml-2 font-semibold">(Revision RE{selectedProject.revision})</span>}
             </DialogDescription>
           </DialogHeader>

@@ -106,7 +106,7 @@ async def get_hr_settings(user: User = Depends(get_current_user)):
     if not settings:
         settings = {
             "settings_id": "hr_global",
-            "company_name": "Urbanspace Builders",
+            "company_name": "Drawlead",
             "company_address": "Door No. D2, 17, 1st street, soumya Nagar, Perumbakkam, Chennai- 600100",
             "department_timings": {
                 "default": {"start": "09:00", "end": "18:00", "grace_minutes": 15},

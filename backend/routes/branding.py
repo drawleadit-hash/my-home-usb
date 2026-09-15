@@ -50,12 +50,18 @@ async def _get_or_init_doc():
     if doc is None:
         doc = {
             "_id": BRANDING_DOC_ID,
-            "app_name": "My Home USB",
+            "app_name": "Drawlead Construction ERP",
             "logo_version": 0,
             "favicon_version": 0,
             "updated_at": datetime.now(timezone.utc).isoformat(),
         }
         await db.branding_settings.insert_one(doc)
+    elif doc.get("app_name") == "My Home USB":
+        # Sep 2026 rebrand: migrate the old stored default in place.
+        doc["app_name"] = "Drawlead Construction ERP"
+        await db.branding_settings.update_one(
+            {"_id": BRANDING_DOC_ID}, {"$set": {"app_name": doc["app_name"]}},
+        )
     return doc
 
 
@@ -64,7 +70,7 @@ def _shape(doc: dict) -> dict:
     lv = doc.get("logo_version") or 0
     fv = doc.get("favicon_version") or 0
     return {
-        "app_name": doc.get("app_name") or "My Home USB",
+        "app_name": doc.get("app_name") or "Drawlead Construction ERP",
         "logo_url": f"/logo.webp?v={lv}",
         "favicon_url": f"/icon-192.png?v={fv}",
         "favicon_512_url": f"/icon-512.png?v={fv}",

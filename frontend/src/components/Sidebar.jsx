@@ -80,8 +80,7 @@ export default function Sidebar({ open, onClose, user }) {
       >
         <div className="p-6 flex items-center justify-between border-b border-secondary-foreground/10">
           <div className="flex items-center gap-2">
-            <img src="/logo.webp" alt="My Home USB" className="h-8 w-8 object-contain" style={{mixBlendMode: 'multiply'}} />
-            <span className="font-bold text-lg">My Home USB</span>
+            <span className="font-bold text-lg">Drawlead Construction ERP</span>
           </div>
           <Button
             data-testid="close-sidebar-btn"

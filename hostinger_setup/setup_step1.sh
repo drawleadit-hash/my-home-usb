@@ -1,11 +1,11 @@
 #!/bin/bash
 # ============================================
-# My Home USB - Hostinger VPS Setup Script
+# Drawlead Construction ERP - Hostinger VPS Setup Script
 # Run this on your VPS after SSH login
 # ============================================
 
 echo "========================================="
-echo "  My Home USB - VPS Setup Starting..."
+echo "  Drawlead Construction ERP - VPS Setup Starting..."
 echo "========================================="
 
 # Step 1: Update system

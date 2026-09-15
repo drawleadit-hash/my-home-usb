@@ -586,7 +586,7 @@ export default function Settings() {
                         id="brand-name-input"
                         value={brandName}
                         onChange={(e) => setBrandName(e.target.value)}
-                        placeholder="My Home USB"
+                        placeholder="Drawlead Construction ERP"
                         maxLength={80}
                         data-testid="branding-name-input"
                       />

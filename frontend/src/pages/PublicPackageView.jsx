@@ -15,7 +15,6 @@ import { Home, Phone, PhoneCall, Loader2, AlertCircle, CheckCircle, Calendar as 
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 const publicAxios = axios.create({ withCredentials: false });
-const URBAN_LOGO = 'https://customer-assets.emergentagent.com/job_10daf0a1-16d3-40c8-bdda-23bef46d5e3c/artifacts/d5w0bsh3_images.png';
 
 // Mon-Sat, 10:00 AM – 6:00 PM, 30-min increments
 const TIME_SLOTS = (() => {
@@ -89,12 +88,6 @@ export default function PublicPackageView() {
               </p>
               <p className="text-[10px] text-amber-700 italic leading-tight mt-0.5">"Pick the package that fits your dream home"</p>
             </div>
-            <img
-              src={URBAN_LOGO}
-              alt="Urban Space Builders"
-              className="h-9 w-9 rounded-full shadow ring-2 ring-amber-200 shrink-0 object-contain bg-white"
-              data-testid="urban-logo"
-            />
           </div>
         </header>
 

@@ -30,10 +30,10 @@ class _PackagePDF(FPDF):
         self.set_xy(14, 8)
         self.set_text_color(*BRAND_DARK)
         self.set_font("Helvetica", "B", 16)
-        self.cell(0, 6, _safe("Urban Space Builders"), new_x="LMARGIN", new_y="NEXT")
+        self.cell(0, 6, _safe("Drawlead"), new_x="LMARGIN", new_y="NEXT")
         self.set_font("Helvetica", "", 9)
         self.set_text_color(*BRAND_GRAY)
-        self.cell(0, 4, _safe("myhomeusb.com  -  Premium Home Construction Packages"), new_x="LMARGIN", new_y="NEXT")
+        self.cell(0, 4, _safe("construction.drawlead.com  -  Premium Home Construction Packages"), new_x="LMARGIN", new_y="NEXT")
         self.ln(4)
 
     def footer(self):

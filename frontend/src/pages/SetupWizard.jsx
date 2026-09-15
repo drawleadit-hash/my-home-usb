@@ -152,7 +152,7 @@ export default function SetupWizard() {
                 <Label htmlFor="company_name">Company Name *</Label>
                 <Input
                   id="company_name"
-                  placeholder="e.g. Urban Space Builders"
+                  placeholder="e.g. Drawlead"
                   value={form.company_name}
                   onChange={e => update('company_name', e.target.value)}
                   className="mt-1"

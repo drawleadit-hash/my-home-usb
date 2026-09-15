@@ -2,12 +2,12 @@ import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
 const COMPANY_INFO = {
-  name: 'URBAN SPACE BUILDERS',
+  name: 'DRAWLEAD',
   tagline: 'Building Dreams Into Reality',
   address: 'No.123, Construction Lane, Chennai - 600001',
   phone: '+91 44 2345 6789',
   email: 'info@urbanspacebuilders.com',
-  website: 'www.urbanspacebuilders.com',
+  website: 'construction.drawlead.com',
   gstin: 'GSTIN: 33XXXXX1234X1Z5'
 };
 
@@ -29,7 +29,7 @@ export async function generateREPDF(project) {
   doc.setTextColor(245, 245, 245);
   doc.setFontSize(50);
   doc.setFont('helvetica', 'bold');
-  doc.text('URBAN SPACE', pageWidth / 2, pageHeight / 2 - 10, { align: 'center', angle: 35 });
+  doc.text('DRAWLEAD', pageWidth / 2, pageHeight / 2 - 10, { align: 'center', angle: 35 });
   doc.text('BUILDERS', pageWidth / 2, pageHeight / 2 + 15, { align: 'center', angle: 35 });
 
   // ─── HEADER / LETTERPAD ───
@@ -274,7 +274,7 @@ export async function generateREPDF(project) {
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(7);
   doc.setTextColor(60, 60, 60);
-  doc.text('URBAN SPACE BUILDERS', margin, footerY);
+  doc.text('DRAWLEAD', margin, footerY);
 
   // Center: Terms
   doc.setFont('helvetica', 'normal');

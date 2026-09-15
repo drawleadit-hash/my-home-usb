@@ -289,9 +289,8 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
               wordmark text collapses on mobile (icon-only) to make room. */}
           <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0 min-w-0">
             <div className="flex items-center gap-2.5 cursor-pointer shrink-0" onClick={() => navigate(navItems[0]?.path || '/dashboard')} data-testid="header-brand">
-              <img src="/logo.webp" alt="My Home USB" className="h-9 w-9 object-contain" style={{ mixBlendMode: 'multiply' }} />
               <div className={`leading-tight ${backTo ? 'hidden sm:block' : ''}`}>
-                <span className="font-bold text-base text-gray-900 block">My Home USB</span>
+                <span className="font-bold text-base text-gray-900 block">Drawlead Construction ERP</span>
                 <span className="text-[10px] font-semibold uppercase tracking-wider text-amber-600">
                   {roleLabel(role)}
                 </span>

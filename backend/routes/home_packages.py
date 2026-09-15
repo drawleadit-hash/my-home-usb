@@ -154,7 +154,7 @@ async def generate_package_link(lead_id: str, user: User = Depends(get_current_u
         "created_at": now.isoformat(),
         "created_by": user.user_id,
         "created_by_name": user.name,
-        "greeting": f"Hi {(lead.get('name') or lead.get('client_name') or 'there').split()[0]}, here are your Urban Space package details 👇",
+        "greeting": f"Hi {(lead.get('name') or lead.get('client_name') or 'there').split()[0]}, here are your Drawlead package details 👇",
         "open_count": 0,
         "last_opened_at": None,
     }
@@ -236,7 +236,7 @@ async def get_generic_package_link(user: User = Depends(get_current_user)):
         "token": token,
         "lead_id": None,
         "is_generic": True,
-        "client_name": "Urban Space Builders",
+        "client_name": "Drawlead",
         "sales_user_id": user.user_id,
         "sales_user_name": user.name,
         "sales_user_phone": None,
@@ -341,7 +341,7 @@ async def public_package_pdf(token: str):
                 return FileResponse(
                     fp,
                     media_type="application/pdf",
-                    filename=f"urbanspace-packages-{client_first}.pdf",
+                    filename=f"drawlead-packages-{client_first}.pdf",
                 )
         # Fall through to generated if the stored file is missing
 
@@ -352,7 +352,7 @@ async def public_package_pdf(token: str):
 
     pdf_bytes = build_package_pdf(link.get("client_name"), packages)
     safe_name = (link.get("client_name") or "client").split()[0].lower()
-    filename = f"urbanspace-packages-{safe_name}.pdf"
+    filename = f"drawlead-packages-{safe_name}.pdf"
     return Response(
         content=pdf_bytes,
         media_type="application/pdf",
