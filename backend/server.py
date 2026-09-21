@@ -304,6 +304,21 @@ async def startup_init():
     await _safe_index(startup_db.direct_expenses, [("created_at", -1)])
     await _safe_index(startup_db.material_expenses, [("created_at", -1)])
     await _safe_index(startup_db.labour_expenses, [("created_at", -1)])
+    # Remove duplicate lead stages (concurrent first-load requests could each
+    # insert the default set), then enforce uniqueness per (stage_type, stage_id).
+    try:
+        dupes = startup_db.lead_stages.aggregate([
+            {"$sort": {"_id": 1}},
+            {"$group": {"_id": {"t": "$stage_type", "s": "$stage_id"}, "ids": {"$push": "$_id"}, "n": {"$sum": 1}}},
+            {"$match": {"n": {"$gt": 1}}},
+        ])
+        extra_ids = [oid async for g in dupes for oid in g["ids"][1:]]
+        if extra_ids:
+            await startup_db.lead_stages.delete_many({"_id": {"$in": extra_ids}})
+            logger.info(f"Removed {len(extra_ids)} duplicate lead stages")
+    except Exception as de:
+        logger.warning(f"Lead stage de-duplication failed (non-fatal): {de}")
+    await _safe_index(startup_db.lead_stages, [("stage_type", 1), ("stage_id", 1)], unique=True)
     logger.info("MongoDB indexes verified/created")
 
     # Auto-seed demo users only in DEMO_MODE

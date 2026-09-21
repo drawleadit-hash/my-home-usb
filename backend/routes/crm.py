@@ -291,6 +291,15 @@ class GoogleOAuthToken(BaseModel):
 
 # ==================== CRM HELPER FUNCTIONS ====================
 
+async def _insert_stage_if_missing(stage: dict):
+    """Insert a system stage only if (stage_type, stage_id) doesn't exist yet.
+    Upsert keeps concurrent requests from inserting the same default stage twice."""
+    await db.lead_stages.update_one(
+        {"stage_id": stage["stage_id"], "stage_type": stage["stage_type"]},
+        {"$setOnInsert": stage},
+        upsert=True,
+    )
+
 async def get_default_pre_sales_stages():
     """Get or create default Pre-Sales stages - also fills missing stages"""
     stages = await db.lead_stages.find({"stage_type": "pre_sales"}, {"_id": 0}).sort("order", 1).to_list(100)
@@ -308,7 +317,7 @@ async def get_default_pre_sales_stages():
         ]
         for stage in default_stages:
             stage["created_at"] = datetime.now(timezone.utc)
-            await db.lead_stages.insert_one(stage)
+            await _insert_stage_if_missing(stage)
         stages = default_stages
     else:
         # Retire Portfolio-sent stage (Apr 2026) + migrate any live leads to Follow-up.
@@ -345,7 +354,7 @@ async def get_default_pre_sales_stages():
         for m in missing:
             if m["stage_id"] not in existing_ids:
                 m["created_at"] = datetime.now(timezone.utc)
-                await db.lead_stages.insert_one(m)
+                await _insert_stage_if_missing(m)
                 stages.append(m)
         stages.sort(key=lambda x: x.get("order", 99))
     # Ensure Appointment Booked has is_final=True (critical for Pre-Sales → Sales transfer)
@@ -434,14 +443,14 @@ async def get_default_sales_stages():
         ]
         for stage in default_stages:
             stage["created_at"] = datetime.now(timezone.utc)
-            await db.lead_stages.insert_one(stage)
+            await _insert_stage_if_missing(stage)
         stages = default_stages
     else:
         # Ensure "New Appointment" stage exists for Pre-Sales → Sales transfer
         existing_ids = {s["stage_id"] for s in stages}
         if "stg_new_appt" not in existing_ids:
             new_appt = {"stage_id": "stg_new_appt", "name": "New Appointment", "stage_type": "sales", "order": 1, "color": "#6366f1", "is_final": False, "is_active": True, "created_by": "system", "created_at": datetime.now(timezone.utc)}
-            await db.lead_stages.insert_one(new_appt)
+            await _insert_stage_if_missing(new_appt)
             stages.insert(0, new_appt)
         # Ensure "Appointment Booked" in pre_sales has is_final=True
         await db.lead_stages.update_one(
@@ -534,7 +543,7 @@ async def migrate_stages(user: User = Depends(get_current_user)):
                 stage["is_active"] = True
                 stage["created_by"] = "migration"
                 stage["created_at"] = datetime.now(timezone.utc)
-                await db.lead_stages.insert_one(stage)
+                await _insert_stage_if_missing(stage)
                 added.append(f"{stage_type}: {stage['name']}")
             else:
                 # Fix is_final and order
