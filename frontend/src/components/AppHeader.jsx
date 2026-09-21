@@ -194,7 +194,9 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
         if (tp !== cp) return false;
         const tparams = new URLSearchParams(tq || '');
         const cparams = new URLSearchParams(cq || '');
-        return tparams.get('tab') === cparams.get('tab');
+        // Compare sub too — Cashbook and Expense share tab=cashbook
+        return tparams.get('tab') === cparams.get('tab')
+          && (tparams.get('sub') || '') === (cparams.get('sub') || '');
       };
       return (
         <div className="bg-white border-b border-gray-200 px-4 lg:px-6 sticky top-0 z-40 dark:bg-gray-900 dark:border-gray-800" data-testid="embedded-sub-nav">
