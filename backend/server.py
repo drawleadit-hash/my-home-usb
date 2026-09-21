@@ -316,8 +316,7 @@ async def startup_init():
         pwd_ctx = CryptContext(schemes=["bcrypt"], deprecated="auto")
         existing = await startup_db.users.count_documents({})
 
-        if existing == 0 and demo_mode:
-            demo_password_hash = pwd_ctx.hash("Demo@1234")
+        if demo_mode:
             demo_users = [
                 {"user_id": "user_superadmin001", "email": "admin@constructionos.com", "name": "Rajesh Kumar", "role": "super_admin", "phone": "+91 9876543210"},
                 {"user_id": "user_gm001", "email": "gm@constructionos.com", "name": "Suresh Menon", "role": "general_manager", "phone": "+91 9876543220"},
@@ -329,19 +328,42 @@ async def startup_init():
                 {"user_id": "user_engineer001", "email": "engineer@constructionos.com", "name": "Vikram Singh", "role": "site_engineer", "phone": "+91 9876543215"},
                 {"user_id": "user_presales001", "email": "presales@constructionos.com", "name": "Kavitha Nair", "role": "pre_sales", "phone": "+91 9876543230"},
                 {"user_id": "user_sales001", "email": "sales@constructionos.com", "name": "Ravi Sales", "role": "sales", "phone": "+91 9876543231"},
+                {"user_id": "user_architect001", "email": "architect@constructionos.com", "name": "Arjun Architect", "role": "architect", "phone": "+91 9876543232"},
+                {"user_id": "user_hr001", "email": "hr@constructionos.com", "name": "Meena HR", "role": "hr", "phone": "+91 9876543233"},
                 {"user_id": "user_client001", "email": "raj@client.com", "name": "Mr. Raj", "role": "client", "phone": "+91 9876543216"},
                 {"user_id": "user_client002", "email": "mohan@client.com", "name": "Mr. Mohan", "role": "client", "phone": "+91 9876543217"},
                 {"user_id": "user_vendor001", "email": "vendor@balaji.com", "name": "Balaji Vendor", "role": "vendor", "phone": "+91 9876501234"},
             ]
-            now = datetime.now(timezone.utc).isoformat()
-            for u in demo_users:
-                u["password_hash"] = demo_password_hash
-                u["is_active"] = True
-                u["status"] = "active"
-                u["created_at"] = now
-            await startup_db.users.insert_many(demo_users)
-            logger.info(f"Auto-seeded {len(demo_users)} demo users (password: Demo@1234)")
-        elif existing == 0 and not demo_mode:
+            # Add only the demo accounts that are missing, so a DB that was seeded
+            # earlier (or partially) still gets every Demo Access role.
+            existing_emails = {
+                (d.get("email") or "").lower()
+                async for d in startup_db.users.find(
+                    {"email": {"$in": [u["email"] for u in demo_users]}}, {"_id": 0, "email": 1}
+                )
+            }
+            existing_ids = {
+                d["user_id"]
+                async for d in startup_db.users.find(
+                    {"user_id": {"$in": [u["user_id"] for u in demo_users]}}, {"_id": 0, "user_id": 1}
+                )
+            }
+            missing = [u for u in demo_users if u["email"] not in existing_emails]
+            if missing:
+                demo_password_hash = pwd_ctx.hash("Demo@1234")
+                now = datetime.now(timezone.utc).isoformat()
+                for u in missing:
+                    if u["user_id"] in existing_ids:
+                        u["user_id"] = f"{u['user_id']}_demo"
+                    u["password_hash"] = demo_password_hash
+                    u["is_active"] = True
+                    u["status"] = "active"
+                    u["created_at"] = now
+                await startup_db.users.insert_many(missing)
+                logger.info(f"Auto-seeded {len(missing)} missing demo users: {[u['email'] for u in missing]}")
+            else:
+                logger.info(f"All demo users present ({existing} users in DB)")
+        elif existing == 0:
             logger.info("No users found and DEMO_MODE is off. Awaiting first-time setup via /api/auth/initial-setup")
         else:
             logger.info(f"Database has {existing} users, skipping seed")
