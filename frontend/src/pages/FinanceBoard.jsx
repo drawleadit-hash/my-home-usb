@@ -34,7 +34,7 @@ export default function FinanceBoard() {
     <div className="min-h-screen bg-gray-50 flex flex-col" data-testid="finance-board">
       <AppHeader user={user} headerActions={
         <Link to="/cashflow-engine">
-          <Button size="sm" variant="outline" className="h-9 border-indigo-300 text-indigo-700 hover:bg-indigo-50" data-testid="finance-cashflow-engine-btn">
+          <Button size="sm" className="h-9 bg-blue-600 hover:bg-blue-700 text-white" data-testid="finance-cashflow-engine-btn">
             <Wallet className="h-4 w-4 mr-1.5" /> Cashflow Engine
           </Button>
         </Link>

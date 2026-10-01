@@ -6408,7 +6408,7 @@ export default function AccountsBoard() {
   // Cashflow Engine quick-link for Accountant/SuperAdmin
   const cashflowLinkButton = (
     <Link to="/cashflow-engine">
-      <Button size="sm" variant="outline" className="h-9 px-3 border-indigo-300 text-indigo-700 hover:bg-indigo-50" data-testid="accounts-cashflow-engine-link">
+      <Button size="sm" className="h-9 px-3 bg-blue-600 hover:bg-blue-700 text-white" data-testid="accounts-cashflow-engine-link">
         <Wallet className="h-4 w-4 mr-1.5" /> Cashflow Engine
       </Button>
     </Link>
