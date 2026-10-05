@@ -61,7 +61,7 @@ export default function PublicPackageView() {
       .finally(() => setLoading(false));
   }, [token]);
 
-  if (loading) return <Center><Loader2 className="h-8 w-8 animate-spin text-amber-600" /></Center>;
+  if (loading) return <Center><Loader2 className="h-8 w-8 animate-spin text-primary" /></Center>;
   if (err) return (
     <Center>
       <Card className="max-w-md w-full"><CardContent className="py-10 text-center">
@@ -76,7 +76,7 @@ export default function PublicPackageView() {
   const sales = data?.sales_person || {};
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-emerald-50 select-none" data-testid="public-package-view">
+    <div className="min-h-screen bg-amber-50 select-none" data-testid="public-package-view">
       <div className="max-w-md mx-auto min-h-screen flex flex-col relative">
 
         {/* Compact header */}
@@ -102,7 +102,7 @@ export default function PublicPackageView() {
         <div className="fixed bottom-[64px] left-0 right-0 z-30 pointer-events-none">
           <div className="max-w-md mx-auto px-3 pb-2 space-y-2 pointer-events-auto">
             <Button
-              className="w-full h-11 bg-amber-500 hover:bg-amber-600 text-white shadow-xl gap-2"
+              className="w-full h-11 bg-primary hover:bg-primary-hover text-white shadow-xl gap-2"
               onClick={() => setOfficeDialog(true)}
               data-testid="visit-office-btn"
             >
@@ -110,7 +110,7 @@ export default function PublicPackageView() {
             </Button>
             {sales?.phone && (
               <a href={`tel:${sales.phone}`} className="block">
-                <Button variant="outline" className="w-full h-10 border-amber-600 text-amber-700 bg-white hover:bg-amber-50 gap-2 shadow-md" data-testid="package-call-sales-btn">
+                <Button variant="outline" className="w-full h-10 border-amber-600 text-primary-strong bg-white hover:bg-brand-50 gap-2 shadow-md" data-testid="package-call-sales-btn">
                   <PhoneCall className="h-4 w-4" /> Call {sales.name || 'Sales'} — {sales.phone}
                 </Button>
               </a>
@@ -174,7 +174,7 @@ function BottomTab({ active, onClick, icon, label, testid }) {
 
 function Center({ children }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-emerald-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-amber-50 flex items-center justify-center px-4">
       {children}
     </div>
   );
@@ -194,7 +194,7 @@ function PackagesNav({ packages }) {
             <TabsTrigger
               key={p.package_id}
               value={p.package_id}
-              className="text-[10px] py-1.5 data-[state=active]:bg-amber-500 data-[state=active]:text-white"
+              className="text-[10px] py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white"
               data-testid={`pkg-tab-${p.short_name?.toLowerCase().replace(/\s+/g, '-') || p.package_id}`}
             >
               <span className="flex items-center gap-1 min-w-0">
@@ -218,7 +218,7 @@ function PackageCard({ pkg }) {
   const hasDiscount = pkg.original_price_per_sqft && pkg.original_price_per_sqft > pkg.price_per_sqft;
   return (
     <>
-      <Card className="bg-gradient-to-br from-amber-50 to-amber-100/50 border-amber-200 overflow-hidden">
+      <Card className="bg-amber-50 border-amber-200 overflow-hidden">
         <CardContent className="p-0">
           <div className="px-4 pt-5 pb-3 text-center">
             <Home className="h-7 w-7 text-amber-600 mx-auto mb-2" />
@@ -270,10 +270,10 @@ function TestimonialsNav({ testimonials, homeTours }) {
   return (
     <Tabs defaultValue="testimonial">
       <TabsList className="grid grid-cols-2 w-full h-auto py-1 bg-white border sticky top-[72px] z-[5]">
-        <TabsTrigger value="testimonial" className="text-[11px] py-1.5 data-[state=active]:bg-amber-500 data-[state=active]:text-white" data-testid="inner-tab-testimonial">
+        <TabsTrigger value="testimonial" className="text-[11px] py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white" data-testid="inner-tab-testimonial">
           <Quote className="h-3 w-3 mr-1" /> Testimonial <span className="ml-1 opacity-70">({testimonials.length})</span>
         </TabsTrigger>
-        <TabsTrigger value="home-tour" className="text-[11px] py-1.5 data-[state=active]:bg-purple-500 data-[state=active]:text-white" data-testid="inner-tab-home-tour">
+        <TabsTrigger value="home-tour" className="text-[11px] py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white" data-testid="inner-tab-home-tour">
           <Home className="h-3 w-3 mr-1" /> Home Tour <span className="ml-1 opacity-70">({homeTours.length})</span>
         </TabsTrigger>
       </TabsList>
@@ -361,10 +361,10 @@ function ProjectsNav({ completed, ongoing, upcoming }) {
         <TabsTrigger value="completed" className="text-[10px] py-1.5 data-[state=active]:bg-emerald-500 data-[state=active]:text-white" data-testid="proj-tab-completed">
           <CheckCircle className="h-3 w-3 mr-1" /> Completed <span className="ml-1 opacity-70">({completed.length})</span>
         </TabsTrigger>
-        <TabsTrigger value="ongoing" className="text-[10px] py-1.5 data-[state=active]:bg-amber-500 data-[state=active]:text-white" data-testid="proj-tab-ongoing">
+        <TabsTrigger value="ongoing" className="text-[10px] py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white" data-testid="proj-tab-ongoing">
           <Construction className="h-3 w-3 mr-1" /> Ongoing <span className="ml-1 opacity-70">({ongoing.length})</span>
         </TabsTrigger>
-        <TabsTrigger value="upcoming" className="text-[10px] py-1.5 data-[state=active]:bg-purple-500 data-[state=active]:text-white" data-testid="proj-tab-upcoming">
+        <TabsTrigger value="upcoming" className="text-[10px] py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white" data-testid="proj-tab-upcoming">
           <Sparkles className="h-3 w-3 mr-1" /> Upcoming <span className="ml-1 opacity-70">({upcoming.length})</span>
         </TabsTrigger>
       </TabsList>
@@ -542,7 +542,7 @@ function VisitOfficeDialog({ open, onOpenChange, token, data, onBooked }) {
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)} disabled={submitting}>Cancel</Button>
-          <Button className="bg-emerald-600 hover:bg-emerald-700 gap-1" onClick={handleSubmit} disabled={submitting} data-testid="office-submit-btn">
+          <Button className="bg-primary hover:bg-primary-hover gap-1" onClick={handleSubmit} disabled={submitting} data-testid="office-submit-btn">
             {submitting ? <><Loader2 className="h-4 w-4 animate-spin" /> Booking…</> : <><CalendarIcon className="h-4 w-4" /> Confirm Visit</>}
           </Button>
         </DialogFooter>
@@ -554,7 +554,7 @@ function VisitOfficeDialog({ open, onOpenChange, token, data, onBooked }) {
 // ===================== Expired =====================
 function ExpiredView({ token, data }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-emerald-50 px-4 py-6" data-testid="public-package-expired">
+    <div className="min-h-screen bg-amber-50 px-4 py-6" data-testid="public-package-expired">
       <div className="max-w-md mx-auto space-y-3">
         <Card><CardContent className="py-6 text-center">
           <AlertCircle className="h-12 w-12 text-amber-500 mx-auto mb-3" />
@@ -574,7 +574,7 @@ function ExpiredView({ token, data }) {
               </div>
             </div>
             <a href={`tel:${data.sales_person.phone}`} className="block mt-3">
-              <Button className="w-full bg-emerald-600 hover:bg-emerald-700 gap-2"><PhoneCall className="h-4 w-4" /> Call Now</Button>
+              <Button className="w-full bg-primary hover:bg-primary-hover gap-2"><PhoneCall className="h-4 w-4" /> Call Now</Button>
             </a>
           </CardContent></Card>
         )}

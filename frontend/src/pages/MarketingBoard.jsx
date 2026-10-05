@@ -1028,19 +1028,19 @@ export default function MarketingBoard() {
   if (loading && !user) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <RefreshCw className="h-8 w-8 animate-spin text-indigo-600" />
+        <RefreshCw className="h-8 w-8 animate-spin text-primary" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-indigo-50">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <AppHeader user={user} />
 
       <main className="max-w-7xl mx-auto px-4 py-6">
         {/* Distribution Engine Settings */}
-        <Card className="mb-6 border-2 border-indigo-200 bg-gradient-to-r from-indigo-50 to-purple-50">
+        <Card className="mb-6 border-2 border-indigo-200 bg-indigo-50">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -1067,25 +1067,25 @@ export default function MarketingBoard() {
 
         {/* Stats Overview */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-          <Card className="bg-gradient-to-br from-gray-700 to-gray-800 text-white">
+          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-brand-400 text-white">
             <CardContent className="p-4">
               <p className="text-blue-100 text-sm">Total Pre-Sales Leads</p>
               <p className="text-3xl font-bold">{dashboard?.total_pre_sales_leads || 0}</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white">
+          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-brand-400 text-white">
             <CardContent className="p-4">
               <p className="text-green-100 text-sm">Total Sales Appointments</p>
               <p className="text-3xl font-bold">{dashboard?.total_sales_leads || 0}</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-purple-500 to-purple-600 text-white">
+          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-purple-400 text-white">
             <CardContent className="p-4">
               <p className="text-purple-100 text-sm">Pre-Sales Team</p>
               <p className="text-3xl font-bold">{dashboard?.pre_sales_team?.length || 0}</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-orange-500 to-orange-600 text-white">
+          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-orange-400 text-white">
             <CardContent className="p-4">
               <p className="text-orange-100 text-sm">Sales Team</p>
               <p className="text-3xl font-bold">{dashboard?.sales_team?.length || 0}</p>
@@ -1095,16 +1095,16 @@ export default function MarketingBoard() {
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
           <TabsList className="bg-white border">
-            <TabsTrigger value="overview" className="data-[state=active]:bg-indigo-100">
+            <TabsTrigger value="overview" className="data-[state=active]:bg-brand-100">
               <BarChart3 className="h-4 w-4 mr-2" /> Overview
             </TabsTrigger>
-            <TabsTrigger value="team" className="data-[state=active]:bg-indigo-100">
+            <TabsTrigger value="team" className="data-[state=active]:bg-brand-100">
               <Users className="h-4 w-4 mr-2" /> Sales Team
             </TabsTrigger>
-            <TabsTrigger value="leads" className="data-[state=active]:bg-indigo-100">
+            <TabsTrigger value="leads" className="data-[state=active]:bg-brand-100">
               <Layers className="h-4 w-4 mr-2" /> All Leads
             </TabsTrigger>
-            <TabsTrigger value="sources" className="data-[state=active]:bg-indigo-100">
+            <TabsTrigger value="sources" className="data-[state=active]:bg-brand-100">
               <TrendingUp className="h-4 w-4 mr-2" /> Lead Sources
             </TabsTrigger>
             <TabsTrigger value="google_sheets" className="data-[state=active]:bg-emerald-100" data-testid="google-sheets-tab">
@@ -1118,7 +1118,7 @@ export default function MarketingBoard() {
               {/* Pre-Sales Team Summary */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-amber-700">
+                  <CardTitle className="flex items-center gap-2 text-foreground">
                     <Users className="h-5 w-5" /> Pre-Sales Team
                   </CardTitle>
                   <CardDescription>Lead qualification and appointment booking</CardDescription>
@@ -1133,7 +1133,7 @@ export default function MarketingBoard() {
                       >
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-white font-bold">
+                            <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white font-bold">
                               {member.name?.charAt(0) || 'U'}
                             </div>
                             <div>
@@ -1184,7 +1184,7 @@ export default function MarketingBoard() {
                       >
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white font-bold">
+                            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold">
                               {member.name?.charAt(0) || 'U'}
                             </div>
                             <div>
@@ -1255,7 +1255,7 @@ export default function MarketingBoard() {
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div>
-                      <CardTitle className="flex items-center gap-2 text-amber-700">
+                      <CardTitle className="flex items-center gap-2 text-foreground">
                         <Users className="h-5 w-5" /> Pre-Sales Team
                       </CardTitle>
                       <CardDescription>Lead qualification and appointment booking team</CardDescription>
@@ -1283,7 +1283,7 @@ export default function MarketingBoard() {
                           <tr key={member.user_id} className="hover:bg-gray-50">
                             <td className="px-4 py-3">
                               <div className="flex items-center gap-3">
-                                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-white font-bold text-sm">
+                                <div className="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center text-white font-bold text-sm">
                                   {member.name?.charAt(0)}
                                 </div>
                                 <span className="font-medium">{member.name}</span>
@@ -1308,7 +1308,7 @@ export default function MarketingBoard() {
                                 <Button variant="ghost" size="sm" onClick={() => openPersonView(member, 'pre_sales')} data-testid={`view-pre-sales-${member.user_id}`}>
                                   <Eye className="h-4 w-4" />
                                 </Button>
-                                <Button variant="ghost" size="sm" className="text-amber-600 hover:bg-amber-50" title="Transfer role + leads to another user" onClick={() => openTransferDialog(member, 'pre_sales')} data-testid={`transfer-pre-sales-${member.user_id}`}>
+                                <Button variant="ghost" size="sm" className="text-primary-strong hover:bg-brand-50" title="Transfer role + leads to another user" onClick={() => openTransferDialog(member, 'pre_sales')} data-testid={`transfer-pre-sales-${member.user_id}`}>
                                   <ArrowRightLeft className="h-4 w-4" />
                                 </Button>
                               </div>
@@ -1354,7 +1354,7 @@ export default function MarketingBoard() {
                           <tr key={member.user_id} className="hover:bg-gray-50">
                             <td className="px-4 py-3">
                               <div className="flex items-center gap-3">
-                                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white font-bold text-sm">
+                                <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm">
                                   {member.name?.charAt(0)}
                                 </div>
                                 <span className="font-medium">{member.name}</span>
@@ -1379,7 +1379,7 @@ export default function MarketingBoard() {
                                 <Button variant="ghost" size="sm" onClick={() => openPersonView(member, 'sales')} data-testid={`view-sales-${member.user_id}`}>
                                   <Eye className="h-4 w-4" />
                                 </Button>
-                                <Button variant="ghost" size="sm" className="text-amber-600 hover:bg-amber-50" title="Transfer role + leads to another user" onClick={() => openTransferDialog(member, 'sales')} data-testid={`transfer-sales-${member.user_id}`}>
+                                <Button variant="ghost" size="sm" className="text-primary-strong hover:bg-brand-50" title="Transfer role + leads to another user" onClick={() => openTransferDialog(member, 'sales')} data-testid={`transfer-sales-${member.user_id}`}>
                                   <ArrowRightLeft className="h-4 w-4" />
                                 </Button>
                               </div>
@@ -1401,7 +1401,7 @@ export default function MarketingBoard() {
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <CardTitle>All Leads</CardTitle>
                   <div className="flex flex-wrap gap-3">
-                    <Button onClick={() => setShowAddLead(true)} className="bg-green-600 hover:bg-green-700" data-testid="add-new-lead-btn">
+                    <Button onClick={() => setShowAddLead(true)} className="bg-primary hover:bg-primary-hover" data-testid="add-new-lead-btn">
                       <Plus className="h-4 w-4 mr-2" /> Add New Lead
                     </Button>
                     <div className="relative">
@@ -1529,7 +1529,7 @@ export default function MarketingBoard() {
                           </td>
                           <td className="px-2 py-2">
                             <div className="flex items-center gap-1">
-                              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                              <div className="w-7 h-7 rounded-full bg-gray-800 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
                                 {lead.name?.charAt(0)}
                               </div>
                               <span className="font-medium text-xs truncate">{lead.name}</span>
@@ -1632,7 +1632,7 @@ export default function MarketingBoard() {
                       variant="outline" 
                       size="sm" 
                       onClick={() => setShowExportDialog(true)}
-                      className="gap-1.5 border-blue-300 text-blue-700 hover:bg-blue-50"
+                      className="gap-1.5 border-brand-300 text-primary-strong hover:bg-brand-50"
                       data-testid="export-sheets-btn"
                     >
                       <Download className="h-4 w-4" /> Export to Sheets
@@ -1660,7 +1660,7 @@ export default function MarketingBoard() {
           <TabsContent value="google_sheets">
             <div className="space-y-6">
               {/* Connection Status */}
-              <Card className="border-2 border-emerald-200 bg-gradient-to-r from-emerald-50 to-green-50">
+              <Card className="border-2 border-emerald-200 bg-emerald-50">
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -1695,7 +1695,7 @@ export default function MarketingBoard() {
                         <Button variant="outline" size="sm" onClick={openCredentialsDialog} className="gap-1.5" data-testid="sheets-settings-btn">
                           <Settings className="h-3.5 w-3.5" /> Settings
                         </Button>
-                        <Button onClick={connectGoogleSheets} className="bg-emerald-600 hover:bg-emerald-700 gap-1.5" data-testid="connect-google-sheets-btn">
+                        <Button onClick={connectGoogleSheets} className="bg-primary hover:bg-primary-hover gap-1.5" data-testid="connect-google-sheets-btn">
                           <Link className="h-4 w-4" /> Connect Google Sheets
                         </Button>
                       </div>
@@ -1736,7 +1736,7 @@ export default function MarketingBoard() {
                             className="flex-1"
                             data-testid="zap-sheet-url"
                           />
-                          <Button onClick={zapFetchTabs} disabled={zapLoading} className="bg-emerald-600 hover:bg-emerald-700 gap-1.5 whitespace-nowrap" data-testid="zap-fetch-btn">
+                          <Button onClick={zapFetchTabs} disabled={zapLoading} className="bg-primary hover:bg-primary-hover gap-1.5 whitespace-nowrap" data-testid="zap-fetch-btn">
                             {zapLoading ? <RefreshCw className="h-4 w-4 animate-spin" /> : <ArrowRight className="h-4 w-4" />}
                             {zapLoading ? 'Reading...' : 'Fetch Tabs'}
                           </Button>
@@ -1759,7 +1759,7 @@ export default function MarketingBoard() {
                               <Button variant="outline" size="sm" onClick={() => { setZapStep('url'); setZapPreview(null); }}>
                                 <ArrowRight className="h-3.5 w-3.5 rotate-180 mr-1" /> Back
                               </Button>
-                              <Button onClick={zapImportAll} disabled={zapLoading} className="bg-emerald-600 hover:bg-emerald-700 gap-1.5" data-testid="zap-import-btn">
+                              <Button onClick={zapImportAll} disabled={zapLoading} className="bg-primary hover:bg-primary-hover gap-1.5" data-testid="zap-import-btn">
                                 {zapLoading ? <RefreshCw className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />}
                                 {zapLoading ? 'Importing...' : `Import All ${zapPreview.tabs.filter(t => !t.is_empty).length} Tabs`}
                               </Button>
@@ -1844,7 +1844,7 @@ export default function MarketingBoard() {
                                               <Button 
                                                 variant="outline" 
                                                 size="sm" 
-                                                className="h-7 text-xs gap-1 border-amber-300 text-amber-700 hover:bg-amber-50"
+                                                className="h-7 text-xs gap-1 border-brand-300 text-primary-strong hover:bg-brand-50"
                                                 onClick={() => zapAddCustomField(tab.tab_name, col, info.original)}
                                                 data-testid={`add-field-${tab.tab_name}-${col}`}
                                               >
@@ -1867,7 +1867,7 @@ export default function MarketingBoard() {
 
                       {/* Bottom Import Button */}
                       <div className="flex justify-end">
-                        <Button onClick={zapImportAll} disabled={zapLoading} className="bg-emerald-600 hover:bg-emerald-700 gap-1.5" size="lg">
+                        <Button onClick={zapImportAll} disabled={zapLoading} className="bg-primary hover:bg-primary-hover gap-1.5" size="lg">
                           {zapLoading ? <RefreshCw className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />}
                           {zapLoading ? 'Importing...' : `Import All ${zapPreview.tabs.filter(t => !t.is_empty).length} Tabs`}
                         </Button>
@@ -2035,7 +2035,7 @@ export default function MarketingBoard() {
         <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-3">
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold ${selectedPerson?.type === 'pre_sales' ? 'bg-gradient-to-br from-amber-400 to-amber-600' : 'bg-gradient-to-br from-green-400 to-green-600'}`}>
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold ${selectedPerson?.type === 'pre_sales' ? 'bg-gray-900' : 'bg-primary'}`}>
                 {selectedPerson?.name?.charAt(0)}
               </div>
               <div>
@@ -2285,7 +2285,7 @@ export default function MarketingBoard() {
             </div>
             <div className="flex gap-3 justify-end mt-6">
               <Button variant="outline" onClick={() => setShowAddMember(false)}>Cancel</Button>
-              <Button onClick={handleAddMember} className="bg-indigo-600 hover:bg-indigo-700">
+              <Button onClick={handleAddMember} className="bg-primary hover:bg-primary-hover">
                 <UserPlus className="h-4 w-4 mr-2" /> Add Member
               </Button>
             </div>
@@ -2333,7 +2333,7 @@ export default function MarketingBoard() {
               </div>
               <div className="flex gap-3 justify-end mt-6">
                 <Button variant="outline" onClick={() => { setShowEditLead(false); setEditingLead(null); }}>Cancel</Button>
-                <Button onClick={handleUpdateLead} className="bg-indigo-600 hover:bg-indigo-700">
+                <Button onClick={handleUpdateLead} className="bg-primary hover:bg-primary-hover">
                   Save Changes
                 </Button>
               </div>
@@ -2348,7 +2348,7 @@ export default function MarketingBoard() {
           <DialogHeader>
             <DialogTitle className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white text-xl font-bold">
+                <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-white text-xl font-bold">
                   {selectedLead?.name?.charAt(0)?.toUpperCase()}
                 </div>
                 <div>
@@ -2369,7 +2369,7 @@ export default function MarketingBoard() {
                   variant="outline" 
                   size="sm" 
                   onClick={() => { setShowLeadDetail(false); openEditLead(selectedLead); }}
-                  className="text-amber-600 border-blue-200 hover:bg-amber-50"
+                  className="text-primary-strong border-blue-200 hover:bg-brand-50"
                 >
                   <Edit2 className="h-4 w-4 mr-1" /> Edit
                 </Button>
@@ -2479,7 +2479,7 @@ export default function MarketingBoard() {
                   <CardContent>
                     {selectedLead.assigned_to ? (
                       <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-white font-bold">
+                        <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold">
                           {selectedLead.assigned_to_name?.charAt(0)?.toUpperCase()}
                         </div>
                         <div>
@@ -2528,7 +2528,7 @@ export default function MarketingBoard() {
                               {dashboard?.pre_sales_team?.map(m => (
                                 <SelectItem key={m.user_id} value={m.user_id}>
                                   <div className="flex items-center gap-2">
-                                    <div className="w-6 h-6 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 text-xs font-bold">
+                                    <div className="w-6 h-6 rounded-full bg-brand-100 flex items-center justify-center text-brand-800 text-xs font-bold">
                                       {m.name?.charAt(0)}
                                     </div>
                                     {m.name} - {m.stats?.leads_count || 0} leads
@@ -2703,7 +2703,7 @@ export default function MarketingBoard() {
                     <Unlink className="h-4 w-4 mr-2" /> Disconnect
                   </Button>
                 ) : (
-                  <Button onClick={connectGoogleSheets} className="bg-emerald-600 hover:bg-emerald-700" data-testid="connect-google-btn">
+                  <Button onClick={connectGoogleSheets} className="bg-primary hover:bg-primary-hover" data-testid="connect-google-btn">
                     <Link className="h-4 w-4 mr-2" /> Connect Google Account
                   </Button>
                 )}
@@ -2765,7 +2765,7 @@ export default function MarketingBoard() {
                             value={sheetUrl}
                             onChange={(e) => setSheetUrl(e.target.value)}
                           />
-                          <Button onClick={previewSheet} disabled={isPreviewLoading} className="bg-emerald-600 hover:bg-emerald-700">
+                          <Button onClick={previewSheet} disabled={isPreviewLoading} className="bg-primary hover:bg-primary-hover">
                             {isPreviewLoading ? <RefreshCw className="h-4 w-4 animate-spin" /> : 'Preview'}
                           </Button>
                         </div>
@@ -2886,7 +2886,7 @@ export default function MarketingBoard() {
                             <Button 
                               onClick={importAllSheets} 
                               disabled={isImporting}
-                              className="bg-emerald-600 hover:bg-emerald-700"
+                              className="bg-primary hover:bg-primary-hover"
                             >
                               {isImporting ? <RefreshCw className="h-4 w-4 mr-2 animate-spin" /> : <Download className="h-4 w-4 mr-2" />}
                               Import All Tabs ({sheetPreview.sheets?.length || 1})
@@ -2923,7 +2923,7 @@ export default function MarketingBoard() {
                                   size="sm"
                                   onClick={() => importLeads(source.source_id)}
                                   disabled={isImporting}
-                                  className="bg-emerald-600 hover:bg-emerald-700"
+                                  className="bg-primary hover:bg-primary-hover"
                                 >
                                   {isImporting ? <RefreshCw className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
                                   <span className="ml-1">Import</span>
@@ -2969,7 +2969,7 @@ export default function MarketingBoard() {
                             value={sheetUrl}
                             onChange={(e) => setSheetUrl(e.target.value)}
                           />
-                          <Button onClick={previewSheet} disabled={isPreviewLoading} className="bg-emerald-600 hover:bg-emerald-700">
+                          <Button onClick={previewSheet} disabled={isPreviewLoading} className="bg-primary hover:bg-primary-hover">
                             {isPreviewLoading ? <RefreshCw className="h-4 w-4 animate-spin" /> : 'Preview'}
                           </Button>
                         </div>
@@ -3076,7 +3076,7 @@ export default function MarketingBoard() {
                           </div>
                         )}
 
-                        <Button onClick={addSheetSource} className="w-full bg-emerald-600 hover:bg-emerald-700">
+                        <Button onClick={addSheetSource} className="w-full bg-primary hover:bg-primary-hover">
                           <Plus className="h-4 w-4 mr-2" /> Add This Source
                         </Button>
                       </CardContent>
@@ -3092,7 +3092,7 @@ export default function MarketingBoard() {
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <RefreshCw className="h-5 w-5 text-amber-600" />
-                    <h3 className="font-semibold text-amber-800">Auto-Sync</h3>
+                    <h3 className="font-semibold text-foreground">Auto-Sync</h3>
                   </div>
                   <label className="relative inline-flex items-center cursor-pointer">
                     <input
@@ -3142,7 +3142,7 @@ export default function MarketingBoard() {
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Download className="h-5 w-5 text-amber-600" />
+              <Download className="h-5 w-5 text-primary" />
               Export Leads to Google Sheets
             </DialogTitle>
             <DialogDescription>Export your CRM leads to a new or existing Google Sheet</DialogDescription>
@@ -3366,7 +3366,7 @@ export default function MarketingBoard() {
           
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowAddLead(false)}>Cancel</Button>
-            <Button onClick={handleAddNewLead} className="bg-green-600 hover:bg-green-700" data-testid="submit-new-lead">
+            <Button onClick={handleAddNewLead} className="bg-primary hover:bg-primary-hover" data-testid="submit-new-lead">
               <Plus className="h-4 w-4 mr-2" /> Create Lead
             </Button>
           </DialogFooter>
@@ -3378,7 +3378,7 @@ export default function MarketingBoard() {
         <DialogContent className="max-w-2xl" data-testid="transfer-role-dialog">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <ArrowRightLeft className="h-5 w-5 text-amber-600" />
+              <ArrowRightLeft className="h-5 w-5 text-primary" />
               Transfer Role &amp; Leads — {transferDialog.member?.name || ''}
             </DialogTitle>
             <DialogDescription className="text-xs">
@@ -3471,7 +3471,7 @@ export default function MarketingBoard() {
               <>
                 <Button variant="outline" onClick={() => setTransferDialog({ open: false, step: 1, member: null })}>Cancel</Button>
                 <Button
-                  className="bg-amber-600 hover:bg-amber-700"
+                  className="bg-primary hover:bg-primary-hover"
                   disabled={!transferForm.to_user_id || !transferForm.reason.trim() || transferLoading}
                   onClick={() => setTransferDialog(d => ({ ...d, step: 2 }))}
                   data-testid="transfer-next-btn"
@@ -3543,7 +3543,7 @@ export default function MarketingBoard() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowCredentialsDialog(false)}>Cancel</Button>
-            <Button onClick={saveCredentials} disabled={savingCredentials} className="bg-emerald-600 hover:bg-emerald-700" data-testid="sheets-cred-save-btn">
+            <Button onClick={saveCredentials} disabled={savingCredentials} className="bg-primary hover:bg-primary-hover" data-testid="sheets-cred-save-btn">
               {savingCredentials ? 'Saving…' : 'Save Credentials'}
             </Button>
           </DialogFooter>

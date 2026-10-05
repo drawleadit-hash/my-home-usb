@@ -76,7 +76,7 @@ export default function USBLookupBar() {
           inputMode="numeric"
           data-testid="usb-lookup-number"
         />
-        <Button type="submit" size="sm" disabled={loading} className="h-7 px-2 gap-1 bg-violet-600 hover:bg-violet-700 text-white" data-testid="usb-lookup-submit">
+        <Button type="submit" size="sm" disabled={loading} className="h-7 px-2 gap-1 bg-primary hover:bg-primary-hover text-white" data-testid="usb-lookup-submit">
           {loading ? <Loader2 className="h-3 w-3 animate-spin" /> : <Search className="h-3 w-3" />}
         </Button>
       </form>
@@ -85,7 +85,7 @@ export default function USBLookupBar() {
         <DialogContent className="max-w-md" data-testid="usb-lookup-dialog">
           <DialogHeader>
             <DialogTitle className="text-base flex items-center gap-2">
-              <Badge className="font-mono bg-violet-600 hover:bg-violet-600">{result?.number}</Badge>
+              <Badge className="font-mono bg-primary hover:bg-primary-hover">{result?.number}</Badge>
               <span className="capitalize">{(result?.kind || '').replace('_', ' ')}</span>
             </DialogTitle>
             <DialogDescription className="text-xs">{result?.subtitle || ''}</DialogDescription>
@@ -114,7 +114,7 @@ export default function USBLookupBar() {
 
           <DialogFooter>
             <Button variant="outline" size="sm" onClick={() => setResult(null)} data-testid="usb-lookup-close">Close</Button>
-            <Button size="sm" onClick={goTo} className="bg-violet-600 hover:bg-violet-700 gap-1" data-testid="usb-lookup-open">
+            <Button size="sm" onClick={goTo} className="bg-primary hover:bg-primary-hover gap-1" data-testid="usb-lookup-open">
               Open <ArrowUpRight className="h-3.5 w-3.5" />
             </Button>
           </DialogFooter>

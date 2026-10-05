@@ -162,7 +162,7 @@ export default function ProjectMaterials() {
               </div>
               <Button 
                 variant="outline" 
-                className="border-amber-400 text-amber-700 hover:bg-amber-100"
+                className="border-brand-300 text-primary-strong hover:bg-brand-50"
                 onClick={() => setUnlockDialog(true)}
                 data-testid="request-unlock-btn"
               >

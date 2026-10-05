@@ -163,8 +163,8 @@ export default function ProfilePage() {
         </Button>
 
         <div className="flex items-center gap-3 mb-6">
-          <div className="h-14 w-14 rounded-full bg-amber-100 flex items-center justify-center">
-            <User className="h-7 w-7 text-amber-700" />
+          <div className="h-14 w-14 rounded-full bg-brand-100 flex items-center justify-center">
+            <User className="h-7 w-7 text-brand-800" />
           </div>
           <div>
             <h1 className="text-xl font-bold text-gray-900" data-testid="profile-name">{user?.name}</h1>
@@ -238,7 +238,7 @@ export default function ProfilePage() {
                         </div>
                         <div className="flex gap-2">
                           <Button variant="outline" onClick={() => { setShowChangePass(false); setPassStep(0); }}>Cancel</Button>
-                          <Button onClick={handleSendOTP} disabled={otpSending} className="flex-1 bg-amber-600 hover:bg-amber-700" data-testid="send-otp-btn">
+                          <Button onClick={handleSendOTP} disabled={otpSending} className="flex-1 bg-primary hover:bg-primary-hover" data-testid="send-otp-btn">
                             {otpSending ? <Loader2 className="h-4 w-4 animate-spin mr-1" /> : <Mail className="h-4 w-4 mr-1" />}
                             {otpSending ? 'Sending...' : 'Send OTP'}
                           </Button>
@@ -312,7 +312,7 @@ export default function ProfilePage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-base flex items-center gap-2">
-                  <Shield className="h-4 w-4 text-blue-600" /> Two-Factor Authentication
+                  <Shield className="h-4 w-4 text-primary" /> Two-Factor Authentication
                 </CardTitle>
                 <CardDescription>Add an extra layer of security using Google Authenticator</CardDescription>
               </CardHeader>
@@ -342,7 +342,7 @@ export default function ProfilePage() {
                 {!twoFAEnabled && (
                   <div className="space-y-4">
                     {setupStep === 0 && (
-                      <Button onClick={() => setSetupStep(1)} className="w-full bg-blue-600 hover:bg-blue-700" data-testid="enable-2fa-btn">
+                      <Button onClick={() => setSetupStep(1)} className="w-full bg-primary hover:bg-primary-hover" data-testid="enable-2fa-btn">
                         <Shield className="h-4 w-4 mr-2" /> Enable 2FA
                       </Button>
                     )}

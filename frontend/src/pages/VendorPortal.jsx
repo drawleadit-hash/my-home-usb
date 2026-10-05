@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { BrandMark } from '@/components/BrandMark';
 import { Building2, LogOut, Package, Truck, CheckCircle, Clock, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -90,12 +91,10 @@ export default function VendorPortal() {
       <nav className="bg-white border-b border-gray-200 px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="bg-purple-600 p-2 rounded-lg">
-              <Package className="h-6 w-6 text-white" />
-            </div>
+            <BrandMark className="h-10 w-10 shrink-0" />
             <div>
               <h1 className="text-xl font-bold text-gray-900">Drawlead Construction ERP</h1>
-              <p className="text-xs text-gray-500">Vendor Portal</p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-primary-strong">Vendor Portal</p>
             </div>
           </div>
           
@@ -138,7 +137,7 @@ export default function VendorPortal() {
 
             {/* Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
-              <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+              <Card className="bg-blue-50 border-blue-200">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-gray-600">Total Orders</CardTitle>
                 </CardHeader>
@@ -150,7 +149,7 @@ export default function VendorPortal() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-yellow-50 to-yellow-100 border-yellow-200">
+              <Card className="bg-yellow-50 border-yellow-200">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-gray-600">Pending</CardTitle>
                 </CardHeader>
@@ -162,7 +161,7 @@ export default function VendorPortal() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+              <Card className="bg-purple-50 border-purple-200">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-gray-600">Dispatched</CardTitle>
                 </CardHeader>
@@ -174,7 +173,7 @@ export default function VendorPortal() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+              <Card className="bg-green-50 border-green-200">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-medium text-gray-600">Completed</CardTitle>
                 </CardHeader>
@@ -231,7 +230,7 @@ export default function VendorPortal() {
                                 <Button
                                   data-testid={`dispatch-btn-${po.po_id}`}
                                   size="sm"
-                                  className="gap-1 bg-purple-600 hover:bg-purple-700"
+                                  className="gap-1 bg-primary hover:bg-primary-hover"
                                   onClick={() => openDispatchDialog(po)}
                                 >
                                   <Send className="h-4 w-4" />
@@ -281,7 +280,7 @@ export default function VendorPortal() {
                   <div className="flex gap-2">
                     <Button
                       data-testid="confirm-dispatch-btn"
-                      className="flex-1 bg-purple-600 hover:bg-purple-700"
+                      className="flex-1 bg-primary hover:bg-primary-hover"
                       onClick={handleDispatch}
                     >
                       Confirm Dispatch

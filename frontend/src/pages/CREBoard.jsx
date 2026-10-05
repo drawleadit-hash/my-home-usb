@@ -831,9 +831,9 @@ export default function CREBoard() {
         return <Badge variant="outline" className="text-orange-500 text-xs">Awaiting Accountant</Badge>;
       case 'payment_received':
       case 'payment_verified':
-        return <Button size="sm" className="bg-amber-600 hover:bg-amber-700 h-7 text-xs" onClick={() => handleSubmitToPlanning(project.project_id)}>Send to Planning</Button>;
+        return <Button size="sm" className="bg-primary hover:bg-primary-hover h-7 text-xs" onClick={() => handleSubmitToPlanning(project.project_id)}>Send to Planning</Button>;
       case 'planning_approved':
-        return <Button size="sm" className="bg-purple-600 hover:bg-purple-700 h-7 text-xs" onClick={() => handleMoveToDrawing(project.project_id)}>Move to Drawing</Button>;
+        return <Button size="sm" className="bg-primary hover:bg-primary-hover h-7 text-xs" onClick={() => handleMoveToDrawing(project.project_id)}>Move to Drawing</Button>;
       default:
         return <Button size="sm" variant="ghost" className="h-7 text-xs" onClick={() => window.location.href = `/projects/${project.project_id}`}><Eye className="h-3 w-3 mr-1" />View</Button>;
     }
@@ -1105,7 +1105,7 @@ export default function CREBoard() {
                   <Card>
                     <CardHeader className="border-b pb-3">
                       <CardTitle className="text-base flex items-center gap-2">
-                        <FileText className="h-4 w-4 text-purple-600" />
+                        <FileText className="h-4 w-4 text-primary" />
                         Final Estimate — {feActiveTab === 'awaiting' ? 'Awaiting You'
                           : feActiveTab === 'in_revision' ? 'In Revision @ Planning'
                           : feActiveTab === 'sent_to_client' ? 'Sent to Client'
@@ -1184,7 +1184,7 @@ export default function CREBoard() {
                                     <Button
                                       size="sm"
                                       variant="outline"
-                                      className="border-purple-400 text-purple-700 hover:bg-purple-50"
+                                      className="border-brand-300 text-primary-strong hover:bg-brand-50"
                                       onClick={() => setRevisionDialog({ open: true, project: p, description: '', submitting: false })}
                                       data-testid={`fe-request-revision-${p.project_id}`}
                                     >
@@ -1193,7 +1193,7 @@ export default function CREBoard() {
                                   )}
                                   <Button
                                     size="sm"
-                                    className="bg-green-600 hover:bg-green-700"
+                                    className="bg-primary hover:bg-primary-hover"
                                     onClick={() => handleFeApprove(p)}
                                     data-testid={`fe-approve-${p.project_id}`}
                                   >
@@ -1202,7 +1202,7 @@ export default function CREBoard() {
                                   <Button
                                     size="sm"
                                     variant="outline"
-                                    className="border-amber-400 text-amber-700 hover:bg-amber-50"
+                                    className="border-brand-300 text-primary-strong hover:bg-brand-50"
                                     onClick={() => setReviewDialog({ open: true, project: p, text: '' })}
                                     data-testid={`fe-review-${p.project_id}`}
                                   >
@@ -1334,7 +1334,7 @@ export default function CREBoard() {
                             <Button
                               size="sm"
                               variant="outline"
-                              className="border-amber-300 text-amber-700 hover:bg-amber-50"
+                              className="border-brand-300 text-primary-strong hover:bg-brand-50"
                               onClick={() => {
                                 setPsAllMonths(false);
                                 const t = new Date();
@@ -1349,7 +1349,7 @@ export default function CREBoard() {
                             <Button
                               size="sm"
                               variant="outline"
-                              className="border-violet-300 text-violet-700 hover:bg-violet-50"
+                              className="border-brand-300 text-primary-strong hover:bg-brand-50"
                               onClick={() => setPsAllMonths(true)}
                               data-testid="ps-show-all"
                             >
@@ -1536,7 +1536,7 @@ export default function CREBoard() {
                                           <Button
                                             size="sm"
                                             variant="ghost"
-                                            className="h-7 w-7 p-0 text-blue-600 hover:bg-blue-50"
+                                            className="h-7 w-7 p-0 text-primary-strong hover:bg-brand-50"
                                             title="View stage details (Super Admin)"
                                             onClick={() => setStageDetailDlg({ open: true, stageId: e.stage_id })}
                                             data-testid={`ps-view-${e.entry_id || e.stage_id}`}
@@ -1551,7 +1551,7 @@ export default function CREBoard() {
                                         ) : (
                                           <Button
                                             size="sm"
-                                            className="h-7 px-2 text-xs bg-green-600 hover:bg-green-700"
+                                            className="h-7 px-2 text-xs bg-primary hover:bg-primary-hover"
                                             onClick={() => openCollectDialog({ ...e, stage_id: e.stage_id })}
                                             data-testid={`ps-collect-${e.entry_id || e.stage_id}`}
                                           >
@@ -1579,7 +1579,7 @@ export default function CREBoard() {
             <Card>
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between gap-3 flex-wrap">
-                  <CardTitle className="text-base flex items-center gap-2"><Building2 className="h-4 w-4 text-amber-600" />All Projects</CardTitle>
+                  <CardTitle className="text-base flex items-center gap-2"><Building2 className="h-4 w-4 text-primary" />All Projects</CardTitle>
                   <div className="flex items-center gap-2">
                     {/* Super-Admin bulk delete CTA. Only renders when at least
                         one row is checked so it doesn't clutter the normal flow. */}
@@ -1598,7 +1598,7 @@ export default function CREBoard() {
                       <Search className="absolute left-2.5 top-2 h-4 w-4 text-gray-400" />
                       <Input placeholder="Search projects..." value={projectSearch} onChange={(e) => setProjectSearch(e.target.value)} className="pl-8 h-8 w-48 text-sm" data-testid="project-search" />
                     </div>
-                    <Button size="sm" onClick={() => { resetForm(); setCreateDialog(true); }} className="bg-amber-600 hover:bg-amber-700 hidden" data-testid="create-project-btn">
+                    <Button size="sm" onClick={() => { resetForm(); setCreateDialog(true); }} className="bg-primary hover:bg-primary-hover hidden" data-testid="create-project-btn">
                       <Plus className="h-4 w-4 mr-1" />Create Project
                     </Button>
                   </div>
@@ -1656,7 +1656,7 @@ export default function CREBoard() {
                               <Button
                                 size="sm"
                                 variant="outline"
-                                className={`h-7 text-[11px] gap-1 ${p.client_user_id ? 'border-green-300 text-green-700 hover:bg-green-50' : 'border-amber-300 text-amber-700 hover:bg-amber-50'}`}
+                                className={`h-7 text-[11px] gap-1 ${p.client_user_id ? 'border-green-300 text-green-700 hover:bg-green-50' : 'border-brand-300 text-primary-strong hover:bg-brand-50'}`}
                                 onClick={() => setPortalProject(p)}
                                 data-testid={`create-portal-btn-${p.project_id}`}
                               >
@@ -1717,7 +1717,7 @@ export default function CREBoard() {
                       <button
                         key={t.key}
                         onClick={() => setAcSubTab(t.key)}
-                        className={`px-3 py-1.5 rounded-full text-xs font-medium border transition ${acSubTab === t.key ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'}`}
+                        className={`px-3 py-1.5 rounded-full text-xs font-medium border transition ${acSubTab === t.key ? 'bg-primary text-white border-primary' : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'}`}
                         data-testid={`ac-subtab-${t.key}`}
                       >
                         {t.label} <span className={`ml-1 inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full text-[10px] ${acSubTab === t.key ? 'bg-white text-indigo-700' : t.color}`}>{t.count}</span>
@@ -1803,7 +1803,7 @@ export default function CREBoard() {
       <Dialog open={createDialog} onOpenChange={setCreateDialog}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2"><Building2 className="h-5 w-5 text-amber-600" />Create New Project</DialogTitle>
+            <DialogTitle className="flex items-center gap-2"><Building2 className="h-5 w-5 text-primary" />Create New Project</DialogTitle>
           </DialogHeader>
 
           {/* Toggle: Full Project vs Request RE */}
@@ -1938,7 +1938,7 @@ export default function CREBoard() {
 
           <DialogFooter>
             <Button variant="outline" onClick={() => { setCreateDialog(false); resetForm(); }}>Cancel</Button>
-            <Button onClick={handleCreateProject} className={requestREMode ? 'bg-amber-600 hover:bg-amber-700' : 'bg-green-600 hover:bg-green-700'} data-testid="btn-create-project">
+            <Button onClick={handleCreateProject} className={requestREMode ? 'bg-primary hover:bg-primary-hover' : 'bg-primary hover:bg-primary-hover'} data-testid="btn-create-project">
               {requestREMode ? <><FileText className="h-4 w-4 mr-2" />Create & Request RE</> : <><Plus className="h-4 w-4 mr-2" />Create Project</>}
             </Button>
           </DialogFooter>
@@ -2162,7 +2162,7 @@ export default function CREBoard() {
             >
               <XCircle className="h-4 w-4 mr-2" />Reject Request
             </Button>
-            <Button onClick={handleCollectPayment} className="bg-green-600 hover:bg-green-700" data-testid="cre-collect-confirm-btn">
+            <Button onClick={handleCollectPayment} className="bg-primary hover:bg-primary-hover" data-testid="cre-collect-confirm-btn">
               <CheckCircle2 className="h-4 w-4 mr-2" />Confirm
             </Button>
           </DialogFooter>
@@ -2224,7 +2224,7 @@ export default function CREBoard() {
             <div className="space-y-6">
               {selectedDealRE && (
                 <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
-                  <h4 className="font-semibold text-purple-800 flex items-center gap-2 mb-2"><FileText className="h-4 w-4" />Rough Estimate Reference</h4>
+                  <h4 className="font-semibold text-foreground flex items-center gap-2 mb-2"><FileText className="h-4 w-4" />Rough Estimate Reference</h4>
                   <div className="grid grid-cols-4 gap-4 text-sm">
                     <div><p className="text-xs text-purple-600">Project</p><p className="font-medium">{selectedDealRE.project_name}</p></div>
                     <div><p className="text-xs text-purple-600">Area</p><p className="font-medium">{selectedDealRE.sqft?.toLocaleString()} sqft</p></div>
@@ -2234,7 +2234,7 @@ export default function CREBoard() {
                 </div>
               )}
               <div className="border rounded-lg p-4">
-                <h4 className="font-semibold mb-3 flex items-center gap-2"><Building2 className="h-4 w-4 text-amber-600" />Project Details</h4>
+                <h4 className="font-semibold mb-3 flex items-center gap-2"><Building2 className="h-4 w-4 text-primary" />Project Details</h4>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="col-span-2"><Label>Project Name *</Label><Input value={form.name || selectedDealRE?.project_name || selectedDeal.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="mt-1" data-testid="project-name-input" /></div>
                   <div><Label>Location *</Label><Input value={form.location || selectedDealRE?.location || selectedDeal.city || ''} onChange={(e) => setForm({ ...form, location: e.target.value })} className="mt-1" /></div>
@@ -2293,7 +2293,7 @@ export default function CREBoard() {
           )}
           <DialogFooter className="gap-2 mt-4">
             <Button variant="outline" onClick={() => setConvertDealDialog(false)}>Cancel</Button>
-            <Button onClick={handleConvertDeal} className="bg-green-600 hover:bg-green-700" disabled={!advanceAmount || parseFloat(advanceAmount) <= 0 || advancePaymentEntries.length === 0 || !accountantConfirmed} data-testid="confirm-convert-deal">
+            <Button onClick={handleConvertDeal} className="bg-primary hover:bg-primary-hover" disabled={!advanceAmount || parseFloat(advanceAmount) <= 0 || advancePaymentEntries.length === 0 || !accountantConfirmed} data-testid="confirm-convert-deal">
               <CheckCircle className="h-4 w-4 mr-2" />Create Project
             </Button>
           </DialogFooter>
@@ -2303,7 +2303,7 @@ export default function CREBoard() {
       {/* ==================== VIEW PROJECT DIALOG ==================== */}
       <Dialog open={viewDialog} onOpenChange={setViewDialog}>
         <DialogContent className="max-w-lg">
-          <DialogHeader><DialogTitle className="flex items-center gap-2"><Eye className="h-5 w-5 text-amber-600" />Project Details</DialogTitle></DialogHeader>
+          <DialogHeader><DialogTitle className="flex items-center gap-2"><Eye className="h-5 w-5 text-primary" />Project Details</DialogTitle></DialogHeader>
           {selectedProject && (
             <div className="space-y-4">
               <div className="bg-gray-50 p-4 rounded-lg">
@@ -2326,7 +2326,7 @@ export default function CREBoard() {
       <Dialog open={reviewDialog.open} onOpenChange={(o) => !o && setReviewDialog({ open: false, project: null, text: '' })}>
         <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2"><MessageSquare className="h-5 w-5 text-amber-600" />Review for Planning Department</DialogTitle>
+            <DialogTitle className="flex items-center gap-2"><MessageSquare className="h-5 w-5 text-primary" />Review for Planning Department</DialogTitle>
             <DialogDescription>Your review will be sent to the Planning Department. They will revise the estimate and resend.</DialogDescription>
           </DialogHeader>
           <div className="space-y-3">
@@ -2347,7 +2347,7 @@ export default function CREBoard() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setReviewDialog({ open: false, project: null, text: '' })}>Cancel</Button>
-            <Button className="bg-amber-600 hover:bg-amber-700" onClick={handleFeSubmitReview} data-testid="fe-review-submit">
+            <Button className="bg-primary hover:bg-primary-hover" onClick={handleFeSubmitReview} data-testid="fe-review-submit">
               <Send className="h-4 w-4 mr-1" /> Send to Planning
             </Button>
           </DialogFooter>
@@ -2358,7 +2358,7 @@ export default function CREBoard() {
       <Dialog open={revisionDialog.open} onOpenChange={(o) => !o && !revisionDialog.submitting && setRevisionDialog({ open: false, project: null, description: '', submitting: false })}>
         <DialogContent className="max-w-lg">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2"><RefreshCw className="h-5 w-5 text-purple-600" />Request Final Estimate Revision</DialogTitle>
+            <DialogTitle className="flex items-center gap-2"><RefreshCw className="h-5 w-5 text-primary" />Request Final Estimate Revision</DialogTitle>
             <DialogDescription>This will bump the revision number and send the Final Estimate back to Planning for changes. Use this only when scope changes are required after approval.</DialogDescription>
           </DialogHeader>
           <div className="space-y-3">
@@ -2384,7 +2384,7 @@ export default function CREBoard() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setRevisionDialog({ open: false, project: null, description: '', submitting: false })} disabled={revisionDialog.submitting}>Cancel</Button>
-            <Button className="bg-purple-600 hover:bg-purple-700" onClick={handleSubmitRevision} disabled={revisionDialog.submitting} data-testid="fe-revision-submit">
+            <Button className="bg-primary hover:bg-primary-hover" onClick={handleSubmitRevision} disabled={revisionDialog.submitting} data-testid="fe-revision-submit">
               {revisionDialog.submitting ? <RefreshCw className="h-4 w-4 mr-1 animate-spin" /> : <Send className="h-4 w-4 mr-1" />}
               Send to Planning
             </Button>

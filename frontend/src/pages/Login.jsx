@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import axios from 'axios';
 import { toast } from 'sonner';
+import { AuthLayout } from '@/components/AuthLayout';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -156,188 +157,172 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-white">
-      {/* Subtle background decoration */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[-120px] left-[-80px] w-[400px] h-[400px] rounded-full bg-amber-100/60 blur-3xl" />
-        <div className="absolute bottom-[-100px] right-[-60px] w-[350px] h-[350px] rounded-full bg-slate-200/70 blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-amber-50/40 blur-3xl" />
-      </div>
-
-      {/* Glassmorphism Card */}
-      <div
-        data-testid="login-card"
-        className="relative z-10 w-full max-w-md rounded-2xl border border-white/40 shadow-2xl [color-scheme:light]"
-        style={{
-          background: 'rgba(255, 255, 255, 0.55)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255,255,255,0.7)',
-        }}
-      >
+    <AuthLayout>
+      <div data-testid="login-card">
         {/* Header / Branding */}
-        <div className="flex flex-col items-center pt-8 pb-4 px-6">
-          <h1
-            className="text-3xl font-extrabold tracking-tight text-slate-800"
-            data-testid="login-title"
-          >
-            {branding.app_name || 'Drawlead Construction ERP'}
-          </h1>
+        <div className="mb-8">
           <p
-            className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-600/80 mt-1"
+            className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-strong ring-1 ring-inset ring-brand-200/70 dark:bg-brand-950/40 dark:ring-brand-800/60"
             data-testid="login-subtitle"
           >
             Powered by Drawlead
           </p>
+          <h1
+            className="text-[28px] font-semibold leading-tight tracking-tight text-foreground"
+            data-testid="login-title"
+          >
+            {branding.app_name || 'Drawlead Construction ERP'}
+          </h1>
+          <p className="mt-2 text-sm text-muted-foreground">Welcome back. Sign in to continue to your workspace.</p>
         </div>
 
-        {/* Content */}
-        <div className="px-6 pb-8 space-y-4">
-          <Tabs value={loginTab} onValueChange={setLoginTab}>
-            <TabsList className={`grid w-full ${demoMode ? 'grid-cols-2' : 'grid-cols-1'} bg-white/50`} data-testid="login-tabs">
-              <TabsTrigger value="password" data-testid="tab-password">Login</TabsTrigger>
-              {demoMode && <TabsTrigger value="demo" data-testid="tab-demo">Demo Access</TabsTrigger>}
-            </TabsList>
+        <Tabs value={loginTab} onValueChange={setLoginTab}>
+          <TabsList className={`grid h-11 w-full ${demoMode ? 'grid-cols-2' : 'grid-cols-1'}`} data-testid="login-tabs">
+            <TabsTrigger value="password" className="h-9" data-testid="tab-password">Login</TabsTrigger>
+            {demoMode && <TabsTrigger value="demo" className="h-9" data-testid="tab-demo">Demo Access</TabsTrigger>}
+          </TabsList>
 
-            {/* Password Login Tab */}
-            <TabsContent value="password" className="space-y-4 mt-4">
-              <form onSubmit={handlePasswordLogin} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-slate-700 text-sm font-medium">Email</Label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                    <Input
-                      id="email"
-                      data-testid="email-input"
-                      type="email"
-                      placeholder="you@company.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="pl-10 h-11 bg-white/70 border-slate-200/80 text-slate-900 placeholder:text-slate-400 [color-scheme:light] focus:border-amber-400 focus:ring-amber-400/20"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <Label htmlFor="password" className="text-slate-700 text-sm font-medium">Password</Label>
-                    <Link to="/forgot-password" className="text-xs text-amber-600 hover:text-amber-700 hover:underline" data-testid="forgot-password-link">
-                      Forgot password?
-                    </Link>
-                  </div>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                    <Input
-                      id="password"
-                      data-testid="password-input"
-                      type={showPassword ? 'text' : 'password'}
-                      placeholder="Enter your password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="pl-10 pr-10 h-11 bg-white/70 border-slate-200/80 text-slate-900 placeholder:text-slate-400 [color-scheme:light] focus:border-amber-400 focus:ring-amber-400/20"
-                      required
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-3 text-slate-400 hover:text-slate-600 transition-colors"
-                      data-testid="toggle-password"
-                    >
-                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                    </button>
-                  </div>
-                </div>
-
-                {/* 2FA Code Field */}
-                {needs2FA && (
-                  <div className="space-y-2" data-testid="2fa-login-section">
-                    <Label className="text-slate-700 text-sm font-medium flex items-center gap-1.5">
-                      <Shield className="h-3.5 w-3.5 text-blue-600" /> Authenticator Code
-                    </Label>
-                    <Input
-                      data-testid="totp-code-input"
-                      type="text"
-                      inputMode="numeric"
-                      placeholder="000000"
-                      maxLength={6}
-                      value={totpCode}
-                      onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                      className="h-11 text-center text-xl tracking-[0.4em] font-mono bg-blue-50/50 border-blue-200 text-slate-900 placeholder:text-slate-400 [color-scheme:light] focus:border-blue-400 focus:ring-blue-400/20"
-                      autoFocus
-                    />
-                    <p className="text-[10px] text-blue-500 text-center">Enter the 6-digit code from Google Authenticator</p>
-                  </div>
-                )}
-
-                <Button
-                  type="submit"
-                  data-testid="login-submit-btn"
-                  disabled={isLoading}
-                  className="w-full h-11 text-base font-bold bg-slate-800 hover:bg-slate-900 text-white rounded-lg transition-all duration-200"
-                >
-                  {isLoading ? 'Logging in...' : 'Login'}
-                </Button>
-              </form>
-
-              <p className="text-xs text-center text-slate-400 mt-4">
-                Only invited users can login. Contact your admin for access.
-              </p>
-            </TabsContent>
-
-            {/* Demo Tab */}
-            <TabsContent value="demo" className="space-y-4 mt-4">
-              <div className="bg-white/40 border border-amber-200/50 rounded-xl p-4">
-                <p className="text-xs font-semibold text-center mb-3 uppercase tracking-wide text-slate-500">Demo Mode</p>
-
-                <div className="space-y-3">
-                  <Select value={selectedEmail} onValueChange={setSelectedEmail}>
-                    <SelectTrigger data-testid="demo-user-select" className="h-11 bg-white/70 border-slate-200/80">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {DEMO_USERS.map((user) => (
-                        <SelectItem key={user.email} value={user.email}>
-                          <span className="font-semibold">{user.name}</span>
-                          <span className="text-xs text-muted-foreground ml-2">{user.email}</span>
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-
-                  <Button
-                    data-testid="demo-login-btn"
-                    onClick={() => handleDemoLogin()}
-                    disabled={isLoading}
-                    className="w-full h-11 font-bold bg-slate-800 hover:bg-slate-900 text-white rounded-lg transition-all duration-200"
-                  >
-                    {isLoading ? 'Logging in...' : 'Login as Demo User'}
-                  </Button>
-                </div>
-
-                <div className="border-t border-slate-200/50 mt-3 pt-3">
-                  <p className="text-xs text-center text-slate-400 mb-2">Quick Access:</p>
-                  <div className="grid grid-cols-2 gap-1.5">
-                    {DEMO_USERS.map((quick) => (
-                      <Button
-                        key={quick.email}
-                        data-testid={`quick-${quick.name.toLowerCase().replace(/\s/g, '-')}`}
-                        variant="outline"
-                        size="sm"
-                        className="text-xs h-8 bg-white/50 border-slate-200/60 hover:bg-amber-50 hover:border-amber-300 transition-all duration-150"
-                        onClick={() => handleDemoLogin(quick.email)}
-                        disabled={isLoading}
-                      >
-                        {quick.name}
-                      </Button>
-                    ))}
-                  </div>
+          {/* Password Login Tab */}
+          <TabsContent value="password" className="mt-6 space-y-5">
+            <form onSubmit={handlePasswordLogin} className="space-y-5">
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <div className="relative">
+                  <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    id="email"
+                    data-testid="email-input"
+                    type="email"
+                    placeholder="you@company.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="h-11 rounded-xl pl-10"
+                    required
+                  />
                 </div>
               </div>
-            </TabsContent>
-          </Tabs>
-        </div>
+
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="password">Password</Label>
+                  <Link to="/forgot-password" className="text-xs font-medium text-primary-strong hover:text-brand-800 hover:underline" data-testid="forgot-password-link">
+                    Forgot password?
+                  </Link>
+                </div>
+                <div className="relative">
+                  <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    id="password"
+                    data-testid="password-input"
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="h-11 rounded-xl pl-10 pr-11"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                    data-testid="toggle-password"
+                  >
+                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
+              </div>
+
+              {/* 2FA Code Field */}
+              {needs2FA && (
+                <div className="space-y-2.5 rounded-xl border border-brand-200 bg-brand-50/60 p-4 dark:border-brand-800/60 dark:bg-brand-950/30" data-testid="2fa-login-section">
+                  <Label className="flex items-center gap-1.5">
+                    <Shield className="h-3.5 w-3.5 text-primary" /> Authenticator Code
+                  </Label>
+                  <Input
+                    data-testid="totp-code-input"
+                    type="text"
+                    inputMode="numeric"
+                    placeholder="000000"
+                    maxLength={6}
+                    value={totpCode}
+                    onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    className="h-12 rounded-xl text-center font-mono text-xl tracking-[0.4em]"
+                    autoFocus
+                  />
+                  <p className="text-center text-[11px] text-muted-foreground">Enter the 6-digit code from Google Authenticator</p>
+                </div>
+              )}
+
+              <Button
+                type="submit"
+                data-testid="login-submit-btn"
+                disabled={isLoading}
+                className="h-11 w-full rounded-xl text-[15px]"
+              >
+                {isLoading ? 'Logging in...' : 'Login'}
+              </Button>
+            </form>
+
+            <p className="text-center text-xs text-muted-foreground">
+              Only invited users can login. Contact your admin for access.
+            </p>
+          </TabsContent>
+
+          {/* Demo Tab */}
+          <TabsContent value="demo" className="mt-6">
+            <div className="rounded-2xl border border-border bg-muted/40 p-4">
+              <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Demo Mode</p>
+
+              <div className="space-y-3">
+                <Select value={selectedEmail} onValueChange={setSelectedEmail}>
+                  <SelectTrigger data-testid="demo-user-select" className="h-11 rounded-xl">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {DEMO_USERS.map((user) => (
+                      <SelectItem key={user.email} value={user.email}>
+                        <span className="font-semibold">{user.name}</span>
+                        <span className="ml-2 text-xs text-muted-foreground">{user.email}</span>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Button
+                  data-testid="demo-login-btn"
+                  onClick={() => handleDemoLogin()}
+                  disabled={isLoading}
+                  className="h-11 w-full rounded-xl text-[15px]"
+                >
+                  {isLoading ? 'Logging in...' : 'Login as Demo User'}
+                </Button>
+              </div>
+
+              <div className="mt-4 border-t border-border pt-4">
+                <p className="mb-2.5 text-xs font-medium text-muted-foreground">Quick Access:</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {DEMO_USERS.map((quick) => (
+                    <Button
+                      key={quick.email}
+                      data-testid={`quick-${quick.name.toLowerCase().replace(/\s/g, '-')}`}
+                      variant="outline"
+                      size="sm"
+                      className="h-9 justify-start gap-2 rounded-lg px-2.5 text-xs font-medium hover:border-brand-300 hover:bg-brand-50 dark:hover:bg-brand-950/40"
+                      onClick={() => handleDemoLogin(quick.email)}
+                      disabled={isLoading}
+                    >
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-100 text-[9px] font-bold text-brand-800 dark:bg-brand-900/60 dark:text-brand-200">
+                        {quick.name.replace(/[^A-Za-z ]/g, '').split(' ').filter(Boolean).slice(0, 2).map((w) => w[0]).join('').toUpperCase()}
+                      </span>
+                      <span className="truncate">{quick.name}</span>
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
-    </div>
+    </AuthLayout>
   );
 }

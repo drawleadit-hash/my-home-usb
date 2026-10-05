@@ -67,7 +67,7 @@ export default function ProjectAttendanceDLR({ projectId, user, labourAttendance
             <RefreshCw className="h-3 w-3" /> Refresh
           </Button>
           {['super_admin', 'planning', 'site_engineer'].includes(user?.role) && (
-            <Button size="sm" className="h-8 gap-1 bg-violet-600 hover:bg-violet-700" onClick={onAddDailyEntry} data-testid="add-attendance-btn">
+            <Button size="sm" className="h-8 gap-1 bg-primary hover:bg-primary-hover" onClick={onAddDailyEntry} data-testid="add-attendance-btn">
               <Plus className="h-3 w-3" /> Daily Entry
             </Button>
           )}

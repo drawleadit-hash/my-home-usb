@@ -421,7 +421,7 @@ const GMDashboard = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
           <p className="mt-4 text-gray-600">Loading GM Dashboard...</p>
         </div>
       </div>
@@ -439,7 +439,7 @@ const GMDashboard = () => {
         {/* Stats Overview — each card is clickable to drill into the underlying list */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-6">
           <Card
-            className="bg-gradient-to-br from-gray-700 to-gray-800 text-white cursor-pointer hover:scale-[1.02] active:scale-100 transition-transform"
+            className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-brand-400 text-white cursor-pointer hover:scale-[1.02] active:scale-100 transition-transform"
             data-testid="gm-stat-total-projects"
             onClick={() => setDrillDialog({ open: true, title: 'All Projects', items: projects, emptyText: 'No projects yet.' })}
           >
@@ -450,7 +450,7 @@ const GMDashboard = () => {
             </CardContent>
           </Card>
           <Card
-            className="bg-gradient-to-br from-green-500 to-green-600 text-white cursor-pointer hover:scale-[1.02] active:scale-100 transition-transform"
+            className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-brand-400 text-white cursor-pointer hover:scale-[1.02] active:scale-100 transition-transform"
             data-testid="gm-stat-active-projects"
             onClick={() => setDrillDialog({
               open: true,
@@ -466,7 +466,7 @@ const GMDashboard = () => {
             </CardContent>
           </Card>
           <Card
-            className="bg-gradient-to-br from-orange-500 to-orange-600 text-white cursor-pointer hover:scale-[1.02] active:scale-100 transition-transform"
+            className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-orange-400 text-white cursor-pointer hover:scale-[1.02] active:scale-100 transition-transform"
             data-testid="gm-stat-pending-approvals"
             onClick={() => setActiveTab('final_estimate')}
           >
@@ -477,7 +477,7 @@ const GMDashboard = () => {
             </CardContent>
           </Card>
           <Card
-            className="bg-gradient-to-br from-purple-500 to-purple-600 text-white cursor-pointer hover:scale-[1.02] active:scale-100 transition-transform"
+            className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-purple-400 text-white cursor-pointer hover:scale-[1.02] active:scale-100 transition-transform"
             data-testid="gm-stat-re-approvals"
             onClick={() => setActiveTab('planning')}
           >
@@ -488,7 +488,7 @@ const GMDashboard = () => {
             </CardContent>
           </Card>
           <Card
-            className="bg-gradient-to-br from-amber-500 to-amber-600 text-white cursor-pointer hover:scale-[1.02] active:scale-100 transition-transform"
+            className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-amber-400 text-white cursor-pointer hover:scale-[1.02] active:scale-100 transition-transform"
             data-testid="gm-stat-site-requests"
             onClick={() => setActiveTab('planning_board')}
           >
@@ -499,7 +499,7 @@ const GMDashboard = () => {
             </CardContent>
           </Card>
           <Card
-            className="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white cursor-pointer hover:scale-[1.02] active:scale-100 transition-transform"
+            className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-brand-400 text-white cursor-pointer hover:scale-[1.02] active:scale-100 transition-transform"
             data-testid="gm-stat-completed"
             onClick={() => setDrillDialog({
               open: true,
@@ -529,7 +529,7 @@ const GMDashboard = () => {
             <div className="bg-white border shadow-sm p-1 rounded-md inline-flex gap-1 flex-wrap mb-4" data-testid="gm-main-tabs">
               <button
                 onClick={() => setActiveTab('final_estimate')}
-                className={`flex items-center gap-2 px-4 py-2 rounded text-sm font-medium transition-colors ${isFE ? 'bg-indigo-600 text-white shadow-sm' : 'text-gray-700 hover:bg-gray-50'}`}
+                className={`flex items-center gap-2 px-4 py-2 rounded text-sm font-medium transition-colors ${isFE ? 'bg-primary text-white shadow-sm' : 'text-gray-700 hover:bg-gray-50'}`}
                 data-testid="gm-tab-fe"
               >
                 <FileText className="h-4 w-4" /> Final Estimate
@@ -539,7 +539,7 @@ const GMDashboard = () => {
               </button>
               <button
                 onClick={() => setActiveTab('planning')}
-                className={`flex items-center gap-2 px-4 py-2 rounded text-sm font-medium transition-colors ${isRE ? 'bg-indigo-600 text-white shadow-sm' : 'text-gray-700 hover:bg-gray-50'}`}
+                className={`flex items-center gap-2 px-4 py-2 rounded text-sm font-medium transition-colors ${isRE ? 'bg-primary text-white shadow-sm' : 'text-gray-700 hover:bg-gray-50'}`}
                 data-testid="gm-tab-re"
               >
                 <Calculator className="h-4 w-4" /> Rough Estimate
@@ -549,14 +549,14 @@ const GMDashboard = () => {
               </button>
               <button
                 onClick={() => setActiveTab('planning_board')}
-                className={`flex items-center gap-2 px-4 py-2 rounded text-sm font-medium transition-colors ${isPlanningBoard ? 'bg-indigo-600 text-white shadow-sm' : 'text-gray-700 hover:bg-gray-50'}`}
+                className={`flex items-center gap-2 px-4 py-2 rounded text-sm font-medium transition-colors ${isPlanningBoard ? 'bg-primary text-white shadow-sm' : 'text-gray-700 hover:bg-gray-50'}`}
                 data-testid="gm-tab-planning-board"
               >
                 <Building2 className="h-4 w-4" /> Planning
               </button>
               <button
                 onClick={() => setActiveTab('labour_advance')}
-                className={`flex items-center gap-2 px-4 py-2 rounded text-sm font-medium transition-colors ${activeTab === 'labour_advance' ? 'bg-indigo-600 text-white shadow-sm' : 'text-gray-700 hover:bg-gray-50'}`}
+                className={`flex items-center gap-2 px-4 py-2 rounded text-sm font-medium transition-colors ${activeTab === 'labour_advance' ? 'bg-primary text-white shadow-sm' : 'text-gray-700 hover:bg-gray-50'}`}
                 data-testid="gm-tab-labour-advance-pill"
               >
                 <Wallet className="h-4 w-4" /> Labour Advance
@@ -622,7 +622,7 @@ const GMDashboard = () => {
                       </p>
                     </div>
                   </div>
-                  <Button onClick={() => setActiveTab('planning')} className="bg-amber-600 hover:bg-amber-700">
+                  <Button onClick={() => setActiveTab('planning')} className="bg-primary hover:bg-primary-hover">
                     Review Now
                   </Button>
                 </CardContent>
@@ -633,7 +633,7 @@ const GMDashboard = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Building2 className="h-5 w-5 text-amber-600" />
+                  <Building2 className="h-5 w-5 text-primary" />
                   All Projects Status
                 </CardTitle>
               </CardHeader>
@@ -675,7 +675,7 @@ const GMDashboard = () => {
                               {project.status === 'awaiting_approval' && !project.gm_approved_by && (
                                 <Button 
                                   size="sm" 
-                                  className="bg-green-600 hover:bg-green-700"
+                                  className="bg-primary hover:bg-primary-hover"
                                   onClick={() => openApprovalDialog(project, 'project', 'approve')}
                                 >
                                   Approve
@@ -704,7 +704,7 @@ const GMDashboard = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Calculator className="h-5 w-5 text-purple-600" />
+                  <Calculator className="h-5 w-5 text-primary" />
                   Rough Estimate Projects
                 </CardTitle>
                 <CardDescription>Review and approve rough estimates from Planning department</CardDescription>
@@ -756,7 +756,7 @@ const GMDashboard = () => {
                             type="button"
                             size="sm" 
                             variant="outline"
-                            className="text-purple-600 hover:bg-purple-50"
+                            className="text-primary-strong hover:bg-brand-50"
                             onClick={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
@@ -812,7 +812,7 @@ const GMDashboard = () => {
                               <Button 
                                 type="button"
                                 size="sm" 
-                                className="bg-green-600 hover:bg-green-700"
+                                className="bg-primary hover:bg-primary-hover"
                                 onClick={(e) => {
                                   e.preventDefault();
                                   e.stopPropagation();
@@ -855,7 +855,7 @@ const GMDashboard = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Building2 className="h-5 w-5 text-amber-600" />
+                  <Building2 className="h-5 w-5 text-primary" />
                   Project Approvals
                 </CardTitle>
                 <CardDescription>Projects awaiting GM approval</CardDescription>
@@ -889,7 +889,7 @@ const GMDashboard = () => {
                           </Button>
                           <Button 
                             size="sm" 
-                            className="bg-green-600 hover:bg-green-700"
+                            className="bg-primary hover:bg-primary-hover"
                             onClick={() => openApprovalDialog(project, 'project', 'approve')}
                           >
                             <CheckCircle className="h-4 w-4 mr-1" /> Approve
@@ -943,7 +943,7 @@ const GMDashboard = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <HardHat className="h-5 w-5 text-amber-600" />
+                  <HardHat className="h-5 w-5 text-primary" />
                   Site Engineer Requests
                 </CardTitle>
                 <CardDescription>Material and labour requests from site</CardDescription>
@@ -1023,7 +1023,7 @@ const GMDashboard = () => {
                         <div className="flex items-center gap-2">
                           <Button 
                             size="sm" 
-                            className="bg-green-600 hover:bg-green-700"
+                            className="bg-primary hover:bg-primary-hover"
                             onClick={() => openApprovalDialog(entry, 'suspense', 'approve')}
                           >
                             <CheckCircle className="h-4 w-4 mr-1" /> Approve
@@ -1086,7 +1086,7 @@ const GMDashboard = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <FileText className="h-5 w-5 text-purple-600" />
+                  <FileText className="h-5 w-5 text-primary" />
                   Site Plan Approvals
                 </CardTitle>
                 <CardDescription>Design submissions from Architect awaiting your approval</CardDescription>
@@ -1111,7 +1111,7 @@ const GMDashboard = () => {
                             <p className="text-sm text-gray-600">Project: {plan.project_name || plan.project_id}</p>
                             {plan.client_name && <p className="text-xs text-gray-400">Client: {plan.client_name}</p>}
                             {plan.drive_link && (
-                              <a href={plan.drive_link} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline inline-flex items-center gap-1 mt-1">
+                              <a href={plan.drive_link} target="_blank" rel="noopener noreferrer" className="text-xs text-primary-strong hover:underline inline-flex items-center gap-1 mt-1">
                                 <Eye className="h-3 w-3" /> View on Google Drive
                               </a>
                             )}
@@ -1120,7 +1120,7 @@ const GMDashboard = () => {
                           <div className="flex items-center gap-2">
                             <Button
                               size="sm"
-                              className="bg-green-600 hover:bg-green-700"
+                              className="bg-primary hover:bg-primary-hover"
                               onClick={() => handleDesignApproval(plan, true)}
                               data-testid={`approve-design-${plan.plan_id}`}
                             >
@@ -1149,7 +1149,7 @@ const GMDashboard = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Calculator className="h-5 w-5 text-blue-600" /> Final Estimates — Pending GM Approval
+                  <Calculator className="h-5 w-5 text-primary" /> Final Estimates — Pending GM Approval
                 </CardTitle>
                 <p className="text-sm text-gray-500">Review and approve/reject Final Estimates submitted by Planning. Approved FEs move to CRE. Rejections return to Planning with your reason.</p>
               </CardHeader>
@@ -1192,7 +1192,7 @@ const GMDashboard = () => {
                                 <>
                                   <Button
                                     size="sm"
-                                    className="bg-green-600 hover:bg-green-700"
+                                    className="bg-primary hover:bg-primary-hover"
                                     disabled={feBusy}
                                     data-testid={`fe-approve-${p.project_id}`}
                                     onClick={() => setFeApproveDialog({ open: true, project: p, typed: '', autoShare: false, submitting: false })}
@@ -1352,7 +1352,7 @@ const GMDashboard = () => {
               Cancel
             </Button>
             <Button 
-              className={approvalAction === 'approve' ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700'}
+              className={approvalAction === 'approve' ? 'bg-primary hover:bg-primary-hover' : 'bg-red-600 hover:bg-red-700'}
               onClick={handleApproval}
               disabled={approvalAction === 'approve' ? approveConfirmText !== 'APPROVE' : !rejectionReason.trim()}
               data-testid="confirm-approval-btn"
@@ -1392,7 +1392,7 @@ const GMDashboard = () => {
                     e.stopPropagation();
                     handleGenerateREPDF(viewItem);
                   }}
-                  className="bg-purple-600 hover:bg-purple-700"
+                  className="bg-primary hover:bg-primary-hover"
                   data-testid="download-pdf-dialog"
                 >
                   <Download className="h-4 w-4 mr-1" /> Download PDF
@@ -1468,7 +1468,7 @@ const GMDashboard = () => {
                   {viewItem.rough_requirement && (
                     <Card className="bg-amber-50 border-amber-200" data-testid="gm-rough-requirement">
                       <CardContent className="p-4">
-                        <h4 className="font-semibold mb-2 text-sm text-amber-800 flex items-center gap-1.5">
+                        <h4 className="font-semibold mb-2 text-sm text-foreground flex items-center gap-1.5">
                           <FileText className="h-4 w-4" />
                           Sales Team Input
                         </h4>
@@ -1518,7 +1518,7 @@ const GMDashboard = () => {
                   {/* Full Scope of Works */}
                   <Card className="border-purple-200">
                     <CardContent className="p-4">
-                      <h4 className="font-semibold mb-3 text-purple-800">Scope of Works</h4>
+                      <h4 className="font-semibold mb-3 text-foreground">Scope of Works</h4>
                       {viewItem.rough_scope_items?.length > 0 ? (
                         <div className="overflow-x-auto">
                           <table className="w-full text-sm">
@@ -1564,7 +1564,7 @@ const GMDashboard = () => {
                   </Card>
                   
                   {/* Estimated Total */}
-                  <Card className="bg-gradient-to-r from-purple-600 to-purple-700">
+                  <Card className="bg-gray-900">
                     <CardContent className="p-4 text-center">
                       <p className="text-sm text-purple-100">Estimated Total</p>
                       <p className="text-3xl font-bold text-white">
@@ -1684,7 +1684,7 @@ const GMDashboard = () => {
               <Button 
                 size="sm"
                 onClick={() => handleGenerateREPDF(reEditProject)}
-                className="bg-purple-600 hover:bg-purple-700"
+                className="bg-primary hover:bg-primary-hover"
               >
                 <Download className="h-4 w-4 mr-1" /> Download PDF
               </Button>
@@ -1889,7 +1889,7 @@ const GMDashboard = () => {
           <DialogFooter>
             <Button variant="outline" onClick={() => setFeApproveDialog({ open: false, project: null, typed: '', autoShare: false, submitting: false })} disabled={feApproveDialog.submitting}>Cancel</Button>
             <Button
-              className="bg-green-600 hover:bg-green-700"
+              className="bg-primary hover:bg-primary-hover"
               disabled={feApproveDialog.submitting || (feApproveDialog.typed || '').trim().toUpperCase() !== 'APPROVE'}
               data-testid="gm-fe-approve-confirm"
               onClick={async () => {
@@ -1925,7 +1925,7 @@ const GMDashboard = () => {
         <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto" data-testid="gm-drill-dialog">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Building2 className="h-5 w-5 text-violet-600" /> {drillDialog.title}
+              <Building2 className="h-5 w-5 text-primary" /> {drillDialog.title}
               <Badge variant="outline" className="ml-2">{(drillDialog.items || []).length}</Badge>
             </DialogTitle>
             <DialogDescription>Click any project to open its detail page.</DialogDescription>

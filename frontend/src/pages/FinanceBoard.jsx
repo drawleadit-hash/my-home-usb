@@ -34,7 +34,7 @@ export default function FinanceBoard() {
     <div className="min-h-screen bg-gray-50 flex flex-col" data-testid="finance-board">
       <AppHeader user={user} headerActions={
         <Link to="/cashflow-engine">
-          <Button size="sm" className="h-9 bg-blue-600 hover:bg-blue-700 text-white" data-testid="finance-cashflow-engine-btn">
+          <Button size="sm" className="h-9 bg-primary hover:bg-primary-hover text-white" data-testid="finance-cashflow-engine-btn">
             <Wallet className="h-4 w-4 mr-1.5" /> Cashflow Engine
           </Button>
         </Link>
@@ -48,7 +48,7 @@ export default function FinanceBoard() {
                 key={t.value}
                 value={t.value}
                 data-testid={`fb-tab-${t.value}`}
-                className="data-[state=active]:bg-amber-50 data-[state=active]:text-amber-700 data-[state=active]:shadow-none data-[state=active]:font-semibold rounded-md px-3 py-1.5 text-sm gap-1.5"
+                className="data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:shadow-none data-[state=active]:font-semibold rounded-md px-3 py-1.5 text-sm gap-1.5"
               >
                 <t.icon className="h-4 w-4" />
                 {t.label}

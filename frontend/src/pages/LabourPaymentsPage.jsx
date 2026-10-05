@@ -27,9 +27,9 @@ export default function LabourPaymentsPage() {
       <div className="max-w-7xl mx-auto px-3 sm:px-6 py-3 sm:py-4">
         <Tabs value={tab} onValueChange={setTab}>
           <TabsList className="bg-white border w-full sm:w-auto">
-            <TabsTrigger value="queue" data-testid="lp-tab-queue" className="data-[state=active]:bg-amber-50 data-[state=active]:text-amber-700 text-xs sm:text-sm">Pending Releases</TabsTrigger>
-            <TabsTrigger value="summary" data-testid="lp-tab-summary" className="data-[state=active]:bg-amber-50 data-[state=active]:text-amber-700 text-xs sm:text-sm">Contractor Summary</TabsTrigger>
-            <TabsTrigger value="material_vendor" data-testid="lp-tab-material-vendor" className="data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700 text-xs sm:text-sm">Material Vendor</TabsTrigger>
+            <TabsTrigger value="queue" data-testid="lp-tab-queue" className="data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong text-xs sm:text-sm">Pending Releases</TabsTrigger>
+            <TabsTrigger value="summary" data-testid="lp-tab-summary" className="data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong text-xs sm:text-sm">Contractor Summary</TabsTrigger>
+            <TabsTrigger value="material_vendor" data-testid="lp-tab-material-vendor" className="data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong text-xs sm:text-sm">Material Vendor</TabsTrigger>
           </TabsList>
           <TabsContent value="queue" className="mt-3">
             <AccountantLabourPayments />

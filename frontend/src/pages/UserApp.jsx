@@ -128,7 +128,7 @@ export default function UserApp() {
 
         {/* Generic Portfolio & Packages link — non-customer */}
         {genericLink?.token && (
-          <Card className="bg-gradient-to-br from-amber-50 to-emerald-50 border-amber-200">
+          <Card className="bg-amber-50 border-amber-200">
             <CardContent className="p-4">
               <div className="flex items-center justify-between gap-3 flex-wrap">
                 <div className="flex items-center gap-3 min-w-0">
@@ -144,7 +144,7 @@ export default function UserApp() {
                 <div className="flex gap-2">
                   <Button size="sm" variant="outline" onClick={copyGeneric} data-testid="generic-link-copy-btn">Copy</Button>
                   <a href={`/package/${genericLink.token}`} target="_blank" rel="noopener noreferrer">
-                    <Button size="sm" className="bg-amber-600 hover:bg-amber-700 gap-1">Preview</Button>
+                    <Button size="sm" className="bg-primary hover:bg-primary-hover gap-1">Preview</Button>
                   </a>
                 </div>
               </div>
@@ -323,7 +323,7 @@ export default function UserApp() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setDialog({ open: false, type: null, editing: null })} disabled={submitting}>Cancel</Button>
-            <Button className="bg-emerald-600 hover:bg-emerald-700" onClick={submit} disabled={submitting} data-testid="ua-submit">
+            <Button className="bg-primary hover:bg-primary-hover" onClick={submit} disabled={submitting} data-testid="ua-submit">
               {submitting ? <><Loader2 className="h-4 w-4 mr-1 animate-spin" /> Saving…</> : (dialog.editing ? 'Save' : 'Create')}
             </Button>
           </DialogFooter>
@@ -338,7 +338,7 @@ function SingleTypePanel({ k, t, list, loading, onAdd, onEdit, onRemove }) {
   return (
     <div>
       <div className="flex justify-end mb-3">
-        <Button onClick={onAdd} className="bg-emerald-600 hover:bg-emerald-700 gap-1" data-testid={`ua-add-${k}`}>
+        <Button onClick={onAdd} className="bg-primary hover:bg-primary-hover gap-1" data-testid={`ua-add-${k}`}>
           <Plus className="h-4 w-4" /> Add {t.label}
         </Button>
       </div>

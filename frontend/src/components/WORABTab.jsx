@@ -263,7 +263,7 @@ export default function WORABTab({ projectId, workOrder, onOpenRabView, stageIdF
       <>
       <tr className="hover:bg-gray-50/60" data-testid={`wo-rab-row-${rab.rab_number}`}>
         <td className="px-3 py-2.5">
-          <Badge className={`font-bold text-[10px] px-2 py-0.5 ${rab.rab_number === '—' ? 'bg-gray-200 text-gray-500' : 'bg-violet-600 text-white border-violet-700'}`}>
+          <Badge className={`font-bold text-[10px] px-2 py-0.5 ${rab.rab_number === '—' ? 'bg-gray-200 text-gray-500' : 'bg-primary text-white border-primary'}`}>
             {rab.rab_number}
           </Badge>
           {isMulti && (
@@ -284,7 +284,7 @@ export default function WORABTab({ projectId, workOrder, onOpenRabView, stageIdF
               <Button
                 size="sm"
                 variant="outline"
-                className="h-7 px-2 text-[11px] text-violet-700 border-violet-200 hover:bg-violet-50"
+                className="h-7 px-2 text-[11px] text-primary-strong border-brand-300 hover:bg-brand-50"
                 onClick={() => onOpenRabView && onOpenRabView(rab.request_id)}
                 data-testid={`wo-rab-view-${rab.rab_number}`}
               >
@@ -300,7 +300,7 @@ export default function WORABTab({ projectId, workOrder, onOpenRabView, stageIdF
               <Button
                 size="sm"
                 variant="ghost"
-                className="h-7 w-7 p-0 text-indigo-500 hover:text-indigo-700 hover:bg-indigo-50"
+                className="h-7 w-7 p-0 text-primary-strong hover:text-brand-800 hover:bg-brand-50"
                 onClick={() => openEditRab(rab)}
                 title={`Edit ${rab.rab_number || 'RAB'}`}
                 data-testid={`wo-rab-edit-${rab.rab_number}`}
@@ -371,7 +371,7 @@ export default function WORABTab({ projectId, workOrder, onOpenRabView, stageIdF
     const decorated = decorateTotals(group);
     return (
       <div className="rounded-lg border border-gray-200 bg-white shadow-sm" data-testid={`worab-stage-card-${decorated.stage_id}`}>
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-3 py-2 border-b border-gray-100 bg-gradient-to-r from-violet-50/40 to-white">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-3 py-2 border-b border-gray-100 bg-white">
           <div className="min-w-0">
             <p className="text-[10px] uppercase tracking-wider text-violet-700 font-semibold">Stage</p>
             <p className="text-sm font-bold text-gray-900 truncate">{decorated.stage_name}</p>
@@ -445,7 +445,7 @@ export default function WORABTab({ projectId, workOrder, onOpenRabView, stageIdF
             whatever came after it) just got cut off on narrow screens
             instead of wrapping or scrolling into view. */}
         <TabsList className="w-full flex justify-start overflow-x-auto bg-gray-50 border-b rounded-none h-auto p-0">
-          <TabsTrigger value="all" className="shrink-0 whitespace-nowrap text-xs flex items-center gap-1.5 px-3 py-2 data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-violet-600 rounded-none">
+          <TabsTrigger value="all" className="shrink-0 whitespace-nowrap text-xs flex items-center gap-1.5 px-3 py-2 data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none">
             <FileText className="h-3 w-3" /> All <Badge className="ml-1 bg-violet-100 text-violet-700 border-0 text-[10px]">{rabs.length}</Badge>
           </TabsTrigger>
           <TabsTrigger value="released" className="shrink-0 whitespace-nowrap text-xs flex items-center gap-1.5 px-3 py-2 data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-emerald-600 rounded-none">
@@ -500,7 +500,7 @@ export default function WORABTab({ projectId, workOrder, onOpenRabView, stageIdF
                     key={o.id}
                     type="button"
                     onMouseDown={(e) => { e.preventDefault(); setStageQuery(o.name); setStageOpen(false); }}
-                    className="block w-full text-left px-3 py-1.5 text-xs hover:bg-violet-50 hover:text-violet-700"
+                    className="block w-full text-left px-3 py-1.5 text-xs hover:bg-brand-50 hover:text-primary-strong"
                     data-testid={`worab-stage-option-${o.id}`}
                   >
                     {o.name}
@@ -529,7 +529,7 @@ export default function WORABTab({ projectId, workOrder, onOpenRabView, stageIdF
       <Dialog open={editDialog.open} onOpenChange={(o) => !o && setEditDialog({ open: false, rab: null, amount: '', notes: '', stage_id: '' })}>
         <DialogContent className="max-w-lg" data-testid="rab-edit-dialog">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2"><Pencil className="h-4 w-4 text-indigo-600" /> Edit {editDialog.rab?.rab_number || 'RAB'}</DialogTitle>
+            <DialogTitle className="flex items-center gap-2"><Pencil className="h-4 w-4 text-primary" /> Edit {editDialog.rab?.rab_number || 'RAB'}</DialogTitle>
             <DialogDescription className="text-xs">
               Update the pending request — amount, notes, or move it to a different open stage. Approval ladder restarts from PM.
             </DialogDescription>
@@ -630,7 +630,7 @@ export default function WORABTab({ projectId, workOrder, onOpenRabView, stageIdF
           })()}
           <DialogFooter>
             <Button variant="outline" onClick={() => setEditDialog({ open: false, rab: null, amount: '', notes: '', stage_id: '' })} data-testid="rab-edit-cancel">Cancel</Button>
-            <Button onClick={submitEditRab} disabled={editSaving} className="bg-indigo-600 hover:bg-indigo-700" data-testid="rab-edit-save">
+            <Button onClick={submitEditRab} disabled={editSaving} className="bg-primary hover:bg-primary-hover" data-testid="rab-edit-save">
               {editSaving ? 'Saving…' : 'Save Changes'}
             </Button>
           </DialogFooter>

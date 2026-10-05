@@ -92,7 +92,7 @@ export function PMMaterialReadOnlyList({ items }) {
   return (
     <div className="space-y-2" data-testid="pm-mat-readonly">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-blue-700 flex items-center gap-2"><Package className="h-4 w-4" /> Material Requests ({filteredItems.length}) <span className="ml-1 text-[10px] uppercase tracking-wide font-normal text-gray-400">(view-only)</span></h3>
+        <h3 className="text-sm font-semibold text-foreground flex items-center gap-2"><Package className="h-4 w-4" /> Material Requests ({filteredItems.length}) <span className="ml-1 text-[10px] uppercase tracking-wide font-normal text-gray-400">(view-only)</span></h3>
       </div>
 
       {/* ── Project + Date filters ──────────────────────────────────────
@@ -147,7 +147,7 @@ export function PMMaterialReadOnlyList({ items }) {
                     key={p.label}
                     onClick={p.fn}
                     data-testid={`pm-mat-preset-${p.label.toLowerCase().replace(/\s+/g, '-')}`}
-                    className={`w-full text-left text-xs px-2.5 py-1.5 rounded-lg transition-colors ${p.label === 'All Requests' ? 'text-red-500 hover:bg-red-50 mt-2' : 'text-gray-700 hover:bg-amber-50 hover:text-amber-700'}`}
+                    className={`w-full text-left text-xs px-2.5 py-1.5 rounded-lg transition-colors ${p.label === 'All Requests' ? 'text-red-500 hover:bg-red-50 mt-2' : 'text-gray-700 hover:bg-brand-50 hover:text-primary-strong'}`}
                   >
                     {p.label}
                   </button>
@@ -173,12 +173,12 @@ export function PMMaterialReadOnlyList({ items }) {
                     table: 'w-full border-collapse', head_row: 'flex',
                     head_cell: 'text-gray-400 rounded-md w-8 font-normal text-[10px] uppercase',
                     row: 'flex w-full mt-1', cell: 'relative p-0 text-center text-sm',
-                    day: 'h-8 w-8 p-0 font-normal text-xs rounded-lg hover:bg-amber-50 transition-colors inline-flex items-center justify-center',
-                    day_selected: 'bg-amber-600 text-white hover:bg-amber-700 font-medium',
-                    day_today: 'bg-gray-100 font-semibold text-amber-600',
-                    day_range_middle: 'bg-amber-50 text-amber-700 rounded-none',
-                    day_range_start: 'bg-amber-600 text-white rounded-l-lg rounded-r-none',
-                    day_range_end: 'bg-amber-600 text-white rounded-r-lg rounded-l-none',
+                    day: 'h-8 w-8 p-0 font-normal text-xs rounded-lg hover:bg-brand-50 transition-colors inline-flex items-center justify-center',
+                    day_selected: 'bg-primary text-white hover:bg-primary-hover font-medium',
+                    day_today: 'bg-gray-100 font-semibold text-primary-strong',
+                    day_range_middle: 'bg-brand-50 text-primary-strong rounded-none',
+                    day_range_start: 'bg-primary text-white rounded-l-lg rounded-r-none',
+                    day_range_end: 'bg-primary text-white rounded-r-lg rounded-l-none',
                     day_outside: 'text-gray-300',
                   }}
                 />
@@ -218,7 +218,7 @@ export function PMMaterialReadOnlyList({ items }) {
               <Card
                 key={r.request_id}
                 data-testid={`pm-mat-card-${r.request_id}`}
-                className="cursor-pointer hover:shadow-md hover:bg-amber-50/40 hover:border-amber-200 transition-all"
+                className="cursor-pointer hover:shadow-md hover:bg-amber-50/40 hover:border-brand-300 transition-all"
                 onClick={() => setSelected(r)}
                 role="button"
                 tabIndex={0}
@@ -328,7 +328,7 @@ export function PMLabourReadOnlyList({ items, onApprove, onReject }) {
 
   return (
     <div className="space-y-2" data-testid="pm-lab-readonly">
-      <h3 className="text-sm font-semibold text-amber-700 flex items-center gap-2"><HardHat className="h-4 w-4" /> Work Order / Labour ({filteredItems.length})</h3>
+      <h3 className="text-sm font-semibold text-foreground flex items-center gap-2"><HardHat className="h-4 w-4" /> Work Order / Labour ({filteredItems.length})</h3>
       <PMProjectDateFilter filter={projDateFilter} itemsCount={items.length} testIdPrefix="pm-lab" />
       <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
         {LABOUR_BUCKETS.map(b => {
@@ -358,7 +358,7 @@ export function PMLabourReadOnlyList({ items, onApprove, onReject }) {
               <Card
                 key={rowKey}
                 onClick={() => setDetail(r)}
-                className="cursor-pointer transition hover:shadow-md hover:border-amber-300"
+                className="cursor-pointer transition hover:shadow-md hover:border-brand-300"
                 data-testid={`pm-lab-card-${rowKey}`}
               >
                 <CardContent className="p-3">
@@ -393,7 +393,7 @@ export function PMLabourReadOnlyList({ items, onApprove, onReject }) {
                       {onApprove && (
                         <Button
                           size="sm"
-                          className="h-8 bg-emerald-600 hover:bg-emerald-700 text-white"
+                          className="h-8 bg-primary hover:bg-primary-hover text-white"
                           onClick={() => doApprove(r)}
                           disabled={busy}
                           data-testid={`pm-lab-approve-${r.request_id || r.labour_expense_id}`}
@@ -466,7 +466,7 @@ export function PMLabourReadOnlyList({ items, onApprove, onReject }) {
             <Button
               onClick={confirmApprove}
               disabled={actingId === (approveTarget?.request_id || approveTarget?.labour_expense_id)}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white"
+              className="bg-primary hover:bg-primary-hover text-white"
               data-testid="pm-lab-approve-confirm"
             >
               {actingId === (approveTarget?.request_id || approveTarget?.labour_expense_id) ? 'Approving…' : 'Confirm Approve'}
@@ -514,7 +514,7 @@ function LabourRabDetailDialog({ request, onClose, onApprove, onReject, busy }) 
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto" data-testid="pm-lab-detail-dialog">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 flex-wrap">
-            <HardHat className="h-4 w-4 text-amber-600" />
+            <HardHat className="h-4 w-4 text-primary" />
             <span>{r.rab_number ? `${r.rab_number}` : 'Labour Request'}</span>
             {r.stage_name && <span className="text-sm font-normal text-gray-500">· {r.stage_name}</span>}
             <span className="ml-auto text-base font-bold text-gray-800">{fmt(r.amount || 0)}</span>
@@ -584,7 +584,7 @@ function LabourRabDetailDialog({ request, onClose, onApprove, onReject, busy }) 
               </Button>
               <Button
                 size="sm"
-                className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                className="bg-primary hover:bg-primary-hover text-white"
                 onClick={() => onApprove(r)}
                 disabled={busy}
                 data-testid="pm-lab-detail-approve"

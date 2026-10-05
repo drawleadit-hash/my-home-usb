@@ -209,9 +209,9 @@ export default function ArchitectDashboard() {
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between gap-3 flex-wrap">
                     <CardTitle className="text-base flex items-center gap-2">
-                      <Layers className="h-4 w-4 text-indigo-600" />Site Plans
+                      <Layers className="h-4 w-4 text-primary" />Site Plans
                     </CardTitle>
-                    <Button size="sm" className="bg-indigo-600 hover:bg-indigo-700" onClick={openAddPlan} data-testid="add-site-plan-btn">
+                    <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={openAddPlan} data-testid="add-site-plan-btn">
                       <Plus className="h-4 w-4 mr-1" />Add Floor
                     </Button>
                   </div>
@@ -239,7 +239,7 @@ export default function ArchitectDashboard() {
                               <td className="px-4 py-2.5 font-medium">{plan.floor_name}</td>
                               <td className="px-4 py-2.5 text-center">
                                 {plan.drive_link ? (
-                                  <a href={plan.drive_link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-xs">
+                                  <a href={plan.drive_link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary-strong hover:text-brand-800 text-xs">
                                     <ExternalLink className="h-3 w-3" />Open
                                   </a>
                                 ) : <span className="text-gray-400 text-xs">-</span>}
@@ -300,9 +300,9 @@ export default function ArchitectDashboard() {
                   <CardHeader className="pb-2">
                     <div className="flex items-center justify-between gap-3">
                       <CardTitle className="text-base flex items-center gap-2">
-                        <Image className="h-4 w-4 text-purple-600" />3D Photos ({photos3d.length})
+                        <Image className="h-4 w-4 text-primary" />3D Photos ({photos3d.length})
                       </CardTitle>
-                      <Button size="sm" className="bg-purple-600 hover:bg-purple-700" onClick={() => openAddFile('3d_photo')} data-testid="add-3d-photo-btn">
+                      <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={() => openAddFile('3d_photo')} data-testid="add-3d-photo-btn">
                         <Plus className="h-4 w-4 mr-1" />Add 3D Photo
                       </Button>
                     </div>
@@ -320,7 +320,7 @@ export default function ArchitectDashboard() {
                             </div>
                             <div className="flex items-center gap-2">
                               {file.drive_link && (
-                                <a href={file.drive_link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-xs border border-blue-200 rounded px-2 py-1">
+                                <a href={file.drive_link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary-strong hover:text-brand-800 text-xs border border-brand-300 rounded px-2 py-1">
                                   <ExternalLink className="h-3 w-3" />Drive
                                 </a>
                               )}
@@ -402,7 +402,7 @@ export default function ArchitectDashboard() {
             </div>
             <DialogFooter>
               <Button variant="outline" onClick={() => setPlanDialog(false)}>Cancel</Button>
-              <Button onClick={handleSavePlan} className="bg-indigo-600 hover:bg-indigo-700" data-testid="save-plan-btn">
+              <Button onClick={handleSavePlan} className="bg-primary hover:bg-primary-hover" data-testid="save-plan-btn">
                 {editingPlan ? 'Update' : 'Add Plan'}
               </Button>
             </DialogFooter>
@@ -442,7 +442,7 @@ export default function ArchitectDashboard() {
             </div>
             <DialogFooter>
               <Button variant="outline" onClick={() => setFileDialog(false)}>Cancel</Button>
-              <Button onClick={handleSaveFile} className="bg-indigo-600 hover:bg-indigo-700" data-testid="save-file-btn">
+              <Button onClick={handleSaveFile} className="bg-primary hover:bg-primary-hover" data-testid="save-file-btn">
                 {editingFile ? 'Update' : 'Add File'}
               </Button>
             </DialogFooter>
@@ -463,7 +463,7 @@ export default function ArchitectDashboard() {
           <CardHeader className="pb-2">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <CardTitle className="text-base flex items-center gap-2">
-                <Building2 className="h-4 w-4 text-indigo-600" />All Projects ({filteredProjects.length})
+                <Building2 className="h-4 w-4 text-primary" />All Projects ({filteredProjects.length})
               </CardTitle>
               <div className="flex items-center gap-2 flex-wrap">
                 <div className="relative">

@@ -67,7 +67,7 @@ export default function ProjectFilterCombobox({
         type="button"
         disabled={disabled}
         onClick={() => { setOpen(o => !o); setSearch(''); }}
-        className={`flex h-8 w-48 items-center justify-between rounded-md border border-gray-200 bg-white px-3 text-xs text-left transition-colors hover:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-400 disabled:opacity-60 disabled:cursor-not-allowed ${selected ? 'text-gray-800' : 'text-gray-500'}`}
+        className={`flex h-8 w-48 items-center justify-between rounded-md border border-gray-200 bg-white px-3 text-xs text-left transition-colors hover:border-brand-300 focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-60 disabled:cursor-not-allowed ${selected ? 'text-gray-800' : 'text-gray-500'}`}
         data-testid={`${testId}-trigger`}
       >
         <span className="truncate">{selected ? selected.name : (placeholder || allLabel)}</span>

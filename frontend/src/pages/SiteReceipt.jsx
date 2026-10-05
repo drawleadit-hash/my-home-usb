@@ -310,7 +310,7 @@ export default function SiteReceipt() {
 
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-          <Card className="bg-gradient-to-br from-yellow-50 to-yellow-100 border-yellow-200">
+          <Card className="bg-yellow-50 border-yellow-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">Pending Deliveries</CardTitle>
             </CardHeader>
@@ -321,7 +321,7 @@ export default function SiteReceipt() {
               </div>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+          <Card className="bg-green-50 border-green-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">GPS Status</CardTitle>
             </CardHeader>
@@ -334,7 +334,7 @@ export default function SiteReceipt() {
               </div>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+          <Card className="bg-blue-50 border-blue-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">Your Role</CardTitle>
             </CardHeader>

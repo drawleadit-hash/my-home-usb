@@ -219,7 +219,7 @@ export default function MobileBottomNav({ user }) {
       {/* More drawer overlay */}
       {moreOpen && hasMore && (
         <div className="md:hidden fixed inset-0 z-[60]" data-testid="mobile-more-drawer">
-          <div className="absolute inset-0 bg-black/40" onClick={() => setMoreOpen(false)} />
+          <div className="absolute inset-0 bg-ink-950/50 backdrop-blur-[2px]" onClick={() => setMoreOpen(false)} />
           <div className="absolute bottom-16 left-0 right-0 bg-white rounded-t-2xl shadow-2xl border-t"
             style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
             <div className="flex items-center justify-between px-4 pt-4 pb-2">
@@ -238,10 +238,10 @@ export default function MobileBottomNav({ user }) {
                     data-testid={`mobile-more-${item.label.toLowerCase().replace(/\s/g, '-')}`}
                     onClick={() => handleNav(item)}
                     className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                      active ? 'bg-amber-50 text-amber-700' : 'text-gray-600 hover:bg-gray-50'
+                      active ? 'bg-brand-50 text-primary-strong' : 'text-gray-600 hover:bg-gray-50'
                     }`}
                   >
-                    <Icon className={`h-4.5 w-4.5 ${active ? 'text-amber-600' : 'text-gray-400'}`} />
+                    <Icon className={`h-4.5 w-4.5 ${active ? 'text-primary' : 'text-gray-400'}`} />
                     {item.label}
                   </button>
                 );
@@ -266,11 +266,11 @@ export default function MobileBottomNav({ user }) {
       
       {/* Fixed Bottom Nav */}
       <nav 
-        className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50"
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/95 backdrop-blur-md"
         data-testid="mobile-bottom-nav"
         style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
       >
-        <div className="flex items-center justify-around h-14">
+        <div className="flex items-center justify-around h-16">
           {navItems.map((item) => {
             const active = item.path ? isActive(item.path) : moreOpen;
             const Icon = item.icon;
@@ -280,11 +280,12 @@ export default function MobileBottomNav({ user }) {
                 data-testid={`mobile-nav-${item.label.toLowerCase().replace(/\s/g, '-')}`}
                 onClick={() => handleNav(item)}
                 className={`flex flex-col items-center justify-center flex-1 h-full transition-colors relative ${
-                  active ? 'text-amber-600' : 'text-gray-400 hover:text-gray-600'
+                  active ? 'text-primary-strong' : 'text-gray-400 hover:text-gray-600'
                 }`}
               >
-                {active && <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-amber-500 rounded-b" />}
-                <Icon className="h-5 w-5" />
+                <span className={`flex h-7 w-12 items-center justify-center rounded-full transition-colors ${active ? 'bg-brand-100 dark:bg-brand-900/50' : ''}`}>
+                  <Icon className="h-5 w-5" />
+                </span>
                 <span className="text-[10px] mt-0.5 font-medium">{item.label}</span>
               </button>
             );

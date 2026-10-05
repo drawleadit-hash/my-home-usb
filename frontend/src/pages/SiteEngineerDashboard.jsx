@@ -166,7 +166,7 @@ function MiniCashbookSection({ projects }) {
       </div>
 
       {loading ? (
-        <div className="flex justify-center py-8"><RefreshCw className="h-6 w-6 animate-spin text-amber-600" /></div>
+        <div className="flex justify-center py-8"><RefreshCw className="h-6 w-6 animate-spin text-primary" /></div>
       ) : cashbooks.length === 0 ? (
         <Card><CardContent className="p-8 text-center text-gray-400">No cashbook entries yet. Request petty cash to get started.</CardContent></Card>
       ) : (
@@ -1209,7 +1209,7 @@ export default function SiteEngineerDashboard() {
           <TabsList className={`hidden lg:grid ${user?.role === 'sr_site_engineer' || user?.role === 'super_admin' ? 'lg:grid-cols-5' : 'lg:grid-cols-4'} w-full h-auto bg-gray-100 p-1 rounded-lg`} data-testid="se-dashboard-tabs">
             <TabsTrigger
               value="projects"
-              className="gap-2 text-base sm:text-lg font-semibold py-3 data-[state=active]:bg-white data-[state=active]:text-amber-700 data-[state=active]:shadow"
+              className="gap-2 text-base sm:text-lg font-semibold py-3 data-[state=active]:bg-white data-[state=active]:text-primary-strong data-[state=active]:shadow"
               data-testid="tab-projects"
             >
               <Building2 className="h-5 w-5" /> My Projects
@@ -1224,7 +1224,7 @@ export default function SiteEngineerDashboard() {
             {(user?.role === 'sr_site_engineer' || user?.role === 'super_admin') && (
               <TabsTrigger
                 value="requests"
-                className="gap-2 text-base sm:text-lg font-semibold py-3 data-[state=active]:bg-white data-[state=active]:text-violet-700 data-[state=active]:shadow"
+                className="gap-2 text-base sm:text-lg font-semibold py-3 data-[state=active]:bg-white data-[state=active]:text-primary-strong data-[state=active]:shadow"
                 data-testid="tab-sr-se-requests"
               >
                 <ClipboardList className="h-5 w-5" /> Requests
@@ -1244,7 +1244,7 @@ export default function SiteEngineerDashboard() {
             </TabsTrigger>
             <TabsTrigger
               value="attendance"
-              className="gap-2 text-base sm:text-lg font-semibold py-3 data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow"
+              className="gap-2 text-base sm:text-lg font-semibold py-3 data-[state=active]:bg-white data-[state=active]:text-primary-strong data-[state=active]:shadow"
               data-testid="tab-attendance"
             >
               <Clock className="h-5 w-5" /> Attendance
@@ -1689,7 +1689,7 @@ export default function SiteEngineerDashboard() {
                       value={projectSearch}
                       onChange={(e) => setProjectSearch(e.target.value)}
                       placeholder="Search project, client, phase or date…"
-                      className="pl-9 h-9 text-sm bg-white border-amber-200 focus-visible:ring-amber-400"
+                      className="pl-9 h-9 text-sm bg-white border-amber-200 focus-visible:ring-primary/50"
                       data-testid="sr-se-projects-search"
                     />
                   </div>
@@ -1711,7 +1711,7 @@ export default function SiteEngineerDashboard() {
                 <Card data-testid="sr-se-projects-table-card" className="overflow-hidden shadow-sm">
                   <CardContent className="p-0 overflow-x-auto">
                     <table className="w-full text-sm" data-testid="sr-se-projects-table">
-                      <thead className="bg-gradient-to-r from-amber-50 to-amber-50/40 text-gray-700 border-b border-amber-100">
+                      <thead className="bg-amber-50 text-gray-700 border-b border-amber-100">
                         <tr>
                           <th className="text-left font-semibold px-4 py-3 uppercase text-[11px] tracking-wider">Project</th>
                           <th className="text-left font-semibold px-4 py-3 uppercase text-[11px] tracking-wider">Client</th>
@@ -1815,7 +1815,7 @@ export default function SiteEngineerDashboard() {
                                   <Button
                                     size="sm"
                                     variant="ghost"
-                                    className="h-8 w-8 p-0 text-amber-700 hover:text-amber-900 hover:bg-amber-100 group-hover:bg-amber-100 group-hover:translate-x-0.5 transition-all"
+                                    className="h-8 w-8 p-0 text-primary-strong hover:text-brand-800 hover:bg-brand-50 group-hover:bg-amber-100 group-hover:translate-x-0.5 transition-all"
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       window.location.href = `/site-engineer/project/${project.project_id}`;
@@ -1947,7 +1947,7 @@ export default function SiteEngineerDashboard() {
             ) : (
               /* ===== CONTRACTOR STAGES DETAIL VIEW ===== */
               <div>
-                <button className="flex items-center gap-1.5 text-sm text-indigo-600 hover:text-indigo-800 mb-3" onClick={() => setSelectedContractor(null)} data-testid="back-to-contractors">
+                <button className="flex items-center gap-1.5 text-sm text-primary-strong hover:text-brand-800 mb-3" onClick={() => setSelectedContractor(null)} data-testid="back-to-contractors">
                   <ArrowLeft className="h-4 w-4" /> Back to Contractors
                 </button>
                 <div className="flex items-center gap-3 mb-4">
@@ -2069,7 +2069,7 @@ export default function SiteEngineerDashboard() {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
               <h3 className="text-lg font-semibold">Petty Cash</h3>
               <div className="flex gap-2">
-                <Button onClick={() => setPettyCashDialog(true)} className="gap-1.5 bg-green-600 hover:bg-green-700 h-8 text-xs" data-testid="req-petty-cash-btn">
+                <Button onClick={() => setPettyCashDialog(true)} className="gap-1.5 bg-primary hover:bg-primary-hover h-8 text-xs" data-testid="req-petty-cash-btn">
                   <Plus className="h-3.5 w-3.5" /> Req Petty Cash
                 </Button>
                 <Button onClick={async () => { setDirectExpenseDialog(true); setDirectExpItems([{category:'',expense_name:'',amount:'',bill_file_id:null,bill_filename:''}]); setDirectExpProject(''); try { const r = await axios.get(`${API}/site-engineer/petty-cash`); setPettyCashList(r.data || []); } catch (e) { /* noop */ } }} variant="outline" className="gap-1.5 h-8 text-xs border-orange-300 text-orange-700 hover:bg-orange-50" data-testid="record-expense-btn">
@@ -2240,7 +2240,7 @@ export default function SiteEngineerDashboard() {
                                     <Button
                                       size="sm"
                                       variant="ghost"
-                                      className="h-7 w-7 p-0 text-blue-600 hover:bg-blue-50"
+                                      className="h-7 w-7 p-0 text-primary-strong hover:bg-brand-50"
                                       onClick={() => handleEditPettyCashRequest(pc)}
                                       data-testid={`pc-edit-${pc.petty_cash_id}`}
                                       title="Edit and resubmit"
@@ -2294,7 +2294,7 @@ export default function SiteEngineerDashboard() {
                             {pc.status === 'payment_done' && (
                               <div className="mt-2 p-2 bg-blue-50 rounded-md border border-blue-200">
                                 <p className="text-xs text-blue-700 mb-1">Payment processed via {pc.payment_details?.payment_mode || 'N/A'} {pc.payment_details?.bank_name ? `(${pc.payment_details.bank_name})` : ''}</p>
-                                <Button size="sm" className="bg-blue-600 hover:bg-blue-700 h-7 text-xs" onClick={() => handleAcknowledgePettyCash(pc.petty_cash_id)} data-testid={`pc-acknowledge-${pc.petty_cash_id}`}>
+                                <Button size="sm" className="bg-primary hover:bg-primary-hover h-7 text-xs" onClick={() => handleAcknowledgePettyCash(pc.petty_cash_id)} data-testid={`pc-acknowledge-${pc.petty_cash_id}`}>
                                   <CheckCircle className="h-3 w-3 mr-1" /> Acknowledge Receipt
                                 </Button>
                               </div>
@@ -2343,7 +2343,7 @@ export default function SiteEngineerDashboard() {
                                             href={`${API}/files/${row.bill_file_id}/download`}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-blue-600 underline hover:text-blue-800"
+                                            className="text-primary-strong underline hover:text-brand-800"
                                             title={row.bill_filename || 'View bill'}
                                             data-testid={`req-status-exp-bill-${idx}`}
                                           >View</a>
@@ -2462,7 +2462,7 @@ export default function SiteEngineerDashboard() {
                                       <Button
                                         size="sm"
                                         variant="ghost"
-                                        className="h-7 w-7 p-0 text-blue-600 hover:bg-blue-50 ml-1"
+                                        className="h-7 w-7 p-0 text-primary-strong hover:bg-brand-50 ml-1"
                                         onClick={() => handleEditDirectExpense(de)}
                                         data-testid={`dexp-edit-${de.expense_id}`}
                                         title="Edit and resubmit"
@@ -2501,7 +2501,7 @@ export default function SiteEngineerDashboard() {
                                         rel="noopener noreferrer"
                                         onClick={(e) => e.stopPropagation()}
                                         title={item.bill_filename}
-                                        className="text-[10px] text-blue-600 underline hover:text-blue-800"
+                                        className="text-[10px] text-primary-strong underline hover:text-brand-800"
                                         data-testid={`se-view-bill-${de.expense_id}-${i}`}
                                       >[bill]</a>
                                     ) : (
@@ -2582,7 +2582,7 @@ export default function SiteEngineerDashboard() {
                                         href={`${API}/files/${row.bill_file_id}/download`}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-blue-600 underline hover:text-blue-800"
+                                        className="text-primary-strong underline hover:text-brand-800"
                                         title={row.bill_filename || 'View bill'}
                                         data-testid={`exp-waiting-bill-${idx}`}
                                       >View</a>
@@ -2609,7 +2609,7 @@ export default function SiteEngineerDashboard() {
               <TabsContent value="petrol_allowance" data-testid="petrol-allowance-tab">
                 <div className="flex justify-between items-center mb-3">
                   <p className="text-xs text-gray-500">Petrol allowance requests go directly to Accountant.</p>
-                  <Button size="sm" className="bg-blue-600 hover:bg-blue-700 h-8 text-xs" onClick={() => { setPetrolDialog(true); setPetrolAmount(''); setPetrolKm(''); }} data-testid="req-petrol-btn">
+                  <Button size="sm" className="bg-primary hover:bg-primary-hover h-8 text-xs" onClick={() => { setPetrolDialog(true); setPetrolAmount(''); setPetrolKm(''); }} data-testid="req-petrol-btn">
                     <Plus className="h-3.5 w-3.5 mr-1" /> Request Petrol Allowance
                   </Button>
                 </div>
@@ -2658,7 +2658,7 @@ export default function SiteEngineerDashboard() {
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle className="text-base flex items-center gap-2">
-                      <Video className="h-4 w-4 text-purple-600" /> Curing Video History
+                      <Video className="h-4 w-4 text-primary" /> Curing Video History
                     </CardTitle>
                     <p className="text-xs text-gray-500 mt-1">Records created via Curing Video popup</p>
                   </div>
@@ -2669,7 +2669,7 @@ export default function SiteEngineerDashboard() {
                       options={projects.map(p => ({ id: p.project_id, name: p.name }))}
                       testId="curing-filter-project"
                     />
-                    <Button size="sm" className="bg-purple-600 hover:bg-purple-700 h-8 text-xs" onClick={() => { setCuringDialog(true); setCuringProject(''); setCuringDone(false); }} data-testid="curing-add-record-btn">
+                    <Button size="sm" className="bg-primary hover:bg-primary-hover h-8 text-xs" onClick={() => { setCuringDialog(true); setCuringProject(''); setCuringDone(false); }} data-testid="curing-add-record-btn">
                       <Plus className="h-3.5 w-3.5 mr-1" /> New Record
                     </Button>
                   </div>
@@ -2677,7 +2677,7 @@ export default function SiteEngineerDashboard() {
               </CardHeader>
               <CardContent className="p-4 pt-0">
                 {curingHistoryLoading ? (
-                  <div className="flex justify-center py-8"><RefreshCw className="h-5 w-5 animate-spin text-purple-600" /></div>
+                  <div className="flex justify-center py-8"><RefreshCw className="h-5 w-5 animate-spin text-primary" /></div>
                 ) : curingHistory.length === 0 ? (
                   <div className="text-center py-8 text-gray-400">
                     <Video className="h-10 w-10 mx-auto mb-2 opacity-40" />
@@ -2750,7 +2750,7 @@ export default function SiteEngineerDashboard() {
                     <p className="text-xs text-gray-500 mt-0.5">Multi-site time tracking</p>
                   </div>
                   {!currentlyLoggedProject ? (
-                    <Button size="sm" className="bg-green-600 hover:bg-green-700 text-xs" onClick={() => setAttLoginDialog(true)} data-testid="att-login-tab-btn">
+                    <Button size="sm" className="bg-primary hover:bg-primary-hover text-xs" onClick={() => setAttLoginDialog(true)} data-testid="att-login-tab-btn">
                       <Play className="h-3 w-3 mr-1" /> Site Login
                     </Button>
                   ) : (
@@ -2895,7 +2895,7 @@ export default function SiteEngineerDashboard() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setAttLoginDialog(false)}>Cancel</Button>
-            <Button className="bg-green-600 hover:bg-green-700" onClick={handleAttLogin} disabled={attLoading} data-testid="att-confirm-login">
+            <Button className="bg-primary hover:bg-primary-hover" onClick={handleAttLogin} disabled={attLoading} data-testid="att-confirm-login">
               {attLoading ? 'Locating...' : 'Login to Site'}
             </Button>
           </DialogFooter>
@@ -2969,7 +2969,7 @@ export default function SiteEngineerDashboard() {
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setFinishStageDialog(false)}>Cancel</Button>
-            <Button className="bg-green-600 hover:bg-green-700" onClick={handleFinishStage} data-testid="finish-stage-confirm">
+            <Button className="bg-primary hover:bg-primary-hover" onClick={handleFinishStage} data-testid="finish-stage-confirm">
               <CheckCircle className="h-4 w-4 mr-1" /> Finish Stage
             </Button>
           </DialogFooter>
@@ -3023,7 +3023,7 @@ export default function SiteEngineerDashboard() {
 
           <DialogFooter>
             <Button variant="outline" onClick={() => { setPettyCashDialog(false); setEditingPettyCashId(null); }}>Cancel</Button>
-            <Button onClick={handleRequestPettyCash} className="bg-green-600 hover:bg-green-700">
+            <Button onClick={handleRequestPettyCash} className="bg-primary hover:bg-primary-hover">
               <Wallet className="h-4 w-4 mr-2" /> {editingPettyCashId ? 'Resubmit' : 'Request'}
             </Button>
           </DialogFooter>
@@ -3111,7 +3111,7 @@ export default function SiteEngineerDashboard() {
 
           <DialogFooter>
             <Button variant="outline" onClick={() => setPettyCashExpenseDialog(false)}>Cancel</Button>
-            <Button onClick={handleAddExpense} className="bg-green-600 hover:bg-green-700">
+            <Button onClick={handleAddExpense} className="bg-primary hover:bg-primary-hover">
               <Receipt className="h-4 w-4 mr-2" /> Add Expense
             </Button>
           </DialogFooter>
@@ -3123,7 +3123,7 @@ export default function SiteEngineerDashboard() {
         <DialogContent className="max-w-sm" data-testid="curing-video-dialog">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-base">
-              <Video className="h-4 w-4 text-purple-600" /> Curing Video
+              <Video className="h-4 w-4 text-primary" /> Curing Video
             </DialogTitle>
             <DialogDescription>Select a project and mark curing status. Date is auto-captured.</DialogDescription>
           </DialogHeader>
@@ -3173,7 +3173,7 @@ export default function SiteEngineerDashboard() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setCuringDialog(false)}>Cancel</Button>
-            <Button onClick={handleCuringSubmit} className="bg-purple-600 hover:bg-purple-700" disabled={curingLoading} data-testid="curing-submit-btn">
+            <Button onClick={handleCuringSubmit} className="bg-primary hover:bg-primary-hover" disabled={curingLoading} data-testid="curing-submit-btn">
               {curingLoading ? 'Saving...' : 'Save & Send'}
             </Button>
           </DialogFooter>
@@ -3316,7 +3316,7 @@ export default function SiteEngineerDashboard() {
                       <Input placeholder="Amount" type="number" className="h-8 text-xs w-full sm:w-24" value={item.amount} onChange={e => { const n = [...directExpItems]; n[idx].amount = e.target.value; setDirectExpItems(n); }} />
                     </div>
                     <div className="flex items-center gap-2">
-                      <label className="flex items-center gap-1.5 text-xs text-blue-600 cursor-pointer hover:text-blue-800">
+                      <label className="flex items-center gap-1.5 text-xs text-primary-strong cursor-pointer hover:text-brand-800">
                         <input type="file" className="hidden" accept="image/*,.pdf" onChange={e => handleBillUpload(idx, e.target.files[0])} />
                         <Plus className="h-3 w-3" /> {item.bill_filename ? item.bill_filename : 'Upload Bill'}
                       </label>
@@ -3362,7 +3362,7 @@ export default function SiteEngineerDashboard() {
       <Dialog open={petrolDialog} onOpenChange={setPetrolDialog}>
         <DialogContent className="max-w-sm" data-testid="petrol-dialog">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-base"><Truck className="h-4 w-4 text-blue-600" /> Petrol Allowance</DialogTitle>
+            <DialogTitle className="flex items-center gap-2 text-base"><Truck className="h-4 w-4 text-primary" /> Petrol Allowance</DialogTitle>
             <DialogDescription>Request petrol allowance. Goes directly to Accountant.</DialogDescription>
           </DialogHeader>
           <div className="space-y-3">
@@ -3384,7 +3384,7 @@ export default function SiteEngineerDashboard() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setPetrolDialog(false)}>Cancel</Button>
-            <Button onClick={handlePetrolSubmit} className="bg-blue-600 hover:bg-blue-700" disabled={petrolLoading} data-testid="petrol-submit">
+            <Button onClick={handlePetrolSubmit} className="bg-primary hover:bg-primary-hover" disabled={petrolLoading} data-testid="petrol-submit">
               {petrolLoading ? 'Submitting...' : 'Request'}
             </Button>
           </DialogFooter>
@@ -3396,7 +3396,7 @@ export default function SiteEngineerDashboard() {
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto" data-testid="material-request-dialog">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-base">
-              <Package className="h-4 w-4 text-blue-600" /> Request Material
+              <Package className="h-4 w-4 text-primary" /> Request Material
             </DialogTitle>
             <DialogDescription>Request materials assigned by Planning for this project. Add multiple items to a single request.</DialogDescription>
           </DialogHeader>
@@ -3552,7 +3552,7 @@ export default function SiteEngineerDashboard() {
                   type="button"
                   variant="outline"
                   size="sm"
-                  className="w-full border-dashed border-blue-300 text-blue-600 hover:bg-blue-50 h-9"
+                  className="w-full border-dashed border-brand-300 text-primary-strong hover:bg-brand-50 h-9"
                   onClick={addMatLine}
                   data-testid="matreq-add-item-btn"
                 >
@@ -3571,7 +3571,7 @@ export default function SiteEngineerDashboard() {
             <Button variant="outline" onClick={() => setMatReqDialog(false)}>Cancel</Button>
             <Button
               onClick={handleMatReqSubmit}
-              className="bg-blue-600 hover:bg-blue-700"
+              className="bg-primary hover:bg-primary-hover"
               disabled={matReqLoading || matReqMaterials.length === 0}
               data-testid="matreq-submit"
             >
@@ -3654,7 +3654,7 @@ function SiteVisitsSection({ user }) {
   const pendingVisits = visits.filter(v => v.visit_status !== 'completed');
   const completedVisits = visits.filter(v => v.visit_status === 'completed');
 
-  if (loading) return <div className="flex justify-center py-8"><RefreshCw className="h-5 w-5 animate-spin text-amber-600" /></div>;
+  if (loading) return <div className="flex justify-center py-8"><RefreshCw className="h-5 w-5 animate-spin text-primary" /></div>;
 
   return (
     <div className="space-y-4">
@@ -3698,13 +3698,13 @@ function SiteVisitsSection({ user }) {
                         <div className="flex flex-col gap-2">
                           {/* Sr. Engineer: Assign Jr. Engineer button */}
                           {isSr && !v.jr_engineer_id && (
-                            <Button size="sm" className="bg-blue-600 hover:bg-blue-700" onClick={() => { setSelectedVisit(v); setSelectedJrId(''); setAssignDialog(true); }} data-testid={`assign-jr-${v.lead_id}`}>
+                            <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={() => { setSelectedVisit(v); setSelectedJrId(''); setAssignDialog(true); }} data-testid={`assign-jr-${v.lead_id}`}>
                               <Users className="h-4 w-4 mr-1" /> Assign Jr.
                             </Button>
                           )}
                           {/* Jr. Engineer: Mark Done button */}
                           {(v.assigned_to_me_as === 'jr' || (!v.jr_engineer_id && v.assigned_to_me_as === 'sr')) && (
-                            <Button size="sm" className="bg-green-600 hover:bg-green-700" onClick={() => handleMarkDone(v.lead_id)} data-testid={`mark-done-${v.lead_id}`}>
+                            <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={() => handleMarkDone(v.lead_id)} data-testid={`mark-done-${v.lead_id}`}>
                               <CheckCircle className="h-4 w-4 mr-1" /> Mark Done
                             </Button>
                           )}
@@ -3768,7 +3768,7 @@ function SiteVisitsSection({ user }) {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setAssignDialog(false)}>Cancel</Button>
-            <Button onClick={handleAssignJr} className="bg-blue-600 hover:bg-blue-700" data-testid="confirm-assign-jr">Assign</Button>
+            <Button onClick={handleAssignJr} className="bg-primary hover:bg-primary-hover" data-testid="confirm-assign-jr">Assign</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

@@ -66,7 +66,7 @@ export function FinalDrawingsSection({ projectId, files, canManage, onRefresh })
       <Dialog open={dialogOpen} onOpenChange={(o) => !o && !uploading && resetForm()}>
         <DialogContent className="max-w-md" data-testid="final-drawing-dialog">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-amber-700">
+            <DialogTitle className="flex items-center gap-2 text-foreground">
               <Upload className="h-5 w-5" /> Upload Drawing
             </DialogTitle>
             <DialogDescription className="text-xs">Enter the drawing's name and number, then choose the file.</DialogDescription>
@@ -117,7 +117,7 @@ export function FinalDrawingsSection({ projectId, files, canManage, onRefresh })
 
           <DialogFooter>
             <Button variant="outline" size="sm" onClick={resetForm} disabled={uploading}>Cancel</Button>
-            <Button size="sm" className="bg-amber-600 hover:bg-amber-700" onClick={handleUpload} disabled={uploading} data-testid="final-drawing-submit">
+            <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={handleUpload} disabled={uploading} data-testid="final-drawing-submit">
               {uploading ? <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> : <Upload className="h-3.5 w-3.5 mr-1" />}
               {uploading ? 'Uploading...' : 'Upload'}
             </Button>

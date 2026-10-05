@@ -127,7 +127,7 @@ function ClientLoginScreen({ onLogin }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-amber-100 flex items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-amber-50 flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-amber-600 rounded-2xl shadow-lg mb-3">
@@ -162,7 +162,7 @@ function ClientLoginScreen({ onLogin }) {
                   data-testid="cp-login-password"
                 />
               </div>
-              <Button type="submit" className="w-full h-11 bg-amber-600 hover:bg-amber-700 mt-2" disabled={submitting} data-testid="cp-login-submit">
+              <Button type="submit" className="w-full h-11 bg-primary hover:bg-primary-hover mt-2" disabled={submitting} data-testid="cp-login-submit">
                 {submitting ? 'Signing in…' : 'Sign in'}
               </Button>
             </form>
@@ -247,7 +247,7 @@ function ProjectDetailScreen({ user, project, onBack, onLogout }) {
 
       {/* Top summary card */}
       <div className="p-3">
-        <Card className="bg-gradient-to-br from-amber-500 to-amber-600 text-white border-0">
+        <Card className="bg-primary text-white border-0">
           <CardContent className="p-4">
             <p className="text-[10px] uppercase opacity-80">Project Value</p>
             <p className="text-2xl font-bold mb-2">{fmt(project.total_value)}</p>

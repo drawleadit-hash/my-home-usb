@@ -70,7 +70,7 @@ function WaitingForLines({ items, expanded, onToggle, hiddenCount }) {
         </div>
       ))}
       {hiddenCount > 0 && (
-        <button type="button" className="text-[11px] text-blue-600 hover:underline" onClick={onToggle}>
+        <button type="button" className="text-[11px] text-primary-strong hover:underline" onClick={onToggle}>
           {expanded ? 'Show less' : `+${hiddenCount}`}
         </button>
       )}
@@ -139,7 +139,7 @@ function WorkOrderApprovalStatus({ onCountChange }) {
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between gap-3 flex-wrap">
           <CardTitle className="text-base flex items-center gap-2">
-            <Building2 className="h-4 w-4 text-blue-600" />
+            <Building2 className="h-4 w-4 text-primary" />
             Work Order Approvals
             {filteredRows.length > 0 && (
               <Badge className="bg-blue-100 text-blue-700 border-blue-200">{filteredRows.length} pending</Badge>
@@ -206,7 +206,7 @@ function WorkOrderApprovalStatus({ onCountChange }) {
                       <td className="px-2 py-2 align-top text-gray-400">{idx + 1}</td>
                       <td className="px-3 py-2 align-top break-words">
                         <button
-                          className="text-blue-700 hover:underline font-medium text-left"
+                          className="text-primary-strong hover:underline font-medium text-left"
                           onClick={() => navigate(`/projects/${r.project_id}`)}
                           title={r.work_order_number}
                         >
@@ -357,7 +357,7 @@ function ClientPendingApprovals() {
                     <td className="px-3 py-2 text-gray-400">{idx + 1}</td>
                     <td className="px-3 py-2">
                       <button
-                        className="text-blue-700 hover:underline font-medium"
+                        className="text-primary-strong hover:underline font-medium"
                         onClick={() => navigate(`/projects/${it.project_id}`)}
                       >
                         {it.project_name || it.project_id}

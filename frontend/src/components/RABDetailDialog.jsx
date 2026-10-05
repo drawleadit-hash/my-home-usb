@@ -115,7 +115,7 @@ export function RABDetailDialog({ open, onOpenChange, projectId, workOrderId, hi
       <DialogContent className="max-w-4xl max-h-[92vh] flex flex-col p-0" data-testid="rab-detail-dialog">
         <DialogHeader className="px-5 pt-4 pb-2 shrink-0">
           <DialogTitle className="flex items-center gap-2">
-            <FileText className="h-5 w-5 text-violet-600" />
+            <FileText className="h-5 w-5 text-primary" />
             RAB Bill Detail
           </DialogTitle>
           <DialogDescription className="text-xs">
@@ -138,7 +138,7 @@ export function RABDetailDialog({ open, onOpenChange, projectId, workOrderId, hi
         {data && (
           <div className="flex-1 min-h-0 flex flex-col px-5">
             {/* Header summary — compact 6-tile single row */}
-            <div className="rounded-lg border border-violet-200 bg-gradient-to-br from-violet-50/60 to-violet-50/20 p-2.5 shrink-0">
+            <div className="rounded-lg border border-violet-200 bg-violet-50 p-2.5 shrink-0">
               <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
                 <Tile icon={Building2}    label="Vendor"        value={data.contractor_name || '—'} accent="text-violet-700" />
                 <Tile icon={Hash}         label="Work Order"    value={data.work_order_number || data.work_order_id?.slice(0, 8)} accent="text-violet-700" />
@@ -344,24 +344,24 @@ function RABCardTabs({ rab, inr, fmtDate, releasedSiblings = [], onView, onDownl
       <TabsList className="bg-gray-50 p-1 h-auto gap-1 mb-3">
         <TabsTrigger
           value="summary"
-          className="text-[11px] px-3 py-1.5 data-[state=active]:bg-violet-600 data-[state=active]:text-white"
+          className="text-[11px] px-3 py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white"
           data-testid={`rab-${rab.rab_number}-tab-summary`}
         >Summary</TabsTrigger>
         <TabsTrigger
           value="timeline"
-          className="text-[11px] px-3 py-1.5 data-[state=active]:bg-violet-600 data-[state=active]:text-white"
+          className="text-[11px] px-3 py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white"
           data-testid={`rab-${rab.rab_number}-tab-timeline`}
         >Timeline</TabsTrigger>
         <TabsTrigger
           value="dlr"
           disabled={!hasDateWindow}
-          className="text-[11px] px-3 py-1.5 data-[state=active]:bg-violet-600 data-[state=active]:text-white disabled:opacity-40"
+          className="text-[11px] px-3 py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white disabled:opacity-40"
           data-testid={`rab-${rab.rab_number}-tab-dlr`}
           title={hasDateWindow ? 'DLR rollup for the billing window' : 'No billing window set for this RAB'}
         >DLR Report</TabsTrigger>
         <TabsTrigger
           value="totalrab"
-          className="text-[11px] px-3 py-1.5 data-[state=active]:bg-violet-600 data-[state=active]:text-white"
+          className="text-[11px] px-3 py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white"
           data-testid={`rab-${rab.rab_number}-tab-totalrab`}
         >{"Total RAB's"}
           <span className="ml-1.5 text-[9px] font-bold opacity-80">({releasedSiblings.length})</span>
@@ -369,7 +369,7 @@ function RABCardTabs({ rab, inr, fmtDate, releasedSiblings = [], onView, onDownl
       </TabsList>
 
       <TabsContent value="summary" className="m-0">
-        <div className="rounded-lg border border-orange-200 bg-gradient-to-br from-orange-50 to-white p-3 mb-2">
+        <div className="rounded-lg border border-orange-200 bg-white p-3 mb-2">
           <p className="text-[10px] uppercase tracking-wider text-orange-700 font-semibold">Closing Balance After {rab.rab_number}</p>
           <p className="text-xl sm:text-2xl font-extrabold text-orange-700 mt-0.5">{inr(rab.closing_balance_after)}</p>
           <p className="text-[10px] text-orange-600/80 mt-0.5">Cumulative released: {inr(rab.cumulative_released_after)}</p>
@@ -597,7 +597,7 @@ function RABCardTabs({ rab, inr, fmtDate, releasedSiblings = [], onView, onDownl
             {releasedSiblings.map((sib) => (
               <div
                 key={sib.request_id}
-                className="flex items-center justify-between gap-2 rounded-lg border border-violet-200 bg-violet-50/50 hover:bg-violet-50 px-2.5 py-2 transition"
+                className="flex items-center justify-between gap-2 rounded-lg border border-brand-300 bg-violet-50/50 hover:bg-brand-50 px-2.5 py-2 transition"
                 data-testid={`totalrab-row-${sib.rab_number}`}
               >
                 <div className="flex items-center gap-2 min-w-0">
@@ -666,7 +666,7 @@ function RABFocusedDialog({ open, rab, inr, fmtDate, onClose, onDownload }) {
       <DialogContent className="max-w-2xl max-h-[88vh] overflow-y-auto p-0" data-testid="rab-focused-dialog">
         <DialogHeader className="px-5 pt-5 pb-3 border-b">
           <DialogTitle className="flex items-center gap-2 text-base">
-            <FileText className="h-5 w-5 text-violet-600" />
+            <FileText className="h-5 w-5 text-primary" />
             {rab.rab_number} — Bill Detail
           </DialogTitle>
           <DialogDescription className="text-xs">
@@ -713,11 +713,11 @@ function RABFocusedDialog({ open, rab, inr, fmtDate, onClose, onDownload }) {
             {/* Summary + Timeline only (no further drill-down). */}
             <Tabs defaultValue="summary" className="w-full">
               <TabsList className="bg-gray-50 p-1 h-auto gap-1 mb-3">
-                <TabsTrigger value="summary" className="text-[11px] px-3 py-1.5 data-[state=active]:bg-violet-600 data-[state=active]:text-white">Summary</TabsTrigger>
-                <TabsTrigger value="timeline" className="text-[11px] px-3 py-1.5 data-[state=active]:bg-violet-600 data-[state=active]:text-white">Timeline</TabsTrigger>
+                <TabsTrigger value="summary" className="text-[11px] px-3 py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white">Summary</TabsTrigger>
+                <TabsTrigger value="timeline" className="text-[11px] px-3 py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white">Timeline</TabsTrigger>
               </TabsList>
               <TabsContent value="summary" className="m-0">
-                <div className="rounded-lg border border-orange-200 bg-gradient-to-br from-orange-50 to-white p-3 mb-2">
+                <div className="rounded-lg border border-orange-200 bg-white p-3 mb-2">
                   <p className="text-[10px] uppercase tracking-wider text-orange-700 font-semibold">Closing Balance After {rab.rab_number}</p>
                   <p className="text-xl sm:text-2xl font-extrabold text-orange-700 mt-0.5">{inr(rab.closing_balance_after)}</p>
                   <p className="text-[10px] text-orange-600/80 mt-0.5">Cumulative released: {inr(rab.cumulative_released_after)}</p>

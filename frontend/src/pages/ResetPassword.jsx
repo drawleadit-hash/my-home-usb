@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { Building2, Lock, Eye, EyeOff, CheckCircle, AlertCircle } from 'lucide-react';
+import { KeyRound, Lock, Eye, EyeOff, CheckCircle, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import axios from 'axios';
 import { toast } from 'sonner';
+import { AuthLayout } from '@/components/AuthLayout';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -21,8 +22,8 @@ export default function ResetPassword() {
 
   if (!token) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 bg-gray-950">
-        <Card className="w-full max-w-md border-2 border-destructive">
+      <AuthLayout>
+        <Card className="rounded-2xl border-destructive/30 bg-destructive/5 shadow-none">
           <CardContent className="pt-6 text-center space-y-4">
             <AlertCircle className="w-16 h-16 text-destructive mx-auto" />
             <p className="font-semibold">Invalid Reset Link</p>
@@ -30,7 +31,7 @@ export default function ResetPassword() {
             <Link to="/forgot-password"><Button variant="outline">Request New Link</Button></Link>
           </CardContent>
         </Card>
-      </div>
+      </AuthLayout>
     );
   }
 
@@ -51,24 +52,22 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gray-950">
-      <Card className="w-full max-w-md border-2 border-primary" data-testid="reset-password-card">
-        <CardHeader className="text-center pb-4">
-          <div className="flex justify-center mb-3">
-            <div className="bg-primary p-3 rounded-sm">
-              <Building2 className="w-10 h-10 text-primary-foreground" />
-            </div>
+    <AuthLayout>
+      <Card className="border-0 bg-transparent shadow-none" data-testid="reset-password-card">
+        <CardHeader className="px-0 pb-6 pt-0">
+          <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50 ring-1 ring-inset ring-brand-200 dark:bg-brand-950/40 dark:ring-brand-800/60">
+            <KeyRound className="h-5 w-5 text-primary" />
           </div>
-          <CardTitle className="text-2xl font-bold">Set New Password</CardTitle>
+          <CardTitle className="text-[28px] font-semibold tracking-tight">Set New Password</CardTitle>
           <CardDescription>Choose a strong password for your account</CardDescription>
         </CardHeader>
 
-        <CardContent>
+        <CardContent className="px-0 pb-0">
           {done ? (
             <div className="text-center space-y-4" data-testid="reset-success">
-              <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
+              <CheckCircle className="mx-auto h-14 w-14 text-primary" />
               <p className="font-semibold">Password Reset Complete!</p>
-              <Link to="/login"><Button className="w-full h-11 font-bold" data-testid="goto-login-btn">Go to Login</Button></Link>
+              <Link to="/login"><Button className="h-11 w-full rounded-xl text-[15px]" data-testid="goto-login-btn">Go to Login</Button></Link>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -83,7 +82,7 @@ export default function ResetPassword() {
                     placeholder="Minimum 8 characters"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10 pr-10 h-11"
+                    className="h-11 rounded-xl pl-10 pr-10"
                     required
                     minLength={8}
                   />
@@ -104,7 +103,7 @@ export default function ResetPassword() {
                     placeholder="Re-enter password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="pl-10 h-11"
+                    className="h-11 rounded-xl pl-10"
                     required
                     minLength={8}
                   />
@@ -114,13 +113,13 @@ export default function ResetPassword() {
                 )}
               </div>
 
-              <Button type="submit" data-testid="reset-submit-btn" disabled={isLoading} className="w-full h-11 font-bold">
+              <Button type="submit" data-testid="reset-submit-btn" disabled={isLoading} className="h-11 w-full rounded-xl text-[15px]">
                 {isLoading ? 'Resetting...' : 'Reset Password'}
               </Button>
             </form>
           )}
         </CardContent>
       </Card>
-    </div>
+    </AuthLayout>
   );
 }

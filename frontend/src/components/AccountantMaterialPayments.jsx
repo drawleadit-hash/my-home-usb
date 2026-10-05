@@ -181,7 +181,7 @@ export default function AccountantMaterialPayments({ onRefresh, legacyExpenses =
         <button
           type="button"
           onClick={() => setSubTab('pending')}
-          className={`px-3 py-1.5 text-[11px] font-semibold rounded-full border transition ${subTab === 'pending' ? 'bg-amber-600 text-white border-amber-600' : 'border-amber-300 text-amber-700 hover:bg-amber-50'}`}
+          className={`px-3 py-1.5 text-[11px] font-semibold rounded-full border transition ${subTab === 'pending' ? 'bg-primary text-white border-primary' : 'border-brand-300 text-primary-strong hover:bg-brand-50'}`}
           data-testid="acc-material-subtab-pending"
         >
           Pending ({pendingCount})
@@ -349,7 +349,7 @@ export default function AccountantMaterialPayments({ onRefresh, legacyExpenses =
                   >
                     <XCircle className="h-3 w-3" /> Reject
                   </Button>
-                  <Button size="sm" className="h-8 text-xs gap-1 bg-emerald-600 hover:bg-emerald-700" onClick={() => openPayDialog(req)} data-testid={`acc-mat-release-${req.request_id}`}>
+                  <Button size="sm" className="h-8 text-xs gap-1 bg-primary hover:bg-primary-hover" onClick={() => openPayDialog(req)} data-testid={`acc-mat-release-${req.request_id}`}>
                     <Wallet className="h-3 w-3" /> {req.partially_collected ? 'Release Payment' : ((req.status === 'partially_paid' || req.last_partial_paid_at) ? 'Pay Balance' : `Release ${phase === 'balance' ? 'Balance' : (phase === 'advance' ? 'Advance' : 'Payment')}`)}
                   </Button>
                 </div>
@@ -435,7 +435,7 @@ export default function AccountantMaterialPayments({ onRefresh, legacyExpenses =
                       >
                         <XCircle className="h-3 w-3" /> Reject
                       </Button>
-                      <Button size="sm" className="h-8 text-xs gap-1 bg-emerald-600 hover:bg-emerald-700" onClick={() => setPayDialog({ open: true, requestId: exp.expense_id })} data-testid={`acc-mat-release-legacy-${exp.expense_id}`}>
+                      <Button size="sm" className="h-8 text-xs gap-1 bg-primary hover:bg-primary-hover" onClick={() => setPayDialog({ open: true, requestId: exp.expense_id })} data-testid={`acc-mat-release-legacy-${exp.expense_id}`}>
                         <Wallet className="h-3 w-3" /> Release Payment
                       </Button>
                     </>

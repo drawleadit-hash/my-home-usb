@@ -292,7 +292,7 @@ function ChequePickerSubRow({ idx, row, allCheques, inactiveCheques = [], claime
                         <Button
                           size="sm"
                           variant="outline"
-                          className="h-5 text-[9px] px-1.5 border-amber-400 text-amber-700 hover:bg-amber-100"
+                          className="h-5 text-[9px] px-1.5 border-brand-300 text-primary-strong hover:bg-brand-50"
                           disabled={requestingId === c.cheque_id}
                           onClick={() => requestOpen(c)}
                           data-testid={`multi-pay-row-${idx}-request-open-${c.cheque_id}`}

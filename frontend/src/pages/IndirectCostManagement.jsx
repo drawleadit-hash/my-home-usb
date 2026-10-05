@@ -177,7 +177,7 @@ export default function IndirectCostManagement() {
     totalConfirmed: costs.filter(c => c.status === 'confirmed').reduce((s, c) => s + (c.amount || 0), 0)
   };
 
-  if (loading && !user) return <div className="min-h-screen flex items-center justify-center bg-gray-50"><RefreshCw className="h-6 w-6 animate-spin text-violet-600" /></div>;
+  if (loading && !user) return <div className="min-h-screen flex items-center justify-center bg-gray-50"><RefreshCw className="h-6 w-6 animate-spin text-primary" /></div>;
 
   const canCreate = ['accountant', 'super_admin'].includes(user?.role);
   const canApprove = ['super_admin', 'general_manager'].includes(user?.role);
@@ -195,7 +195,7 @@ export default function IndirectCostManagement() {
             <p className="text-sm text-gray-500">{100 - (bo?.indirect_cost_percent || 20)}% Direct / {bo?.indirect_cost_percent || 20}% Indirect+Profit per project</p>
           </div>
           {canCreate && (
-            <Button onClick={() => setCreateDialog(true)} className="bg-violet-600 hover:bg-violet-700 gap-1.5" data-testid="add-indirect-cost-btn">
+            <Button onClick={() => setCreateDialog(true)} className="bg-primary hover:bg-primary-hover gap-1.5" data-testid="add-indirect-cost-btn">
               <Plus className="h-4 w-4" /> Add Indirect Cost
             </Button>
           )}
@@ -370,7 +370,7 @@ export default function IndirectCostManagement() {
                               <Button size="sm" onClick={() => { setSelectedCost(cost); setApproveDialog(true); }} data-testid={`review-btn-${cost.indirect_cost_id}`}>Review</Button>
                             )}
                             {cost.status === 'approved' && canConfirm && (
-                              <Button size="sm" className="bg-green-600 hover:bg-green-700" onClick={() => { setSelectedCost(cost); setConfirmDialog(true); }} data-testid={`confirm-btn-${cost.indirect_cost_id}`}>Confirm</Button>
+                              <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={() => { setSelectedCost(cost); setConfirmDialog(true); }} data-testid={`confirm-btn-${cost.indirect_cost_id}`}>Confirm</Button>
                             )}
                             {cost.status === 'confirmed' && <span className="text-xs text-green-600"><Lock className="h-3 w-3 inline" /> Locked</span>}
                             {cost.status === 'rejected' && <span className="text-xs text-red-500">{cost.rejection_reason || 'Rejected'}</span>}
@@ -473,7 +473,7 @@ export default function IndirectCostManagement() {
             {distributionPreview && (
               <Card className="bg-violet-50 border-violet-200">
                 <CardHeader className="py-2 px-4 border-b border-violet-200">
-                  <CardTitle className="text-sm text-violet-700">Auto-Distribution Preview ({fmt(distributionPreview.amount)})</CardTitle>
+                  <CardTitle className="text-sm text-foreground">Auto-Distribution Preview ({fmt(distributionPreview.amount)})</CardTitle>
                 </CardHeader>
                 <CardContent className="p-3">
                   {distributionPreview.warnings?.length > 0 && (
@@ -504,7 +504,7 @@ export default function IndirectCostManagement() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setCreateDialog(false)}>Cancel</Button>
-            <Button onClick={handleCreateCost} className="bg-violet-600 hover:bg-violet-700" data-testid="submit-indirect-cost"><Plus className="h-4 w-4 mr-1" /> Submit for Approval</Button>
+            <Button onClick={handleCreateCost} className="bg-primary hover:bg-primary-hover" data-testid="submit-indirect-cost"><Plus className="h-4 w-4 mr-1" /> Submit for Approval</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -529,7 +529,7 @@ export default function IndirectCostManagement() {
           <DialogFooter className="gap-2">
             <Button variant="outline" onClick={() => setApproveDialog(false)}>Cancel</Button>
             <Button variant="destructive" onClick={() => handleApprove(false)} disabled={!rejectionReason} data-testid="reject-btn"><ThumbsDown className="h-4 w-4 mr-1" /> Reject</Button>
-            <Button className="bg-green-600 hover:bg-green-700" onClick={() => handleApprove(true)} data-testid="approve-btn"><ThumbsUp className="h-4 w-4 mr-1" /> Approve</Button>
+            <Button className="bg-primary hover:bg-primary-hover" onClick={() => handleApprove(true)} data-testid="approve-btn"><ThumbsUp className="h-4 w-4 mr-1" /> Approve</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -556,7 +556,7 @@ export default function IndirectCostManagement() {
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setConfirmDialog(false)}>Cancel</Button>
-            <Button onClick={handleConfirmPayment} className="bg-green-600 hover:bg-green-700" data-testid="confirm-payment-btn"><Lock className="h-4 w-4 mr-1" /> Confirm & Distribute</Button>
+            <Button onClick={handleConfirmPayment} className="bg-primary hover:bg-primary-hover" data-testid="confirm-payment-btn"><Lock className="h-4 w-4 mr-1" /> Confirm & Distribute</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

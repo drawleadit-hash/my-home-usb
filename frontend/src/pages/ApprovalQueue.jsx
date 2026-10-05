@@ -198,7 +198,7 @@ export default function ApprovalQueue() {
 
   if (loading && !user) return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="w-10 h-10 border-3 border-amber-500 border-t-transparent rounded-full animate-spin" />
+      <div className="w-10 h-10 border-3 border-primary border-t-transparent rounded-full animate-spin" />
     </div>
   );
 
@@ -288,7 +288,7 @@ export default function ApprovalQueue() {
                           <span className="text-lg font-bold text-green-600">{fmt(inc.amount)}</span>
                           <Badge className={statusColor(inc.status)}>{inc.status}</Badge>
                           <div className="flex gap-1.5">
-                            <Button size="sm" className="bg-amber-600 hover:bg-amber-700 h-8" onClick={() => openReviewDialog(inc)} data-testid={`review-income-${inc.income_id}`}>
+                            <Button size="sm" className="bg-primary hover:bg-primary-hover h-8" onClick={() => openReviewDialog(inc)} data-testid={`review-income-${inc.income_id}`}>
                               {processing === inc.income_id ? <RefreshCw className="h-3.5 w-3.5 mr-1 animate-spin" /> : <ClipboardCheck className="h-3.5 w-3.5 mr-1" />}Review
                             </Button>
                           </div>
@@ -333,7 +333,7 @@ export default function ApprovalQueue() {
       <Dialog open={reviewDialog.open} onOpenChange={(open) => { if (!open) setReviewDialog({ open: false, income: null }); }}>
         <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-amber-700">
+            <DialogTitle className="flex items-center gap-2 text-foreground">
               <ClipboardCheck className="h-5 w-5" /> Review Income
             </DialogTitle>
           </DialogHeader>
@@ -437,7 +437,7 @@ export default function ApprovalQueue() {
                 <Textarea value={reviewForm.notes} onChange={(e) => setReviewForm({ ...reviewForm, notes: e.target.value })} placeholder="Any additional notes..." rows={2} className="mt-1" />
               </div>
 
-              <Button className="w-full bg-green-600 hover:bg-green-700" onClick={handleSubmitReview} disabled={processing} data-testid="submit-review-btn">
+              <Button className="w-full bg-primary hover:bg-primary-hover" onClick={handleSubmitReview} disabled={processing} data-testid="submit-review-btn">
                 {processing ? <RefreshCw className="h-4 w-4 animate-spin mr-1" /> : <CheckCircle className="h-4 w-4 mr-1" />}
                 Record Payment
               </Button>
@@ -511,7 +511,7 @@ function ExpenseList({ items, type, idField, amountField, altAmountField, descFi
                   <span className="text-lg font-bold text-amber-600">{fmt(amount)}</span>
                   {action && (
                     <div className="flex gap-1.5">
-                      <Button size="sm" className="bg-green-600 hover:bg-green-700 h-8" onClick={() => onApprove(type, id, action)} data-testid={`approve-${type}-${id}`}>
+                      <Button size="sm" className="bg-primary hover:bg-primary-hover h-8" onClick={() => onApprove(type, id, action)} data-testid={`approve-${type}-${id}`}>
                         <CheckCircle className="h-3.5 w-3.5 mr-1" />Approve
                       </Button>
                       <Button size="sm" variant="outline" className="text-red-500 border-red-200 h-8" onClick={() => onReject(id)} data-testid={`reject-${type}-${id}`}>

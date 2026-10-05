@@ -276,7 +276,7 @@ export default function CREPreConstruction({ embedded = false }) {
       <CardHeader className="border-b pb-3">
         <div className="flex items-center justify-between gap-3 flex-wrap">
           <CardTitle className="text-base flex items-center gap-2">
-            <Hammer className="h-4 w-4 text-amber-600" />
+            <Hammer className="h-4 w-4 text-primary" />
             {stageMeta?.label} ({filteredRows.length})
           </CardTitle>
           <div className="relative">
@@ -382,7 +382,7 @@ export default function CREPreConstruction({ embedded = false }) {
                             </Button>
                             <Button
                               size="sm"
-                              className="h-7 px-2 text-xs bg-green-600 hover:bg-green-700"
+                              className="h-7 px-2 text-xs bg-primary hover:bg-primary-hover"
                               onClick={() => updateStage(row.project_id, row.stage, { status: 'completed' })}
                               data-testid={`pc-complete-${row.project_id}`}
                             >
@@ -418,7 +418,7 @@ export default function CREPreConstruction({ embedded = false }) {
       <Dialog open={scheduleDialog.open} onOpenChange={(o) => !o && !scheduleDialog.submitting && setScheduleDialog({ open: false, project: null, value: '', submitting: false })}>
         <DialogContent className="max-w-md">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2"><Calendar className="h-5 w-5 text-amber-600" />Schedule</DialogTitle>
+            <DialogTitle className="flex items-center gap-2"><Calendar className="h-5 w-5 text-primary" />Schedule</DialogTitle>
             <DialogDescription>
               {scheduleDialog.project?.name} · {data.stages?.find(s => s.key === scheduleDialog.project?.stage)?.label}
             </DialogDescription>
@@ -462,7 +462,7 @@ export default function CREPreConstruction({ embedded = false }) {
               </Button>
             )}
             <Button variant="outline" onClick={() => setScheduleDialog({ open: false, project: null, value: '', submitting: false })} disabled={scheduleDialog.submitting}>Cancel</Button>
-            <Button className="bg-amber-600 hover:bg-amber-700" onClick={submitSchedule} disabled={scheduleDialog.submitting} data-testid="pc-schedule-save">
+            <Button className="bg-primary hover:bg-primary-hover" onClick={submitSchedule} disabled={scheduleDialog.submitting} data-testid="pc-schedule-save">
               {scheduleDialog.submitting ? <RefreshCw className="h-4 w-4 mr-1 animate-spin" /> : <Clock className="h-4 w-4 mr-1" />}
               Save
             </Button>
@@ -481,7 +481,7 @@ export default function CREPreConstruction({ embedded = false }) {
         <div className="flex items-center justify-between flex-wrap gap-3">
           <div>
             <h1 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
-              <Hammer className="h-6 w-6 text-amber-600" />
+              <Hammer className="h-6 w-6 text-primary" />
               Pre-Construction
             </h1>
             <p className="text-xs text-gray-500 mt-0.5">

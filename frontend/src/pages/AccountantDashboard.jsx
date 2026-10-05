@@ -133,7 +133,7 @@ export default function AccountantDashboard() {
   const chequeSummary = dashboard?.cheque_summary || {};
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
       <AppHeader user={user} />
 
@@ -141,7 +141,7 @@ export default function AccountantDashboard() {
         {/* Summary Cards - Financial Overview */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           {/* Total Income */}
-          <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white border-0 shadow-lg" data-testid="total-income-card">
+          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-brand-400 text-white border-0 shadow-lg" data-testid="total-income-card">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -160,7 +160,7 @@ export default function AccountantDashboard() {
           </Card>
 
           {/* Total Expense */}
-          <Card className="bg-gradient-to-br from-red-500 to-red-600 text-white border-0 shadow-lg" data-testid="total-expense-card">
+          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-red-400 text-white border-0 shadow-lg" data-testid="total-expense-card">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -179,7 +179,7 @@ export default function AccountantDashboard() {
           </Card>
 
           {/* Total Profit */}
-          <Card className={`${summary.total_profit >= 0 ? 'bg-gradient-to-br from-emerald-500 to-teal-600' : 'bg-gradient-to-br from-orange-500 to-red-500'} text-white border-0 shadow-lg`} data-testid="total-profit-card">
+          <Card className={`${summary.total_profit >= 0 ? 'bg-primary' : 'bg-red-600'} text-white border-0 shadow-lg`} data-testid="total-profit-card">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -197,7 +197,7 @@ export default function AccountantDashboard() {
           </Card>
 
           {/* Pending Requests */}
-          <Card className="bg-gradient-to-br from-amber-500 to-orange-500 text-white border-0 shadow-lg" data-testid="pending-requests-card">
+          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-amber-400 text-white border-0 shadow-lg" data-testid="pending-requests-card">
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -272,10 +272,10 @@ export default function AccountantDashboard() {
         {/* HR & Cheque Summary Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           {/* HR Summary */}
-          <Card className="bg-gradient-to-br from-violet-50 to-purple-50 border-violet-200" data-testid="hr-summary-card">
+          <Card className="bg-violet-50 border-violet-200" data-testid="hr-summary-card">
             <CardHeader className="pb-2">
               <CardTitle className="text-base flex items-center gap-2">
-                <Briefcase className="h-5 w-5 text-violet-600" />
+                <Briefcase className="h-5 w-5 text-primary" />
                 HR & Payroll
               </CardTitle>
             </CardHeader>
@@ -291,7 +291,7 @@ export default function AccountantDashboard() {
                 </div>
                 <Button 
                   size="sm" 
-                  className="bg-violet-600 hover:bg-violet-700"
+                  className="bg-primary hover:bg-primary-hover"
                   onClick={() => window.location.href = '/hr-portal'}
                 >
                   <Users className="h-4 w-4 mr-1" /> Manage
@@ -301,10 +301,10 @@ export default function AccountantDashboard() {
           </Card>
 
           {/* Cheque Summary */}
-          <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 border-blue-200" data-testid="cheque-summary-card">
+          <Card className="bg-blue-50 border-blue-200" data-testid="cheque-summary-card">
             <CardHeader className="pb-2">
               <CardTitle className="text-base flex items-center gap-2">
-                <FileText className="h-5 w-5 text-amber-600" />
+                <FileText className="h-5 w-5 text-primary" />
                 Cheque Management
               </CardTitle>
             </CardHeader>
@@ -451,7 +451,7 @@ export default function AccountantDashboard() {
         {/* Quick Actions */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-6">
           <Button 
-            className="bg-emerald-600 hover:bg-emerald-700 h-auto py-4 flex-col gap-2"
+            className="bg-primary hover:bg-primary-hover h-auto py-4 flex-col gap-2"
             onClick={() => window.location.href = '/income'}
             data-testid="quick-income-btn"
           >
@@ -469,7 +469,7 @@ export default function AccountantDashboard() {
           </Button>
           
           <Button 
-            className="bg-violet-600 hover:bg-violet-700 h-auto py-4 flex-col gap-2"
+            className="bg-primary hover:bg-primary-hover h-auto py-4 flex-col gap-2"
             onClick={() => window.location.href = '/indirect-costs'}
             data-testid="quick-indirect-btn"
           >
@@ -496,7 +496,7 @@ export default function AccountantDashboard() {
           </Button>
           
           <Button 
-            className="bg-amber-600 hover:bg-amber-700 h-auto py-4 flex-col gap-2"
+            className="bg-primary hover:bg-primary-hover h-auto py-4 flex-col gap-2"
             onClick={() => window.location.href = '/accounts-board'}
             data-testid="quick-approvals-btn"
           >

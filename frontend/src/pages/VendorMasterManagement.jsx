@@ -198,7 +198,7 @@ export default function VendorMasterManagement({ embedded = false }) {
     return matchSearch && matchCat;
   });
 
-  if (loading) return <div className="flex items-center justify-center min-h-screen"><div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full" /></div>;
+  if (loading) return <div className="flex items-center justify-center min-h-screen"><div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full" /></div>;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -246,7 +246,7 @@ export default function VendorMasterManagement({ embedded = false }) {
                       <h3 className="font-semibold text-gray-900 truncate">{v.name}</h3>
                     </div>
                     <div className="flex gap-1">
-                      <Button variant="ghost" size="sm" onClick={e => { e.stopPropagation(); setBookVendor(v); }} data-testid={`vendor-book-${v.vendor_id}`} title="Vendor Book" className="text-amber-700 hover:bg-amber-50">
+                      <Button variant="ghost" size="sm" onClick={e => { e.stopPropagation(); setBookVendor(v); }} data-testid={`vendor-book-${v.vendor_id}`} title="Vendor Book" className="text-primary-strong hover:bg-brand-50">
                         <FileText className="h-3.5 w-3.5" />
                       </Button>
                       <Button variant="ghost" size="sm" onClick={e => { e.stopPropagation(); openEdit(v); }} data-testid={`edit-vendor-${v.vendor_id}`} title="Edit vendor">
@@ -628,7 +628,7 @@ export default function VendorMasterManagement({ embedded = false }) {
                         )}
                       </div>
                     ) : (
-                      <div className="flex justify-center py-8"><div className="animate-spin h-6 w-6 border-2 border-blue-500 border-t-transparent rounded-full" /></div>
+                      <div className="flex justify-center py-8"><div className="animate-spin h-6 w-6 border-2 border-primary border-t-transparent rounded-full" /></div>
                     )}
                   </TabsContent>
                 </Tabs>
@@ -692,7 +692,7 @@ function VendorBookDialog({ vendor, onClose }) {
         </DialogHeader>
 
         {loading ? (
-          <div className="flex justify-center py-10"><div className="animate-spin h-6 w-6 border-2 border-amber-500 border-t-transparent rounded-full" /></div>
+          <div className="flex justify-center py-10"><div className="animate-spin h-6 w-6 border-2 border-primary border-t-transparent rounded-full" /></div>
         ) : (
           <Tabs value={tab} onValueChange={setTab} className="w-full">
             <TabsList className="grid w-full grid-cols-3" data-testid="vendor-book-tabs">
@@ -718,7 +718,7 @@ function VendorBookDialog({ vendor, onClose }) {
                   <button
                     key={b.key}
                     onClick={() => setOrderBucket(b.key)}
-                    className={`px-3 py-2 text-xs font-medium border-b-2 transition-colors ${orderBucket === b.key ? 'border-amber-600 text-amber-700 bg-amber-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+                    className={`px-3 py-2 text-xs font-medium border-b-2 transition-colors ${orderBucket === b.key ? 'border-primary text-primary-strong bg-brand-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
                     data-testid={`vb-order-bucket-${b.key}`}
                   >
                     {b.label} <Badge variant="outline" className="ml-1 text-[10px]">{data?.orders?.[b.key]?.length || 0}</Badge>

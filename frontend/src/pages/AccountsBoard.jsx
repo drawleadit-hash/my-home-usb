@@ -682,11 +682,11 @@ function SuspenseDrilldown({ onBack }) {
       </div>
 
       {loading ? (
-        <div className="flex justify-center py-8"><RefreshCw className="h-6 w-6 animate-spin text-amber-600" /></div>
+        <div className="flex justify-center py-8"><RefreshCw className="h-6 w-6 animate-spin text-primary" /></div>
       ) : (
         <div className="space-y-3">
           {/* Master Total + 3-way breakdown */}
-          <Card className="bg-gradient-to-r from-orange-50 to-red-50 border-orange-200">
+          <Card className="bg-orange-50 border-orange-200">
             <CardContent className="p-3">
               <p className="text-sm font-semibold text-orange-800">Total Suspense Balance</p>
               <p className="text-2xl font-bold text-orange-700">
@@ -862,7 +862,7 @@ function PettyCashManagement({ onBack }) {
     } catch (e) { toast.error(e.response?.data?.detail || 'Failed'); }
   };
 
-  if (loading) return <div className="flex justify-center py-8"><RefreshCw className="h-6 w-6 animate-spin text-amber-600" /></div>;
+  if (loading) return <div className="flex justify-center py-8"><RefreshCw className="h-6 w-6 animate-spin text-primary" /></div>;
 
   // If viewing a specific SE's cashbook
   if (selectedSE && seCashbook) {
@@ -924,7 +924,7 @@ function PettyCashManagement({ onBack }) {
                     <td className="px-3 py-2 text-right text-red-600"><MaskedValue value={pc.amount_spent} className="text-red-600" /></td>
                     <td className="px-3 py-2 text-center">
                       {pc.status === 'requested' && (
-                        <Button size="sm" className="h-6 text-[10px] bg-green-600 hover:bg-green-700"
+                        <Button size="sm" className="h-6 text-[10px] bg-primary hover:bg-primary-hover"
                           onClick={() => { setIssuePC(pc); setIssueAmount(pc.amount_requested?.toString() || ''); setIssueDialog(true); }}>
                           Issue
                         </Button>
@@ -1068,7 +1068,7 @@ function PettyCashManagement({ onBack }) {
       {petrolRequests.filter(r => r.status === 'requested').length > 0 && (
         <Card className="border-l-4 border-l-blue-500 mb-4">
           <CardHeader className="p-3 pb-1">
-            <CardTitle className="text-sm flex items-center gap-2 text-blue-700"><Truck className="h-4 w-4" /> Petrol Allowance — Pending ({petrolRequests.filter(r => r.status === 'requested').length})</CardTitle>
+            <CardTitle className="text-sm flex items-center gap-2 text-foreground"><Truck className="h-4 w-4" /> Petrol Allowance — Pending ({petrolRequests.filter(r => r.status === 'requested').length})</CardTitle>
           </CardHeader>
           <CardContent className="p-0">
             <div className="overflow-x-auto">
@@ -1089,7 +1089,7 @@ function PettyCashManagement({ onBack }) {
                       <td className="px-3 py-2 text-right">{pa.km} km</td>
                       <td className="px-3 py-2 text-center">
                         <div className="flex gap-1 justify-center">
-                          <Button size="sm" className="bg-green-600 hover:bg-green-700 h-6 text-[10px]" onClick={() => handleApprovePetrol(pa.allowance_id)}>Approve</Button>
+                          <Button size="sm" className="bg-primary hover:bg-primary-hover h-6 text-[10px]" onClick={() => handleApprovePetrol(pa.allowance_id)}>Approve</Button>
                           <Button size="sm" variant="outline" className="h-6 text-[10px] text-red-600 border-red-300" onClick={() => handleRejectPetrol(pa.allowance_id)}>Reject</Button>
                         </div>
                       </td>
@@ -1162,7 +1162,7 @@ function PettyCashManagement({ onBack }) {
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setIssueDialog(false)}>Cancel</Button>
-            <Button className="bg-green-600 hover:bg-green-700" onClick={handleIssue}>Issue Cash</Button>
+            <Button className="bg-primary hover:bg-primary-hover" onClick={handleIssue}>Issue Cash</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -1488,7 +1488,7 @@ function IndirectExpenseSection({ userRole }) {
     return <Badge className={cls}>{label}</Badge>;
   };
 
-  if (indirectLoading) return <div className="flex justify-center py-8"><RefreshCw className="h-5 w-5 animate-spin text-violet-600" /></div>;
+  if (indirectLoading) return <div className="flex justify-center py-8"><RefreshCw className="h-5 w-5 animate-spin text-primary" /></div>;
 
   const bo = budgetOverview;
 
@@ -1523,7 +1523,7 @@ function IndirectExpenseSection({ userRole }) {
       </div>
 
       {/* Cost Split Bar */}
-      <Card className="border-violet-200 bg-gradient-to-r from-blue-50 via-white to-violet-50">
+      <Card className="border-violet-200 bg-blue-50">
         <CardContent className="p-2.5 sm:p-3">
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
@@ -1541,7 +1541,7 @@ function IndirectExpenseSection({ userRole }) {
             </div>
             {/* Edit controls - Super Admin only */}
             {canEditPct && !editingPct && (
-              <Button size="sm" variant="outline" className="h-6 text-[10px] gap-1 border-violet-300 text-violet-700 hover:bg-violet-50 shrink-0"
+              <Button size="sm" variant="outline" className="h-6 text-[10px] gap-1 border-brand-300 text-primary-strong hover:bg-brand-50 shrink-0"
                 onClick={() => { setEditingPct(true); setPctInput(String(indirectPct)); }} data-testid="edit-cost-split-btn">
                 <Edit className="h-3 w-3" /> Edit
               </Button>
@@ -1551,7 +1551,7 @@ function IndirectExpenseSection({ userRole }) {
                 <NumericInput className="w-16 h-6 text-xs text-center"
                   value={pctInput} onChange={(e) => setPctInput(e.target.value)} data-testid="cost-split-input" />
                 <span className="text-[10px] text-gray-500">%</span>
-                <Button size="sm" className="h-6 text-[10px] bg-violet-600 hover:bg-violet-700 px-2" disabled={savingPct}
+                <Button size="sm" className="h-6 text-[10px] bg-primary hover:bg-primary-hover px-2" disabled={savingPct}
                   onClick={handleSavePct} data-testid="save-cost-split-btn">
                   {savingPct ? <RefreshCw className="h-3 w-3 animate-spin" /> : <CheckCircle className="h-3 w-3" />}
                 </Button>
@@ -1579,7 +1579,7 @@ function IndirectExpenseSection({ userRole }) {
             onClick={() => setSection(t.key)}
             data-testid={`indirect-section-${t.key}`}
             className={`px-3 py-1.5 text-xs font-medium transition-colors border-b-2 -mb-px ${
-              section === t.key ? 'border-violet-600 text-violet-700' : 'border-transparent text-gray-500 hover:text-gray-700'
+              section === t.key ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
           >
             {t.label}
@@ -1598,14 +1598,14 @@ function IndirectExpenseSection({ userRole }) {
           { key: 'allocations', label: `Allocations (${allocations.length})`, icon: ArrowUpRight },
         ].map(t => (
           <Button key={t.key} size="sm" variant={viewMode === t.key ? 'default' : 'outline'}
-            className={`text-[10px] sm:text-xs h-6 sm:h-7 px-2 sm:px-3 gap-1 ${viewMode === t.key ? 'bg-violet-600 hover:bg-violet-700' : ''}`}
+            className={`text-[10px] sm:text-xs h-6 sm:h-7 px-2 sm:px-3 gap-1 ${viewMode === t.key ? 'bg-primary hover:bg-primary-hover' : ''}`}
             onClick={() => setViewMode(t.key)} data-testid={`indirect-view-${t.key}`}>
             <t.icon className="h-3 w-3" /> {t.label}
           </Button>
         ))}
         {canCreate && (
           <div className="ml-auto">
-            <Button size="sm" className="bg-violet-600 hover:bg-violet-700 gap-1 h-6 sm:h-7 text-[10px] sm:text-xs"
+            <Button size="sm" className="bg-primary hover:bg-primary-hover gap-1 h-6 sm:h-7 text-[10px] sm:text-xs"
               onClick={() => setMultiProjectDialog(true)} data-testid="add-indirect-cost-inline-btn">
               <Plus className="h-3 w-3" /> Add Indirect Cost
             </Button>
@@ -1676,7 +1676,7 @@ function IndirectExpenseSection({ userRole }) {
                             <Button size="sm" className="h-6 text-[10px]" onClick={() => { setSelectedCost(cost); setApproveDialog(true); }} data-testid={`indirect-review-${cost.indirect_cost_id}`}>Review</Button>
                           )}
                           {cost.status === 'approved' && canConfirm && (
-                            <Button size="sm" className="h-6 text-[10px] bg-green-600 hover:bg-green-700" onClick={() => { setSelectedCost(cost); setConfirmDialog(true); }} data-testid={`indirect-confirm-${cost.indirect_cost_id}`}>Confirm</Button>
+                            <Button size="sm" className="h-6 text-[10px] bg-primary hover:bg-primary-hover" onClick={() => { setSelectedCost(cost); setConfirmDialog(true); }} data-testid={`indirect-confirm-${cost.indirect_cost_id}`}>Confirm</Button>
                           )}
                           {cost.status === 'confirmed' && <span className="text-[10px] text-green-600"><Lock className="h-3 w-3 inline" /> Locked</span>}
                           {cost.status === 'rejected' && <span className="text-[10px] text-red-500 truncate max-w-[100px] inline-block">{cost.rejection_reason || 'Rejected'}</span>}
@@ -1870,7 +1870,7 @@ function IndirectExpenseSection({ userRole }) {
             <div><Label className="text-xs">Remarks</Label><Textarea value={createForm.remarks} onChange={(e) => setCreateForm({ ...createForm, remarks: e.target.value })} rows={2} /></div>
             {distributionPreview && (
               <Card className="bg-violet-50 border-violet-200">
-                <CardHeader className="py-1.5 px-3 border-b border-violet-200"><CardTitle className="text-xs text-violet-700">Auto-Distribution Preview ({fmtI(distributionPreview.amount)})</CardTitle></CardHeader>
+                <CardHeader className="py-1.5 px-3 border-b border-violet-200"><CardTitle className="text-xs text-foreground">Auto-Distribution Preview ({fmtI(distributionPreview.amount)})</CardTitle></CardHeader>
                 <CardContent className="p-2">
                   {distributionPreview.warnings?.length > 0 && distributionPreview.warnings.map((w, i) => (
                     <p key={i} className="text-[10px] text-orange-600 flex items-start gap-1 mb-1"><AlertTriangle className="h-3 w-3 mt-0.5 shrink-0" /> {w}</p>
@@ -1887,7 +1887,7 @@ function IndirectExpenseSection({ userRole }) {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setCreateDialog(false)}>Cancel</Button>
-            <Button onClick={handleCreateCost} className="bg-violet-600 hover:bg-violet-700" data-testid="submit-indirect-cost-inline"><Plus className="h-4 w-4 mr-1" /> Submit for Approval</Button>
+            <Button onClick={handleCreateCost} className="bg-primary hover:bg-primary-hover" data-testid="submit-indirect-cost-inline"><Plus className="h-4 w-4 mr-1" /> Submit for Approval</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -1910,7 +1910,7 @@ function IndirectExpenseSection({ userRole }) {
           <DialogFooter className="gap-2">
             <Button variant="outline" onClick={() => setApproveDialog(false)}>Cancel</Button>
             <Button variant="destructive" onClick={() => handleApprove(false)} disabled={!rejectionReason} data-testid="indirect-reject-btn"><ThumbsDown className="h-4 w-4 mr-1" /> Reject</Button>
-            <Button className="bg-green-600 hover:bg-green-700" onClick={() => handleApprove(true)} data-testid="indirect-approve-btn"><ThumbsUp className="h-4 w-4 mr-1" /> Approve</Button>
+            <Button className="bg-primary hover:bg-primary-hover" onClick={() => handleApprove(true)} data-testid="indirect-approve-btn"><ThumbsUp className="h-4 w-4 mr-1" /> Approve</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -1932,7 +1932,7 @@ function IndirectExpenseSection({ userRole }) {
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setConfirmDialog(false)}>Cancel</Button>
-            <Button onClick={handleConfirmPayment} className="bg-green-600 hover:bg-green-700" data-testid="indirect-confirm-payment-btn"><Lock className="h-4 w-4 mr-1" /> Confirm & Distribute</Button>
+            <Button onClick={handleConfirmPayment} className="bg-primary hover:bg-primary-hover" data-testid="indirect-confirm-payment-btn"><Lock className="h-4 w-4 mr-1" /> Confirm & Distribute</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -2376,7 +2376,7 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
           request; only 3 cards now show. */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3" data-testid="kpi-cards">
         <Card
-          className="border-l-4 border-l-green-500 bg-gradient-to-br from-green-50 to-white cursor-pointer hover:shadow-md transition-shadow"
+          className="border-l-4 border-l-green-500 bg-white cursor-pointer hover:shadow-md transition-shadow"
           onClick={() => setDrilldown({ type: 'category', category: 'overall_income', entries: incomeEntries, label: 'Overall Income' })}
           data-testid="kpi-card-income"
           title="Click to see all income entries"
@@ -2396,7 +2396,7 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
         </Card>
 
         <Card
-          className="border-l-4 border-l-red-500 bg-gradient-to-br from-red-50 to-white cursor-pointer hover:shadow-md transition-shadow"
+          className="border-l-4 border-l-red-500 bg-white cursor-pointer hover:shadow-md transition-shadow"
           onClick={() => setDrilldown({ type: 'category', category: 'overall_expense', entries: allExpenseEntries, label: 'All Expense' })}
           data-testid="kpi-card-expense"
           title="Click to see all expense entries (includes Other / uncategorised)"
@@ -2420,7 +2420,7 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
           const isPos = bal >= 0;
           return (
             <Card
-              className={`border-l-4 ${isPos ? 'border-l-blue-500 bg-gradient-to-br from-blue-50 to-white' : 'border-l-orange-500 bg-gradient-to-br from-orange-50 to-white'} cursor-pointer hover:shadow-md transition-shadow`}
+              className={`border-l-4 ${isPos ? 'border-l-blue-500 bg-white' : 'border-l-orange-500 bg-white'} cursor-pointer hover:shadow-md transition-shadow`}
               onClick={() => setDrilldown({ type: 'category', category: 'overall_expense', entries: allExpenseEntries, label: 'All Expense (Balance contribution)' })}
               data-testid="kpi-card-balance"
               title="Click to see expense rows driving the balance"
@@ -2488,7 +2488,7 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
               </Button>
               <Button
                 size="sm"
-                className={`h-7 text-xs gap-1 ${dailyClosing.is_closed ? 'bg-slate-600 hover:bg-slate-700' : 'bg-amber-600 hover:bg-amber-700'} text-white`}
+                className={`h-7 text-xs gap-1 ${dailyClosing.is_closed ? 'bg-slate-600 hover:bg-slate-700' : 'bg-primary hover:bg-primary-hover'} text-white`}
                 onClick={() => setCloseDialogOpen(true)}
                 data-testid="close-books-btn"
               >
@@ -2617,7 +2617,7 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
                   <X className="h-3 w-3 mr-1" /> Clear
                 </Button>
               )}
-              {loading && <RefreshCw className="h-4 w-4 animate-spin text-amber-600" />}
+              {loading && <RefreshCw className="h-4 w-4 animate-spin text-primary" />}
             </div>
           </div>
         </CardContent>
@@ -2640,7 +2640,7 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
                 </button>
                 <button
                   onClick={() => setSubTab('indirect')}
-                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors gap-1 inline-flex items-center ${subTab === 'indirect' ? 'bg-violet-600 text-white shadow-sm' : 'text-gray-600 hover:text-gray-900'}`}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors gap-1 inline-flex items-center ${subTab === 'indirect' ? 'bg-primary text-white shadow-sm' : 'text-gray-600 hover:text-gray-900'}`}
                   data-testid="expense-only-indirect-tab"
                 >
                   <PieChart className="h-3.5 w-3.5" /> Indirect
@@ -2688,7 +2688,7 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
             <TabsTrigger value="expense" className="data-[state=active]:bg-red-100 data-[state=active]:text-red-800 gap-1.5" data-testid="cashbook-expense-tab">
               <ArrowUpRight className="h-4 w-4" /> <span className="hidden sm:inline">Direct </span>Expense ({allExpenseEntries.length})
             </TabsTrigger>
-            <TabsTrigger value="indirect" className="data-[state=active]:bg-violet-100 data-[state=active]:text-violet-800 gap-1.5" data-testid="cashbook-indirect-tab">
+            <TabsTrigger value="indirect" className="data-[state=active]:bg-brand-100 data-[state=active]:text-primary-strong gap-1.5" data-testid="cashbook-indirect-tab">
               <PieChart className="h-4 w-4" /> Indirect
             </TabsTrigger>
           </TabsList>
@@ -2715,9 +2715,9 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
             };
             const sumAmt = (arr) => arr.reduce((s, e) => s + (e.amount || 0), 0);
             const cards = [
-              { key: 'material', label: 'Material', icon: Building2, gradient: 'from-blue-500 to-blue-600', ring: 'ring-blue-600', bg: 'bg-blue-50', count: byCat.material.length, total: sumAmt(byCat.material) },
-              { key: 'labour', label: 'Labour', icon: Wallet, gradient: 'from-purple-500 to-purple-600', ring: 'ring-purple-600', bg: 'bg-purple-50', count: byCat.labour.length, total: sumAmt(byCat.labour) },
-              { key: 'petty_cash', label: 'Petty Cash', icon: Banknote, gradient: 'from-amber-500 to-amber-600', ring: 'ring-amber-600', bg: 'bg-amber-50', count: byCat.petty_cash.length, total: sumAmt(byCat.petty_cash) },
+              { key: 'material', label: 'Material', icon: Building2, gradient: '[&_svg]:text-blue-400', ring: 'ring-primary', bg: 'bg-blue-50', count: byCat.material.length, total: sumAmt(byCat.material) },
+              { key: 'labour', label: 'Labour', icon: Wallet, gradient: '[&_svg]:text-purple-400', ring: 'ring-primary', bg: 'bg-purple-50', count: byCat.labour.length, total: sumAmt(byCat.labour) },
+              { key: 'petty_cash', label: 'Petty Cash', icon: Banknote, gradient: '[&_svg]:text-amber-400', ring: 'ring-primary', bg: 'bg-amber-50', count: byCat.petty_cash.length, total: sumAmt(byCat.petty_cash) },
             ];
             if (expenseOnly) {
               // Colorful full cards
@@ -2731,7 +2731,7 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
                         key={c.key}
                         onClick={() => setExpenseSubTab(c.key)}
                         data-testid={`expense-filter-${c.key}`}
-                        className={`text-left rounded-xl p-4 bg-gradient-to-br ${c.gradient} text-white shadow-md transition-all hover:shadow-lg hover:scale-[1.02] ${active ? `ring-2 ring-offset-2 ${c.ring}` : 'opacity-90'}`}
+                        className={`text-left rounded-xl p-4 bg-gray-900 ${c.gradient} text-white shadow-md transition-all hover:shadow-lg hover:scale-[1.02] ${active ? `ring-2 ring-offset-2 ${c.ring}` : 'opacity-90'}`}
                       >
                         <div className="flex items-center justify-between mb-2">
                           <Icon className="h-5 w-5 opacity-90" />
@@ -3044,14 +3044,14 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
                   )}
                   <div className="flex gap-2 pt-1">
                     <Button size="sm" variant="outline" className="flex-1" onClick={() => setEditingIncome(false)} disabled={savingIncomeEdit}>Cancel</Button>
-                    <Button size="sm" className="flex-1 bg-green-600 hover:bg-green-700" onClick={handleSaveIncomeEdit} disabled={savingIncomeEdit} data-testid="income-edit-save">
+                    <Button size="sm" className="flex-1 bg-primary hover:bg-primary-hover" onClick={handleSaveIncomeEdit} disabled={savingIncomeEdit} data-testid="income-edit-save">
                       {savingIncomeEdit ? <RefreshCw className="h-3 w-3 animate-spin mr-1" /> : null} Save
                     </Button>
                   </div>
                 </div>
               )}
               {!editingIncome && (
-                <Button className="w-full bg-amber-600 hover:bg-amber-700" onClick={() => handlePrintReceipt(selectedEntry)}>
+                <Button className="w-full bg-primary hover:bg-primary-hover" onClick={() => handlePrintReceipt(selectedEntry)}>
                   <Printer className="h-4 w-4 mr-2" /> Print Receipt
                 </Button>
               )}
@@ -3377,7 +3377,7 @@ function ChequeManagementTab({ projects }) {
       </Card>
 
       {reminders.length > 0 && (
-        <Card className="bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200" data-testid="cheque-reminders">
+        <Card className="bg-amber-50 border-amber-200" data-testid="cheque-reminders">
           <CardContent className="p-3">
             <div className="flex items-start gap-2">
               <Bell className="h-4 w-4 text-amber-600 mt-0.5" />
@@ -3396,7 +3396,7 @@ function ChequeManagementTab({ projects }) {
       )}
 
       {vendorSuspense.length > 0 && (
-        <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200" data-testid="vendor-suspense-summary">
+        <Card className="bg-blue-50 border-blue-200" data-testid="vendor-suspense-summary">
           <CardContent className="p-3">
             <div className="flex items-start gap-2">
               <AlertCircle className="h-4 w-4 text-blue-600 mt-0.5" />
@@ -3458,7 +3458,7 @@ function ChequeManagementTab({ projects }) {
             <div className="flex flex-wrap gap-1">
               {['all', 'incoming', 'outgoing', 'pending', 'bounced'].map(tab => (
                 <Button key={tab} size="sm" variant={activeTab === tab ? 'default' : 'ghost'}
-                  className={`text-[10px] sm:text-xs h-6 sm:h-7 px-2 sm:px-3 ${activeTab === tab ? 'bg-amber-600 hover:bg-amber-700' : ''}`}
+                  className={`text-[10px] sm:text-xs h-6 sm:h-7 px-2 sm:px-3 ${activeTab === tab ? 'bg-primary hover:bg-primary-hover' : ''}`}
                   onClick={() => setActiveTab(tab)} data-testid={`cheque-filter-${tab}`}>
                   {tab.charAt(0).toUpperCase() + tab.slice(1)}
                 </Button>
@@ -3470,7 +3470,7 @@ function ChequeManagementTab({ projects }) {
                 <Input placeholder="Search cheques..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)}
                   className="pl-8 w-full sm:w-48 h-8 text-xs" data-testid="search-cheques" />
               </div>
-              <Button size="sm" className="bg-amber-600 hover:bg-amber-700 gap-1 h-8 text-xs" onClick={() => setAddDialog(true)} data-testid="add-cheque-btn">
+              <Button size="sm" className="bg-primary hover:bg-primary-hover gap-1 h-8 text-xs" onClick={() => setAddDialog(true)} data-testid="add-cheque-btn">
                 <Plus className="h-3.5 w-3.5" /> Add
               </Button>
               <Button size="sm" variant="outline" className="gap-1 h-8 border-blue-300 text-blue-700 text-xs" onClick={() => setSmartPayDialog(true)} data-testid="smart-pay-btn">
@@ -3481,7 +3481,7 @@ function ChequeManagementTab({ projects }) {
         </CardHeader>
         <CardContent className="p-0">
           {loading ? (
-            <div className="flex items-center justify-center py-12"><RefreshCw className="h-6 w-6 animate-spin text-amber-600" /></div>
+            <div className="flex items-center justify-center py-12"><RefreshCw className="h-6 w-6 animate-spin text-primary" /></div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-xs" data-testid="cheque-table">
@@ -3583,7 +3583,7 @@ function ChequeManagementTab({ projects }) {
       {/* Add Cheque Dialog */}
       <Dialog open={addDialog} onOpenChange={setAddDialog}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader><DialogTitle className="flex items-center gap-2"><FileText className="h-5 w-5 text-amber-600" /> Add New Cheque</DialogTitle></DialogHeader>
+          <DialogHeader><DialogTitle className="flex items-center gap-2"><FileText className="h-5 w-5 text-primary" /> Add New Cheque</DialogTitle></DialogHeader>
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-3">
               <div><Label>Cheque Number *</Label><Input value={chequeForm.cheque_number} onChange={e => setChequeForm({...chequeForm, cheque_number: e.target.value})} data-testid="input-cheque-number" /></div>
@@ -3623,7 +3623,7 @@ function ChequeManagementTab({ projects }) {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setAddDialog(false)}>Cancel</Button>
-            <Button onClick={handleAddCheque} className="bg-amber-600 hover:bg-amber-700" data-testid="save-cheque-btn"><CheckCircle className="h-4 w-4 mr-1" /> Save Cheque</Button>
+            <Button onClick={handleAddCheque} className="bg-primary hover:bg-primary-hover" data-testid="save-cheque-btn"><CheckCircle className="h-4 w-4 mr-1" /> Save Cheque</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -3669,7 +3669,7 @@ function ChequeManagementTab({ projects }) {
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setStatusDialog(false)}>Cancel</Button>
-            <Button onClick={handleUpdateStatus} className="bg-amber-600 hover:bg-amber-700" data-testid="update-status-btn"><CheckCircle className="h-4 w-4 mr-1" /> Update</Button>
+            <Button onClick={handleUpdateStatus} className="bg-primary hover:bg-primary-hover" data-testid="update-status-btn"><CheckCircle className="h-4 w-4 mr-1" /> Update</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -3677,7 +3677,7 @@ function ChequeManagementTab({ projects }) {
       {/* Smart Payment Dialog */}
       <Dialog open={smartPayDialog} onOpenChange={v => { setSmartPayDialog(v); if (!v) setSuspenseAlert(null); }}>
         <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
-          <DialogHeader><DialogTitle className="flex items-center gap-2"><CreditCard className="h-5 w-5 text-blue-600" /> Smart Cheque Payment</DialogTitle></DialogHeader>
+          <DialogHeader><DialogTitle className="flex items-center gap-2"><CreditCard className="h-5 w-5 text-primary" /> Smart Cheque Payment</DialogTitle></DialogHeader>
           <div className="space-y-4">
             {suspenseAlert && suspenseAlert.suspense_balance > 0 && (
               <Card className="bg-green-50 border-green-300" data-testid="suspense-auto-alert">
@@ -3767,7 +3767,7 @@ function ChequeManagementTab({ projects }) {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setSmartPayDialog(false)}>Cancel</Button>
-            <Button onClick={handleSmartPayment} className="bg-blue-600 hover:bg-blue-700" data-testid="process-smart-payment-btn"><CreditCard className="h-4 w-4 mr-1" /> Process Payment</Button>
+            <Button onClick={handleSmartPayment} className="bg-primary hover:bg-primary-hover" data-testid="process-smart-payment-btn"><CreditCard className="h-4 w-4 mr-1" /> Process Payment</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -4073,7 +4073,7 @@ function ApprovalsTab() {
   if (loading && !data.summary) {
     return (
       <div className="flex justify-center py-12">
-        <RefreshCw className="h-6 w-6 animate-spin text-purple-600" />
+        <RefreshCw className="h-6 w-6 animate-spin text-primary" />
       </div>
     );
   }
@@ -4111,7 +4111,7 @@ function ApprovalsTab() {
               ].map(opt => {
                 const active = statusFilter === opt.v;
                 const accentCls = {
-                  amber: active ? 'bg-amber-600 text-white border-amber-600' : 'border-amber-300 text-amber-700 hover:bg-amber-50',
+                  amber: active ? 'bg-primary text-white border-primary' : 'border-brand-300 text-primary-strong hover:bg-brand-50',
                   emerald: active ? 'bg-emerald-600 text-white border-emerald-600' : 'border-emerald-300 text-emerald-700 hover:bg-emerald-50',
                   red: active ? 'bg-red-600 text-white border-red-600' : 'border-red-300 text-red-700 hover:bg-red-50',
                   orange: active ? 'bg-orange-600 text-white border-orange-600' : 'border-orange-300 text-orange-700 hover:bg-orange-50',
@@ -4203,10 +4203,10 @@ function ApprovalsTab() {
       {['materials','labour','vendor'].includes(activeTab) && (
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="w-full grid grid-cols-3 mb-3" data-testid="approval-expense-sub-tabs">
-            <TabsTrigger value="materials" className="text-xs sm:text-sm data-[state=active]:bg-amber-100 data-[state=active]:text-amber-800 gap-1">
+            <TabsTrigger value="materials" className="text-xs sm:text-sm data-[state=active]:bg-brand-100 data-[state=active]:text-primary-strong gap-1">
               <Building2 className="h-3.5 w-3.5" /> Materials ({fSummary.material_count})
             </TabsTrigger>
-            <TabsTrigger value="labour" className="text-xs sm:text-sm data-[state=active]:bg-blue-100 data-[state=active]:text-blue-800 gap-1">
+            <TabsTrigger value="labour" className="text-xs sm:text-sm data-[state=active]:bg-brand-100 data-[state=active]:text-primary-strong gap-1">
               <Wallet className="h-3.5 w-3.5" /> Labour Work Order ({fSummary.labour_count})
             </TabsTrigger>
             <TabsTrigger value="vendor" className="text-xs sm:text-sm data-[state=active]:bg-orange-100 data-[state=active]:text-orange-800 gap-1">
@@ -4291,7 +4291,7 @@ function ApprovalsTab() {
                             <td className="px-3 py-2 text-center">
                               <div className="flex gap-1 justify-center flex-wrap">
                                 {isPending && (
-                                  <Button size="sm" className="h-6 text-[10px] bg-amber-600 hover:bg-amber-700 gap-1 px-3"
+                                  <Button size="sm" className="h-6 text-[10px] bg-primary hover:bg-primary-hover gap-1 px-3"
                                     disabled={processing === inc.income_id}
                                     onClick={() => openReviewDialog(inc)}
                                     data-testid={`review-income-btn-${inc.income_id}`}>
@@ -4378,7 +4378,7 @@ function ApprovalsTab() {
         <TabsContent value="vendor">
           <Tabs defaultValue="req_petty_cash" className="w-full">
             <TabsList className="grid grid-cols-2 mb-3 max-w-md">
-              <TabsTrigger value="req_petty_cash" className="text-xs gap-1 data-[state=active]:bg-amber-100 data-[state=active]:text-amber-800">
+              <TabsTrigger value="req_petty_cash" className="text-xs gap-1 data-[state=active]:bg-brand-100 data-[state=active]:text-primary-strong">
                 <Wallet className="h-3.5 w-3.5" /> Req Petty Cash ({filteredPettyCash.length})
               </TabsTrigger>
               <TabsTrigger value="record_expense" className="text-xs gap-1 data-[state=active]:bg-emerald-100 data-[state=active]:text-emerald-800">
@@ -4432,7 +4432,7 @@ function ApprovalsTab() {
                           </Button>
                           <Button
                             size="sm"
-                            className="h-7 text-[11px] gap-1 bg-emerald-600 hover:bg-emerald-700"
+                            className="h-7 text-[11px] gap-1 bg-primary hover:bg-primary-hover"
                             data-testid={`approval-petty-issue-${pc.petty_cash_id}`}
                             onClick={() => setIssueDialog({ open: true, kind: 'issue', item: pc })}
                           >
@@ -4531,7 +4531,7 @@ function ApprovalsTab() {
                           </Button>
                           <Button
                             size="sm"
-                            className="h-7 text-[11px] gap-1 bg-emerald-600 hover:bg-emerald-700"
+                            className="h-7 text-[11px] gap-1 bg-primary hover:bg-primary-hover"
                             data-testid={`approval-record-approve-${re.expense_id}`}
                             onClick={() => setIssueDialog({ open: true, kind: 'approve', item: re })}
                           >
@@ -4631,7 +4631,7 @@ function ApprovalsTab() {
       <Dialog open={reviewDialog.open} onOpenChange={(open) => { if (!open) setReviewDialog({ open: false, income: null }); }}>
         <DialogContent className="max-w-md">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-amber-700">
+            <DialogTitle className="flex items-center gap-2 text-foreground">
               <ClipboardCheck className="h-5 w-5" /> Review Income
             </DialogTitle>
           </DialogHeader>
@@ -4739,7 +4739,7 @@ function ApprovalsTab() {
                       </div>
                       <Button
                         size="sm"
-                        className="bg-amber-600 hover:bg-amber-700 h-8"
+                        className="bg-primary hover:bg-primary-hover h-8"
                         onClick={handleAddMissingCheque}
                         disabled={newCheque.adding}
                         data-testid="add-cheque-submit-btn"
@@ -4837,7 +4837,7 @@ function ApprovalsTab() {
                   <XCircle className="h-4 w-4 mr-1" /> Reject
                 </Button>
                 <Button
-                  className="bg-green-600 hover:bg-green-700"
+                  className="bg-primary hover:bg-primary-hover"
                   onClick={handleSubmitReview}
                   disabled={processing}
                   data-testid="submit-review-btn"
@@ -5028,7 +5028,7 @@ function IncomeTabsView({ incomeEntries, classifyMode, onView, onPrint, onDelete
                         {tab === 'dt' && (!entry.dt_status || entry.dt_status === 'new') && (
                           <Button
                             size="sm"
-                            className="h-6 text-[10px] bg-emerald-600 hover:bg-emerald-700 gap-1 px-2"
+                            className="h-6 text-[10px] bg-primary hover:bg-primary-hover gap-1 px-2"
                             onClick={() => setDtPayDialog({ open: true, dtIncome: entry })}
                             data-testid={`dt-select-pay-btn-${entry.income_id}`}
                           >
@@ -5126,14 +5126,14 @@ function ApprovalExpenseTable({ items, type, idField, amountField, altAmountFiel
                       {action ? (
                         <div className="flex items-center justify-center gap-1 flex-wrap">
                           {onPay && (
-                            <Button size="sm" className="h-6 text-[10px] bg-emerald-600 hover:bg-emerald-700 gap-1 px-2"
+                            <Button size="sm" className="h-6 text-[10px] bg-primary hover:bg-primary-hover gap-1 px-2"
                               disabled={processing === id}
                               onClick={() => onPay(id)}
                               data-testid={`pay-${type}-btn-${id}`}>
                               <Wallet className="h-3 w-3" /> Pay & Settle
                             </Button>
                           )}
-                          <Button size="sm" className="h-6 text-[10px] bg-green-600 hover:bg-green-700 gap-1 px-2"
+                          <Button size="sm" className="h-6 text-[10px] bg-primary hover:bg-primary-hover gap-1 px-2"
                             disabled={processing === id}
                             onClick={() => onApprove(type, id, action)}
                             data-testid={`approve-${type}-btn-${id}`}>
@@ -5307,7 +5307,7 @@ function ProjectSummaryTab({ overview, userRole, onRefresh }) {
               testIdPrefix="projsummary"
               accent="amber"
             />
-            {fLoading && <RefreshCw className="h-4 w-4 animate-spin text-amber-600" />}
+            {fLoading && <RefreshCw className="h-4 w-4 animate-spin text-primary" />}
             <div className="relative ml-auto w-full sm:w-72">
               <Search className="h-3.5 w-3.5 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
               <input
@@ -5316,7 +5316,7 @@ function ProjectSummaryTab({ overview, userRole, onRefresh }) {
                 onChange={(e) => setProjSearch(e.target.value)}
                 placeholder="Search project name..."
                 data-testid="project-summary-search"
-                className="w-full pl-8 pr-8 py-1.5 text-xs border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                className="w-full pl-8 pr-8 py-1.5 text-xs border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent"
               />
               {projSearch && (
                 <button
@@ -5477,7 +5477,7 @@ function ProjectSummaryTab({ overview, userRole, onRefresh }) {
         <CardHeader className="py-3 px-4 border-b">
           <div className="flex items-center justify-between">
             <CardTitle className="text-sm flex items-center gap-2">
-              <Building2 className="h-4 w-4 text-amber-600" /> All Projects
+              <Building2 className="h-4 w-4 text-primary" /> All Projects
               <Badge variant="outline" className="text-xs">{projects.length} projects</Badge>
             </CardTitle>
           </div>
@@ -5835,7 +5835,7 @@ function CarryForwardTab({ userRole }) {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <RefreshCw className="h-6 w-6 animate-spin text-amber-600" />
+        <RefreshCw className="h-6 w-6 animate-spin text-primary" />
       </div>
     );
   }
@@ -5857,7 +5857,7 @@ function CarryForwardTab({ userRole }) {
   return (
     <div className="space-y-4" data-testid="carry-forward-tab">
       {/* Hero card — current net amount + Open popup */}
-      <Card className="border-l-4 border-l-indigo-500 bg-gradient-to-br from-indigo-50/60 to-white">
+      <Card className="border-l-4 border-l-indigo-500 bg-white">
         <CardContent className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
             <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-indigo-700 font-semibold">
@@ -5876,7 +5876,7 @@ function CarryForwardTab({ userRole }) {
           {canEdit && (
             <Button
               onClick={openDialog}
-              className="bg-indigo-600 hover:bg-indigo-700 gap-1.5"
+              className="bg-primary hover:bg-primary-hover gap-1.5"
               data-testid="open-carry-forward-dialog"
             >
               <Lock className="h-4 w-4" /> {data?.locked_at ? 'Update Lock' : 'Lock Balance'}
@@ -5960,7 +5960,7 @@ function CarryForwardTab({ userRole }) {
         <CardContent className="p-0">
           {projectLoading ? (
             <div className="flex items-center justify-center py-10">
-              <RefreshCw className="h-5 w-5 animate-spin text-amber-600" />
+              <RefreshCw className="h-5 w-5 animate-spin text-primary" />
             </div>
           ) : projectRows.length === 0 ? (
             <p className="text-center text-sm text-gray-500 py-8">No projects yet.</p>
@@ -6020,7 +6020,7 @@ function CarryForwardTab({ userRole }) {
                           <Button
                             size="sm"
                             variant="outline"
-                            className="h-7 px-2 text-[11px] gap-1 border-indigo-300 text-indigo-700 hover:bg-indigo-50"
+                            className="h-7 px-2 text-[11px] gap-1 border-brand-300 text-primary-strong hover:bg-brand-50"
                             onClick={() => askIncomeOrExpense(r)}
                             data-testid={`cf-row-btn-${r.project_id}`}
                           >
@@ -6211,7 +6211,7 @@ function CarryForwardTab({ userRole }) {
             <Button
               onClick={submitCarryForward}
               disabled={cfSaving}
-              className={cfDialog.type === 'income' ? 'bg-emerald-600 hover:bg-emerald-700 gap-1.5' : 'bg-rose-600 hover:bg-rose-700 gap-1.5'}
+              className={cfDialog.type === 'income' ? 'bg-primary hover:bg-primary-hover gap-1.5' : 'bg-rose-600 hover:bg-rose-700 gap-1.5'}
               data-testid="cf-save-btn"
             >
               <Lock className="h-4 w-4" /> {cfSaving ? 'Saving…' : 'Save Carry Forward'}
@@ -6310,7 +6310,7 @@ function CarryForwardTab({ userRole }) {
             <Button
               onClick={handleLock}
               disabled={saving}
-              className="bg-indigo-600 hover:bg-indigo-700 gap-1.5"
+              className="bg-primary hover:bg-primary-hover gap-1.5"
               data-testid="carry-forward-lock-btn"
             >
               <Lock className="h-4 w-4" /> {saving ? 'Locking…' : 'Lock Closing Balance'}
@@ -6374,7 +6374,7 @@ export default function AccountsBoard() {
       <div className="min-h-screen bg-gray-50">
         <AppHeader user={user} />
         <div className="flex items-center justify-center h-[60vh]">
-          <RefreshCw className="h-8 w-8 animate-spin text-amber-600" />
+          <RefreshCw className="h-8 w-8 animate-spin text-primary" />
         </div>
       </div>
     );
@@ -6396,7 +6396,7 @@ export default function AccountsBoard() {
       <Button
         variant="outline"
         size="sm"
-        className="border-amber-300 text-amber-700 hover:bg-amber-50 hidden md:inline-flex"
+        className="border-brand-300 text-primary-strong hover:bg-brand-50 hidden md:inline-flex"
         onClick={() => setUnmaskDialog(true)}
         data-testid="unmask-all-btn"
       >
@@ -6408,7 +6408,7 @@ export default function AccountsBoard() {
   // Cashflow Engine quick-link for Accountant/SuperAdmin
   const cashflowLinkButton = (
     <Link to="/cashflow-engine">
-      <Button size="sm" className="h-9 px-3 bg-blue-600 hover:bg-blue-700 text-white" data-testid="accounts-cashflow-engine-link">
+      <Button size="sm" className="h-9 px-3 bg-primary hover:bg-primary-hover text-white" data-testid="accounts-cashflow-engine-link">
         <Wallet className="h-4 w-4 mr-1.5" /> Cashflow Engine
       </Button>
     </Link>
@@ -6454,7 +6454,7 @@ export default function AccountsBoard() {
       <Dialog open={unmaskDialog} onOpenChange={setUnmaskDialog}>
         <DialogContent className="max-w-sm">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-amber-700">
+            <DialogTitle className="flex items-center gap-2 text-foreground">
               <Eye className="h-5 w-5" /> Unmask All Values
             </DialogTitle>
           </DialogHeader>
@@ -6464,7 +6464,7 @@ export default function AccountsBoard() {
           <DialogFooter className="gap-2">
             <Button variant="outline" onClick={() => setUnmaskDialog(false)}>Cancel</Button>
             <Button
-              className="bg-amber-600 hover:bg-amber-700"
+              className="bg-primary hover:bg-primary-hover"
               data-testid="confirm-unmask-btn"
               onClick={() => {
                 setGlobalUnmasked(true);

@@ -358,7 +358,7 @@ function ProtectedRoute({ children }) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50" data-testid="auth-loading">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-8 w-8 border-3 border-gray-300 border-t-blue-600 rounded-full animate-spin" />
+          <div className="h-8 w-8 border-3 border-gray-300 border-t-primary rounded-full animate-spin" />
           <p className="text-sm text-gray-400">Authenticating...</p>
         </div>
       </div>

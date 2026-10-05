@@ -102,10 +102,10 @@ export function CashbookDateFilter({
 
   const isActive = !!(dateFrom || dateTo);
   const accentMap = {
-    amber: { trigger: 'bg-amber-50 border-amber-400 text-amber-700', day: 'hover:bg-amber-50', sel: 'bg-amber-600 text-white hover:bg-amber-700', today: 'text-amber-600', mid: 'bg-amber-50 text-amber-700', presetHover: 'hover:bg-amber-50 hover:text-amber-700' },
-    green: { trigger: 'bg-green-50 border-green-400 text-green-700', day: 'hover:bg-green-50', sel: 'bg-green-600 text-white hover:bg-green-700', today: 'text-green-600', mid: 'bg-green-50 text-green-700', presetHover: 'hover:bg-green-50 hover:text-green-700' },
+    amber: { trigger: 'bg-amber-50 border-amber-400 text-amber-700', day: 'hover:bg-amber-50', sel: 'bg-primary text-white hover:bg-primary-hover', today: 'text-amber-600', mid: 'bg-amber-50 text-amber-700', presetHover: 'hover:bg-brand-50 hover:text-primary-strong' },
+    green: { trigger: 'bg-green-50 border-green-400 text-green-700', day: 'hover:bg-green-50', sel: 'bg-primary text-white hover:bg-primary-hover', today: 'text-green-600', mid: 'bg-green-50 text-green-700', presetHover: 'hover:bg-green-50 hover:text-green-700' },
     red: { trigger: 'bg-red-50 border-red-400 text-red-700', day: 'hover:bg-red-50', sel: 'bg-red-600 text-white hover:bg-red-700', today: 'text-red-600', mid: 'bg-red-50 text-red-700', presetHover: 'hover:bg-red-50 hover:text-red-700' },
-    blue: { trigger: 'bg-blue-50 border-blue-400 text-blue-700', day: 'hover:bg-blue-50', sel: 'bg-blue-600 text-white hover:bg-blue-700', today: 'text-blue-600', mid: 'bg-blue-50 text-blue-700', presetHover: 'hover:bg-blue-50 hover:text-blue-700' },
+    blue: { trigger: 'bg-blue-50 border-blue-400 text-blue-700', day: 'hover:bg-blue-50', sel: 'bg-primary text-white hover:bg-primary-hover', today: 'text-blue-600', mid: 'bg-blue-50 text-blue-700', presetHover: 'hover:bg-brand-50 hover:text-primary-strong' },
   };
   const c = accentMap[accent] || accentMap.amber;
 

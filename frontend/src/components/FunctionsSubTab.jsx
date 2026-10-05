@@ -67,7 +67,7 @@ function FunctionRow({ icon, title, description, onEdit, testId }) {
       <Button
         size="sm"
         onClick={onEdit}
-        className="h-8 px-3 gap-1 bg-violet-600 hover:bg-violet-700"
+        className="h-8 px-3 gap-1 bg-primary hover:bg-primary-hover"
         data-testid={`${testId}-edit`}
       >
         <Pencil className="h-3.5 w-3.5" /> Edit
@@ -173,7 +173,7 @@ function DlrDateModuleDialog({ open, onClose }) {
           </Button>
           <Button
             size="sm"
-            className="bg-violet-600 hover:bg-violet-700"
+            className="bg-primary hover:bg-primary-hover"
             onClick={save}
             disabled={saving || !dirty}
             data-testid="fn-dlr-save"

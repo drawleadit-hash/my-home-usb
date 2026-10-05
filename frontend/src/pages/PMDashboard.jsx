@@ -397,7 +397,7 @@ export default function PMDashboard() {
                       value={projectSearch}
                       onChange={(e) => setProjectSearch(e.target.value)}
                       placeholder="Search project, client, phase or date…"
-                      className="pl-9 h-9 text-sm bg-white border-indigo-200 focus-visible:ring-indigo-400"
+                      className="pl-9 h-9 text-sm bg-white border-indigo-200 focus-visible:ring-primary/50"
                       data-testid="pm-projects-search"
                     />
                   </div>
@@ -419,7 +419,7 @@ export default function PMDashboard() {
                 <Card data-testid="pm-projects-table-card" className="overflow-hidden shadow-sm">
                   <CardContent className="p-0 overflow-x-auto">
                     <table className="w-full text-sm" data-testid="pm-projects-table">
-                      <thead className="bg-gradient-to-r from-indigo-50 to-indigo-50/40 text-gray-700 border-b border-indigo-100">
+                      <thead className="bg-indigo-50 text-gray-700 border-b border-indigo-100">
                         <tr>
                           <th className="text-left font-semibold px-4 py-3 uppercase text-[11px] tracking-wider">Project</th>
                           <th className="text-left font-semibold px-4 py-3 uppercase text-[11px] tracking-wider">Client</th>
@@ -512,7 +512,7 @@ export default function PMDashboard() {
                                     <Button
                                       size="sm"
                                       variant="ghost"
-                                      className="h-8 w-8 p-0 text-indigo-700 hover:text-indigo-900 hover:bg-indigo-100"
+                                      className="h-8 w-8 p-0 text-primary-strong hover:text-brand-800 hover:bg-brand-50"
                                       onClick={() => window.location.href = `/site-engineer/project/${project.project_id}`}
                                       data-testid={`project-row-view-${project.project_id}`}
                                       title="Open project (SE view)"
@@ -563,13 +563,13 @@ export default function PMDashboard() {
             <div className="space-y-3" data-testid="pm-requests-tab">
               <Tabs defaultValue="material_requests" className="w-full">
                 <TabsList className="bg-amber-50/40 border border-amber-100 rounded-lg p-1 flex flex-wrap">
-                  <TabsTrigger value="material_requests" className="text-xs sm:text-sm data-[state=active]:bg-white data-[state=active]:text-amber-700 data-[state=active]:shadow-sm" data-testid="pm-req-sub-material">
+                  <TabsTrigger value="material_requests" className="text-xs sm:text-sm data-[state=active]:bg-white data-[state=active]:text-primary-strong data-[state=active]:shadow-sm" data-testid="pm-req-sub-material">
                     Material Requests<CountBadge count={materialRequests?.length || 0} />
                   </TabsTrigger>
-                  <TabsTrigger value="work_order_labour" className="text-xs sm:text-sm data-[state=active]:bg-white data-[state=active]:text-amber-700 data-[state=active]:shadow-sm" data-testid="pm-req-sub-labour">
+                  <TabsTrigger value="work_order_labour" className="text-xs sm:text-sm data-[state=active]:bg-white data-[state=active]:text-primary-strong data-[state=active]:shadow-sm" data-testid="pm-req-sub-labour">
                     Work Order / Labour (RAB)<CountBadge count={labourRequests?.length || 0} />
                   </TabsTrigger>
-                  <TabsTrigger value="petty_cash" className="text-xs sm:text-sm data-[state=active]:bg-white data-[state=active]:text-amber-700 data-[state=active]:shadow-sm" data-testid="pm-req-sub-petty">
+                  <TabsTrigger value="petty_cash" className="text-xs sm:text-sm data-[state=active]:bg-white data-[state=active]:text-primary-strong data-[state=active]:shadow-sm" data-testid="pm-req-sub-petty">
                     Petty Cash<CountBadge count={pendingPcCount} />
                   </TabsTrigger>
                 </TabsList>
@@ -849,10 +849,10 @@ export default function PMDashboard() {
             <Card>
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between gap-3 flex-wrap">
-                  <CardTitle className="text-base flex items-center gap-2"><Users className="h-4 w-4 text-indigo-600" />Team Members ({filteredTeam.length})</CardTitle>
+                  <CardTitle className="text-base flex items-center gap-2"><Users className="h-4 w-4 text-primary" />Team Members ({filteredTeam.length})</CardTitle>
                   <div className="flex items-center gap-2">
                     <div className="relative"><Search className="absolute left-2.5 top-2 h-4 w-4 text-gray-400" /><Input placeholder="Search..." value={teamSearch} onChange={(e) => setTeamSearch(e.target.value)} className="pl-8 h-8 w-40 text-sm" /></div>
-                    <Button size="sm" onClick={() => { setSEForm({ name: '', phone: '', email: '', role: 'site_engineer' }); setCreateSEDialog(true); }} className="bg-indigo-600 hover:bg-indigo-700" data-testid="create-se-btn"><Plus className="h-4 w-4 mr-1" />Create Site Engineer</Button>
+                    <Button size="sm" onClick={() => { setSEForm({ name: '', phone: '', email: '', role: 'site_engineer' }); setCreateSEDialog(true); }} className="bg-primary hover:bg-primary-hover" data-testid="create-se-btn"><Plus className="h-4 w-4 mr-1" />Create Site Engineer</Button>
                   </div>
                 </div>
               </CardHeader>
@@ -908,7 +908,7 @@ export default function PMDashboard() {
             <div><Label>Current Stage</Label><div className="mt-1">{getStageBadge(selectedProject?.current_stage)}</div></div>
             <div><Label>Move to</Label><Select value={newStage} onValueChange={setNewStage}><SelectTrigger className="mt-1"><SelectValue /></SelectTrigger><SelectContent>{stages.map(s => <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>)}</SelectContent></Select></div>
           </div>
-          <DialogFooter><Button variant="outline" onClick={() => setStageDialog(false)}>Cancel</Button><Button onClick={handleUpdateStage} className="bg-indigo-600 hover:bg-indigo-700">Update Stage</Button></DialogFooter>
+          <DialogFooter><Button variant="outline" onClick={() => setStageDialog(false)}>Cancel</Button><Button onClick={handleUpdateStage} className="bg-primary hover:bg-primary-hover">Update Stage</Button></DialogFooter>
         </DialogContent>
       </Dialog>
 
@@ -977,7 +977,7 @@ export default function PMDashboard() {
               </Select>
             </div>
           </div>
-          <DialogFooter><Button variant="outline" onClick={() => setAssignDialog(false)}>Cancel</Button><Button onClick={handleAssignTeam} className="bg-indigo-600 hover:bg-indigo-700" data-testid="confirm-assign">Assign Selected</Button></DialogFooter>
+          <DialogFooter><Button variant="outline" onClick={() => setAssignDialog(false)}>Cancel</Button><Button onClick={handleAssignTeam} className="bg-primary hover:bg-primary-hover" data-testid="confirm-assign">Assign Selected</Button></DialogFooter>
         </DialogContent>
       </Dialog>
 
@@ -1010,7 +1010,7 @@ export default function PMDashboard() {
               <div><Label>Email</Label><Input value={seForm.email} onChange={(e) => setSEForm({ ...seForm, email: e.target.value })} placeholder="email" className="mt-1" /></div>
             </div>
           </div>
-          <DialogFooter><Button variant="outline" onClick={() => setCreateSEDialog(false)}>Cancel</Button><Button onClick={handleCreateSE} className="bg-indigo-600 hover:bg-indigo-700" data-testid="confirm-create-se">Create</Button></DialogFooter>
+          <DialogFooter><Button variant="outline" onClick={() => setCreateSEDialog(false)}>Cancel</Button><Button onClick={handleCreateSE} className="bg-primary hover:bg-primary-hover" data-testid="confirm-create-se">Create</Button></DialogFooter>
         </DialogContent>
       </Dialog>
 

@@ -171,10 +171,10 @@ export default function CashflowEngine() {
     return (projectsList || []).filter(p => !overrideMap[p.project_id]);
   }, [projectsList, overrideMap]);
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center"><RefreshCw className="h-6 w-6 animate-spin text-indigo-600" /></div>;
+  if (loading) return <div className="min-h-screen flex items-center justify-center"><RefreshCw className="h-6 w-6 animate-spin text-primary" /></div>;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-indigo-50/30 p-4 md:p-6">
+    <div className="min-h-screen bg-slate-50 p-4 md:p-6">
       <div className="max-w-7xl mx-auto space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between flex-wrap gap-3">
@@ -183,7 +183,7 @@ export default function CashflowEngine() {
               <Button variant="outline" size="sm"><ArrowLeft className="h-4 w-4 mr-1" /> Back</Button>
             </Link>
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2"><Wallet className="h-6 w-6 text-indigo-600" /> Cashflow Engine</h1>
+              <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2"><Wallet className="h-6 w-6 text-primary" /> Cashflow Engine</h1>
               <p className="text-xs text-gray-500">Splits every approved income into Direct & Indirect pools; expenses drain the matching pool.</p>
             </div>
           </div>
@@ -196,7 +196,7 @@ export default function CashflowEngine() {
               testIdPrefix="cf"
               accent="blue"
             />
-            {refetching && <RefreshCw className="h-4 w-4 animate-spin text-indigo-600" />}
+            {refetching && <RefreshCw className="h-4 w-4 animate-spin text-primary" />}
             <Button variant="outline" size="sm" onClick={fetchAll} disabled={busy} data-testid="cf-refresh-btn"><RefreshCw className={`h-4 w-4 mr-1 ${busy ? 'animate-spin' : ''}`} /> Refresh</Button>
             {isAdmin && (
               <Button size="sm" variant="outline" className="border-indigo-300 text-indigo-700" onClick={fullRecompute} disabled={busy} data-testid="cf-recompute-btn">
@@ -229,7 +229,7 @@ export default function CashflowEngine() {
         {summary && (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3" data-testid="cf-summary-strip">
             {/* Card 01 — TOTAL INCOME */}
-            <Card className="bg-gradient-to-br from-violet-50 to-violet-100/40 border-violet-200">
+            <Card className="bg-violet-50 border-violet-200">
               <CardContent className="p-4 space-y-2.5">
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-semibold uppercase text-violet-700">Cashflow Overview</span>
@@ -251,7 +251,7 @@ export default function CashflowEngine() {
             </Card>
 
             {/* Card 02 — TOTAL DIRECT */}
-            <Card className="bg-gradient-to-br from-emerald-50 to-emerald-100/40 border-emerald-200">
+            <Card className="bg-emerald-50 border-emerald-200">
               <CardContent className="p-4 space-y-2.5">
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-semibold uppercase text-emerald-700">Direct Cost Allocation</span>
@@ -273,7 +273,7 @@ export default function CashflowEngine() {
             </Card>
 
             {/* Card 03 — TOTAL INDIRECT */}
-            <Card className="bg-gradient-to-br from-sky-50 to-sky-100/40 border-sky-200">
+            <Card className="bg-sky-50 border-sky-200">
               <CardContent className="p-4 space-y-2.5">
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-semibold uppercase text-sky-700">Indirect Cost Allocation</span>
@@ -362,7 +362,7 @@ export default function CashflowEngine() {
                         <tr key={p.project_id} className="hover:bg-gray-50" data-testid={`cf-summary-row-${p.project_id}`}>
                           <td className="px-4 py-2.5 text-center text-gray-500 tabular-nums">{idx + 1}</td>
                           <td className="px-4 py-2.5">
-                            <Link to={`/projects/${p.project_id}`} className="text-indigo-600 hover:underline font-medium">{p.project_name || '— Unassigned —'}</Link>
+                            <Link to={`/projects/${p.project_id}`} className="text-primary-strong hover:underline font-medium">{p.project_name || '— Unassigned —'}</Link>
                           </td>
                           <td className="px-4 py-2.5 text-center whitespace-nowrap">
                             <span className="inline-flex items-center gap-1">
@@ -500,7 +500,7 @@ export default function CashflowEngine() {
                       <Button
                         onClick={() => setPwDialog({ open: true, password: '', verifying: false })}
                         variant="outline"
-                        className="border-indigo-300 text-indigo-700 hover:bg-indigo-50"
+                        className="border-brand-300 text-primary-strong hover:bg-brand-50"
                         data-testid="cf-global-edit"
                       >
                         <Lock className="h-4 w-4 mr-1" /> Edit (Password Required)
@@ -509,7 +509,7 @@ export default function CashflowEngine() {
                     </div>
                   ) : (
                     <div className="flex items-center gap-2">
-                      <Button onClick={saveGlobal} disabled={busy} className="bg-indigo-600 hover:bg-indigo-700" data-testid="cf-global-save"><Save className="h-4 w-4 mr-1" /> Save Global</Button>
+                      <Button onClick={saveGlobal} disabled={busy} className="bg-primary hover:bg-primary-hover" data-testid="cf-global-save"><Save className="h-4 w-4 mr-1" /> Save Global</Button>
                       <Button variant="outline" onClick={() => { setGlobalEdit({ direct_pct: config.global.direct_pct, indirect_pct: config.global.indirect_pct }); setGlobalLocked(true); }} data-testid="cf-global-cancel">Cancel</Button>
                     </div>
                   )}
@@ -601,7 +601,7 @@ export default function CashflowEngine() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setPwDialog({ open: false, password: '', verifying: false })} disabled={pwDialog.verifying}>Cancel</Button>
-            <Button onClick={submitPasswordUnlock} disabled={pwDialog.verifying || !pwDialog.password} className="bg-indigo-600 hover:bg-indigo-700" data-testid="cf-pw-submit">
+            <Button onClick={submitPasswordUnlock} disabled={pwDialog.verifying || !pwDialog.password} className="bg-primary hover:bg-primary-hover" data-testid="cf-pw-submit">
               {pwDialog.verifying ? 'Verifying…' : 'Unlock'}
             </Button>
           </DialogFooter>
@@ -638,7 +638,7 @@ export default function CashflowEngine() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setOverrideDialog({ open: false, project: null, direct_pct: 85, indirect_pct: 15, apply_retroactively: false })}>Cancel</Button>
-            <Button onClick={submitOverride} disabled={busy} className="bg-indigo-600 hover:bg-indigo-700" data-testid="cf-override-save">{busy ? 'Saving…' : 'Save'}</Button>
+            <Button onClick={submitOverride} disabled={busy} className="bg-primary hover:bg-primary-hover" data-testid="cf-override-save">{busy ? 'Saving…' : 'Save'}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

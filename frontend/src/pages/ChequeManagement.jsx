@@ -239,7 +239,7 @@ export default function ChequeManagement() {
   if (loading && !user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <RefreshCw className="h-6 w-6 animate-spin text-amber-600" />
+        <RefreshCw className="h-6 w-6 animate-spin text-primary" />
       </div>
     );
   }
@@ -252,7 +252,7 @@ export default function ChequeManagement() {
       <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6">
         {/* Reminders Alert */}
         {reminders.length > 0 && (
-          <Card className="mb-6 bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200" data-testid="reminders-alert">
+          <Card className="mb-6 bg-amber-50 border-amber-200" data-testid="reminders-alert">
             <CardContent className="p-4">
               <div className="flex items-start gap-3">
                 <Bell className="h-5 w-5 text-amber-600 mt-0.5" />
@@ -431,7 +431,7 @@ export default function ChequeManagement() {
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <FileText className="h-5 w-5 text-amber-600" /> Add New Cheque
+              <FileText className="h-5 w-5 text-primary" /> Add New Cheque
             </DialogTitle>
           </DialogHeader>
           

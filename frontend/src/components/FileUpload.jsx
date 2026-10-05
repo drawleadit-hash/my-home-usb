@@ -84,7 +84,7 @@ export function FileUpload({ projectId, category = 'general', onUploadComplete, 
     <div
       data-testid="file-upload-zone"
       className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors cursor-pointer ${
-        dragOver ? 'border-amber-500 bg-amber-50' : 'border-gray-300 hover:border-gray-400'
+        dragOver ? 'border-primary bg-brand-50' : 'border-gray-300 hover:border-gray-400'
       }`}
       onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
       onDragLeave={() => setDragOver(false)}
@@ -102,7 +102,7 @@ export function FileUpload({ projectId, category = 'general', onUploadComplete, 
       />
       {uploading ? (
         <div className="flex flex-col items-center gap-2">
-          <Loader2 className="h-8 w-8 text-amber-600 animate-spin" />
+          <Loader2 className="h-8 w-8 text-primary animate-spin" />
           <p className="text-sm text-gray-500">Uploading...</p>
         </div>
       ) : (

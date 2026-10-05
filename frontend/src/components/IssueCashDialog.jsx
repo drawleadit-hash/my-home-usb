@@ -264,7 +264,7 @@ export default function IssueCashDialog({
 
         <DialogFooter>
           <Button variant="outline" size="sm" onClick={() => onOpenChange(false)} disabled={busy} data-testid="issue-cash-cancel">Cancel</Button>
-          <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 gap-1" onClick={handleSubmit} disabled={busy || (refRequired && !refNum.trim()) || !amount || amount <= 0} data-testid="issue-cash-submit">
+          <Button size="sm" className="bg-primary hover:bg-primary-hover gap-1" onClick={handleSubmit} disabled={busy || (refRequired && !refNum.trim()) || !amount || amount <= 0} data-testid="issue-cash-submit">
             {headerIcon} {busy ? '…' : cta}
           </Button>
         </DialogFooter>

@@ -187,7 +187,7 @@ function UsersSubTab() {
                     </span>
                   </td>
                   <td className="px-4 py-3 text-center">
-                    <Button size="sm" onClick={() => openEdit(r)} className="h-8 px-3 gap-1 bg-indigo-600 hover:bg-indigo-700" data-testid={`wf-edit-${r.role}`}>
+                    <Button size="sm" onClick={() => openEdit(r)} className="h-8 px-3 gap-1 bg-primary hover:bg-primary-hover" data-testid={`wf-edit-${r.role}`}>
                       <Pencil className="h-3.5 w-3.5" /> Edit
                     </Button>
                   </td>
@@ -202,7 +202,7 @@ function UsersSubTab() {
         <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto" data-testid="wf-edit-dialog">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Workflow className="h-5 w-5 text-indigo-600" /> {editing?.label}
+              <Workflow className="h-5 w-5 text-primary" /> {editing?.label}
             </DialogTitle>
             <DialogDescription className="text-xs">
               Drag menus to reorder, toggle to show/hide. Hidden menus won't appear in this role's dashboard.
@@ -264,7 +264,7 @@ function UsersSubTab() {
             <Button variant="outline" size="sm" onClick={() => setEditing(null)} disabled={saving} className="gap-1">
               <X className="h-3.5 w-3.5" /> Cancel
             </Button>
-            <Button size="sm" className="bg-indigo-600 hover:bg-indigo-700" onClick={save} disabled={saving} data-testid="wf-save">
+            <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={save} disabled={saving} data-testid="wf-save">
               {saving ? 'Saving…' : 'Save with Password'}
             </Button>
           </DialogFooter>

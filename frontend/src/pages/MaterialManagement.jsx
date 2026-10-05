@@ -180,7 +180,7 @@ export default function MaterialManagement() {
           {canManage && (
             <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
               <DialogTrigger asChild>
-                <Button data-testid="add-material-btn" className="gap-2 bg-green-600 hover:bg-green-700 w-full sm:w-auto" onClick={() => handleOpenDialog()}>
+                <Button data-testid="add-material-btn" className="gap-2 bg-primary hover:bg-primary-hover w-full sm:w-auto" onClick={() => handleOpenDialog()}>
                   <Plus className="h-4 w-4" /> Add Material
                 </Button>
               </DialogTrigger>
@@ -263,7 +263,7 @@ export default function MaterialManagement() {
 
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 mb-4 sm:mb-8">
-          <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+          <Card className="bg-green-50 border-green-200">
             <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Total</CardTitle>
             </CardHeader>
@@ -274,7 +274,7 @@ export default function MaterialManagement() {
               </div>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+          <Card className="bg-blue-50 border-blue-200">
             <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Active</CardTitle>
             </CardHeader>
@@ -282,7 +282,7 @@ export default function MaterialManagement() {
               <span className="text-lg sm:text-2xl font-bold text-amber-700">{activeMaterials.length}</span>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200">
+          <Card className="bg-gray-50 border-gray-200">
             <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Inactive</CardTitle>
             </CardHeader>
@@ -290,7 +290,7 @@ export default function MaterialManagement() {
               <span className="text-lg sm:text-2xl font-bold text-gray-700">{inactiveMaterials.length}</span>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+          <Card className="bg-purple-50 border-purple-200">
             <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Categories</CardTitle>
             </CardHeader>

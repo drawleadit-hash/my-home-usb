@@ -132,7 +132,7 @@ export default function Dashboard() {
   if (loading && !user) return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="text-center">
-        <div className="w-10 h-10 border-3 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+        <div className="w-10 h-10 border-3 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-3" />
         <p className="text-sm text-gray-500 font-medium">Loading dashboard...</p>
       </div>
     </div>
@@ -203,7 +203,7 @@ export default function Dashboard() {
           <Card data-testid="card-project-value" className="border-l-4 border-l-amber-500">
             <CardHeader className="pb-2 pt-4 px-4">
               <CardTitle className="text-sm font-semibold text-gray-500 flex items-center gap-2">
-                <IndianRupee className="h-4 w-4 text-amber-500" /> Project Value
+                <IndianRupee className="h-4 w-4 text-primary" /> Project Value
               </CardTitle>
             </CardHeader>
             <CardContent className="px-4 pb-4 space-y-2">

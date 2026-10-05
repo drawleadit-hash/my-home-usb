@@ -1106,7 +1106,7 @@ export default function SiteEngineerProject() {
 
       <div className="max-w-6xl mx-auto px-3 py-3 sm:px-6 sm:py-6">
         {/* Compact Project Header */}
-        <div className="bg-gradient-to-r from-amber-50 via-white to-amber-50 border border-amber-200 rounded-lg p-3 sm:p-4 mb-4 shadow-sm">
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 sm:p-4 mb-4 shadow-sm">
           <div className="flex items-start gap-3">
             <div className="bg-amber-100 p-2 rounded-lg shrink-0">
               <Building2 className="h-5 w-5 sm:h-6 sm:w-6 text-amber-700" />
@@ -1157,7 +1157,7 @@ export default function SiteEngineerProject() {
                 <div className="flex items-start justify-between gap-2 flex-wrap">
                   <div className="min-w-0">
                     <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-                      <FileText className="h-4 w-4 text-indigo-600" /> DLR &amp; DPR
+                      <FileText className="h-4 w-4 text-primary" /> DLR &amp; DPR
                     </CardTitle>
                     <CardDescription className="text-xs sm:text-sm">Daily Labour Report &amp; Daily Progress Report submitted by Site Engineer</CardDescription>
                   </div>
@@ -1171,7 +1171,7 @@ export default function SiteEngineerProject() {
                 {dlrSubTab === 'dlr' ? (
                   <>
                     {/* DLR card — single unified entry point (DPR captured inside DLR popup) */}
-                    <div className="rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50/60 to-white p-4 sm:p-5">
+                    <div className="rounded-2xl border border-amber-200 bg-white p-4 sm:p-5">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-9 h-9 rounded-lg bg-amber-100 flex items-center justify-center">
                           <ClipboardList className="h-4 w-4 text-amber-700" />
@@ -1187,7 +1187,7 @@ export default function SiteEngineerProject() {
                       </p>
                       <Button
                         size="sm"
-                        className="bg-amber-600 hover:bg-amber-700 text-white gap-1 w-full sm:w-auto"
+                        className="bg-primary hover:bg-primary-hover text-white gap-1 w-full sm:w-auto"
                         onClick={() => setActiveTab('work_orders')}
                         data-testid="open-dlr-btn"
                       >
@@ -1292,14 +1292,14 @@ export default function SiteEngineerProject() {
             <div className="flex gap-1 mb-3 border-b">
               <button
                 onClick={() => setMaterialsSubTab('requests')}
-                className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${materialsSubTab === 'requests' ? 'border-amber-600 text-amber-700' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+                className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${materialsSubTab === 'requests' ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
                 data-testid="mat-subtab-requests"
               >
                 Material Requests
               </button>
               <button
                 onClick={() => { setMaterialsSubTab('inventory'); fetchStockData(stockDate); }}
-                className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${materialsSubTab === 'inventory' ? 'border-amber-600 text-amber-700' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+                className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${materialsSubTab === 'inventory' ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
                 data-testid="mat-subtab-inventory"
               >
                 Inventory
@@ -1324,7 +1324,7 @@ export default function SiteEngineerProject() {
                   }
                 }}>
                   <DialogTrigger asChild>
-                    <Button data-testid="request-material-btn" size="sm" className="gap-1 bg-amber-600 hover:bg-amber-700 text-xs sm:text-sm whitespace-nowrap">
+                    <Button data-testid="request-material-btn" size="sm" className="gap-1 bg-primary hover:bg-primary-hover text-xs sm:text-sm whitespace-nowrap">
                       <Plus className="h-3 w-3 sm:h-4 sm:w-4" />
                       <span className="hidden sm:inline">Request</span> Order
                     </Button>
@@ -1344,7 +1344,7 @@ export default function SiteEngineerProject() {
                       <div className="flex rounded-lg border overflow-hidden" data-testid="material-type-toggle">
                         <button
                           type="button"
-                          className={`flex-1 px-3 py-2 text-xs sm:text-sm font-medium transition-colors ${materialForm.is_approved ? 'bg-amber-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
+                          className={`flex-1 px-3 py-2 text-xs sm:text-sm font-medium transition-colors ${materialForm.is_approved ? 'bg-primary text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
                           onClick={() => {
                             setMaterialForm({ ...materialForm, is_approved: true, material_id: '', material_name: '', brand: '', category: '', unit: 'kg', is_locked_from_package: false, locked_estimated_rate: null });
                             setMaterialSearch('');
@@ -1355,7 +1355,7 @@ export default function SiteEngineerProject() {
                         </button>
                         <button
                           type="button"
-                          className={`flex-1 px-3 py-2 text-xs sm:text-sm font-medium transition-colors ${!materialForm.is_approved ? 'bg-amber-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
+                          className={`flex-1 px-3 py-2 text-xs sm:text-sm font-medium transition-colors ${!materialForm.is_approved ? 'bg-primary text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
                           onClick={() => {
                             setMaterialForm({ ...materialForm, is_approved: false, material_id: '', material_name: '', brand: '', category: '', unit: 'kg', is_locked_from_package: false, locked_estimated_rate: null });
                             setMaterialSearch('');
@@ -1578,7 +1578,7 @@ export default function SiteEngineerProject() {
                           <button
                             type="button"
                             onClick={() => setSteelItems(items => [...items, { diameter: 8, rod_count: '', weight: 0, remarks: '' }])}
-                            className="w-full border-2 border-dashed border-blue-300 text-blue-600 hover:bg-blue-50 rounded-lg py-2 text-xs sm:text-sm font-medium flex items-center justify-center gap-1"
+                            className="w-full border-2 border-dashed border-brand-300 text-primary-strong hover:bg-brand-50 rounded-lg py-2 text-xs sm:text-sm font-medium flex items-center justify-center gap-1"
                             data-testid="steel-add-item-btn"
                           >
                             <Plus className="h-3.5 w-3.5" /> Add Another Item
@@ -1689,8 +1689,8 @@ export default function SiteEngineerProject() {
                               onClick={() => setMaterialForm({ ...materialForm, delivery_choice: opt.v, ...(opt.v !== 'custom' ? { delivery_custom_date: '' } : {}) })}
                               className={`px-2 py-1.5 text-xs rounded border transition-all ${
                                 materialForm.delivery_choice === opt.v
-                                  ? 'bg-amber-600 text-white border-amber-600 shadow-sm'
-                                  : 'bg-white border-gray-200 text-gray-700 hover:border-amber-300'
+                                  ? 'bg-primary text-white border-primary shadow-sm'
+                                  : 'bg-white border-gray-200 text-gray-700 hover:border-brand-300'
                               }`}
                               data-testid={`se-delivery-${opt.v}`}
                             >
@@ -1921,7 +1921,7 @@ export default function SiteEngineerProject() {
                                   <Button
                                     size="sm"
                                     onClick={(e) => { e.stopPropagation(); openReceiveDialog(req); }}
-                                    className="gap-1 bg-green-600 hover:bg-green-700 text-xs whitespace-nowrap"
+                                    className="gap-1 bg-primary hover:bg-primary-hover text-xs whitespace-nowrap"
                                     data-testid={`receive-btn-${req.request_id}`}
                                   >
                                     <Package className="h-3 w-3" />Material Collecting
@@ -1935,7 +1935,7 @@ export default function SiteEngineerProject() {
                                   type="button"
                                   title="View details"
                                   onClick={(e) => { e.stopPropagation(); setSelectedOrder(req); }}
-                                  className="h-7 w-7 flex items-center justify-center rounded text-gray-400 hover:text-amber-600 hover:bg-amber-50"
+                                  className="h-7 w-7 flex items-center justify-center rounded text-gray-400 hover:text-primary hover:bg-brand-50"
                                   data-testid={`se-mat-view-${req.request_id}`}
                                 >
                                   <Eye className="h-4 w-4" />
@@ -1966,7 +1966,7 @@ export default function SiteEngineerProject() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-                      <Warehouse className="h-4 w-4 text-amber-600" />
+                      <Warehouse className="h-4 w-4 text-primary" />
                       Daily Inventory Register
                     </CardTitle>
                     <CardDescription className="text-xs sm:text-sm">Auto-tracks stock from each material receipt — opening, received, used, closing.</CardDescription>
@@ -2111,14 +2111,14 @@ export default function SiteEngineerProject() {
               <CardHeader className="p-3 sm:p-6 flex flex-row items-center justify-between gap-2">
                 <div>
                   <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-                    <Calendar className="h-4 w-4 text-blue-600" />
+                    <Calendar className="h-4 w-4 text-primary" />
                     Daily Progress
                   </CardTitle>
                   <CardDescription className="text-xs sm:text-sm">Log daily updates for this project</CardDescription>
                 </div>
                 <Dialog open={dailyProgressDialog} onOpenChange={setDailyProgressDialog}>
                   <DialogTrigger asChild>
-                    <Button size="sm" className="gap-1 bg-blue-600 hover:bg-blue-700 text-xs sm:text-sm" data-testid="todays-update-btn">
+                    <Button size="sm" className="gap-1 bg-primary hover:bg-primary-hover text-xs sm:text-sm" data-testid="todays-update-btn">
                       <Plus className="h-3 w-3 sm:h-4 sm:w-4" /> Today's Update
                     </Button>
                   </DialogTrigger>
@@ -2160,7 +2160,7 @@ export default function SiteEngineerProject() {
                     </div>
                     <DialogFooter className="gap-2">
                       <Button variant="outline" size="sm" onClick={() => setDailyProgressDialog(false)}>Cancel</Button>
-                      <Button size="sm" onClick={handleSaveDailyProgress} disabled={savingProgress} className="bg-blue-600 hover:bg-blue-700" data-testid="save-progress-btn">
+                      <Button size="sm" onClick={handleSaveDailyProgress} disabled={savingProgress} className="bg-primary hover:bg-primary-hover" data-testid="save-progress-btn">
                         <Save className="h-3 w-3 mr-1" />{savingProgress ? 'Saving...' : 'Save Update'}
                       </Button>
                     </DialogFooter>
@@ -2451,7 +2451,7 @@ export default function SiteEngineerProject() {
               size="sm"
               onClick={handleInitiateReceive}
               disabled={!gpsLocation}
-              className="bg-green-600 hover:bg-green-700"
+              className="bg-primary hover:bg-primary-hover"
               data-testid="submit-receive-btn"
             >
               <Send className="h-3 w-3 mr-1" />Confirm Receipt
@@ -2554,7 +2554,7 @@ export default function SiteEngineerProject() {
       <Dialog open={stockHistoryDialog.open} onOpenChange={(o) => !o && setStockHistoryDialog({ open: false, materialName: '', loading: false, entries: [] })}>
         <DialogContent className="max-w-2xl" data-testid="stock-history-dialog">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-amber-700"><History className="h-5 w-5" /> Stock History — {stockHistoryDialog.materialName}</DialogTitle>
+            <DialogTitle className="flex items-center gap-2 text-foreground"><History className="h-5 w-5" /> Stock History — {stockHistoryDialog.materialName}</DialogTitle>
             <DialogDescription className="text-xs">Date-wise opening / received / used / closing stock.</DialogDescription>
           </DialogHeader>
           {stockHistoryDialog.loading ? (

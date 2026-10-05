@@ -138,7 +138,7 @@ export default function CreateProspectUserDialog({ open, onOpenChange, lead, onC
           {!created ? (
             <>
               <Button variant="outline" onClick={() => onOpenChange(false)} disabled={submitting}>Cancel</Button>
-              <Button className="bg-emerald-600 hover:bg-emerald-700" onClick={submit} disabled={submitting} data-testid="prospect-submit">
+              <Button className="bg-primary hover:bg-primary-hover" onClick={submit} disabled={submitting} data-testid="prospect-submit">
                 {submitting ? <><Loader2 className="h-4 w-4 mr-1 animate-spin" /> Creating…</> : <><UserPlus className="h-4 w-4 mr-1" /> Create User</>}
               </Button>
             </>

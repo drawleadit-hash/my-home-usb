@@ -6,7 +6,7 @@
 
 .App {
   min-height: 100vh;
-  background: white;
+  background: hsl(var(--canvas));
 }
 
 .App-header {
@@ -19,7 +19,7 @@
 }
 
 .App-link {
-  color: #FFD700;
+  color: hsl(var(--primary));
 }
 
 /* Hide Emergent badge */

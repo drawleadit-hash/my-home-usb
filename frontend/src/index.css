@@ -1,21 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+/* Inter is loaded from index.html (preconnect + stylesheet) so the first
+ * paint already has the right face. */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-body {
-    margin: 0;
-    font-family: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-        sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-    font-family: 'JetBrains Mono', source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
 
 /* Hide number input spinners globally */
 input[type="number"]::-webkit-outer-spin-button,
@@ -32,57 +20,79 @@ input[inputmode="numeric"]::-webkit-inner-spin-button {
     margin: 0;
 }
 
+/* ================================================================
+ * DRAWLEAD DESIGN TOKENS
+ * Brand green #32B46F · green-tinted ink neutrals · Inter
+ * ================================================================ */
 @layer base {
     :root {
         --background: 0 0% 100%;
-        --foreground: 0 0% 9%;
+        --foreground: 147 17% 9%;
+        --canvas: 150 12% 97%;
         --card: 0 0% 100%;
-        --card-foreground: 0 0% 9%;
+        --card-foreground: 147 17% 9%;
         --popover: 0 0% 100%;
-        --popover-foreground: 0 0% 9%;
-        --primary: 40 91% 55%;
+        --popover-foreground: 147 17% 9%;
+        --primary: 148 57% 45%;
         --primary-foreground: 0 0% 100%;
-        --secondary: 0 0% 24%;
-        --secondary-foreground: 0 0% 98%;
-        --muted: 0 0% 96%;
-        --muted-foreground: 0 0% 45%;
-        --accent: 48 100% 96%;
-        --accent-foreground: 42 78% 27%;
-        --destructive: 0 84% 60%;
-        --destructive-foreground: 0 0% 98%;
-        --border: 0 0% 90%;
-        --input: 0 0% 90%;
-        --ring: 0 0% 10%;
-        --radius: 0.125rem;
-        --success: 142 71% 45%;
+        --primary-hover: 149 60% 38%;
+        --primary-soft: 143 64% 96%;
+        --primary-strong: 150 60% 29%;
+        --secondary: 150 17% 12%;
+        --secondary-foreground: 0 0% 100%;
+        --muted: 150 13% 95%;
+        --muted-foreground: 146 7% 42%;
+        --accent: 143 64% 96%;
+        --accent-foreground: 150 60% 24%;
+        --destructive: 0 72% 51%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 150 12% 89%;
+        --input: 150 10% 85%;
+        --ring: 148 57% 45%;
+        --radius: 0.625rem;
+        --success: 148 57% 45%;
         --warning: 38 92% 50%;
-        --info: 217 91% 60%;
+        --info: 210 80% 52%;
+
+        /* App shell (dark sidebar in both themes) */
+        --sidebar: 150 26% 7%;
+        --sidebar-foreground: 150 10% 84%;
+        --sidebar-muted: 150 7% 56%;
+        --sidebar-border: 150 14% 14%;
+        --sidebar-accent: 150 18% 12%;
+        --app-sidebar-w: 16rem;
     }
 
-    /* Phase 1 dark palette. Only overrides the shadcn CSS variables — every
-     * `dark:` Tailwind variant a page opts in to will also fire. Pages that
-     * still use hard-coded `bg-white` / `text-gray-900` will keep their
-     * existing look until they are explicitly migrated. */
     .dark {
-        --background: 222 14% 8%;
-        --foreground: 0 0% 96%;
-        --card: 222 14% 11%;
-        --card-foreground: 0 0% 96%;
-        --popover: 222 14% 11%;
-        --popover-foreground: 0 0% 96%;
-        --primary: 40 91% 55%;
-        --primary-foreground: 0 0% 8%;
-        --secondary: 222 14% 16%;
-        --secondary-foreground: 0 0% 96%;
-        --muted: 222 14% 16%;
-        --muted-foreground: 0 0% 66%;
-        --accent: 222 14% 18%;
-        --accent-foreground: 0 0% 96%;
+        --background: 150 12% 8%;
+        --foreground: 150 10% 94%;
+        --canvas: 150 14% 6%;
+        --card: 150 10% 10%;
+        --card-foreground: 150 10% 94%;
+        --popover: 150 10% 11%;
+        --popover-foreground: 150 10% 94%;
+        --primary: 148 57% 47%;
+        --primary-foreground: 0 0% 100%;
+        --primary-hover: 148 52% 54%;
+        --primary-soft: 150 38% 13%;
+        --primary-strong: 146 55% 64%;
+        --secondary: 150 10% 22%;
+        --secondary-foreground: 150 10% 94%;
+        --muted: 150 10% 15%;
+        --muted-foreground: 150 6% 64%;
+        --accent: 150 28% 15%;
+        --accent-foreground: 146 55% 72%;
         --destructive: 0 70% 55%;
         --destructive-foreground: 0 0% 98%;
-        --border: 222 14% 20%;
-        --input: 222 14% 22%;
-        --ring: 40 91% 55%;
+        --border: 150 10% 18%;
+        --input: 150 10% 22%;
+        --ring: 148 57% 47%;
+
+        --sidebar: 150 18% 4%;
+        --sidebar-foreground: 150 10% 84%;
+        --sidebar-muted: 150 6% 52%;
+        --sidebar-border: 150 12% 12%;
+        --sidebar-accent: 150 16% 10%;
     }
 }
 
@@ -90,9 +100,84 @@ input[inputmode="numeric"]::-webkit-inner-spin-button {
     * {
         @apply border-border;
     }
-    body {
-        @apply bg-background text-foreground;
+    html {
+        -webkit-text-size-adjust: 100%;
+        text-rendering: optimizeLegibility;
     }
+    body {
+        @apply text-foreground;
+        margin: 0;
+        background-color: hsl(var(--canvas));
+        font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'calt';
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    code, kbd, samp, pre {
+        font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+        font-variant-numeric: tabular-nums slashed-zero;
+    }
+    h1, h2, h3, h4 {
+        letter-spacing: -0.015em;
+    }
+    /* Figures line up in every ledger, table and amount field. */
+    table, input, select, textarea {
+        font-variant-numeric: tabular-nums;
+    }
+    ::selection {
+        background: hsl(var(--primary) / 0.22);
+        color: inherit;
+    }
+    :focus-visible {
+        outline-color: hsl(var(--ring));
+    }
+    input::placeholder, textarea::placeholder {
+        color: hsl(var(--muted-foreground) / 0.75);
+    }
+    /* Pill chips (status / role tags) stay on one line in tight tables. */
+    span.rounded-full {
+        white-space: nowrap;
+    }
+
+    /* Slim, rounded scrollbars across the app */
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: hsl(var(--foreground) / 0.18) transparent;
+    }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb {
+        background-color: hsl(var(--foreground) / 0.16);
+        border-radius: 999px;
+        border: 3px solid transparent;
+        background-clip: content-box;
+    }
+    ::-webkit-scrollbar-thumb:hover { background-color: hsl(var(--foreground) / 0.3); }
+    ::-webkit-scrollbar-corner { background: transparent; }
+}
+
+@layer utilities {
+    /* `font-mono` is Inter now — keep the column-aligned figures that
+     * monospace used to provide for amounts, IDs and codes. */
+    .font-mono {
+        font-variant-numeric: tabular-nums slashed-zero;
+        letter-spacing: 0;
+    }
+    .scrollbar-hide { scrollbar-width: none; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+}
+
+/* ================================================================
+ * APP SHELL — fixed sidebar offset
+ * AppHeader adds `has-app-sidebar` to <html> while the desktop sidebar
+ * is mounted, so every page shifts right without per-page changes.
+ * ================================================================ */
+html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 4.5rem; }
+@media screen and (min-width: 1024px) {
+    html.has-app-sidebar body { padding-left: var(--app-sidebar-w); }
+}
+@media print {
+    [data-testid="app-sidebar"] { display: none !important; }
 }
 
 @layer base {
@@ -129,7 +214,7 @@ input[inputmode="numeric"]::-webkit-inner-spin-button {
 /* Thin scrollbar for CRM stage tabs */
 .crm-scroll-tabs {
   scrollbar-width: thin;
-  scrollbar-color: #d1d5db transparent;
+  scrollbar-color: hsl(var(--foreground) / 0.18) transparent;
 }
 .crm-scroll-tabs::-webkit-scrollbar {
   height: 6px;
@@ -138,13 +223,13 @@ input[inputmode="numeric"]::-webkit-inner-spin-button {
   background: transparent;
 }
 .crm-scroll-tabs::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 3px;
+  background: hsl(var(--foreground) / 0.18);
+  border-radius: 999px;
+  border: 0;
 }
 .crm-scroll-tabs::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  background: hsl(var(--foreground) / 0.3);
 }
-
 
 /* ================================================================
  * PHASE 2 DARK MODE — Global Hardcoded-Utility Overrides
@@ -166,17 +251,17 @@ input[inputmode="numeric"]::-webkit-inner-spin-button {
 }
 
 /* --- Light backgrounds → dark equivalents ------------------------- */
-.dark .bg-white { background-color: hsl(222 14% 11%); }
+.dark .bg-white { background-color: hsl(150 10% 11%); }
 .dark .bg-gray-50,
 .dark .bg-slate-50,
 .dark .bg-neutral-50,
 .dark .bg-zinc-50,
-.dark .bg-stone-50 { background-color: hsl(222 14% 13%); }
+.dark .bg-stone-50 { background-color: hsl(150 10% 13%); }
 .dark .bg-gray-100,
 .dark .bg-slate-100,
 .dark .bg-neutral-100,
 .dark .bg-zinc-100,
-.dark .bg-stone-100 { background-color: hsl(222 14% 16%); }
+.dark .bg-stone-100 { background-color: hsl(150 10% 16%); }
 
 /* Tinted pastel backgrounds (warning/info/success/danger highlight
  * cards) — keep the hue but drop luminance so they stop blinding
@@ -251,16 +336,16 @@ input[inputmode="numeric"]::-webkit-inner-spin-button {
 /* --- Light borders → subtle dark dividers ------------------------- */
 .dark .border-gray-100,
 .dark .border-slate-100,
-.dark .border-neutral-100 { border-color: hsl(222 14% 16%); }
+.dark .border-neutral-100 { border-color: hsl(150 10% 16%); }
 .dark .border-gray-200,
 .dark .border-slate-200,
 .dark .border-neutral-200,
-.dark .border-zinc-200 { border-color: hsl(222 14% 20%); }
+.dark .border-zinc-200 { border-color: hsl(150 10% 20%); }
 .dark .border-gray-300,
 .dark .border-slate-300,
-.dark .border-neutral-300 { border-color: hsl(222 14% 24%); }
-.dark .divide-gray-200 > * + * { border-color: hsl(222 14% 20%); }
-.dark .divide-gray-100 > * + * { border-color: hsl(222 14% 16%); }
+.dark .border-neutral-300 { border-color: hsl(150 10% 24%); }
+.dark .divide-gray-200 > * + * { border-color: hsl(150 10% 20%); }
+.dark .divide-gray-100 > * + * { border-color: hsl(150 10% 16%); }
 
 /* Coloured badge/pill borders paired with the -800 text above. */
 .dark .border-amber-200   { border-color: hsl(35 35% 24%); }
@@ -275,9 +360,9 @@ input[inputmode="numeric"]::-webkit-inner-spin-button {
 
 /* --- Hover states of light backgrounds --------------------------- */
 .dark .hover\:bg-gray-50:hover,
-.dark .hover\:bg-slate-50:hover { background-color: hsl(222 14% 16%); }
+.dark .hover\:bg-slate-50:hover { background-color: hsl(150 10% 16%); }
 .dark .hover\:bg-gray-100:hover,
-.dark .hover\:bg-slate-100:hover { background-color: hsl(222 14% 19%); }
+.dark .hover\:bg-slate-100:hover { background-color: hsl(150 10% 19%); }
 
 /* --- Inputs / textareas / selects forced text colour -------------- */
 .dark input,
@@ -292,7 +377,7 @@ input[inputmode="numeric"]::-webkit-inner-spin-button {
 .dark input:-webkit-autofill:focus,
 .dark textarea:-webkit-autofill {
   -webkit-text-fill-color: hsl(0 0% 96%) !important;
-  -webkit-box-shadow: 0 0 0 1000px hsl(222 14% 14%) inset !important;
+  -webkit-box-shadow: 0 0 0 1000px hsl(150 10% 14%) inset !important;
   caret-color: hsl(0 0% 96%);
 }
 
@@ -300,23 +385,23 @@ input[inputmode="numeric"]::-webkit-inner-spin-button {
 .dark .bg-white\/70,
 .dark .bg-white\/80,
 .dark .bg-white\/90,
-.dark .bg-white\/95 { background-color: hsl(222 14% 13% / 0.85); }
+.dark .bg-white\/95 { background-color: hsl(150 10% 13% / 0.85); }
 .dark .bg-white\/50,
-.dark .bg-white\/60 { background-color: hsl(222 14% 13% / 0.65); }
+.dark .bg-white\/60 { background-color: hsl(150 10% 13% / 0.65); }
 .dark .bg-white\/20,
 .dark .bg-white\/30,
-.dark .bg-white\/40 { background-color: hsl(222 14% 18% / 0.45); }
+.dark .bg-white\/40 { background-color: hsl(150 10% 18% / 0.45); }
 
 /* Shadcn popover / dropdown / dialog content already use --popover.
  * Ring colours used for focus rings on inputs across the app default
  * to slate; lighten them so they stay visible in dark. */
 .dark .ring-gray-200,
-.dark .ring-slate-200 { --tw-ring-color: hsl(222 14% 28%); }
+.dark .ring-slate-200 { --tw-ring-color: hsl(150 10% 28%); }
 
 /* Light gradients used as page backgrounds (e.g. login) — dim them. */
-.dark .from-white { --tw-gradient-from: hsl(222 14% 11%) var(--tw-gradient-from-position); }
-.dark .to-white   { --tw-gradient-to:   hsl(222 14% 11%) var(--tw-gradient-to-position); }
-.dark .via-white  { --tw-gradient-via:  hsl(222 14% 11%) var(--tw-gradient-via-position); }
+.dark .from-white { --tw-gradient-from: hsl(150 10% 11%) var(--tw-gradient-from-position); }
+.dark .to-white   { --tw-gradient-to:   hsl(150 10% 11%) var(--tw-gradient-to-position); }
+.dark .via-white  { --tw-gradient-via:  hsl(150 10% 11%) var(--tw-gradient-via-position); }
 
 /* Tinted `from-{color}-50` gradient stops (KPI summary cards) — same
  * hues as the `.dark .bg-{color}-50` overrides above so a card that
@@ -344,4 +429,165 @@ input[inputmode="numeric"]::-webkit-inner-spin-button {
 .dark .bg-rose-50\/40    { background-color: hsl(350 35% 15% / 0.6); }
 
 /* Body fallback if a page never opts into dark vars. */
-.dark body { background-color: hsl(222 14% 8%); color: hsl(0 0% 96%); }
+.dark body { background-color: hsl(150 10% 8%); color: hsl(0 0% 96%); }
+
+/* Brand tints introduced by the Drawlead redesign — same treatment as the
+ * pastel remaps above so selected tabs/chips don't glow on dark pages. */
+.dark .bg-brand-50,
+.dark .bg-brand-50\/40,
+.dark .bg-brand-50\/50,
+.dark .bg-brand-50\/60 { background-color: hsl(150 38% 13%); }
+.dark .bg-brand-100   { background-color: hsl(150 38% 16%); }
+.dark .hover\:bg-brand-50:hover { background-color: hsl(150 38% 14%); }
+.dark .border-brand-200 { border-color: hsl(150 30% 22%); }
+.dark .border-brand-300 { border-color: hsl(150 32% 28%); }
+.dark .text-brand-800,
+.dark .text-brand-900 { color: hsl(146 55% 70%); }
+.dark .ring-brand-200 { --tw-ring-color: hsl(150 30% 24%); }
+
+/* Radix tabs whose active state uses a pastel (data-[state=active]:bg-green-100 …):
+ * the plain .bg-* remaps above don't reach variant classes. */
+.dark [data-state="active"][class*="active]:bg-red-50 "],
+.dark [data-state="active"][class$="active]:bg-red-50"],
+.dark [data-state="active"][class*="active]:bg-red-100 "],
+.dark [data-state="active"][class$="active]:bg-red-100"] { background-color: hsl(0 32% 15%); }
+.dark [data-state="active"][class*="active]:text-red-700 "],
+.dark [data-state="active"][class$="active]:text-red-700"],
+.dark [data-state="active"][class*="active]:text-red-800 "],
+.dark [data-state="active"][class$="active]:text-red-800"] { color: hsl(0 57% 70%); }
+.dark [data-state="active"][class*="active]:bg-rose-50 "],
+.dark [data-state="active"][class$="active]:bg-rose-50"],
+.dark [data-state="active"][class*="active]:bg-rose-100 "],
+.dark [data-state="active"][class$="active]:bg-rose-100"] { background-color: hsl(350 32% 15%); }
+.dark [data-state="active"][class*="active]:text-rose-700 "],
+.dark [data-state="active"][class$="active]:text-rose-700"],
+.dark [data-state="active"][class*="active]:text-rose-800 "],
+.dark [data-state="active"][class$="active]:text-rose-800"] { color: hsl(350 57% 70%); }
+.dark [data-state="active"][class*="active]:bg-pink-50 "],
+.dark [data-state="active"][class$="active]:bg-pink-50"],
+.dark [data-state="active"][class*="active]:bg-pink-100 "],
+.dark [data-state="active"][class$="active]:bg-pink-100"] { background-color: hsl(330 32% 15%); }
+.dark [data-state="active"][class*="active]:text-pink-700 "],
+.dark [data-state="active"][class$="active]:text-pink-700"],
+.dark [data-state="active"][class*="active]:text-pink-800 "],
+.dark [data-state="active"][class$="active]:text-pink-800"] { color: hsl(330 57% 70%); }
+.dark [data-state="active"][class*="active]:bg-orange-50 "],
+.dark [data-state="active"][class$="active]:bg-orange-50"],
+.dark [data-state="active"][class*="active]:bg-orange-100 "],
+.dark [data-state="active"][class$="active]:bg-orange-100"] { background-color: hsl(24 32% 15%); }
+.dark [data-state="active"][class*="active]:text-orange-700 "],
+.dark [data-state="active"][class$="active]:text-orange-700"],
+.dark [data-state="active"][class*="active]:text-orange-800 "],
+.dark [data-state="active"][class$="active]:text-orange-800"] { color: hsl(24 57% 70%); }
+.dark [data-state="active"][class*="active]:bg-amber-50 "],
+.dark [data-state="active"][class$="active]:bg-amber-50"],
+.dark [data-state="active"][class*="active]:bg-amber-100 "],
+.dark [data-state="active"][class$="active]:bg-amber-100"] { background-color: hsl(35 32% 15%); }
+.dark [data-state="active"][class*="active]:text-amber-700 "],
+.dark [data-state="active"][class$="active]:text-amber-700"],
+.dark [data-state="active"][class*="active]:text-amber-800 "],
+.dark [data-state="active"][class$="active]:text-amber-800"] { color: hsl(35 57% 70%); }
+.dark [data-state="active"][class*="active]:bg-yellow-50 "],
+.dark [data-state="active"][class$="active]:bg-yellow-50"],
+.dark [data-state="active"][class*="active]:bg-yellow-100 "],
+.dark [data-state="active"][class$="active]:bg-yellow-100"] { background-color: hsl(48 32% 15%); }
+.dark [data-state="active"][class*="active]:text-yellow-700 "],
+.dark [data-state="active"][class$="active]:text-yellow-700"],
+.dark [data-state="active"][class*="active]:text-yellow-800 "],
+.dark [data-state="active"][class$="active]:text-yellow-800"] { color: hsl(48 57% 70%); }
+.dark [data-state="active"][class*="active]:bg-green-50 "],
+.dark [data-state="active"][class$="active]:bg-green-50"],
+.dark [data-state="active"][class*="active]:bg-green-100 "],
+.dark [data-state="active"][class$="active]:bg-green-100"] { background-color: hsl(148 32% 15%); }
+.dark [data-state="active"][class*="active]:text-green-700 "],
+.dark [data-state="active"][class$="active]:text-green-700"],
+.dark [data-state="active"][class*="active]:text-green-800 "],
+.dark [data-state="active"][class$="active]:text-green-800"] { color: hsl(148 57% 70%); }
+.dark [data-state="active"][class*="active]:bg-emerald-50 "],
+.dark [data-state="active"][class$="active]:bg-emerald-50"],
+.dark [data-state="active"][class*="active]:bg-emerald-100 "],
+.dark [data-state="active"][class$="active]:bg-emerald-100"] { background-color: hsl(150 32% 15%); }
+.dark [data-state="active"][class*="active]:text-emerald-700 "],
+.dark [data-state="active"][class$="active]:text-emerald-700"],
+.dark [data-state="active"][class*="active]:text-emerald-800 "],
+.dark [data-state="active"][class$="active]:text-emerald-800"] { color: hsl(150 57% 70%); }
+.dark [data-state="active"][class*="active]:bg-brand-50 "],
+.dark [data-state="active"][class$="active]:bg-brand-50"],
+.dark [data-state="active"][class*="active]:bg-brand-100 "],
+.dark [data-state="active"][class$="active]:bg-brand-100"] { background-color: hsl(148 32% 15%); }
+.dark [data-state="active"][class*="active]:text-brand-700 "],
+.dark [data-state="active"][class$="active]:text-brand-700"],
+.dark [data-state="active"][class*="active]:text-brand-800 "],
+.dark [data-state="active"][class$="active]:text-brand-800"] { color: hsl(148 57% 70%); }
+.dark [data-state="active"][class*="active]:bg-teal-50 "],
+.dark [data-state="active"][class$="active]:bg-teal-50"],
+.dark [data-state="active"][class*="active]:bg-teal-100 "],
+.dark [data-state="active"][class$="active]:bg-teal-100"] { background-color: hsl(170 32% 15%); }
+.dark [data-state="active"][class*="active]:text-teal-700 "],
+.dark [data-state="active"][class$="active]:text-teal-700"],
+.dark [data-state="active"][class*="active]:text-teal-800 "],
+.dark [data-state="active"][class$="active]:text-teal-800"] { color: hsl(170 57% 70%); }
+.dark [data-state="active"][class*="active]:bg-cyan-50 "],
+.dark [data-state="active"][class$="active]:bg-cyan-50"],
+.dark [data-state="active"][class*="active]:bg-cyan-100 "],
+.dark [data-state="active"][class$="active]:bg-cyan-100"] { background-color: hsl(190 32% 15%); }
+.dark [data-state="active"][class*="active]:text-cyan-700 "],
+.dark [data-state="active"][class$="active]:text-cyan-700"],
+.dark [data-state="active"][class*="active]:text-cyan-800 "],
+.dark [data-state="active"][class$="active]:text-cyan-800"] { color: hsl(190 57% 70%); }
+.dark [data-state="active"][class*="active]:bg-sky-50 "],
+.dark [data-state="active"][class$="active]:bg-sky-50"],
+.dark [data-state="active"][class*="active]:bg-sky-100 "],
+.dark [data-state="active"][class$="active]:bg-sky-100"] { background-color: hsl(200 32% 15%); }
+.dark [data-state="active"][class*="active]:text-sky-700 "],
+.dark [data-state="active"][class$="active]:text-sky-700"],
+.dark [data-state="active"][class*="active]:text-sky-800 "],
+.dark [data-state="active"][class$="active]:text-sky-800"] { color: hsl(200 57% 70%); }
+.dark [data-state="active"][class*="active]:bg-blue-50 "],
+.dark [data-state="active"][class$="active]:bg-blue-50"],
+.dark [data-state="active"][class*="active]:bg-blue-100 "],
+.dark [data-state="active"][class$="active]:bg-blue-100"] { background-color: hsl(217 32% 15%); }
+.dark [data-state="active"][class*="active]:text-blue-700 "],
+.dark [data-state="active"][class$="active]:text-blue-700"],
+.dark [data-state="active"][class*="active]:text-blue-800 "],
+.dark [data-state="active"][class$="active]:text-blue-800"] { color: hsl(217 57% 70%); }
+.dark [data-state="active"][class*="active]:bg-indigo-50 "],
+.dark [data-state="active"][class$="active]:bg-indigo-50"],
+.dark [data-state="active"][class*="active]:bg-indigo-100 "],
+.dark [data-state="active"][class$="active]:bg-indigo-100"] { background-color: hsl(235 32% 15%); }
+.dark [data-state="active"][class*="active]:text-indigo-700 "],
+.dark [data-state="active"][class$="active]:text-indigo-700"],
+.dark [data-state="active"][class*="active]:text-indigo-800 "],
+.dark [data-state="active"][class$="active]:text-indigo-800"] { color: hsl(235 57% 70%); }
+.dark [data-state="active"][class*="active]:bg-violet-50 "],
+.dark [data-state="active"][class$="active]:bg-violet-50"],
+.dark [data-state="active"][class*="active]:bg-violet-100 "],
+.dark [data-state="active"][class$="active]:bg-violet-100"] { background-color: hsl(265 32% 15%); }
+.dark [data-state="active"][class*="active]:text-violet-700 "],
+.dark [data-state="active"][class$="active]:text-violet-700"],
+.dark [data-state="active"][class*="active]:text-violet-800 "],
+.dark [data-state="active"][class$="active]:text-violet-800"] { color: hsl(265 57% 70%); }
+.dark [data-state="active"][class*="active]:bg-purple-50 "],
+.dark [data-state="active"][class$="active]:bg-purple-50"],
+.dark [data-state="active"][class*="active]:bg-purple-100 "],
+.dark [data-state="active"][class$="active]:bg-purple-100"] { background-color: hsl(275 32% 15%); }
+.dark [data-state="active"][class*="active]:text-purple-700 "],
+.dark [data-state="active"][class$="active]:text-purple-700"],
+.dark [data-state="active"][class*="active]:text-purple-800 "],
+.dark [data-state="active"][class$="active]:text-purple-800"] { color: hsl(275 57% 70%); }
+.dark [data-state="active"][class*="active]:bg-gray-50 "],
+.dark [data-state="active"][class$="active]:bg-gray-50"],
+.dark [data-state="active"][class*="active]:bg-gray-100 "],
+.dark [data-state="active"][class$="active]:bg-gray-100"] { background-color: hsl(150 10% 15%); }
+.dark [data-state="active"][class*="active]:text-gray-700 "],
+.dark [data-state="active"][class$="active]:text-gray-700"],
+.dark [data-state="active"][class*="active]:text-gray-800 "],
+.dark [data-state="active"][class$="active]:text-gray-800"] { color: hsl(150 35% 70%); }
+.dark [data-state="active"][class*="active]:bg-slate-50 "],
+.dark [data-state="active"][class$="active]:bg-slate-50"],
+.dark [data-state="active"][class*="active]:bg-slate-100 "],
+.dark [data-state="active"][class$="active]:bg-slate-100"] { background-color: hsl(150 10% 15%); }
+.dark [data-state="active"][class*="active]:text-slate-700 "],
+.dark [data-state="active"][class$="active]:text-slate-700"],
+.dark [data-state="active"][class*="active]:text-slate-800 "],
+.dark [data-state="active"][class$="active]:text-slate-800"] { color: hsl(150 35% 70%); }

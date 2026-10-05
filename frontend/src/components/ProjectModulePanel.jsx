@@ -91,7 +91,7 @@ export default function ProjectModulePanel() {
     <Card data-testid="project-module-panel">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-lg">
-          <ShieldCheck className="h-5 w-5 text-violet-600" /> Project Management Module
+          <ShieldCheck className="h-5 w-5 text-primary" /> Project Management Module
         </CardTitle>
         <CardDescription className="text-xs">
           Control which Project Detail tabs each user can access. Toggle ON to grant access, OFF to hide the tab entirely for that user. Saving requires the Super Admin password.
@@ -192,7 +192,7 @@ export default function ProjectModulePanel() {
               <Button
                 size="sm"
                 onClick={() => setEditing(e => ({ ...e, mode: 'edit' }))}
-                className="h-8 px-3 gap-1 bg-violet-600 hover:bg-violet-700"
+                className="h-8 px-3 gap-1 bg-primary hover:bg-primary-hover"
                 data-testid="pm-switch-edit"
               >
                 <Pencil className="h-3.5 w-3.5" /> Switch to Edit
@@ -247,7 +247,7 @@ export default function ProjectModulePanel() {
               <X className="h-3.5 w-3.5" /> {editing?.mode === 'edit' ? 'Cancel' : 'Close'}
             </Button>
             {editing?.mode === 'edit' && (
-              <Button size="sm" className="bg-violet-600 hover:bg-violet-700" onClick={save} disabled={saving} data-testid="pm-save">
+              <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={save} disabled={saving} data-testid="pm-save">
                 {saving ? 'Saving…' : 'Save with Password'}
               </Button>
             )}

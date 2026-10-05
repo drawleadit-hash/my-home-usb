@@ -307,7 +307,7 @@ export default function ProcurementDashboard() {
       <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 sm:py-8">
         {/* Dashboard Metrics */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4 mb-4 sm:mb-8">
-          <Card className="bg-gradient-to-br from-yellow-50 to-yellow-100 border-yellow-200 cursor-pointer active:bg-yellow-100" onClick={() => handleTabChange('pending')}>
+          <Card className="bg-yellow-50 border-yellow-200 cursor-pointer active:bg-yellow-100" onClick={() => handleTabChange('pending')}>
             <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600 flex items-center gap-1">
                 <Clock className="h-3 w-3 sm:h-4 sm:w-4" />Pending
@@ -318,7 +318,7 @@ export default function ProcurementDashboard() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200 cursor-pointer active:bg-amber-50" onClick={() => handleTabChange('pricing_in_progress')}>
+          <Card className="bg-blue-50 border-blue-200 cursor-pointer active:bg-amber-50" onClick={() => handleTabChange('pricing_in_progress')}>
             <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600 flex items-center gap-1">
                 <IndianRupee className="h-3 w-3 sm:h-4 sm:w-4" />Pricing
@@ -329,7 +329,7 @@ export default function ProcurementDashboard() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200 cursor-pointer active:bg-orange-100" onClick={() => handleTabChange('waiting_accounts')}>
+          <Card className="bg-orange-50 border-orange-200 cursor-pointer active:bg-orange-100" onClick={() => handleTabChange('waiting_accounts')}>
             <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600 flex items-center gap-1">
                 <AlertCircle className="h-3 w-3 sm:h-4 sm:w-4" />Waiting
@@ -340,7 +340,7 @@ export default function ProcurementDashboard() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200 cursor-pointer active:bg-green-100" onClick={() => handleTabChange('approved')}>
+          <Card className="bg-green-50 border-green-200 cursor-pointer active:bg-green-100" onClick={() => handleTabChange('approved')}>
             <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600 flex items-center gap-1">
                 <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4" />Approved
@@ -351,7 +351,7 @@ export default function ProcurementDashboard() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200 cursor-pointer active:bg-purple-100 col-span-2 sm:col-span-1" onClick={() => handleTabChange('delivered')}>
+          <Card className="bg-purple-50 border-purple-200 cursor-pointer active:bg-purple-100 col-span-2 sm:col-span-1" onClick={() => handleTabChange('delivered')}>
             <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600 flex items-center gap-1">
                 <Package className="h-3 w-3 sm:h-4 sm:w-4" />Delivered
@@ -412,7 +412,7 @@ export default function ProcurementDashboard() {
                 <TabsTrigger value="pending" className="data-[state=active]:border-b-2 data-[state=active]:border-yellow-600 rounded-none px-2 sm:px-4 text-xs sm:text-sm">
                   Pending
                 </TabsTrigger>
-                <TabsTrigger value="pricing_in_progress" className="data-[state=active]:border-b-2 data-[state=active]:border-amber-500 rounded-none px-2 sm:px-4 text-xs sm:text-sm">
+                <TabsTrigger value="pricing_in_progress" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-2 sm:px-4 text-xs sm:text-sm">
                   Pricing
                 </TabsTrigger>
                 <TabsTrigger value="waiting_accounts" className="data-[state=active]:border-b-2 data-[state=active]:border-orange-600 rounded-none px-2 sm:px-4 text-xs sm:text-sm">
@@ -421,7 +421,7 @@ export default function ProcurementDashboard() {
                 <TabsTrigger value="approved" className="data-[state=active]:border-b-2 data-[state=active]:border-green-600 rounded-none px-2 sm:px-4 text-xs sm:text-sm">
                   Approved
                 </TabsTrigger>
-                <TabsTrigger value="delivered" className="data-[state=active]:border-b-2 data-[state=active]:border-purple-600 rounded-none px-2 sm:px-4 text-xs sm:text-sm">
+                <TabsTrigger value="delivered" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-2 sm:px-4 text-xs sm:text-sm">
                   Delivered
                 </TabsTrigger>
               </TabsList>
@@ -465,7 +465,7 @@ export default function ProcurementDashboard() {
                       {(activeTab === 'pending' || activeTab === 'pricing_in_progress') && (
                         <Button 
                           size="sm" 
-                          className="w-full gap-2 bg-purple-600 hover:bg-purple-700"
+                          className="w-full gap-2 bg-primary hover:bg-primary-hover"
                           onClick={() => handleStartPricing(req)}
                         >
                           <IndianRupee className="h-4 w-4" />
@@ -524,7 +524,7 @@ export default function ProcurementDashboard() {
                             {(activeTab === 'pending' || activeTab === 'pricing_in_progress') && (
                               <Button 
                                 size="sm" 
-                                className="gap-1 bg-purple-600 hover:bg-purple-700"
+                                className="gap-1 bg-primary hover:bg-primary-hover"
                                 onClick={() => handleStartPricing(req)}
                               >
                                 <IndianRupee className="h-3 w-3" />
@@ -714,7 +714,7 @@ export default function ProcurementDashboard() {
                           />
                         </div>
                         <div className="flex items-end">
-                          <Button onClick={handleAddQuote} className="w-full gap-2 bg-purple-600 hover:bg-purple-700">
+                          <Button onClick={handleAddQuote} className="w-full gap-2 bg-primary hover:bg-primary-hover">
                             <Plus className="h-4 w-4" /> Add Quote
                           </Button>
                         </div>
@@ -762,7 +762,7 @@ export default function ProcurementDashboard() {
                   <Button 
                     onClick={handleSubmitForApproval}
                     disabled={!pricingDetails.pricing?.selected_vendor_id}
-                    className="gap-2 bg-green-600 hover:bg-green-700"
+                    className="gap-2 bg-primary hover:bg-primary-hover"
                   >
                     <ArrowRight className="h-4 w-4" /> Submit for Accounts Approval
                   </Button>
@@ -821,7 +821,7 @@ export default function ProcurementDashboard() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setNewVendorDialog(false)}>Cancel</Button>
-            <Button onClick={handleAddNewVendor} className="bg-purple-600 hover:bg-purple-700">Add Vendor</Button>
+            <Button onClick={handleAddNewVendor} className="bg-primary hover:bg-primary-hover">Add Vendor</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

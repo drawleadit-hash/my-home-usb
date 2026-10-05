@@ -148,7 +148,7 @@ export default function SlotManagement() {
   }, [users, assignDialog.slot]);
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center"><Loader2 className="h-6 w-6 animate-spin text-indigo-600" /></div>;
+    return <div className="min-h-screen flex items-center justify-center"><Loader2 className="h-6 w-6 animate-spin text-primary" /></div>;
   }
 
   if (user?.role !== 'super_admin') {
@@ -173,7 +173,7 @@ export default function SlotManagement() {
         <div className="flex items-start justify-between gap-3 mb-6 flex-wrap">
           <div>
             <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-              <Users className="h-6 w-6 text-indigo-600" />
+              <Users className="h-6 w-6 text-primary" />
               Slot Management
             </h1>
             <p className="text-sm text-gray-500 mt-1 max-w-xl">
@@ -186,7 +186,7 @@ export default function SlotManagement() {
               {migrating ? <Loader2 className="h-4 w-4 animate-spin mr-1" /> : <RefreshCw className="h-4 w-4 mr-1" />}
               Auto-seed from existing users
             </Button>
-            <Button onClick={openCreate} className="bg-indigo-600 hover:bg-indigo-700" data-testid="slot-create-btn">
+            <Button onClick={openCreate} className="bg-primary hover:bg-primary-hover" data-testid="slot-create-btn">
               <Plus className="h-4 w-4 mr-1" /> New Slot
             </Button>
           </div>
@@ -207,7 +207,7 @@ export default function SlotManagement() {
               <Users className="h-10 w-10 mx-auto mb-3 text-gray-300" />
               <p className="font-semibold text-gray-700">No slots yet</p>
               <p className="text-sm mt-1 mb-4">Either click <span className="font-semibold text-indigo-600">Auto-seed</span> to create one slot per existing Pre-Sales/Sales/CRE/Marketing user, or create slots manually.</p>
-              <Button onClick={handleMigrate} className="bg-indigo-600 hover:bg-indigo-700" disabled={migrating}>
+              <Button onClick={handleMigrate} className="bg-primary hover:bg-primary-hover" disabled={migrating}>
                 {migrating ? <Loader2 className="h-4 w-4 animate-spin mr-1" /> : <RefreshCw className="h-4 w-4 mr-1" />}
                 Auto-seed slots now
               </Button>
@@ -295,7 +295,7 @@ export default function SlotManagement() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setCreateDialog(false)}>Cancel</Button>
-            <Button onClick={handleCreate} disabled={submitting} className="bg-indigo-600 hover:bg-indigo-700">
+            <Button onClick={handleCreate} disabled={submitting} className="bg-primary hover:bg-primary-hover">
               {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Create Slot'}
             </Button>
           </DialogFooter>
@@ -331,7 +331,7 @@ export default function SlotManagement() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setAssignDialog({ open: false, slot: null })}>Cancel</Button>
-            <Button onClick={handleAssign} disabled={submitting} className="bg-indigo-600 hover:bg-indigo-700">
+            <Button onClick={handleAssign} disabled={submitting} className="bg-primary hover:bg-primary-hover">
               {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <>Assign <ArrowRight className="h-4 w-4 ml-1" /></>}
             </Button>
           </DialogFooter>
@@ -383,7 +383,7 @@ function FilterChip({ label, active, onClick }) {
   return (
     <button
       onClick={onClick}
-      className={`text-xs px-3 py-1.5 rounded-full font-medium transition-all ${active ? 'bg-indigo-600 text-white shadow' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'}`}
+      className={`text-xs px-3 py-1.5 rounded-full font-medium transition-all ${active ? 'bg-primary text-white shadow' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'}`}
     >
       {label}
     </button>

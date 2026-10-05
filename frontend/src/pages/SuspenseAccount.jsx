@@ -171,7 +171,7 @@ export default function SuspenseAccountPage() {
 
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="w-10 h-10 border-3 border-amber-500 border-t-transparent rounded-full animate-spin" />
+      <div className="w-10 h-10 border-3 border-primary border-t-transparent rounded-full animate-spin" />
     </div>
   );
   if (!user) return null;
@@ -261,7 +261,7 @@ export default function SuspenseAccountPage() {
         </div>
 
         {/* Total Suspense (sum of all 3) */}
-        <Card className="mb-4 bg-gradient-to-r from-orange-50 via-amber-50 to-yellow-50 border-orange-200 border-2" data-testid="total-suspense-card">
+        <Card className="mb-4 bg-orange-50 border-orange-200 border-2" data-testid="total-suspense-card">
           <CardContent className="p-5">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
@@ -388,11 +388,11 @@ export default function SuspenseAccountPage() {
                           <td className="px-2 py-2">
                             <div className="flex items-center justify-end gap-1">
                               {(pc.status === 'submitted' || pc.status === 'partially_settled') && (
-                                <Button size="sm" className="h-7 px-2 bg-green-600 hover:bg-green-700 text-[10px]" onClick={() => handleSettlePettyCash(pc.petty_cash_id)} data-testid={`settle-${pc.petty_cash_id}`}>
+                                <Button size="sm" className="h-7 px-2 bg-primary hover:bg-primary-hover text-[10px]" onClick={() => handleSettlePettyCash(pc.petty_cash_id)} data-testid={`settle-${pc.petty_cash_id}`}>
                                   <CheckCircle className="h-3 w-3 mr-0.5" />Settle
                                 </Button>
                               )}
-                              <Button size="sm" variant="ghost" className="h-7 w-7 p-0 text-violet-600 hover:bg-violet-50" onClick={() => openLedger(pc)} data-testid={`ledger-petty-${pc.petty_cash_id}`} title="View Activity Timeline">
+                              <Button size="sm" variant="ghost" className="h-7 w-7 p-0 text-primary-strong hover:bg-brand-50" onClick={() => openLedger(pc)} data-testid={`ledger-petty-${pc.petty_cash_id}`} title="View Activity Timeline">
                                 <Eye className="h-3.5 w-3.5" />
                               </Button>
                               {canDelete && (
@@ -548,7 +548,7 @@ export default function SuspenseAccountPage() {
         <DialogContent className="max-w-[95vw] sm:max-w-2xl max-h-[85vh] overflow-y-auto" data-testid="petty-ledger-dialog">
           <DialogHeader>
             <DialogTitle className="text-base flex items-center gap-2">
-              <Wallet className="h-4 w-4 text-violet-600" />
+              <Wallet className="h-4 w-4 text-primary" />
               {ledgerDlg.bucket?.purpose || 'Petty Cash'} · Activity Timeline
             </DialogTitle>
             {ledgerDlg.data && (

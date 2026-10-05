@@ -128,11 +128,11 @@ export default function PaymentScheduleTemplates() {
           <div className="flex items-center gap-3">
             <Button variant="ghost" size="sm" onClick={() => navigate(-1)} className="gap-1"><ArrowLeft className="h-4 w-4" /> Back</Button>
             <div>
-              <h1 className="text-xl font-bold flex items-center gap-2"><FileText className="h-5 w-5 text-indigo-600" /> Payment Schedule Templates</h1>
+              <h1 className="text-xl font-bold flex items-center gap-2"><FileText className="h-5 w-5 text-primary" /> Payment Schedule Templates</h1>
               <p className="text-xs text-gray-500">Reusable milestone schedules — apply to any project from Payment Schedule → Choose Template</p>
             </div>
           </div>
-          <Button onClick={openNew} className="bg-emerald-600 hover:bg-emerald-700 gap-1.5" data-testid="new-template-btn">
+          <Button onClick={openNew} className="bg-primary hover:bg-primary-hover gap-1.5" data-testid="new-template-btn">
             <Plus className="h-4 w-4" /> New Template
           </Button>
         </div>
@@ -145,7 +145,7 @@ export default function PaymentScheduleTemplates() {
             {templates.map(tpl => {
               const total = (tpl.rows || []).reduce((s, r) => s + (parseFloat(r.percentage) || 0), 0);
               return (
-                <Card key={tpl.template_id} className="border-2 hover:border-indigo-300 transition-colors" data-testid={`tpl-card-${tpl.template_id}`}>
+                <Card key={tpl.template_id} className="border-2 hover:border-brand-300 transition-colors" data-testid={`tpl-card-${tpl.template_id}`}>
                   <CardHeader className="pb-2">
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
@@ -251,7 +251,7 @@ export default function PaymentScheduleTemplates() {
             </div>
             <DialogFooter>
               <Button variant="outline" onClick={() => setEditorOpen(false)}>Cancel</Button>
-              <Button onClick={save} disabled={saving} className="bg-emerald-600 hover:bg-emerald-700" data-testid="save-tpl-btn">
+              <Button onClick={save} disabled={saving} className="bg-primary hover:bg-primary-hover" data-testid="save-tpl-btn">
                 <Save className="h-4 w-4 mr-1" /> {saving ? 'Saving...' : 'Save Template'}
               </Button>
             </DialogFooter>

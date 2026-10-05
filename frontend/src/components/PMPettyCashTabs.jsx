@@ -173,7 +173,7 @@ function PettyCashRequestsView({ items, onRefresh }) {
                       <Button size="sm" variant="outline" className="h-7 text-xs gap-1 border-red-300 text-red-700 hover:bg-red-50" onClick={() => setActDialog({ open: true, item: p, action: 'reject', reason: '' })} data-testid={`pm-pc-reject-${p.petty_cash_id}`}>
                         <ThumbsDown className="h-3 w-3" /> Reject
                       </Button>
-                      <Button size="sm" className="h-7 text-xs gap-1 bg-green-600 hover:bg-green-700" onClick={() => setActDialog({ open: true, item: p, action: 'approve', reason: '' })} data-testid={`pm-pc-approve-${p.petty_cash_id}`}>
+                      <Button size="sm" className="h-7 text-xs gap-1 bg-primary hover:bg-primary-hover" onClick={() => setActDialog({ open: true, item: p, action: 'approve', reason: '' })} data-testid={`pm-pc-approve-${p.petty_cash_id}`}>
                         <ThumbsUp className="h-3 w-3" /> Approve
                       </Button>
                     </div>
@@ -201,7 +201,7 @@ function PettyCashRequestsView({ items, onRefresh }) {
           </div>
           <DialogFooter>
             <Button variant="outline" size="sm" onClick={() => setActDialog({ open: false, item: null, action: null, reason: '' })} disabled={submitting}>Cancel</Button>
-            <Button size="sm" className={actDialog.action === 'approve' ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700'} onClick={submitAction} disabled={submitting} data-testid="pm-pc-action-confirm">
+            <Button size="sm" className={actDialog.action === 'approve' ? 'bg-primary hover:bg-primary-hover' : 'bg-red-600 hover:bg-red-700'} onClick={submitAction} disabled={submitting} data-testid="pm-pc-action-confirm">
               {submitting ? '…' : (actDialog.action === 'approve' ? 'Approve' : 'Reject')}
             </Button>
           </DialogFooter>
@@ -311,7 +311,7 @@ function RecordExpenseView({ items, loading, onRefresh }) {
                             href={`${API}/files/${b.bill_file_id}/download`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[10px] text-blue-600 underline hover:text-blue-800 inline-flex items-center gap-0.5"
+                            className="text-[10px] text-primary-strong underline hover:text-brand-800 inline-flex items-center gap-0.5"
                             title={b.bill_filename || b.label}
                             data-testid={`pm-pc-record-bill-${e.expense_id}-${i}`}
                           >
@@ -326,7 +326,7 @@ function RecordExpenseView({ items, loading, onRefresh }) {
                       <Button size="sm" variant="outline" className="h-7 text-xs gap-1 border-red-300 text-red-700 hover:bg-red-50" onClick={() => setActDialog({ open: true, item: e, action: 'reject', reason: '' })} data-testid={`pm-pc-record-reject-${e.expense_id}`}>
                         <ThumbsDown className="h-3 w-3" /> Reject
                       </Button>
-                      <Button size="sm" className="h-7 text-xs gap-1 bg-green-600 hover:bg-green-700" onClick={() => setActDialog({ open: true, item: e, action: 'approve', reason: '' })} data-testid={`pm-pc-record-approve-${e.expense_id}`}>
+                      <Button size="sm" className="h-7 text-xs gap-1 bg-primary hover:bg-primary-hover" onClick={() => setActDialog({ open: true, item: e, action: 'approve', reason: '' })} data-testid={`pm-pc-record-approve-${e.expense_id}`}>
                         <ThumbsUp className="h-3 w-3" /> Approve
                       </Button>
                     </div>
@@ -354,7 +354,7 @@ function RecordExpenseView({ items, loading, onRefresh }) {
           </div>
           <DialogFooter>
             <Button variant="outline" size="sm" onClick={() => setActDialog({ open: false, item: null, action: null, reason: '' })} disabled={submitting}>Cancel</Button>
-            <Button size="sm" className={actDialog.action === 'approve' ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700'} onClick={submitAction} disabled={submitting} data-testid="pm-pc-record-action-confirm">
+            <Button size="sm" className={actDialog.action === 'approve' ? 'bg-primary hover:bg-primary-hover' : 'bg-red-600 hover:bg-red-700'} onClick={submitAction} disabled={submitting} data-testid="pm-pc-record-action-confirm">
               {submitting ? '…' : (actDialog.action === 'approve' ? 'Approve' : 'Reject')}
             </Button>
           </DialogFooter>

@@ -65,7 +65,7 @@ export default function ProcurementBoardSimple() {
     axios.get(`${API}/auth/me`).then(r => setUser(r.data)).catch(() => { window.location.href = '/login'; });
   }, []);
 
-  if (!user) return <div className="min-h-screen bg-gray-50 flex items-center justify-center"><RefreshCw className="h-6 w-6 animate-spin text-amber-600" /></div>;
+  if (!user) return <div className="min-h-screen bg-gray-50 flex items-center justify-center"><RefreshCw className="h-6 w-6 animate-spin text-primary" /></div>;
 
   return (
     <div className="min-h-screen bg-gray-50 pb-20" data-testid="procurement-board-simple">
@@ -942,7 +942,7 @@ function DashboardTab() {
               onClick={() => setSub(t.key)}
               className={`px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-medium rounded transition-all ${
                 subTab === t.key
-                  ? 'bg-amber-600 text-white shadow-sm'
+                  ? 'bg-primary text-white shadow-sm'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
               }`}
               data-testid={`proc-subtab-${t.key}`}
@@ -1230,7 +1230,7 @@ function CreditManagementTab({ dateRange, projectFilter }) {
                     {it.status === 'pending' && (
                       <Button
                         size="sm"
-                        className="h-8 text-xs gap-1 bg-amber-600 hover:bg-amber-700"
+                        className="h-8 text-xs gap-1 bg-primary hover:bg-primary-hover"
                         onClick={() => setCollectDialog({ open: true, entry: it, remarks: '' })}
                         data-testid={`collect-payment-btn-${it.ledger_id}`}
                       >
@@ -1249,7 +1249,7 @@ function CreditManagementTab({ dateRange, projectFilter }) {
       <Dialog open={collectDialog.open} onOpenChange={(o) => !o && setCollectDialog({ open: false, entry: null, remarks: '' })}>
         <DialogContent className="max-w-md">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-amber-700"><Banknote className="h-5 w-5" /> Request Credit Payment</DialogTitle>
+            <DialogTitle className="flex items-center gap-2 text-foreground"><Banknote className="h-5 w-5" /> Request Credit Payment</DialogTitle>
             <DialogDescription className="text-xs">
               {collectDialog.entry?.material_name} · {collectDialog.entry?.vendor_name} · {fmt(collectDialog.entry?.amount || 0)}
               <br />This will be sent to Planning for approval before Accountant releases the payment.
@@ -1268,7 +1268,7 @@ function CreditManagementTab({ dateRange, projectFilter }) {
           </div>
           <DialogFooter>
             <Button variant="outline" size="sm" onClick={() => setCollectDialog({ open: false, entry: null, remarks: '' })} disabled={submitting}>Cancel</Button>
-            <Button size="sm" className="bg-amber-600 hover:bg-amber-700" onClick={submitCollect} disabled={submitting} data-testid="collect-confirm">
+            <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={submitCollect} disabled={submitting} data-testid="collect-confirm">
               {submitting ? 'Sending…' : 'Send to Planning'}
             </Button>
           </DialogFooter>
@@ -1567,7 +1567,7 @@ function RequestCard({ req, onClick, stockInfo = null }) {
             {isActionable ? (
               <Button
                 size="sm"
-                className={`h-8 text-xs gap-1 ${status === 'procurement_revision' ? 'bg-orange-600 hover:bg-orange-700' : 'bg-amber-600 hover:bg-amber-700'}`}
+                className={`h-8 text-xs gap-1 ${status === 'procurement_revision' ? 'bg-orange-600 hover:bg-orange-700' : 'bg-primary hover:bg-primary-hover'}`}
                 onClick={(e) => { e.stopPropagation(); onClick(); }}
                 data-testid={`proc-card-approve-${req.request_id}`}
               >
@@ -1791,7 +1791,7 @@ function VendorCombobox({ value, onChange, vendors, disabled, excludeId, placeho
           type="button"
           disabled={disabled}
           onClick={() => { setOpen(true); setSearch(''); }}
-          className={`flex h-10 w-full items-center justify-between rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-left transition-colors hover:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-400 disabled:opacity-60 disabled:cursor-not-allowed ${!selected ? 'text-gray-500' : 'text-gray-800'}`}
+          className={`flex h-10 w-full items-center justify-between rounded-md border border-gray-200 bg-white px-3 py-2 text-sm text-left transition-colors hover:border-brand-300 focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-60 disabled:cursor-not-allowed ${!selected ? 'text-gray-500' : 'text-gray-800'}`}
           data-testid={testId ? `${testId}-trigger` : undefined}
         >
           <span className="truncate flex items-center gap-2">
@@ -2112,7 +2112,7 @@ function AssignVendorDialog({ item, readOnly, onClose, onDone, onReject }) {
     <Dialog open={!!item} onOpenChange={(v) => { if (!v) onClose(); }}>
       <DialogContent className="max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-y-auto" data-testid="proc-assign-dialog">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2 text-amber-700">
+          <DialogTitle className="flex items-center gap-2 text-foreground">
             <Package className="h-5 w-5" /> {readOnly ? 'View' : 'Approve'} Material Request
           </DialogTitle>
           <DialogDescription className="text-xs">
@@ -2127,7 +2127,7 @@ function AssignVendorDialog({ item, readOnly, onClose, onDone, onReject }) {
             onClick={() => setDialogTab('details')}
             className={`px-3 py-2 text-xs font-medium border-b-2 transition-colors ${
               dialogTab === 'details'
-                ? 'border-amber-600 text-amber-700'
+                ? 'border-primary text-primary-strong'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
             data-testid="proc-dialog-tab-details"
@@ -2139,7 +2139,7 @@ function AssignVendorDialog({ item, readOnly, onClose, onDone, onReject }) {
             onClick={() => setDialogTab('timeline')}
             className={`px-3 py-2 text-xs font-medium border-b-2 transition-colors ${
               dialogTab === 'timeline'
-                ? 'border-amber-600 text-amber-700'
+                ? 'border-primary text-primary-strong'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
             data-testid="proc-dialog-tab-timeline"
@@ -2249,7 +2249,7 @@ function AssignVendorDialog({ item, readOnly, onClose, onDone, onReject }) {
         {/* Vendor + pricing form */}
         <div className="space-y-3">
           {/* Section header — Vendor & Pricing */}
-          <div className="border-b pb-1.5 flex items-center gap-1.5"><Truck className="h-3.5 w-3.5 text-amber-600" /><h4 className="text-xs font-semibold text-amber-800 uppercase tracking-wide">Vendor & Pricing</h4></div>
+          <div className="border-b pb-1.5 flex items-center gap-1.5"><Truck className="h-3.5 w-3.5 text-primary" /><h4 className="text-xs font-semibold text-foreground uppercase tracking-wide">Vendor & Pricing</h4></div>
 
           <div>
             <Label className="text-xs">Material Vendor *</Label>
@@ -2364,7 +2364,7 @@ function AssignVendorDialog({ item, readOnly, onClose, onDone, onReject }) {
           </div>
 
           {/* Section — Delivery Timeline */}
-          <div className="border-b pb-1.5 mt-3 flex items-center gap-1.5"><CalendarClock className="h-3.5 w-3.5 text-amber-600" /><h4 className="text-xs font-semibold text-amber-800 uppercase tracking-wide">Delivery Timeline</h4></div>
+          <div className="border-b pb-1.5 mt-3 flex items-center gap-1.5"><CalendarClock className="h-3.5 w-3.5 text-primary" /><h4 className="text-xs font-semibold text-foreground uppercase tracking-wide">Delivery Timeline</h4></div>
 
           {/* SE expectation banner */}
           <div className={`rounded p-2 border text-xs flex items-center justify-between gap-2 ${item.se_emergency_reason ? 'bg-red-50 border-red-200' : 'bg-blue-50 border-blue-200'}`} data-testid="proc-se-expected-banner">
@@ -2386,14 +2386,14 @@ function AssignVendorDialog({ item, readOnly, onClose, onDone, onReject }) {
                 type="button"
                 onClick={() => !readOnly && setTimelineType('date')}
                 disabled={readOnly}
-                className={`flex-1 px-3 py-1.5 text-xs rounded border ${timelineType === 'date' ? 'bg-amber-600 text-white border-amber-600' : 'bg-white border-gray-200 text-gray-600'}`}
+                className={`flex-1 px-3 py-1.5 text-xs rounded border ${timelineType === 'date' ? 'bg-primary text-white border-primary' : 'bg-white border-gray-200 text-gray-600'}`}
                 data-testid="proc-timeline-mode-date"
               >Specific Date</button>
               <button
                 type="button"
                 onClick={() => !readOnly && setTimelineType('days')}
                 disabled={readOnly}
-                className={`flex-1 px-3 py-1.5 text-xs rounded border ${timelineType === 'days' ? 'bg-amber-600 text-white border-amber-600' : 'bg-white border-gray-200 text-gray-600'}`}
+                className={`flex-1 px-3 py-1.5 text-xs rounded border ${timelineType === 'days' ? 'bg-primary text-white border-primary' : 'bg-white border-gray-200 text-gray-600'}`}
                 data-testid="proc-timeline-mode-days"
               >Number of Days</button>
             </div>
@@ -2454,7 +2454,7 @@ function AssignVendorDialog({ item, readOnly, onClose, onDone, onReject }) {
           )}
 
           {/* Section — Payment Mode */}
-          <div className="border-b pb-1.5 mt-3 flex items-center gap-1.5"><Banknote className="h-3.5 w-3.5 text-amber-600" /><h4 className="text-xs font-semibold text-amber-800 uppercase tracking-wide">Payment Mode</h4></div>
+          <div className="border-b pb-1.5 mt-3 flex items-center gap-1.5"><Banknote className="h-3.5 w-3.5 text-primary" /><h4 className="text-xs font-semibold text-foreground uppercase tracking-wide">Payment Mode</h4></div>
 
           <div className="grid grid-cols-2 gap-2">
             {SELECTABLE_PAYMENT_MODES.map((key) => {
@@ -2466,7 +2466,7 @@ function AssignVendorDialog({ item, readOnly, onClose, onDone, onReject }) {
                 disabled={readOnly}
                 onClick={() => setPaymentMode(key)}
                 className={`flex flex-col items-center justify-center px-2 py-2 rounded border text-xs transition-all min-h-[60px] ${
-                  paymentMode === key ? 'bg-amber-600 text-white border-amber-600 shadow-sm' : 'bg-white border-gray-200 text-gray-700 hover:border-amber-300'
+                  paymentMode === key ? 'bg-primary text-white border-primary shadow-sm' : 'bg-white border-gray-200 text-gray-700 hover:border-brand-300'
                 } ${readOnly ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}`}
                 data-testid={`proc-payment-${key}`}
               >
@@ -2532,7 +2532,7 @@ function AssignVendorDialog({ item, readOnly, onClose, onDone, onReject }) {
           )}
 
           {/* Section — Remarks / Reason */}
-          <div className="border-b pb-1.5 mt-3 flex items-center gap-1.5"><FileClock className="h-3.5 w-3.5 text-amber-600" /><h4 className="text-xs font-semibold text-amber-800 uppercase tracking-wide">{itemStockInfo && itemStockInfo.stock > 0 ? 'Reason for Planning' : 'Notes for Planning'}</h4></div>
+          <div className="border-b pb-1.5 mt-3 flex items-center gap-1.5"><FileClock className="h-3.5 w-3.5 text-primary" /><h4 className="text-xs font-semibold text-foreground uppercase tracking-wide">{itemStockInfo && itemStockInfo.stock > 0 ? 'Reason for Planning' : 'Notes for Planning'}</h4></div>
           <Textarea
             rows={2}
             value={remarks}
@@ -2600,7 +2600,7 @@ function AssignVendorDialog({ item, readOnly, onClose, onDone, onReject }) {
               <Button variant="outline" size="sm" className="text-red-600 border-red-200 hover:bg-red-50" onClick={() => onReject(item)} disabled={submitting} data-testid="proc-assign-reject">
                 <ThumbsDown className="h-3.5 w-3.5 mr-1" /> Reject
               </Button>
-              <Button size="sm" className="bg-amber-600 hover:bg-amber-700" onClick={submit} disabled={submitting} data-testid="proc-assign-submit">
+              <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={submit} disabled={submitting} data-testid="proc-assign-submit">
                 <Send className="h-3.5 w-3.5 mr-1" /> {submitting ? 'Sending…' : (paymentMode === 'advance' ? 'Send for Accountant Approval' : 'Send to Site Engineer')}
               </Button>
             </>
@@ -2903,10 +2903,10 @@ function MaterialVendorsTab() {
   return (
     <div className="space-y-3" data-testid="proc-vendors-tab">
       <div className="flex gap-1 border-b bg-white rounded-t-lg px-2 pt-1">
-        <button onClick={() => setView('vendors')} className={`px-3 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors ${view === 'vendors' ? 'border-amber-600 text-amber-700 bg-amber-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'}`} data-testid="proc-vendor-view-vendors">
+        <button onClick={() => setView('vendors')} className={`px-3 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors ${view === 'vendors' ? 'border-primary text-primary-strong bg-brand-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'}`} data-testid="proc-vendor-view-vendors">
           Material Vendor <Badge variant="outline" className="ml-1 text-[10px]">{filteredVendors.length}</Badge>
         </button>
-        <button onClick={() => setView('materials')} className={`px-3 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors ${view === 'materials' ? 'border-amber-600 text-amber-700 bg-amber-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'}`} data-testid="proc-vendor-view-materials">
+        <button onClick={() => setView('materials')} className={`px-3 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors ${view === 'materials' ? 'border-primary text-primary-strong bg-brand-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'}`} data-testid="proc-vendor-view-materials">
           Materials <Badge variant="outline" className="ml-1 text-[10px]">{filteredMaterials.length}</Badge>
         </button>
       </div>
@@ -2919,7 +2919,7 @@ function MaterialVendorsTab() {
             <div className="flex items-center gap-2 flex-wrap">
               <MetaDateFilter value={dateRange} onChange={setDateRange} defaultPreset="last_month" />
               <Input placeholder='Search… (try "active" or "inactive")' value={search} onChange={(e) => setSearch(e.target.value)} className="h-8 w-full sm:w-72 text-sm" data-testid="proc-vendors-search" />
-              <Button size="sm" className="h-8 bg-amber-600 hover:bg-amber-700 text-xs" onClick={openAddMaterial} data-testid="proc-vendors-add-btn">
+              <Button size="sm" className="h-8 bg-primary hover:bg-primary-hover text-xs" onClick={openAddMaterial} data-testid="proc-vendors-add-btn">
                 + Add Material
               </Button>
             </div>
@@ -2956,7 +2956,7 @@ function MaterialVendorsTab() {
                           </button>
                         </td>
                         <td className="px-3 py-2 text-right">
-                          <button onClick={() => openEditMaterial(m)} className="text-amber-700 hover:underline text-xs" data-testid={`proc-material-edit-${m.material_id}`}>Edit</button>
+                          <button onClick={() => openEditMaterial(m)} className="text-primary-strong hover:underline text-xs" data-testid={`proc-material-edit-${m.material_id}`}>Edit</button>
                         </td>
                       </tr>
                       );
@@ -3174,7 +3174,7 @@ function MaterialVendorsTab() {
                           <button
                             type="button"
                             onClick={() => setForm({ ...form, materials_supplied: form.materials_supplied.filter(x => x !== id) })}
-                            className="ml-1 text-amber-600 hover:text-amber-800"
+                            className="ml-1 text-primary-strong hover:text-brand-800"
                           >×</button>
                         </Badge>
                       );
@@ -3186,7 +3186,7 @@ function MaterialVendorsTab() {
           )}
           <DialogFooter>
             <Button size="sm" variant="ghost" onClick={() => setAddOpen(false)}>Cancel</Button>
-            <Button size="sm" className="bg-amber-600 hover:bg-amber-700" onClick={save} disabled={saving || !form.name} data-testid="vendor-form-save-btn">
+            <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={save} disabled={saving || !form.name} data-testid="vendor-form-save-btn">
               {saving ? 'Saving…' : 'Save'}
             </Button>
           </DialogFooter>

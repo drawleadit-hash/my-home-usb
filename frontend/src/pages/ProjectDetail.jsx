@@ -133,7 +133,7 @@ const InlineEditRate = ({ initial, onSave, mode = 'percent' }) => {
       <button
         type="button"
         onClick={() => setEditing(true)}
-        className="inline-flex items-center gap-1 px-2 py-0.5 rounded hover:bg-amber-50 text-gray-800 hover:text-amber-700 transition-colors group"
+        className="inline-flex items-center gap-1 px-2 py-0.5 rounded hover:bg-brand-50 text-gray-800 hover:text-primary-strong transition-colors group"
         title={isPct ? 'Click to edit rate' : 'Click to edit amount'}
         data-testid={isPct ? 'edit-advance-rate-btn' : 'edit-advance-amount-btn'}
       >
@@ -160,7 +160,7 @@ const InlineEditRate = ({ initial, onSave, mode = 'percent' }) => {
         if (e.key === 'Enter') commit();
         if (e.key === 'Escape') { setVal(String(initial ?? '')); setEditing(false); }
       }}
-      className={`${isPct ? 'w-20' : 'w-32'} px-2 py-1 text-right text-sm border border-amber-400 rounded outline-none focus:ring-1 focus:ring-amber-400`}
+      className={`${isPct ? 'w-20' : 'w-32'} px-2 py-1 text-right text-sm border border-amber-400 rounded outline-none focus:ring-1 focus:ring-primary/50`}
       data-testid={isPct ? 'edit-advance-rate-input' : 'edit-advance-amount-input'}
     />
   );
@@ -455,7 +455,7 @@ function ProjectCostAllocation({ projectId, api }) {
                 <input type="checkbox" checked={retro} onChange={(e) => setRetro(e.target.checked)} data-testid="cf-proj-retro" />
                 Recompute past
               </label>
-              <Button size="sm" onClick={save} disabled={busy} className="bg-indigo-600 hover:bg-indigo-700" data-testid="cf-proj-save">{busy ? 'Saving…' : 'Save'}</Button>
+              <Button size="sm" onClick={save} disabled={busy} className="bg-primary hover:bg-primary-hover" data-testid="cf-proj-save">{busy ? 'Saving…' : 'Save'}</Button>
               <Button size="sm" variant="outline" onClick={() => setEditing(false)}>Cancel</Button>
               <Button size="sm" variant="outline" className="text-red-600 border-red-200 hover:bg-red-50" onClick={removeOverride} disabled={busy}>Revert</Button>
             </div>
@@ -549,7 +549,7 @@ function ProjectCashflowTab({ projectId, isAdmin }) {
       {/* === Project Header Strip: Value + Add − Ded = Grand Total | Income − Expense = Receivable === */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3" data-testid="project-strip">
         {/* LEFT — Project Value Calculation */}
-        <Card className="border-blue-200 bg-gradient-to-br from-blue-50/60 to-violet-50/40">
+        <Card className="border-blue-200 bg-blue-50">
           <CardContent className="p-3">
             <p className="text-[10px] font-bold uppercase tracking-wider text-blue-700 mb-2">Project Value Calculation</p>
             <div className="grid grid-cols-4 gap-2 items-stretch">
@@ -578,7 +578,7 @@ function ProjectCashflowTab({ projectId, isAdmin }) {
         </Card>
 
         {/* RIGHT — Financial Performance */}
-        <Card className="border-emerald-200 bg-gradient-to-br from-emerald-50/60 to-rose-50/40">
+        <Card className="border-emerald-200 bg-emerald-50">
           <CardContent className="p-3">
             <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 mb-2">Financial Performance</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 items-stretch">
@@ -614,7 +614,7 @@ function ProjectCashflowTab({ projectId, isAdmin }) {
       {/* 3 Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {/* Card 01 — Project Cashflow Overview */}
-        <Card className="bg-gradient-to-br from-violet-50 to-violet-100/40 border-violet-200">
+        <Card className="bg-violet-50 border-violet-200">
           <CardContent className="p-4 space-y-2.5">
             <div className="flex items-center justify-between">
               <span className="text-[11px] font-semibold uppercase text-violet-700">Cashflow Overview</span>
@@ -636,7 +636,7 @@ function ProjectCashflowTab({ projectId, isAdmin }) {
         </Card>
 
         {/* Card 02 — Direct */}
-        <Card className="bg-gradient-to-br from-emerald-50 to-emerald-100/40 border-emerald-200">
+        <Card className="bg-emerald-50 border-emerald-200">
           <CardContent className="p-4 space-y-2.5">
             <div className="flex items-center justify-between">
               <span className="text-[11px] font-semibold uppercase text-emerald-700">Direct Cost Allocation</span>
@@ -658,7 +658,7 @@ function ProjectCashflowTab({ projectId, isAdmin }) {
         </Card>
 
         {/* Card 03 — Indirect */}
-        <Card className="bg-gradient-to-br from-sky-50 to-sky-100/40 border-sky-200">
+        <Card className="bg-sky-50 border-sky-200">
           <CardContent className="p-4 space-y-2.5">
             <div className="flex items-center justify-between">
               <span className="text-[11px] font-semibold uppercase text-sky-700">Indirect Cost Allocation</span>
@@ -693,7 +693,7 @@ function ProjectCashflowTab({ projectId, isAdmin }) {
                 <p className="text-xs text-gray-500">Adjust Direct / Indirect split for this project.</p>
               </div>
               {locked && (
-                <Button variant="outline" className="border-indigo-300 text-indigo-700 hover:bg-indigo-50" onClick={() => setPw({ open: true, password: '', verifying: false })} data-testid="proj-cf-edit-btn">
+                <Button variant="outline" className="border-brand-300 text-primary-strong hover:bg-brand-50" onClick={() => setPw({ open: true, password: '', verifying: false })} data-testid="proj-cf-edit-btn">
                   <Lock className="h-4 w-4 mr-1" /> Edit (Password Required)
                 </Button>
               )}
@@ -715,7 +715,7 @@ function ProjectCashflowTab({ projectId, isAdmin }) {
                   Recompute past income with the new split
                 </label>
                 <div className="flex items-center gap-2 mt-3">
-                  <Button onClick={save} disabled={busy} className="bg-indigo-600 hover:bg-indigo-700" data-testid="proj-cf-save"><Save className="h-4 w-4 mr-1" /> Save</Button>
+                  <Button onClick={save} disabled={busy} className="bg-primary hover:bg-primary-hover" data-testid="proj-cf-save"><Save className="h-4 w-4 mr-1" /> Save</Button>
                   <Button variant="outline" onClick={() => { setLocked(true); load(); }} data-testid="proj-cf-cancel">Cancel</Button>
                   {data.has_override && (
                     <Button variant="outline" className="text-red-600 border-red-200 hover:bg-red-50" onClick={revert} disabled={busy} data-testid="proj-cf-revert"><Trash2 className="h-4 w-4 mr-1" /> Revert to Global</Button>
@@ -739,7 +739,7 @@ function ProjectCashflowTab({ projectId, isAdmin }) {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setPw({ open: false, password: '', verifying: false })} disabled={pw.verifying}>Cancel</Button>
-            <Button onClick={submitUnlock} disabled={pw.verifying || !pw.password} className="bg-indigo-600 hover:bg-indigo-700" data-testid="proj-cf-pw-submit">
+            <Button onClick={submitUnlock} disabled={pw.verifying || !pw.password} className="bg-primary hover:bg-primary-hover" data-testid="proj-cf-pw-submit">
               {pw.verifying ? 'Verifying…' : 'Unlock'}
             </Button>
           </DialogFooter>
@@ -833,7 +833,7 @@ function PaymentSummarySection({ user, projectId, paymentSummary, formatCurrency
         const displayedProjectValue = feClientApproved ? (paymentSummary.project_value || 0) : 0;
         return (
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-          <Card className="bg-gradient-to-br from-indigo-50 to-indigo-100 border-indigo-200">
+          <Card className="bg-indigo-50 border-indigo-200">
             <CardContent className="p-3">
               <p className="text-xs text-indigo-600 font-medium">Project Value</p>
               <p className="text-lg font-bold text-indigo-700">{formatCurrency(displayedProjectValue)}</p>
@@ -842,25 +842,25 @@ function PaymentSummarySection({ user, projectId, paymentSummary, formatCurrency
               )}
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-emerald-50 to-emerald-100 border-emerald-200">
+          <Card className="bg-emerald-50 border-emerald-200">
             <CardContent className="p-3">
               <p className="text-xs text-emerald-600 font-medium">Advance Paid</p>
               <p className="text-lg font-bold text-emerald-700">{formatCurrency(paymentSummary.advance_payment?.amount || 0)}</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+          <Card className="bg-blue-50 border-blue-200">
             <CardContent className="p-3">
               <p className="text-xs text-amber-600 font-medium">Stages Scheduled</p>
               <p className="text-lg font-bold text-amber-700">{formatCurrency(paymentSummary.summary?.total_scheduled || 0)}</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+          <Card className="bg-green-50 border-green-200">
             <CardContent className="p-3">
               <p className="text-xs text-green-600 font-medium">Total Received</p>
               <p className="text-lg font-bold text-green-700">{formatCurrency(paymentSummary.summary?.total_received || 0)}</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
+          <Card className="bg-orange-50 border-orange-200">
             <CardContent className="p-3">
               <p className="text-xs text-orange-600 font-medium">Balance Due</p>
               <p className="text-lg font-bold text-orange-700">{formatCurrency(paymentSummary.summary?.total_balance || 0)}</p>
@@ -883,7 +883,7 @@ function PaymentSummarySection({ user, projectId, paymentSummary, formatCurrency
                 <TabsTrigger value="expense" className="gap-1.5 data-[state=active]:bg-red-100 data-[state=active]:text-red-800" data-testid="project-expense-tab">
                   <ArrowUpRight className="h-3.5 w-3.5" /> Expense
                 </TabsTrigger>
-                <TabsTrigger value="cashflow" className="gap-1.5 data-[state=active]:bg-indigo-100 data-[state=active]:text-indigo-800" data-testid="project-cashflow-tab">
+                <TabsTrigger value="cashflow" className="gap-1.5 data-[state=active]:bg-brand-100 data-[state=active]:text-primary-strong" data-testid="project-cashflow-tab">
                   <Wallet className="h-3.5 w-3.5" /> Cashflow Engine
                 </TabsTrigger>
               </TabsList>
@@ -891,7 +891,7 @@ function PaymentSummarySection({ user, projectId, paymentSummary, formatCurrency
           </CardHeader>
           <CardContent className="p-0">
             {loadingFinance ? (
-              <div className="flex justify-center py-8"><RefreshCw className="h-5 w-5 animate-spin text-amber-600" /></div>
+              <div className="flex justify-center py-8"><RefreshCw className="h-5 w-5 animate-spin text-primary" /></div>
             ) : financeTab === 'cashflow' ? (
               <div className="p-4">
                 <ProjectCashflowTab projectId={projectId} isAdmin={['super_admin'].includes(user?.role)} />
@@ -3799,14 +3799,14 @@ export default function ProjectDetail() {
                     Rejected{d.rejected_at_step ? ` at ${d.rejected_at_step === 'general_manager' ? 'GM' : d.rejected_at_step === 'planning_head' ? 'PH' : 'Client'}` : ''}{d.rejection_reason ? `: ${d.rejection_reason.length > 18 ? d.rejection_reason.slice(0, 18) + '…' : d.rejection_reason}` : ''}
                   </span>
                   {(user?.role === 'planning_person' || user?.role === 'planning' || user?.role === 'super_admin') && (
-                    <Button variant="outline" size="sm" className="h-7 gap-1 border-amber-500 text-amber-700 hover:bg-amber-50 text-xs" onClick={() => submitDeductionForReview(d)} data-testid={`ded-resubmit-${d.deduction_id}`}>
+                    <Button variant="outline" size="sm" className="h-7 gap-1 border-brand-300 text-primary-strong hover:bg-brand-50 text-xs" onClick={() => submitDeductionForReview(d)} data-testid={`ded-resubmit-${d.deduction_id}`}>
                       <Send className="h-3 w-3" /> Resubmit
                     </Button>
                   )}
                 </>
               ) : (
                 (user?.role === 'planning_person' || user?.role === 'planning' || user?.role === 'super_admin') && (
-                  <Button variant="outline" size="sm" className="h-7 gap-1 border-amber-500 text-amber-700 hover:bg-amber-50 text-xs" onClick={() => submitDeductionForReview(d)} data-testid={`ded-submit-review-${d.deduction_id}`}>
+                  <Button variant="outline" size="sm" className="h-7 gap-1 border-brand-300 text-primary-strong hover:bg-brand-50 text-xs" onClick={() => submitDeductionForReview(d)} data-testid={`ded-submit-review-${d.deduction_id}`}>
                     <Send className="h-3 w-3" /> Submit for Review
                   </Button>
                 )
@@ -4218,7 +4218,7 @@ export default function ProjectDetail() {
           <Card>
             <CardContent className="p-3 sm:p-6">
               <h3 className="text-base font-bold flex items-center gap-2 mb-3">
-                <ImageIcon className="h-5 w-5 text-purple-600" />
+                <ImageIcon className="h-5 w-5 text-primary" />
                 Project Process Image
               </h3>
               <ProjectProcessImages
@@ -4297,7 +4297,7 @@ export default function ProjectDetail() {
       <button
         onClick={() => setActiveTab(key)}
         className={`px-3 py-2 text-sm font-medium border-b-2 ${
-          current === key ? 'border-amber-500 text-amber-700' : 'border-transparent text-gray-500 hover:text-gray-700'
+          current === key ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-gray-700'
         }`}
         data-testid={`fe-subnav-${key}`}
       >
@@ -4308,7 +4308,7 @@ export default function ProjectDetail() {
     return (
       <>
         {showTotal && (
-          <div className="mb-3 rounded-lg border-2 border-amber-200 bg-gradient-to-br from-amber-50/70 to-white p-3 sm:p-4" data-testid="fe-grand-total-card">
+          <div className="mb-3 rounded-lg border-2 border-amber-200 bg-white p-3 sm:p-4" data-testid="fe-grand-total-card">
             <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
               <div className="text-[11px] font-semibold uppercase tracking-wide text-amber-700 flex items-center gap-2">
                 Total Final Estimate Cost
@@ -4369,7 +4369,7 @@ export default function ProjectDetail() {
                   </>
                 )}
                 {canSendToClient && (
-                  <Button type="button" size="sm" className="h-7 text-[11px] bg-blue-600 hover:bg-blue-700"
+                  <Button type="button" size="sm" className="h-7 text-[11px] bg-primary hover:bg-primary-hover"
                     onClick={async () => {
                       const isFirst = !fe.public_token;
                       const msg = isFirst
@@ -4538,7 +4538,7 @@ export default function ProjectDetail() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Button size="sm" onClick={saveHeaderEdit} disabled={headerSaving} className="bg-indigo-600 hover:bg-indigo-700" data-testid="header-edit-save">
+                    <Button size="sm" onClick={saveHeaderEdit} disabled={headerSaving} className="bg-primary hover:bg-primary-hover" data-testid="header-edit-save">
                       <Save className="h-3.5 w-3.5 mr-1" />{headerSaving ? 'Saving...' : 'Save'}
                     </Button>
                     <Button size="sm" variant="outline" onClick={() => setHeaderEditing(false)} data-testid="header-edit-cancel">
@@ -4564,7 +4564,7 @@ export default function ProjectDetail() {
                       </Badge>
                     )}
                     {(user?.role === 'super_admin' || user?.role === 'cre' || user?.role === 'planning' || user?.role === 'general_manager') && (
-                      <Button variant="ghost" size="icon" className="h-7 w-7 text-gray-400 hover:text-indigo-600 shrink-0" onClick={startHeaderEdit} data-testid="header-edit-btn">
+                      <Button variant="ghost" size="icon" className="h-7 w-7 text-gray-400 hover:text-primary shrink-0" onClick={startHeaderEdit} data-testid="header-edit-btn">
                         <Edit className="h-3.5 w-3.5" />
                       </Button>
                     )}
@@ -4633,7 +4633,7 @@ export default function ProjectDetail() {
                 <Button
                   data-testid="hand-over-btn"
                   size="sm"
-                  className="gap-2 bg-purple-600 hover:bg-purple-700 text-white"
+                  className="gap-2 bg-primary hover:bg-primary-hover text-white"
                   onClick={async () => {
                     if (!window.confirm(`Hand over "${project.name}" to the client?\n\nThis moves the project to Delivered Projects. You can revert from the Planning Board if needed.`)) return;
                     try {
@@ -4745,7 +4745,7 @@ export default function ProjectDetail() {
           return (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-4 sm:mb-6" data-testid="project-summary-strip">
               {/* LEFT — Project Value Calculation */}
-              <Card className="border-blue-200 bg-gradient-to-br from-blue-50/60 to-violet-50/40">
+              <Card className="border-blue-200 bg-blue-50">
                 <CardContent className="p-3">
                   <div className="flex items-center justify-between gap-2 mb-2 flex-wrap">
                     <p className="text-[10px] font-bold uppercase tracking-wider text-blue-700">Project Value Calculation</p>
@@ -4777,7 +4777,7 @@ export default function ProjectDetail() {
               </Card>
 
               {/* RIGHT — Financial Performance */}
-              <Card className="border-emerald-200 bg-gradient-to-br from-emerald-50/60 to-rose-50/40">
+              <Card className="border-emerald-200 bg-emerald-50">
                 <CardContent className="p-3">
                   <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 mb-2">Financial Performance</p>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 items-stretch">
@@ -4815,7 +4815,7 @@ export default function ProjectDetail() {
             <CardHeader className="border-b p-3 sm:p-6">
               {user?.role === 'quality_check' ? (
                 <TabsList className="bg-transparent border-0 p-0 h-auto gap-0 w-full justify-between overflow-x-auto flex-nowrap" data-testid="qc-restricted-tabs">
-                  <TabsTrigger value="project-stages" className="data-[state=active]:border-b-2 data-[state=active]:border-blue-600 rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center" data-testid="tab-project-stages">
+                  <TabsTrigger value="project-stages" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center" data-testid="tab-project-stages">
                     Stages - Project Stages
                   </TabsTrigger>
                 </TabsList>
@@ -4823,13 +4823,13 @@ export default function ProjectDetail() {
               <TabsList className="bg-transparent border-0 p-0 h-auto gap-0 w-full justify-between overflow-x-auto flex-nowrap">
                 {/* Order: Estimate → Final Estimate → Payment Schedule → Work Order → Materials →
                     Payment Summary → Team → Construction Stage (CRE) → Project Stages → Documents */}
-                {tabAllowed('rough-estimate') && <TabsTrigger value="rough-estimate" className="data-[state=active]:border-b-2 data-[state=active]:border-purple-600 rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center">
+                {tabAllowed('rough-estimate') && <TabsTrigger value="rough-estimate" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center">
                   Estimate
                 </TabsTrigger>}
-                {tabAllowed('scope') && <TabsTrigger value="scope" className="data-[state=active]:border-b-2 data-[state=active]:border-amber-500 rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center">
+                {tabAllowed('scope') && <TabsTrigger value="scope" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center">
                   Final Estimate
                 </TabsTrigger>}
-                {canSeeFinancials && tabAllowed('payments') && <TabsTrigger value="payments" className="data-[state=active]:border-b-2 data-[state=active]:border-amber-500 rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center">
+                {canSeeFinancials && tabAllowed('payments') && <TabsTrigger value="payments" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center">
                   Payment Schedule
                 </TabsTrigger>}
                 {tabAllowed('labours') && <TabsTrigger value="labours" className="data-[state=active]:border-b-2 data-[state=active]:border-teal-500 rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center" data-testid="tab-labours">
@@ -4841,17 +4841,17 @@ export default function ProjectDetail() {
                 {canSeeFinancials && tabAllowed('payment-summary') && <TabsTrigger value="payment-summary" className="data-[state=active]:border-b-2 data-[state=active]:border-green-600 rounded-none px-4 py-3 text-[15px] font-medium bg-green-50 whitespace-nowrap flex-1 text-center">
                   Payment Summary
                 </TabsTrigger>}
-                {tabAllowed('team') && <TabsTrigger value="team" className="data-[state=active]:border-b-2 data-[state=active]:border-indigo-600 rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center" data-testid="tab-team">
+                {tabAllowed('team') && <TabsTrigger value="team" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center" data-testid="tab-team">
                   Team
                 </TabsTrigger>}
                 {tabAllowed('construction-stage') && <TabsTrigger value="construction-stage" className="data-[state=active]:border-b-2 data-[state=active]:border-rose-600 rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center" data-testid="tab-construction-stage">
                   Pre-Construction Stages
                 </TabsTrigger>}
-                {tabAllowed('project-stages') && <TabsTrigger value="project-stages" className="data-[state=active]:border-b-2 data-[state=active]:border-blue-600 rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center" data-testid="tab-project-stages">
+                {tabAllowed('project-stages') && <TabsTrigger value="project-stages" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center" data-testid="tab-project-stages">
                   Stages - Project Stages
                 </TabsTrigger>}
                 {/* Cheques tab moved INSIDE Payment Summary as a sub-tab — kept as a hidden mount-point so /tab=cheques deep links still resolve */}
-                {tabAllowed('documents') && <TabsTrigger value="documents" className="data-[state=active]:border-b-2 data-[state=active]:border-amber-600 rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center">
+                {tabAllowed('documents') && <TabsTrigger value="documents" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center">
                   Documents
                 </TabsTrigger>}
               </TabsList>
@@ -4863,7 +4863,7 @@ export default function ProjectDetail() {
               <div className="mb-4 flex items-center justify-between">
                 <div>
                   <h3 className="text-base sm:text-lg font-bold flex items-center gap-2">
-                    <FileText className="h-5 w-5 text-purple-600" />
+                    <FileText className="h-5 w-5 text-primary" />
                     Rough Estimate Reference
                   </h3>
                   <p className="text-xs sm:text-sm text-gray-500">Original rough estimate from Planning department</p>
@@ -4882,7 +4882,7 @@ export default function ProjectDetail() {
                     ) : (
                       <Button 
                         onClick={handleConvertToScope} 
-                        className="bg-green-600 hover:bg-green-700"
+                        className="bg-primary hover:bg-primary-hover"
                         data-testid="convert-to-scope-btn"
                       >
                         <ArrowRight className="h-4 w-4 mr-2" />
@@ -4891,7 +4891,7 @@ export default function ProjectDetail() {
                     )}
                     <Button 
                       onClick={handleGenerateREPDF} 
-                      className="bg-purple-600 hover:bg-purple-700"
+                      className="bg-primary hover:bg-primary-hover"
                       data-testid="download-re-pdf"
                     >
                       <Download className="h-4 w-4 mr-2" />
@@ -4915,7 +4915,7 @@ export default function ProjectDetail() {
                         onClick={() => setReProject(rev)}
                         className={`px-3 py-1.5 rounded-md text-xs font-semibold border transition-all ${
                           isActive
-                            ? 'bg-purple-600 text-white border-purple-600 shadow-sm'
+                            ? 'bg-primary text-white border-primary shadow-sm'
                             : isApproved
                               ? 'bg-green-100 text-green-800 border-green-300 ring-1 ring-green-400'
                               : isDimmed
@@ -4992,14 +4992,14 @@ export default function ProjectDetail() {
                     <div className="border rounded-lg overflow-hidden" data-testid="re-inner-tabs">
                       <div className="flex border-b bg-gray-50">
                         <button
-                          className={`flex-1 px-4 py-2.5 text-sm font-medium transition ${reInnerTab === 'scope' ? 'bg-white text-purple-700 border-b-2 border-purple-600' : 'text-gray-600 hover:bg-gray-100'}`}
+                          className={`flex-1 px-4 py-2.5 text-sm font-medium transition ${reInnerTab === 'scope' ? 'bg-white text-primary-strong border-b-2 border-primary' : 'text-gray-600 hover:bg-gray-100'}`}
                           onClick={() => setReInnerTab('scope')}
                           data-testid="re-tab-scope"
                         >
                           Scope of Work ({(reProject.rough_scope_items || reProject.scope_items || []).length})
                         </button>
                         <button
-                          className={`flex-1 px-4 py-2.5 text-sm font-medium transition ${reInnerTab === 'payments' ? 'bg-white text-purple-700 border-b-2 border-purple-600' : 'text-gray-600 hover:bg-gray-100'}`}
+                          className={`flex-1 px-4 py-2.5 text-sm font-medium transition ${reInnerTab === 'payments' ? 'bg-white text-primary-strong border-b-2 border-primary' : 'text-gray-600 hover:bg-gray-100'}`}
                           onClick={() => setReInnerTab('payments')}
                           data-testid="re-tab-payments"
                         >
@@ -5053,7 +5053,7 @@ export default function ProjectDetail() {
                                     <Check className="h-4 w-4 mr-2" /> Already Converted
                                   </Button>
                                 ) : (
-                                  <Button onClick={handleConvertToPaymentSchedule} className="bg-green-600 hover:bg-green-700" data-testid="convert-to-payments-btn">
+                                  <Button onClick={handleConvertToPaymentSchedule} className="bg-primary hover:bg-primary-hover" data-testid="convert-to-payments-btn">
                                     <ArrowRight className="h-4 w-4 mr-2" /> Convert to Project Payment Schedule
                                   </Button>
                                 )}
@@ -5158,7 +5158,7 @@ export default function ProjectDetail() {
                           <Button
                             size="sm"
                             variant="outline"
-                            className="ml-auto h-7 px-2 text-[11px] border-amber-300 text-amber-700 hover:bg-amber-50 gap-1"
+                            className="ml-auto h-7 px-2 text-[11px] border-brand-300 text-primary-strong hover:bg-brand-50 gap-1"
                             data-testid="fe-restart-approval-btn"
                             onClick={async () => {
                               const reason = window.prompt('Restart Final Estimate approval — this resets the FE to draft so it re-runs through Planning Person → Planning Head → GM.\n\nOptional note (audit trail):');
@@ -5250,7 +5250,7 @@ export default function ProjectDetail() {
                       <Button
                         data-testid="fe-planning-head-approve-btn"
                         size="sm"
-                        className="gap-1 sm:gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm"
+                        className="gap-1 sm:gap-2 bg-primary hover:bg-primary-hover text-white text-xs sm:text-sm"
                         onClick={async () => {
                           if (!window.confirm('Approve this Final Estimate and forward to GM?')) return;
                           try {
@@ -5721,7 +5721,7 @@ export default function ProjectDetail() {
                             className="h-8 text-xs" data-testid="inline-scope-remarks" />
                         </td>
                         <td className="px-2 py-2 whitespace-nowrap">
-                          <Button size="sm" className="h-7 px-2 bg-emerald-600 hover:bg-emerald-700 mr-1" onClick={saveInlineScope} data-testid="inline-scope-save">Save</Button>
+                          <Button size="sm" className="h-7 px-2 bg-primary hover:bg-primary-hover mr-1" onClick={saveInlineScope} data-testid="inline-scope-save">Save</Button>
                           <Button size="sm" variant="ghost" className="h-7 px-2 text-gray-500" onClick={() => setInlineNewScope(null)} data-testid="inline-scope-cancel">Cancel</Button>
                         </td>
                       </tr>
@@ -5764,7 +5764,7 @@ export default function ProjectDetail() {
                       <Button
                         size="sm"
                         variant={globalEditMode ? 'default' : 'outline'}
-                        className={`gap-2 ${globalEditMode ? 'bg-emerald-600 hover:bg-emerald-700' : ''}`}
+                        className={`gap-2 ${globalEditMode ? 'bg-primary hover:bg-primary-hover' : ''}`}
                         onClick={() => { setGlobalEditMode(!globalEditMode); setEditingStageId(null); }}
                         data-testid="global-edit-toggle"
                       >
@@ -5784,7 +5784,7 @@ export default function ProjectDetail() {
                   <Card className="border-2 border-blue-200 bg-blue-50/30">
                     <CardContent className="p-4 space-y-4">
                       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                        <h4 className="font-semibold text-blue-800">Add Project Stages</h4>
+                        <h4 className="font-semibold text-foreground">Add Project Stages</h4>
                         <div className="flex items-center gap-2">
                           <span className="text-sm text-gray-600">Load Template:</span>
                           <select 
@@ -5987,7 +5987,7 @@ export default function ProjectDetail() {
                         <Button variant="outline" size="sm" onClick={() => { setSaveTemplateDialog(true); }} data-testid="save-as-template-btn">
                           <Save className="h-3 w-3 mr-1" /> Save as Template
                         </Button>
-                        <Button size="sm" className="bg-green-600 hover:bg-green-700" onClick={handleSaveStages} data-testid="save-stages-btn">
+                        <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={handleSaveStages} data-testid="save-stages-btn">
                           <Check className="h-3 w-3 mr-1" /> Save Stages
                         </Button>
                         <Button variant="outline" size="sm" onClick={() => { setShowAddStages(false); setNewStages([{ stage_name: '', start_date: '', target_date: '', status: 'yet_to_start', remarks: '', hindrances: '', sl_no: '', section_title: '', is_section_header: false, actual_start_date: '', actual_finish_date: '', duration_days: '', progress: 0 }]); }}>
@@ -6008,7 +6008,7 @@ export default function ProjectDetail() {
                               onChange={(e) => setTemplateName(e.target.value)}
                               data-testid="template-name-input"
                             />
-                            <Button size="sm" className="bg-amber-600 hover:bg-amber-700" onClick={handleSaveAsTemplate} data-testid="confirm-save-template-btn">
+                            <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={handleSaveAsTemplate} data-testid="confirm-save-template-btn">
                               Save Template
                             </Button>
                             <Button variant="outline" size="sm" onClick={() => setSaveTemplateDialog(false)}>Cancel</Button>
@@ -6283,7 +6283,7 @@ export default function ProjectDetail() {
                                     <Button
                                       size="sm"
                                       variant="ghost"
-                                      className="h-7 text-indigo-600 hover:bg-indigo-50"
+                                      className="h-7 text-primary-strong hover:bg-brand-50"
                                       onClick={() => setTimelineStage(stage)}
                                       title="View edit timeline"
                                       data-testid={`timeline-stage-${stage.stage_id}`}
@@ -6486,7 +6486,7 @@ export default function ProjectDetail() {
                                   key={tpl.template_id}
                                   type="button"
                                   onClick={() => setSelectedTemplateId(tpl.template_id)}
-                                  className={`w-full text-left p-3 rounded-lg border-2 transition-colors ${isSelected ? 'border-indigo-500 bg-indigo-50/60' : 'border-gray-200 hover:border-indigo-300'}`}
+                                  className={`w-full text-left p-3 rounded-lg border-2 transition-colors ${isSelected ? 'border-primary bg-brand-50/60' : 'border-gray-200 hover:border-brand-300'}`}
                                   data-testid={`pick-tpl-${tpl.template_id}`}
                                 >
                                   <div className="flex items-center justify-between">
@@ -6523,7 +6523,7 @@ export default function ProjectDetail() {
                       <DialogFooter>
                         <Button variant="outline" onClick={() => navigate('/payment-schedule-templates')} className="mr-auto">Manage Templates</Button>
                         <Button variant="outline" onClick={() => setChooseTemplateDialog(false)}>Cancel</Button>
-                        <Button onClick={applyPaymentTemplate} disabled={!selectedTemplateId || applyingTemplate} className="bg-indigo-600 hover:bg-indigo-700" data-testid="apply-template-btn">
+                        <Button onClick={applyPaymentTemplate} disabled={!selectedTemplateId || applyingTemplate} className="bg-primary hover:bg-primary-hover" data-testid="apply-template-btn">
                           {applyingTemplate ? 'Applying...' : `Apply (${templateApplyMode === 'replace' ? 'Replace' : 'Append'})`}
                         </Button>
                       </DialogFooter>
@@ -6986,7 +6986,7 @@ export default function ProjectDetail() {
                                       type="button"
                                       size="sm"
                                       variant="ghost"
-                                      className="mt-1 h-6 text-[11px] text-indigo-600 hover:bg-indigo-50"
+                                      className="mt-1 h-6 text-[11px] text-primary-strong hover:bg-brand-50"
                                       onClick={() => {
                                         const rows = [...(advanceDialog.editable_template_rows || []), { stage_name: '', percentage: '', notes: '' }];
                                         setAdvanceDialog(s => ({ ...s, editable_template_rows: rows }));
@@ -6999,7 +6999,7 @@ export default function ProjectDetail() {
 
                                 <p className="text-[10px] text-gray-500">
                                   Edits made here apply to <em>this</em> save only. To save changes back to the template, use{' '}
-                                  <button type="button" className="text-indigo-600 hover:underline" onClick={() => navigate('/payment-schedule-templates')}>Payment Templates</button>.
+                                  <button type="button" className="text-primary-strong hover:underline" onClick={() => navigate('/payment-schedule-templates')}>Payment Templates</button>.
                                 </p>
                               </div>
                             )}
@@ -7262,7 +7262,7 @@ export default function ProjectDetail() {
                                 <Button
                                   size="sm"
                                   variant="outline"
-                                  className="mt-2 h-7 text-[11px] border-amber-300 text-amber-700 hover:bg-amber-50"
+                                  className="mt-2 h-7 text-[11px] border-brand-300 text-primary-strong hover:bg-brand-50"
                                   data-testid="set-advance-pct-btn"
                                   onClick={() => setAdvanceDialog({
                                     open: true,
@@ -7409,7 +7409,7 @@ export default function ProjectDetail() {
                                     data-testid={`req-payment-${stage.stage_id}`}
                                     variant="outline"
                                     size="sm"
-                                    className="text-amber-600 border-blue-300 hover:bg-amber-50"
+                                    className="text-primary-strong border-blue-300 hover:bg-brand-50"
                                     onClick={() => setReqPayDialog({ open: true, stage, date: '', submitting: false })}
                                   >
                                     <Send className="h-3 w-3 mr-1" />
@@ -7491,7 +7491,7 @@ export default function ProjectDetail() {
                                   {canManage && (
                                     <Button
                                       size="sm"
-                                      className="h-7 text-xs bg-blue-600 hover:bg-blue-700 shrink-0"
+                                      className="h-7 text-xs bg-primary hover:bg-primary-hover shrink-0"
                                       data-testid={`planning-resubmit-${stage.stage_id}`}
                                       onClick={() => setPsResubmitDialog({
                                         open: true,
@@ -7838,9 +7838,9 @@ export default function ProjectDetail() {
                       {group.section_id && (
                         <div className="flex items-center justify-between mb-3 gap-3 flex-wrap">
                           <div className="flex items-center gap-2 flex-1 min-w-0">
-                            <h4 className="text-sm font-bold text-indigo-700 truncate">{group.title}</h4>
+                            <h4 className="text-sm font-bold text-foreground truncate">{group.title}</h4>
                             {canManage && (
-                              <Button size="sm" variant="ghost" className="h-6 w-6 p-0 text-gray-400 hover:text-indigo-700" onClick={() => setEditingSection({ section_id: group.section_id, title: group.title })} data-testid={`rename-section-${group.section_id}`}>
+                              <Button size="sm" variant="ghost" className="h-6 w-6 p-0 text-gray-400 hover:text-primary-strong" onClick={() => setEditingSection({ section_id: group.section_id, title: group.title })} data-testid={`rename-section-${group.section_id}`}>
                                 <Edit className="h-3 w-3" />
                               </Button>
                             )}
@@ -7862,7 +7862,7 @@ export default function ProjectDetail() {
                             </div>
                             {canManage && (
                               <>
-                                <label className="inline-flex items-center gap-1 px-2 py-1 rounded border border-indigo-200 bg-white text-[11px] text-indigo-700 cursor-pointer hover:bg-indigo-50" data-testid={`attach-section-${group.section_id}`}>
+                                <label className="inline-flex items-center gap-1 px-2 py-1 rounded border border-brand-300 bg-white text-[11px] text-primary-strong cursor-pointer hover:bg-brand-50" data-testid={`attach-section-${group.section_id}`}>
                                   <Plus className="h-3 w-3" /> File
                                   <input type="file" className="hidden" onChange={(e) => { if (e.target.files?.[0]) { handleUploadSectionAttachment(group, e.target.files[0]); e.target.value = ''; } }} />
                                 </label>
@@ -7913,7 +7913,7 @@ export default function ProjectDetail() {
                                   return (
                                     <Button
                                       size="sm"
-                                      className="h-7 px-2.5 text-xs gap-1 bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm"
+                                      className="h-7 px-2.5 text-xs gap-1 bg-primary hover:bg-primary-hover text-white shadow-sm"
                                       onClick={() => setReqPayDialog({
                                         open: true,
                                         mode: 'addition_section',
@@ -7939,7 +7939,7 @@ export default function ProjectDetail() {
                                   <Button
                                     size="sm"
                                     variant="outline"
-                                    className="h-7 px-2.5 text-xs gap-1 border-amber-500 text-amber-700 hover:bg-amber-50"
+                                    className="h-7 px-2.5 text-xs gap-1 border-brand-300 text-primary-strong hover:bg-brand-50"
                                     onClick={() => handleCancelSectionPayment(group.section_id, group.title || group.name)}
                                     data-testid={`section-undo-pay-request-${group.section_id}`}
                                     title={`Undo Pay Request for "${group.title || group.name}"`}
@@ -7965,7 +7965,7 @@ export default function ProjectDetail() {
                                   return (
                                     <>
                                       {draftN > 0 && isPP && (
-                                        <Button size="sm" variant="outline" className="h-7 px-2 text-xs gap-1 border-amber-300 text-amber-700 hover:bg-amber-50" onClick={() => submitSectionForReview(group, items)} data-testid={`section-submit-review-${group.section_id}`}>
+                                        <Button size="sm" variant="outline" className="h-7 px-2 text-xs gap-1 border-brand-300 text-primary-strong hover:bg-brand-50" onClick={() => submitSectionForReview(group, items)} data-testid={`section-submit-review-${group.section_id}`}>
                                           <Send className="h-3 w-3" /> Submit {draftN} for Review
                                         </Button>
                                       )}
@@ -8061,7 +8061,7 @@ export default function ProjectDetail() {
                                   return (
                                     <>
                                       {draftN > 0 && isPP && (
-                                        <Button size="sm" variant="outline" className="h-7 px-2 text-xs gap-1 border-amber-300 text-amber-700 hover:bg-amber-50" onClick={() => submitSectionForReview({ section_id: null, title: 'Ungrouped' }, items)} data-testid="ungrouped-submit-review">
+                                        <Button size="sm" variant="outline" className="h-7 px-2 text-xs gap-1 border-brand-300 text-primary-strong hover:bg-brand-50" onClick={() => submitSectionForReview({ section_id: null, title: 'Ungrouped' }, items)} data-testid="ungrouped-submit-review">
                                           <Send className="h-3 w-3" /> Submit {draftN} for Review
                                         </Button>
                                       )}
@@ -8254,7 +8254,7 @@ export default function ProjectDetail() {
                                           <Button
                                             variant="outline"
                                             size="sm"
-                                            className="h-7 gap-1 border-violet-500 text-violet-700 hover:bg-violet-50 text-xs"
+                                            className="h-7 gap-1 border-brand-300 text-primary-strong hover:bg-brand-50 text-xs"
                                             onClick={() => sendAdditionToClient(cost)}
                                             data-testid={`resend-review-${cost.cost_id}`}
                                             title="After addressing the client's note, resend for approval"
@@ -8274,7 +8274,7 @@ export default function ProjectDetail() {
                                           <Button
                                             variant="outline"
                                             size="sm"
-                                            className="h-7 gap-1 border-violet-500 text-violet-700 hover:bg-violet-50 text-xs"
+                                            className="h-7 gap-1 border-brand-300 text-primary-strong hover:bg-brand-50 text-xs"
                                             onClick={() => sendAdditionToClient(cost)}
                                             data-testid={`resend-client-${cost.cost_id}`}
                                           >
@@ -8342,7 +8342,7 @@ export default function ProjectDetail() {
                                         <Button
                                           variant="outline"
                                           size="sm"
-                                          className="h-7 gap-1 border-blue-500 text-blue-700 hover:bg-blue-50 text-xs"
+                                          className="h-7 gap-1 border-brand-300 text-primary-strong hover:bg-brand-50 text-xs"
                                           onClick={() => handleCREApproveAddition(cost.cost_id)}
                                           data-testid={`cre-approve-addition-${cost.cost_id}`}
                                         >
@@ -8450,7 +8450,7 @@ export default function ProjectDetail() {
                         </td>
                         {canManage && (
                           <td className="px-2 py-2 whitespace-nowrap">
-                            <Button size="sm" className="h-7 px-2 bg-emerald-600 hover:bg-emerald-700 mr-1" onClick={saveInlineAddition} data-testid="inline-addition-save">Save</Button>
+                            <Button size="sm" className="h-7 px-2 bg-primary hover:bg-primary-hover mr-1" onClick={saveInlineAddition} data-testid="inline-addition-save">Save</Button>
                             <Button size="sm" variant="ghost" className="h-7 px-2 text-gray-500" onClick={() => setInlineNewAddition(null)} data-testid="inline-addition-cancel">Cancel</Button>
                           </td>
                         )}
@@ -8705,7 +8705,7 @@ export default function ProjectDetail() {
                             </>
                           )}
                           {draftN > 0 && isPP && (
-                            <Button size="sm" variant="outline" className="h-7 px-2 text-xs gap-1 border-amber-300 text-amber-700 hover:bg-amber-50" onClick={() => submitDedSectionForReview(group, items)} data-testid={`ded-section-submit-review-${group.section_id || 'ungrouped'}`}>
+                            <Button size="sm" variant="outline" className="h-7 px-2 text-xs gap-1 border-brand-300 text-primary-strong hover:bg-brand-50" onClick={() => submitDedSectionForReview(group, items)} data-testid={`ded-section-submit-review-${group.section_id || 'ungrouped'}`}>
                               <Send className="h-3 w-3" /> Submit {draftN} for Review
                             </Button>
                           )}
@@ -8789,7 +8789,7 @@ export default function ProjectDetail() {
                                 <td className="px-2 py-2"></td>
                                 {canManage && (
                                   <td className="px-2 py-2 whitespace-nowrap">
-                                    <Button size="sm" className="h-7 px-2 bg-emerald-600 hover:bg-emerald-700 mr-1" onClick={saveInlineDeduction} data-testid="inline-deduction-save">Save</Button>
+                                    <Button size="sm" className="h-7 px-2 bg-primary hover:bg-primary-hover mr-1" onClick={saveInlineDeduction} data-testid="inline-deduction-save">Save</Button>
                                     <Button size="sm" variant="ghost" className="h-7 px-2 text-gray-500" onClick={() => { setInlineNewDeduction(null); setInlineDeductionSectionId(null); }} data-testid="inline-deduction-cancel">Cancel</Button>
                                   </td>
                                 )}
@@ -8880,10 +8880,10 @@ export default function ProjectDetail() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="text-base font-bold flex items-center gap-2">
-                    <Users className="h-5 w-5 text-indigo-600" />Project Team
+                    <Users className="h-5 w-5 text-primary" />Project Team
                   </h3>
                   {(user?.role === 'super_admin' || user?.role === 'project_manager' || user?.role === 'planning') && (
-                    <Button size="sm" onClick={openTeamEditDialog} className="bg-indigo-600 hover:bg-indigo-700" data-testid="edit-team-btn">
+                    <Button size="sm" onClick={openTeamEditDialog} className="bg-primary hover:bg-primary-hover" data-testid="edit-team-btn">
                       <Edit className="h-3.5 w-3.5 mr-1" />Edit Team
                     </Button>
                   )}
@@ -8946,7 +8946,7 @@ export default function ProjectDetail() {
                   </div>
                   <DialogFooter>
                     <Button variant="outline" onClick={() => setTeamEditDialog(false)}>Cancel</Button>
-                    <Button onClick={handleTeamSave} disabled={teamSaving} className="bg-indigo-600 hover:bg-indigo-700" data-testid="confirm-team-assign">
+                    <Button onClick={handleTeamSave} disabled={teamSaving} className="bg-primary hover:bg-primary-hover" data-testid="confirm-team-assign">
                       {teamSaving ? 'Saving...' : 'Save Team'}
                     </Button>
                   </DialogFooter>
@@ -8980,7 +8980,7 @@ export default function ProjectDetail() {
                     <div className="border rounded-lg p-4 mb-4" data-testid="pkg-materials-section">
                       <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
                         <h4 className="text-sm font-bold flex items-center gap-2">
-                          <Package className="h-4 w-4 text-amber-600" />
+                          <Package className="h-4 w-4 text-primary" />
                           Materials List
                         </h4>
                         <div className="flex items-center gap-2 flex-wrap">
@@ -9001,7 +9001,7 @@ export default function ProjectDetail() {
                               <Button size="sm" variant="outline" onClick={addProjectMaterial} data-testid="add-project-material">
                                 <Plus className="h-3 w-3 mr-1" />Add
                               </Button>
-                              <Button size="sm" className="bg-indigo-600 hover:bg-indigo-700" onClick={handleSaveMaterials} data-testid="save-project-materials">
+                              <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={handleSaveMaterials} data-testid="save-project-materials">
                                 <Save className="h-3 w-3 mr-1" />Save
                               </Button>
                             </>
@@ -9049,7 +9049,7 @@ export default function ProjectDetail() {
                                     {projAddingMatFor === idx ? (
                                       <div className="flex items-center gap-1">
                                         <Input placeholder="New material name..." value={projNewMatName} onChange={e => setProjNewMatName(e.target.value)} className="h-9 text-sm flex-1" data-testid={`proj-new-mat-input-${idx}`} onKeyDown={e => { if (e.key === 'Enter') handleProjCreateMaterial(idx); }} autoFocus />
-                                        <Button size="sm" className="h-9 px-2 bg-green-600 hover:bg-green-700" onClick={() => handleProjCreateMaterial(idx)}><Check className="h-3.5 w-3.5" /></Button>
+                                        <Button size="sm" className="h-9 px-2 bg-primary hover:bg-primary-hover" onClick={() => handleProjCreateMaterial(idx)}><Check className="h-3.5 w-3.5" /></Button>
                                         <Button size="sm" variant="ghost" className="h-9 px-2" onClick={() => setProjAddingMatFor(null)}><X className="h-3.5 w-3.5" /></Button>
                                       </div>
                                     ) : (
@@ -9068,7 +9068,7 @@ export default function ProjectDetail() {
                                     {projAddingBrandFor === idx ? (
                                       <div className="flex items-center gap-1">
                                         <Input placeholder="New brand name..." value={projNewBrandName} onChange={e => setProjNewBrandName(e.target.value)} className="h-9 text-sm flex-1" data-testid={`proj-new-brand-input-${idx}`} onKeyDown={e => { if (e.key === 'Enter') handleProjCreateBrand(idx); }} autoFocus />
-                                        <Button size="sm" className="h-9 px-2 bg-green-600 hover:bg-green-700" onClick={() => handleProjCreateBrand(idx)}><Check className="h-3.5 w-3.5" /></Button>
+                                        <Button size="sm" className="h-9 px-2 bg-primary hover:bg-primary-hover" onClick={() => handleProjCreateBrand(idx)}><Check className="h-3.5 w-3.5" /></Button>
                                         <Button size="sm" variant="ghost" className="h-9 px-2" onClick={() => setProjAddingBrandFor(null)}><X className="h-3.5 w-3.5" /></Button>
                                       </div>
                                     ) : (
@@ -9449,7 +9449,7 @@ export default function ProjectDetail() {
                                 { label: 'All Entries', fn: () => { setStockDateFrom(''); setStockDateTo(''); } },
                               ].map(p => (
                                 <button key={p.label} onClick={p.fn}
-                                  className={`w-full text-left text-xs px-2.5 py-1.5 rounded-lg transition-colors ${p.label === 'Clear' ? 'text-red-500 hover:bg-red-50' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'}`}
+                                  className={`w-full text-left text-xs px-2.5 py-1.5 rounded-lg transition-colors ${p.label === 'Clear' ? 'text-red-500 hover:bg-red-50' : 'text-gray-700 hover:bg-brand-50 hover:text-primary-strong'}`}
                                   data-testid={`stock-date-preset-${p.label.toLowerCase().replace(/ /g,'-')}`}
                                 >{p.label}</button>
                               ))}
@@ -9475,7 +9475,7 @@ export default function ProjectDetail() {
                                   head_cell: 'text-gray-400 rounded-md w-8 font-normal text-[10px] uppercase',
                                   row: 'flex w-full mt-1', cell: 'relative p-0 text-center text-sm',
                                   day: 'h-8 w-8 p-0 font-normal text-xs rounded-lg hover:bg-blue-50 transition-colors inline-flex items-center justify-center',
-                                  day_selected: 'bg-blue-600 text-white hover:bg-blue-700 font-medium',
+                                  day_selected: 'bg-primary text-white hover:bg-primary-hover font-medium',
                                   day_today: 'bg-gray-100 font-semibold text-blue-600',
                                   day_range_middle: 'bg-blue-50 text-blue-700 rounded-none',
                                   day_range_start: 'bg-blue-600 text-white rounded-l-lg rounded-r-none',
@@ -9634,10 +9634,10 @@ export default function ProjectDetail() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="text-base font-bold flex items-center gap-2">
-                    <FileText className="h-5 w-5 text-violet-600" />Work Orders ({workOrders.length})
+                    <FileText className="h-5 w-5 text-primary" />Work Orders ({workOrders.length})
                   </h3>
                   {(user?.role === 'super_admin' || user?.role === 'planning' || user?.role === 'planning_person' || user?.role === 'project_manager' || user?.role === 'cre') && (
-                    <Button size="sm" onClick={() => openWoDialog()} className="bg-violet-600 hover:bg-violet-700" data-testid="create-wo-btn">
+                    <Button size="sm" onClick={() => openWoDialog()} className="bg-primary hover:bg-primary-hover" data-testid="create-wo-btn">
                       <Plus className="h-3.5 w-3.5 mr-1" />Create Work Order
                     </Button>
                   )}
@@ -9679,7 +9679,7 @@ export default function ProjectDetail() {
                               )}
                               {wo.status !== 'frozen' && (
                                 <>
-                                  <Button size="sm" variant="outline" className="border-violet-300 text-violet-700 hover:bg-violet-50" onClick={() => openSaveWoTemplate(wo)} data-testid={`wo-save-template-${wo.work_order_id}`}>
+                                  <Button size="sm" variant="outline" className="border-brand-300 text-primary-strong hover:bg-brand-50" onClick={() => openSaveWoTemplate(wo)} data-testid={`wo-save-template-${wo.work_order_id}`}>
                                     <Plus className="h-3 w-3 mr-1" />Save as Template
                                   </Button>
                                   <Button size="sm" variant="destructive" onClick={() => handleDeleteWo(wo)} data-testid="wo-delete-btn"><Trash2 className="h-3 w-3" /></Button>
@@ -9690,11 +9690,11 @@ export default function ProjectDetail() {
                           </div>
                           <Tabs defaultValue="scope" className="w-full">
                             <TabsList className="w-full rounded-none border-b bg-white h-auto p-0 gap-0">
-                              <TabsTrigger value="scope" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-violet-50 data-[state=active]:text-violet-700 data-[state=active]:border-violet-600 data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5">Scope ({wo.scope_items?.length || 0})</TabsTrigger>
-                              <TabsTrigger value="stages" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-violet-50 data-[state=active]:text-violet-700 data-[state=active]:border-violet-600 data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5">Stages ({wo.stages?.length || 0})</TabsTrigger>
-                              <TabsTrigger value="additional" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-violet-50 data-[state=active]:text-violet-700 data-[state=active]:border-violet-600 data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5">Additional ({wo.additional_work?.length || 0})</TabsTrigger>
-                              <TabsTrigger value="dlr" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-violet-50 data-[state=active]:text-violet-700 data-[state=active]:border-violet-600 data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5" data-testid="wo-dlr-tab">DLR</TabsTrigger>
-                              <TabsTrigger value="rab" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-violet-50 data-[state=active]:text-violet-700 data-[state=active]:border-violet-600 data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5" data-testid="wo-rab-tab">RAB</TabsTrigger>
+                              <TabsTrigger value="scope" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5">Scope ({wo.scope_items?.length || 0})</TabsTrigger>
+                              <TabsTrigger value="stages" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5">Stages ({wo.stages?.length || 0})</TabsTrigger>
+                              <TabsTrigger value="additional" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5">Additional ({wo.additional_work?.length || 0})</TabsTrigger>
+                              <TabsTrigger value="dlr" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5" data-testid="wo-dlr-tab">DLR</TabsTrigger>
+                              <TabsTrigger value="rab" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5" data-testid="wo-rab-tab">RAB</TabsTrigger>
                             </TabsList>
                             <TabsContent value="scope" className="p-3">
                               {(() => {
@@ -9707,7 +9707,7 @@ export default function ProjectDetail() {
                               })()}
                               {['planning', 'planning_person', 'super_admin'].includes(user?.role) && (
                                 <div className="mt-3 flex justify-start">
-                                  <Button size="sm" variant="outline" className="h-8 text-xs border-dashed border-violet-300 text-violet-700 hover:bg-violet-50" data-testid={`wo-add-scope-${wo.work_order_id}`} onClick={() => openAddScopeItem(wo)}>
+                                  <Button size="sm" variant="outline" className="h-8 text-xs border-dashed border-brand-300 text-primary-strong hover:bg-brand-50" data-testid={`wo-add-scope-${wo.work_order_id}`} onClick={() => openAddScopeItem(wo)}>
                                     <Plus className="h-3.5 w-3.5 mr-1" /> Add Item
                                   </Button>
                                 </div>
@@ -9816,7 +9816,7 @@ export default function ProjectDetail() {
                                                   </td>
                                                   <td className="px-2 py-2 text-center align-top">
                                                     {canEdit && (
-                                                      <Button size="sm" variant="ghost" className="h-7 w-7 p-0 text-gray-500 hover:text-violet-700 hover:bg-violet-50" data-testid={`wo-stage-edit-${st.stage_id}`}
+                                                      <Button size="sm" variant="ghost" className="h-7 w-7 p-0 text-gray-500 hover:text-primary-strong hover:bg-brand-50" data-testid={`wo-stage-edit-${st.stage_id}`}
                                                         onClick={(e) => { e.stopPropagation(); openEditWoStage(wo, st); }}>
                                                         <Edit className="h-3.5 w-3.5" />
                                                       </Button>
@@ -9838,12 +9838,12 @@ export default function ProjectDetail() {
                                                         {showApprove && (
                                                           <>
                                                             {user?.role === 'accountant' ? (
-                                                              <Button size="sm" className="h-7 text-xs bg-green-600 hover:bg-green-700" data-testid={`wo-stage-approve-${st.stage_id}`}
+                                                              <Button size="sm" className="h-7 text-xs bg-primary hover:bg-primary-hover" data-testid={`wo-stage-approve-${st.stage_id}`}
                                                                 onClick={(e) => { e.stopPropagation(); handleWoStageApprove(wo.work_order_id, st.stage_id, 'approve', { approved_amount: st.amount }); }}>
                                                                 Process Payment
                                                               </Button>
                                                             ) : (
-                                                              <Button size="sm" className="h-7 text-xs bg-blue-600 hover:bg-blue-700" data-testid={`wo-stage-approve-${st.stage_id}`}
+                                                              <Button size="sm" className="h-7 text-xs bg-primary hover:bg-primary-hover" data-testid={`wo-stage-approve-${st.stage_id}`}
                                                                 onClick={(e) => { e.stopPropagation(); handleWoStageApprove(wo.work_order_id, st.stage_id, 'approve'); }}>
                                                                 Approve
                                                               </Button>
@@ -9855,7 +9855,7 @@ export default function ProjectDetail() {
                                                           </>
                                                         )}
                                                         {canRequestPayment && (
-                                                          <Button size="sm" className="h-7 text-xs bg-amber-600 hover:bg-amber-700" data-testid={`wo-stage-request-${st.stage_id}`}
+                                                          <Button size="sm" className="h-7 text-xs bg-primary hover:bg-primary-hover" data-testid={`wo-stage-request-${st.stage_id}`}
                                                             onClick={(e) => { e.stopPropagation(); handleWoStageRequestPayment(wo.work_order_id, st.stage_id); }}>
                                                             <Send className="h-3 w-3 mr-1" /> Req Payment (RAB)
                                                           </Button>
@@ -9881,7 +9881,7 @@ export default function ProjectDetail() {
                               })() : <p className="text-gray-400 text-center py-4 text-sm">No stages</p>}
                               {['planning', 'planning_person', 'super_admin'].includes(user?.role) && (
                                 <div className="mt-3 flex justify-start">
-                                  <Button size="sm" variant="outline" className="h-8 text-xs border-dashed border-violet-300 text-violet-700 hover:bg-violet-50" data-testid={`wo-add-stage-${wo.work_order_id}`} onClick={() => openAddStage(wo)}>
+                                  <Button size="sm" variant="outline" className="h-8 text-xs border-dashed border-brand-300 text-primary-strong hover:bg-brand-50" data-testid={`wo-add-stage-${wo.work_order_id}`} onClick={() => openAddStage(wo)}>
                                     <Plus className="h-3.5 w-3.5 mr-1" /> Add Stage
                                   </Button>
                                 </div>
@@ -9923,7 +9923,7 @@ export default function ProjectDetail() {
                                     <div className="col-span-2"><Label className="text-[10px] text-gray-500">Rate</Label><Input type="number" value={addAdditionalForm.unit_rate} onChange={e => setAddAdditionalForm(f => ({ ...f, unit_rate: e.target.value }))} className="h-8 text-xs" /></div>
                                     <div className="col-span-1 text-xs font-medium text-violet-700 pb-1.5">{formatCurrency((parseFloat(addAdditionalForm.quantity)||0) * (parseFloat(addAdditionalForm.unit_rate)||0))}</div>
                                     <div className="col-span-2 flex gap-1 pb-0.5">
-                                      <Button size="sm" className="h-8 text-xs bg-violet-600 hover:bg-violet-700" onClick={saveItem} data-testid={`wo-additional-form-save-${ct}`}>Save</Button>
+                                      <Button size="sm" className="h-8 text-xs bg-primary hover:bg-primary-hover" onClick={saveItem} data-testid={`wo-additional-form-save-${ct}`}>Save</Button>
                                       <Button size="sm" variant="ghost" className="h-8 text-xs" onClick={() => setAddAdditionalForm(null)}>Cancel</Button>
                                     </div>
                                   </div>
@@ -10019,7 +10019,7 @@ export default function ProjectDetail() {
                       const totalStages = (wo.stages || []).length;
                       const pendingRequests = (wo.stages || []).filter(s => ['requested','pm_approved','planning_approved'].includes(s.status)).length;
                       return (
-                      <div key={wo.work_order_id} className={`border rounded-lg p-4 hover:border-violet-300 cursor-pointer transition ${wo.status === 'frozen' ? 'border-red-200 bg-red-50/30 opacity-75' : wo.reassigned_from ? 'border-emerald-300 bg-emerald-50/30' : ''}`} onClick={() => setWoViewId(wo.work_order_id)} data-testid={`wo-card-${wo.work_order_id}`}>
+                      <div key={wo.work_order_id} className={`border rounded-lg p-4 hover:border-brand-300 cursor-pointer transition ${wo.status === 'frozen' ? 'border-red-200 bg-red-50/30 opacity-75' : wo.reassigned_from ? 'border-emerald-300 bg-emerald-50/30' : ''}`} onClick={() => setWoViewId(wo.work_order_id)} data-testid={`wo-card-${wo.work_order_id}`}>
                         <div className="flex items-start justify-between gap-3">
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-1 flex-wrap">
@@ -10053,7 +10053,7 @@ export default function ProjectDetail() {
                             <Button
                               size="sm"
                               variant="ghost"
-                              className="h-7 w-7 p-0 text-violet-600 hover:text-violet-800 hover:bg-violet-50"
+                              className="h-7 w-7 p-0 text-primary-strong hover:text-brand-800 hover:bg-brand-50"
                               onClick={() => setRabView({ open: true, projectId, workOrderId: wo.work_order_id, requestId: null })}
                               title="View RAB chain"
                               data-testid={`wo-view-rab-${wo.work_order_id}`}
@@ -10102,7 +10102,7 @@ export default function ProjectDetail() {
                         <Button
                           variant="outline"
                           size="sm"
-                          className="border-violet-300 text-violet-700 hover:bg-violet-50 gap-1 shrink-0"
+                          className="border-brand-300 text-primary-strong hover:bg-brand-50 gap-1 shrink-0"
                           onClick={() => setUseWoTplDialog(true)}
                           data-testid="wo-use-template-btn"
                         >
@@ -10332,7 +10332,7 @@ export default function ProjectDetail() {
                           const dedTotal = (woForm.deductions || []).reduce((s, i) => s + (parseFloat(i.quantity) || 0) * (parseFloat(i.unit_rate) || 0), 0);
                           const grand = scopeTotal + addTotal - dedTotal;
                           return (
-                            <div className="rounded-lg border-2 border-violet-200 bg-gradient-to-br from-violet-50/70 to-white p-3" data-testid="wo-summary-card">
+                            <div className="rounded-lg border-2 border-violet-200 bg-white p-3" data-testid="wo-summary-card">
                               <div className="flex items-end justify-between gap-3 flex-wrap">
                                 <div className="flex-1 min-w-0">
                                   <div className="text-[10px] font-semibold uppercase tracking-wide text-violet-700 mb-1">Work Order Total</div>
@@ -10488,7 +10488,7 @@ export default function ProjectDetail() {
                           const matches = Math.abs(remaining) < 0.5;
                           const overrun = remaining < -0.5;
                           return (
-                            <div className="rounded-lg border-2 border-violet-200 bg-gradient-to-br from-violet-50/70 to-white p-3" data-testid="wo-payment-summary-card">
+                            <div className="rounded-lg border-2 border-violet-200 bg-white p-3" data-testid="wo-payment-summary-card">
                               <div className="flex items-end justify-between gap-3 flex-wrap mb-3">
                                 <div className="flex-1 min-w-0">
                                   <div className="text-[10px] font-semibold uppercase tracking-wide text-violet-700 mb-1">Work Order Total</div>
@@ -10598,7 +10598,7 @@ export default function ProjectDetail() {
                     <Button variant="outline" onClick={() => { setWoDialog(false); setEditingTemplate(null); setEditingTemplateName(''); }}>Cancel</Button>
                     <Button
                       onClick={editingTemplate ? handleSaveTemplateEdit : handleSaveWo}
-                      className="bg-violet-600 hover:bg-violet-700"
+                      className="bg-primary hover:bg-primary-hover"
                       data-testid="wo-save-btn"
                     >
                       {editingTemplate ? 'Save Template' : (editingWo ? 'Update Work Order' : 'Create Work Order')}
@@ -10638,7 +10638,7 @@ export default function ProjectDetail() {
                   </div>
                   <DialogFooter>
                     <Button variant="outline" onClick={() => setSaveWoTplDialog({ open: false, sourceWo: null, name: '', submitting: false })}>Cancel</Button>
-                    <Button onClick={handleSaveWoTemplate} disabled={saveWoTplDialog.submitting} className="bg-violet-600 hover:bg-violet-700" data-testid="wo-save-template-submit">
+                    <Button onClick={handleSaveWoTemplate} disabled={saveWoTplDialog.submitting} className="bg-primary hover:bg-primary-hover" data-testid="wo-save-template-submit">
                       {saveWoTplDialog.submitting ? 'Saving…' : 'Save Template'}
                     </Button>
                   </DialogFooter>
@@ -10657,7 +10657,7 @@ export default function ProjectDetail() {
                       {(user?.role === 'planning' || user?.role === 'planning_person' || user?.role === 'super_admin' || user?.role === 'project_manager') && (
                         <Button
                           size="sm"
-                          className="bg-violet-600 hover:bg-violet-700 h-8 gap-1 shrink-0"
+                          className="bg-primary hover:bg-primary-hover h-8 gap-1 shrink-0"
                           onClick={openNewWoTemplate}
                           data-testid="wo-tpl-new"
                         >
@@ -10671,7 +10671,7 @@ export default function ProjectDetail() {
                       <p className="text-sm text-gray-400 text-center py-8">No saved templates yet. Click "+ New Template" above or use "Save as Template" on any existing Work Order.</p>
                     ) : (
                       woTemplates.map(tpl => (
-                        <div key={tpl.template_id} className="border rounded-lg p-3 hover:border-violet-300 hover:bg-violet-50/40 transition" data-testid={`wo-tpl-row-${tpl.template_id}`}>
+                        <div key={tpl.template_id} className="border rounded-lg p-3 hover:border-brand-300 hover:bg-violet-50/40 transition" data-testid={`wo-tpl-row-${tpl.template_id}`}>
                           <div className="flex items-start justify-between gap-3">
                             <div className="min-w-0 flex-1">
                               <div className="flex items-center gap-2 flex-wrap">
@@ -10684,11 +10684,11 @@ export default function ProjectDetail() {
                               </p>
                             </div>
                             <div className="flex items-center gap-1">
-                              <Button size="sm" className="bg-violet-600 hover:bg-violet-700 h-7 text-xs" onClick={() => applyWoTemplate(tpl)} data-testid={`wo-tpl-apply-${tpl.template_id}`}>Apply</Button>
-                              <Button size="sm" variant="outline" className="h-7 px-2 text-xs border-blue-300 text-blue-700 hover:bg-blue-50" onClick={() => handleDuplicateWoTemplate(tpl)} data-testid={`wo-tpl-duplicate-${tpl.template_id}`} title="Duplicate this template">
+                              <Button size="sm" className="bg-primary hover:bg-primary-hover h-7 text-xs" onClick={() => applyWoTemplate(tpl)} data-testid={`wo-tpl-apply-${tpl.template_id}`}>Apply</Button>
+                              <Button size="sm" variant="outline" className="h-7 px-2 text-xs border-brand-300 text-primary-strong hover:bg-brand-50" onClick={() => handleDuplicateWoTemplate(tpl)} data-testid={`wo-tpl-duplicate-${tpl.template_id}`} title="Duplicate this template">
                                 <Copy className="h-3 w-3 mr-1" /> Duplicate
                               </Button>
-                              <Button size="sm" variant="outline" className="h-7 px-2 text-xs border-amber-300 text-amber-700 hover:bg-amber-50" onClick={() => openEditWoTemplate(tpl)} data-testid={`wo-tpl-edit-${tpl.template_id}`}>
+                              <Button size="sm" variant="outline" className="h-7 px-2 text-xs border-brand-300 text-primary-strong hover:bg-brand-50" onClick={() => openEditWoTemplate(tpl)} data-testid={`wo-tpl-edit-${tpl.template_id}`}>
                                 <Edit className="h-3 w-3 mr-1" /> Edit
                               </Button>
                               <Button size="sm" variant="ghost" className="h-7 w-7 p-0 text-red-400 hover:text-red-600" onClick={() => handleDeleteWoTemplate(tpl)} data-testid={`wo-tpl-del-${tpl.template_id}`}>
@@ -10745,7 +10745,7 @@ export default function ProjectDetail() {
                   </div>
                   <DialogFooter>
                     <Button variant="outline" onClick={() => setEditItemDialog({ open: false, type: null, id: null })}>Cancel</Button>
-                    <Button onClick={handleSaveEditItem} className="bg-emerald-600 hover:bg-emerald-700" data-testid="edit-item-save">Save</Button>
+                    <Button onClick={handleSaveEditItem} className="bg-primary hover:bg-primary-hover" data-testid="edit-item-save">Save</Button>
                   </DialogFooter>
                 </DialogContent>
               </Dialog>
@@ -10787,7 +10787,7 @@ export default function ProjectDetail() {
                 <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
                   <DialogHeader>
                     <DialogTitle className="flex items-center gap-2">
-                      <Snowflake className="h-4 w-4 text-blue-500" />Reassign Work Order
+                      <Snowflake className="h-4 w-4 text-primary" />Reassign Work Order
                     </DialogTitle>
                     <DialogDescription>
                       The current work order will be frozen. Select a new contractor and review the balance items below.
@@ -10943,7 +10943,7 @@ export default function ProjectDetail() {
                         <Button
                           size="sm"
                           onClick={() => { setLabourSubTab('workorders'); setTimeout(() => openWoDialog(), 0); }}
-                          className="bg-violet-600 hover:bg-violet-700"
+                          className="bg-primary hover:bg-primary-hover"
                           data-testid="requests-create-wo-btn"
                         >
                           <Plus className="h-3.5 w-3.5 mr-1" />Create Work Order
@@ -11014,7 +11014,7 @@ export default function ProjectDetail() {
                     <div className="flex justify-between items-center mb-4">
                       <p className="text-sm text-gray-500">{workOrders.length} work orders</p>
                       {(user?.role === 'super_admin' || user?.role === 'planning' || user?.role === 'planning_person' || user?.role === 'project_manager' || user?.role === 'cre') && (
-                        <Button size="sm" onClick={() => openWoDialog()} className="bg-violet-600 hover:bg-violet-700" data-testid="labour-create-wo-btn">
+                        <Button size="sm" onClick={() => openWoDialog()} className="bg-primary hover:bg-primary-hover" data-testid="labour-create-wo-btn">
                           <Plus className="h-3.5 w-3.5 mr-1" />Create Work Order
                         </Button>
                       )}
@@ -11054,11 +11054,11 @@ export default function ProjectDetail() {
                               </div>
                               <Tabs defaultValue="scope" className="w-full">
                                 <TabsList className="w-full rounded-none border-b bg-white h-auto p-0 gap-0">
-                                  <TabsTrigger value="scope" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-violet-50 data-[state=active]:text-violet-700 data-[state=active]:border-violet-600 data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5">Scope ({wo.scope_items?.length || 0})</TabsTrigger>
-                                  <TabsTrigger value="stages" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-violet-50 data-[state=active]:text-violet-700 data-[state=active]:border-violet-600 data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5">Stages ({wo.stages?.length || 0})</TabsTrigger>
-                                  <TabsTrigger value="additional" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-violet-50 data-[state=active]:text-violet-700 data-[state=active]:border-violet-600 data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5">Additional ({wo.additional_work?.length || 0})</TabsTrigger>
-                                  <TabsTrigger value="dlr" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-violet-50 data-[state=active]:text-violet-700 data-[state=active]:border-violet-600 data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5" data-testid="labour-wo-dlr-tab">DLR</TabsTrigger>
-                                  <TabsTrigger value="rab" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-violet-50 data-[state=active]:text-violet-700 data-[state=active]:border-violet-600 data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5" data-testid="labour-wo-rab-tab">RAB</TabsTrigger>
+                                  <TabsTrigger value="scope" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5">Scope ({wo.scope_items?.length || 0})</TabsTrigger>
+                                  <TabsTrigger value="stages" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5">Stages ({wo.stages?.length || 0})</TabsTrigger>
+                                  <TabsTrigger value="additional" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5">Additional ({wo.additional_work?.length || 0})</TabsTrigger>
+                                  <TabsTrigger value="dlr" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5" data-testid="labour-wo-dlr-tab">DLR</TabsTrigger>
+                                  <TabsTrigger value="rab" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5" data-testid="labour-wo-rab-tab">RAB</TabsTrigger>
                                 </TabsList>
                                 <TabsContent value="scope" className="p-3">
                                   {(() => {
@@ -11071,7 +11071,7 @@ export default function ProjectDetail() {
                                   })()}
                                   {['planning', 'planning_person', 'super_admin'].includes(user?.role) && (
                                     <div className="mt-3 flex justify-start">
-                                      <Button size="sm" variant="outline" className="h-8 text-xs border-dashed border-violet-300 text-violet-700 hover:bg-violet-50" data-testid={`labour-wo-add-scope-${wo.work_order_id}`} onClick={() => openAddScopeItem(wo)}>
+                                      <Button size="sm" variant="outline" className="h-8 text-xs border-dashed border-brand-300 text-primary-strong hover:bg-brand-50" data-testid={`labour-wo-add-scope-${wo.work_order_id}`} onClick={() => openAddScopeItem(wo)}>
                                         <Plus className="h-3.5 w-3.5 mr-1" /> Add Item
                                       </Button>
                                     </div>
@@ -11187,7 +11187,7 @@ export default function ProjectDetail() {
                                                       </td>
                                                       <td className="px-2 py-2 text-center align-top">
                                                         {canEdit && (
-                                                          <Button size="sm" variant="ghost" className="h-7 w-7 p-0 text-gray-500 hover:text-violet-700 hover:bg-violet-50" data-testid={`labour-wo-stage-edit-${st.stage_id}`}
+                                                          <Button size="sm" variant="ghost" className="h-7 w-7 p-0 text-gray-500 hover:text-primary-strong hover:bg-brand-50" data-testid={`labour-wo-stage-edit-${st.stage_id}`}
                                                             onClick={(e) => { e.stopPropagation(); openEditWoStage(wo, st); }}>
                                                             <Edit className="h-3.5 w-3.5" />
                                                           </Button>
@@ -11209,12 +11209,12 @@ export default function ProjectDetail() {
                                                             {showApprove && (
                                                               <>
                                                                 {user?.role === 'accountant' ? (
-                                                                  <Button size="sm" className="h-7 text-xs bg-green-600 hover:bg-green-700" data-testid={`labour-wo-stage-approve-${st.stage_id}`}
+                                                                  <Button size="sm" className="h-7 text-xs bg-primary hover:bg-primary-hover" data-testid={`labour-wo-stage-approve-${st.stage_id}`}
                                                                     onClick={(e) => { e.stopPropagation(); handleWoStageApprove(wo.work_order_id, st.stage_id, 'approve', { approved_amount: st.amount }); }}>
                                                                     Process Payment
                                                                   </Button>
                                                                 ) : (
-                                                                  <Button size="sm" className="h-7 text-xs bg-blue-600 hover:bg-blue-700" data-testid={`labour-wo-stage-approve-${st.stage_id}`}
+                                                                  <Button size="sm" className="h-7 text-xs bg-primary hover:bg-primary-hover" data-testid={`labour-wo-stage-approve-${st.stage_id}`}
                                                                     onClick={(e) => { e.stopPropagation(); handleWoStageApprove(wo.work_order_id, st.stage_id, 'approve'); }}>
                                                                     Approve
                                                                   </Button>
@@ -11226,7 +11226,7 @@ export default function ProjectDetail() {
                                                               </>
                                                             )}
                                                             {canRequestPayment && (
-                                                              <Button size="sm" className="h-7 text-xs bg-amber-600 hover:bg-amber-700" data-testid={`labour-wo-stage-request-${st.stage_id}`}
+                                                              <Button size="sm" className="h-7 text-xs bg-primary hover:bg-primary-hover" data-testid={`labour-wo-stage-request-${st.stage_id}`}
                                                                 onClick={(e) => { e.stopPropagation(); handleWoStageRequest(wo.work_order_id, st.stage_id); }}>
                                                                 <Send className="h-3 w-3 mr-1" /> Req Payment (RAB)
                                                               </Button>
@@ -11251,7 +11251,7 @@ export default function ProjectDetail() {
                                   })() : <p className="text-gray-400 text-center py-4 text-sm">No stages</p>}
                                   {['planning', 'planning_person', 'super_admin'].includes(user?.role) && (
                                     <div className="mt-3 flex justify-start">
-                                      <Button size="sm" variant="outline" className="h-8 text-xs border-dashed border-violet-300 text-violet-700 hover:bg-violet-50" data-testid={`labour-wo-add-stage-${wo.work_order_id}`} onClick={() => openAddStage(wo)}>
+                                      <Button size="sm" variant="outline" className="h-8 text-xs border-dashed border-brand-300 text-primary-strong hover:bg-brand-50" data-testid={`labour-wo-add-stage-${wo.work_order_id}`} onClick={() => openAddStage(wo)}>
                                         <Plus className="h-3.5 w-3.5 mr-1" /> Add Stage
                                       </Button>
                                     </div>
@@ -11293,7 +11293,7 @@ export default function ProjectDetail() {
                                         <div className="col-span-2"><Label className="text-[10px] text-gray-500">Rate</Label><Input type="number" value={addAdditionalForm.unit_rate} onChange={e => setAddAdditionalForm(f => ({ ...f, unit_rate: e.target.value }))} className="h-8 text-xs" /></div>
                                         <div className="col-span-1 text-xs font-medium text-violet-700 pb-1.5">{formatCurrency((parseFloat(addAdditionalForm.quantity)||0) * (parseFloat(addAdditionalForm.unit_rate)||0))}</div>
                                         <div className="col-span-2 flex gap-1 pb-0.5">
-                                          <Button size="sm" className="h-8 text-xs bg-violet-600 hover:bg-violet-700" onClick={saveItem} data-testid={`wo-additional-form-save-${ct}`}>Save</Button>
+                                          <Button size="sm" className="h-8 text-xs bg-primary hover:bg-primary-hover" onClick={saveItem} data-testid={`wo-additional-form-save-${ct}`}>Save</Button>
                                           <Button size="sm" variant="ghost" className="h-8 text-xs" onClick={() => setAddAdditionalForm(null)}>Cancel</Button>
                                         </div>
                                       </div>
@@ -11373,7 +11373,7 @@ export default function ProjectDetail() {
                                                   <td className="px-2 py-1"><Input type="number" value={addAdditionalForm.unit_rate} onChange={e => setAddAdditionalForm(f => ({ ...f, unit_rate: e.target.value }))} className="h-8 text-xs text-right" /></td>
                                                   <td className="px-3 py-2 text-right font-medium">{formatCurrency((parseFloat(addAdditionalForm.quantity)||0) * (parseFloat(addAdditionalForm.unit_rate)||0))}</td>
                                                   <td className="px-3 py-2 text-center"><div className="flex gap-1 justify-center">
-                                                    <Button size="sm" className="h-7 text-[10px] bg-violet-600 hover:bg-violet-700" onClick={() => editItem(a._idx, { description: addAdditionalForm.description, unit: addAdditionalForm.unit, quantity: parseFloat(addAdditionalForm.quantity)||0, unit_rate: parseFloat(addAdditionalForm.unit_rate)||0 })}>Save</Button>
+                                                    <Button size="sm" className="h-7 text-[10px] bg-primary hover:bg-primary-hover" onClick={() => editItem(a._idx, { description: addAdditionalForm.description, unit: addAdditionalForm.unit, quantity: parseFloat(addAdditionalForm.quantity)||0, unit_rate: parseFloat(addAdditionalForm.unit_rate)||0 })}>Save</Button>
                                                     <Button size="sm" variant="ghost" className="h-7 text-[10px]" onClick={() => setAddAdditionalForm(null)}>Cancel</Button>
                                                   </div></td>
                                                 </tr>
@@ -11411,7 +11411,7 @@ export default function ProjectDetail() {
                                                 </td>
                                               )}
                                               {canEdit && <td className="px-3 py-2 text-center"><div className="flex gap-1 justify-center">
-                                                <Button size="sm" variant="ghost" className="h-6 w-6 p-0 text-blue-600 hover:bg-blue-50" onClick={() => setAddAdditionalForm({ woId: wo.work_order_id, claim_type: ct, section_id: a.section_id || null, editing_idx: a._idx, description: a.description, unit: a.unit, quantity: a.quantity, unit_rate: a.unit_rate })} data-testid={`wo-additional-edit-${a._idx}`}>
+                                                <Button size="sm" variant="ghost" className="h-6 w-6 p-0 text-primary-strong hover:bg-brand-50" onClick={() => setAddAdditionalForm({ woId: wo.work_order_id, claim_type: ct, section_id: a.section_id || null, editing_idx: a._idx, description: a.description, unit: a.unit, quantity: a.quantity, unit_rate: a.unit_rate })} data-testid={`wo-additional-edit-${a._idx}`}>
                                                   <Edit className="h-3 w-3" />
                                                 </Button>
                                                 <Button size="sm" variant="ghost" className="h-6 w-6 p-0 text-red-500 hover:bg-red-50" onClick={() => delItem(a._idx)} data-testid={`wo-additional-delete-${a._idx}`}>
@@ -11437,7 +11437,7 @@ export default function ProjectDetail() {
                                             const secSubtotal = secItems.reduce((s, r) => s + (r.total || 0), 0);
                                             return (
                                               <div key={sec.section_id} className="border rounded-lg overflow-hidden" data-testid={`wo-additional-section-${sec.section_id}`}>
-                                                <div className="flex items-center justify-between px-3 py-2 bg-gradient-to-r from-violet-50 to-blue-50 border-b">
+                                                <div className="flex items-center justify-between px-3 py-2 bg-violet-50 border-b">
                                                   <div className="flex items-center gap-2">
                                                     {canTogglePlanning ? (
                                                       <Button size="sm" variant="ghost" onClick={() => toggleSectionLock(sec)} className={`h-7 px-2 text-[10px] ${sec.is_locked ? 'text-gray-600' : 'text-emerald-700'}`} data-testid={`wo-additional-section-lock-${sec.section_id}`}>
@@ -11559,7 +11559,7 @@ export default function ProjectDetail() {
                           const totalStages = (wo.stages || []).length;
                           const pendingRequests = (wo.stages || []).filter(s => ['requested','pm_approved','planning_approved'].includes(s.status)).length;
                           return (
-                          <div key={wo.work_order_id} className={`border rounded-lg p-4 hover:border-violet-300 cursor-pointer transition ${wo.status === 'frozen' ? 'border-red-200 bg-red-50/30 opacity-75' : ''}`} onClick={() => setLabourWoViewId(wo.work_order_id)} data-testid={`labour-wo-card-${wo.work_order_id}`}>
+                          <div key={wo.work_order_id} className={`border rounded-lg p-4 hover:border-brand-300 cursor-pointer transition ${wo.status === 'frozen' ? 'border-red-200 bg-red-50/30 opacity-75' : ''}`} onClick={() => setLabourWoViewId(wo.work_order_id)} data-testid={`labour-wo-card-${wo.work_order_id}`}>
                             <div className="flex items-start justify-between gap-3">
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-1 flex-wrap">
@@ -11591,7 +11591,7 @@ export default function ProjectDetail() {
                                 <Button
                                   size="sm"
                                   variant="ghost"
-                                  className="h-7 w-7 p-0 text-violet-600 hover:text-violet-800 hover:bg-violet-50"
+                                  className="h-7 w-7 p-0 text-primary-strong hover:text-brand-800 hover:bg-brand-50"
                                   onClick={() => setRabView({ open: true, projectId, workOrderId: wo.work_order_id, requestId: null })}
                                   title="View RAB chain"
                                   data-testid={`labour-wo-view-rab-${wo.work_order_id}`}
@@ -11877,7 +11877,7 @@ export default function ProjectDetail() {
                 {(designData.site_plans.length > 0 || designData.design_files.length > 0) && (
                   <div className="space-y-4">
                     <h3 className="text-base font-bold flex items-center gap-2">
-                      <Layers className="h-5 w-5 text-indigo-600" />
+                      <Layers className="h-5 w-5 text-primary" />
                       Architect Designs
                     </h3>
 
@@ -11910,7 +11910,7 @@ export default function ProjectDetail() {
                                     </span>
                                   </td>
                                   <td className="px-3 py-2 text-center">
-                                    {plan.drive_link ? <a href={plan.drive_link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-xs">Open</a> : '-'}
+                                    {plan.drive_link ? <a href={plan.drive_link} target="_blank" rel="noopener noreferrer" className="text-primary-strong hover:underline text-xs">Open</a> : '-'}
                                   </td>
                                   <td className="px-3 py-2 text-xs text-gray-500">{plan.remarks || '-'}</td>
                                 </tr>
@@ -11933,7 +11933,7 @@ export default function ProjectDetail() {
                                 <p className="text-xs text-gray-400">{file.file_type === '3d_photo' ? '3D Photo' : 'Elevation'} {file.remarks ? `- ${file.remarks}` : ''}</p>
                               </div>
                               {file.drive_link && (
-                                <a href={file.drive_link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-xs border border-blue-200 rounded px-2 py-1">
+                                <a href={file.drive_link} target="_blank" rel="noopener noreferrer" className="text-primary-strong hover:underline text-xs border border-brand-300 rounded px-2 py-1">
                                   Open Drive
                                 </a>
                               )}
@@ -11960,7 +11960,7 @@ export default function ProjectDetail() {
                           <button
                             onClick={() => setDocsSubTab('final_drawing')}
                             className={`px-3 py-2 text-sm font-medium border-b-2 transition-colors flex items-center gap-1.5 ${
-                              docsSubTab === 'final_drawing' ? 'border-amber-600 text-amber-700' : 'border-transparent text-gray-500 hover:text-gray-700'
+                              docsSubTab === 'final_drawing' ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-gray-700'
                             }`}
                             data-testid="docs-subtab-final-drawing"
                           >
@@ -11971,7 +11971,7 @@ export default function ProjectDetail() {
                           <button
                             onClick={() => setDocsSubTab('documents')}
                             className={`px-3 py-2 text-sm font-medium border-b-2 transition-colors flex items-center gap-1.5 ${
-                              docsSubTab === 'documents' ? 'border-amber-600 text-amber-700' : 'border-transparent text-gray-500 hover:text-gray-700'
+                              docsSubTab === 'documents' ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-gray-700'
                             }`}
                             data-testid="docs-subtab-documents"
                           >
@@ -11982,7 +11982,7 @@ export default function ProjectDetail() {
                           <button
                             onClick={() => setDocsSubTab('process_images')}
                             className={`px-3 py-2 text-sm font-medium border-b-2 transition-colors flex items-center gap-1.5 ${
-                              docsSubTab === 'process_images' ? 'border-amber-600 text-amber-700' : 'border-transparent text-gray-500 hover:text-gray-700'
+                              docsSubTab === 'process_images' ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-gray-700'
                             }`}
                             data-testid="docs-subtab-process-images"
                           >
@@ -12157,7 +12157,7 @@ export default function ProjectDetail() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setCollectPaymentDialog(false)}>Cancel</Button>
-            <Button onClick={handleCollectPayment} className="bg-green-600 hover:bg-green-700">
+            <Button onClick={handleCollectPayment} className="bg-primary hover:bg-primary-hover">
               <CheckCircle2 className="h-4 w-4 mr-2" />
               Confirm Collection
             </Button>
@@ -12174,7 +12174,7 @@ export default function ProjectDetail() {
         <DialogContent className="max-w-md" data-testid="rab-request-dialog">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Send className="h-5 w-5 text-amber-600" /> Request Payment (RAB)
+              <Send className="h-5 w-5 text-primary" /> Request Payment (RAB)
             </DialogTitle>
             <DialogDescription>
               Submit a Running Account Bill for this stage. It will be reviewed by PM → QC → Planning → Accountant.
@@ -12207,7 +12207,7 @@ export default function ProjectDetail() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setRabDialog({ open: false, workOrderId: null, stageId: null, amount: '', notes: '', submitting: false })} disabled={rabDialog.submitting}>Cancel</Button>
-            <Button className="bg-amber-600 hover:bg-amber-700" onClick={submitRabDialog} disabled={rabDialog.submitting} data-testid="rab-submit">
+            <Button className="bg-primary hover:bg-primary-hover" onClick={submitRabDialog} disabled={rabDialog.submitting} data-testid="rab-submit">
               <Send className="h-4 w-4 mr-1" /> {rabDialog.submitting ? 'Submitting…' : 'Submit RAB'}
             </Button>
           </DialogFooter>
@@ -12222,7 +12222,7 @@ export default function ProjectDetail() {
       >
         <DialogContent className="max-w-md">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2"><Send className="h-5 w-5 text-amber-600" />Request {reqPayDialog.mode === 'addition_section' ? 'Section Payment' : reqPayDialog.mode === 'addition' ? 'Additional Payment' : 'Payment'}</DialogTitle>
+            <DialogTitle className="flex items-center gap-2"><Send className="h-5 w-5 text-primary" />Request {reqPayDialog.mode === 'addition_section' ? 'Section Payment' : reqPayDialog.mode === 'addition' ? 'Additional Payment' : 'Payment'}</DialogTitle>
             <DialogDescription>
               {reqPayDialog.mode === 'addition_section'
                 ? `Send all ${reqPayDialog.items?.length || 0} client-approved rows under "${reqPayDialog.sectionName}" to CRE as a single Payment Schedule entry. Pick the month it should be collected.`
@@ -12269,7 +12269,7 @@ export default function ProjectDetail() {
               Cancel
             </Button>
             <Button
-              className="bg-amber-600 hover:bg-amber-700"
+              className="bg-primary hover:bg-primary-hover"
               onClick={async () => {
                 if (!reqPayDialog.date) {
                   toast.error('Please pick the expected payment date');
@@ -12407,7 +12407,7 @@ export default function ProjectDetail() {
           <DialogFooter>
             <Button variant="outline" onClick={() => setAddTplDialog({ open: false, text: '', submitting: false })} disabled={addTplDialog.submitting}>Cancel</Button>
             <Button
-              className="bg-emerald-600 hover:bg-emerald-700"
+              className="bg-primary hover:bg-primary-hover"
               data-testid="wo-tpl-add-confirm"
               disabled={addTplDialog.submitting || !addTplDialog.text.trim()}
               onClick={async () => {
@@ -12482,7 +12482,7 @@ export default function ProjectDetail() {
       >
         <DialogContent className="max-w-3xl max-h-[88vh] overflow-y-auto" data-testid="stage-detail-dialog">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-blue-700">
+            <DialogTitle className="flex items-center gap-2 text-foreground">
               <Eye className="h-5 w-5" /> Payment Stage Details
             </DialogTitle>
             {stageDetailDialog.data?.summary?.stage_name && (
@@ -12526,7 +12526,7 @@ export default function ProjectDetail() {
                     <Button
                       size="sm"
                       variant="outline"
-                      className="h-7 px-2 text-[11px] gap-1 border-blue-300 text-blue-700 hover:bg-blue-50"
+                      className="h-7 px-2 text-[11px] gap-1 border-brand-300 text-primary-strong hover:bg-brand-50"
                       onClick={handleResyncStage}
                       disabled={resyncingStage}
                       title="Recompute Received from this stage's actually-linked income records"
@@ -12699,7 +12699,7 @@ export default function ProjectDetail() {
         <DialogContent className="max-w-md" data-testid="ps-resubmit-dialog">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <RefreshCw className="h-5 w-5 text-blue-600" />
+              <RefreshCw className="h-5 w-5 text-primary" />
               {psResubmitDialog.mode === 'cre' ? 'Resubmit to CRE' : 'Re-request Payment'}
             </DialogTitle>
             <DialogDescription>
@@ -12755,7 +12755,7 @@ export default function ProjectDetail() {
               Cancel
             </Button>
             <Button
-              className="bg-blue-600 hover:bg-blue-700"
+              className="bg-primary hover:bg-primary-hover"
               data-testid="ps-resubmit-submit"
               onClick={async () => {
                 const stage = psResubmitDialog.stage;
@@ -12911,7 +12911,7 @@ export default function ProjectDetail() {
         <DialogContent className="max-w-2xl" data-testid="add-wo-item-dialog">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Plus className="h-5 w-5 text-violet-600" />
+              <Plus className="h-5 w-5 text-primary" />
               {addWoItemDialog.mode === 'scope' ? 'Add Scope Item' : 'Add Stage'}
             </DialogTitle>
             <DialogDescription className="text-xs">
@@ -13030,7 +13030,7 @@ export default function ProjectDetail() {
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setAddWoItemDialog(prev => ({ ...prev, open: false }))} data-testid="add-wo-item-cancel">Cancel</Button>
-            <Button onClick={submitAddWoItem} disabled={addWoItemSaving} className="bg-violet-600 hover:bg-violet-700" data-testid="add-wo-item-save">
+            <Button onClick={submitAddWoItem} disabled={addWoItemSaving} className="bg-primary hover:bg-primary-hover" data-testid="add-wo-item-save">
               {addWoItemSaving ? 'Saving…' : (addWoItemDialog.mode === 'scope' ? 'Add Item' : 'Add Stage')}
             </Button>
           </DialogFooter>
@@ -13042,7 +13042,7 @@ export default function ProjectDetail() {
         <DialogContent className="max-w-md" data-testid="edit-wo-stage-dialog">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Edit className="h-5 w-5 text-violet-600" /> Edit Stage
+              <Edit className="h-5 w-5 text-primary" /> Edit Stage
             </DialogTitle>
             {editWoStageDialog.stage?.payment_requests?.length > 0 && (
               <DialogDescription className="text-xs text-amber-700">
@@ -13074,7 +13074,7 @@ export default function ProjectDetail() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setEditWoStageDialog({ open: false, wo: null, stage: null, name: '', amount: '' })} data-testid="edit-wo-stage-cancel">Cancel</Button>
-            <Button onClick={saveEditWoStage} disabled={editWoStageSaving} className="bg-violet-600 hover:bg-violet-700" data-testid="edit-wo-stage-save">
+            <Button onClick={saveEditWoStage} disabled={editWoStageSaving} className="bg-primary hover:bg-primary-hover" data-testid="edit-wo-stage-save">
               {editWoStageSaving ? 'Saving…' : 'Save Changes'}
             </Button>
           </DialogFooter>
@@ -13124,7 +13124,7 @@ export default function ProjectDetail() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setLabourAdvanceDialog({ open: false, stage: null, workOrder: null, amount: '', date: '', reason: '' })} disabled={labourAdvanceSaving}>Cancel</Button>
-            <Button onClick={submitLabourAdvanceRequest} disabled={labourAdvanceSaving} className="bg-emerald-600 hover:bg-emerald-700 text-white" data-testid="labour-advance-submit">
+            <Button onClick={submitLabourAdvanceRequest} disabled={labourAdvanceSaving} className="bg-primary hover:bg-primary-hover text-white" data-testid="labour-advance-submit">
               {labourAdvanceSaving ? 'Submitting…' : (<><ArrowRight className="h-4 w-4 mr-1" /> Submit Request</>)}
             </Button>
           </DialogFooter>
@@ -13179,7 +13179,7 @@ export default function ProjectDetail() {
           <DialogFooter>
             <Button variant="outline" onClick={() => setCreatingSection(null)} data-testid="create-section-cancel">Cancel</Button>
             <Button
-              className="bg-blue-600 hover:bg-blue-700"
+              className="bg-primary hover:bg-primary-hover"
               disabled={!creatingSection?.name?.trim()}
               onClick={async () => {
                 try {

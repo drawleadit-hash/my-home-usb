@@ -230,7 +230,7 @@ export default function Expenses() {
 
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
-          <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
+          <Card className="bg-orange-50 border-orange-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">Total Expenses</CardTitle>
             </CardHeader>
@@ -241,7 +241,7 @@ export default function Expenses() {
               </div>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+          <Card className="bg-blue-50 border-blue-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">Material</CardTitle>
             </CardHeader>
@@ -249,7 +249,7 @@ export default function Expenses() {
               <div className="text-2xl font-bold text-amber-700">₹{(materialExpenses / 100000).toFixed(2)}L</div>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+          <Card className="bg-green-50 border-green-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">Labour</CardTitle>
             </CardHeader>
@@ -257,7 +257,7 @@ export default function Expenses() {
               <div className="text-2xl font-bold text-green-700">₹{(labourExpenses / 100000).toFixed(2)}L</div>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200">
+          <Card className="bg-gray-50 border-gray-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">Total Entries</CardTitle>
             </CardHeader>

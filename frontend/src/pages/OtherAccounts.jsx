@@ -153,7 +153,7 @@ export default function OtherAccounts() {
             </h1>
             <p className="text-xs text-gray-500 mt-0.5">Sub-contractors, consultants, statutory & misc payees with bank details for Direct Transfer</p>
           </div>
-          <Button onClick={openCreate} className="bg-emerald-600 hover:bg-emerald-700 gap-1" data-testid="oa-add-btn">
+          <Button onClick={openCreate} className="bg-primary hover:bg-primary-hover gap-1" data-testid="oa-add-btn">
             <Plus className="h-4 w-4" /> Add New Account
           </Button>
         </div>
@@ -304,7 +304,7 @@ export default function OtherAccounts() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setDialogOpen(false)} disabled={submitting}>Cancel</Button>
-            <Button onClick={submit} disabled={submitting} className="bg-emerald-600 hover:bg-emerald-700" data-testid="oa-form-submit">
+            <Button onClick={submit} disabled={submitting} className="bg-primary hover:bg-primary-hover" data-testid="oa-form-submit">
               {submitting ? <><Loader2 className="h-4 w-4 mr-1 animate-spin" /> Saving…</> : (editing ? 'Save Changes' : 'Create Account')}
             </Button>
           </DialogFooter>

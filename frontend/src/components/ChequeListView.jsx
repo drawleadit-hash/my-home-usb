@@ -537,7 +537,7 @@ export default function ChequeListView({ scope = 'cre', projectId = null, userRo
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setOpenDialog({ open: false, cheque: null, remarks: '' })} disabled={submitting}>Cancel</Button>
-            <Button className="bg-emerald-600 hover:bg-emerald-700" onClick={handleOpen} disabled={submitting} data-testid="cheque-open-confirm">
+            <Button className="bg-primary hover:bg-primary-hover" onClick={handleOpen} disabled={submitting} data-testid="cheque-open-confirm">
               {submitting ? <><Loader2 className="h-4 w-4 mr-1 animate-spin" /> Opening…</> : <><CheckCircle2 className="h-4 w-4 mr-1" /> Open Cheque</>}
             </Button>
           </DialogFooter>
@@ -576,7 +576,7 @@ export default function ChequeListView({ scope = 'cre', projectId = null, userRo
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setRequestDialog({ open: false, cheque: null, remarks: '' })} disabled={submitting}>Cancel</Button>
-            <Button className="bg-blue-600 hover:bg-blue-700" onClick={handleRequestOpen} disabled={submitting} data-testid="cheque-request-confirm">
+            <Button className="bg-primary hover:bg-primary-hover" onClick={handleRequestOpen} disabled={submitting} data-testid="cheque-request-confirm">
               {submitting ? <><Loader2 className="h-4 w-4 mr-1 animate-spin" /> Sending…</> : <><Lock className="h-4 w-4 mr-1" /> Send Request</>}
             </Button>
           </DialogFooter>
@@ -643,7 +643,7 @@ export default function ChequeListView({ scope = 'cre', projectId = null, userRo
       <Dialog open={usageDialog.open} onOpenChange={(o) => !o && setUsageDialog({ open: false, cheque: null, data: null, loading: false })}>
         <DialogContent className="max-w-3xl max-h-[88vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-blue-700">
+            <DialogTitle className="flex items-center gap-2 text-foreground">
               <Eye className="h-5 w-5" /> Cheque Usage Details
             </DialogTitle>
           </DialogHeader>
@@ -797,7 +797,7 @@ export default function ChequeListView({ scope = 'cre', projectId = null, userRo
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setRetrieveDialog({ open: false, cheque: null, reason: '', password: '' })} disabled={submitting}>Cancel</Button>
-            <Button className="bg-emerald-600 hover:bg-emerald-700" onClick={handleRetrieve} disabled={submitting || !retrieveDialog.password || !retrieveDialog.reason.trim()} data-testid="cheque-retrieve-confirm">
+            <Button className="bg-primary hover:bg-primary-hover" onClick={handleRetrieve} disabled={submitting || !retrieveDialog.password || !retrieveDialog.reason.trim()} data-testid="cheque-retrieve-confirm">
               {submitting ? <><Loader2 className="h-4 w-4 mr-1 animate-spin" /> Retrieving…</> : <><RotateCcw className="h-4 w-4 mr-1" /> Retrieve</>}
             </Button>
           </DialogFooter>
@@ -989,7 +989,7 @@ function ChequeTable({ rows, canOpen, canRequestOpen, canBounce, canDelete, canD
                         {isLockedIncoming && canOpen ? (
                           <Button
                             size="sm"
-                            className="h-7 text-[10px] bg-emerald-600 hover:bg-emerald-700"
+                            className="h-7 text-[10px] bg-primary hover:bg-primary-hover"
                             onClick={() => onOpenRequest(c)}
                             data-testid={`cheque-open-btn-${c.cheque_id}`}
                           >
@@ -999,7 +999,7 @@ function ChequeTable({ rows, canOpen, canRequestOpen, canBounce, canDelete, canD
                           <Button
                             size="sm"
                             variant="outline"
-                            className="h-7 text-[10px] border-blue-300 text-blue-700 hover:bg-blue-50"
+                            className="h-7 text-[10px] border-brand-300 text-primary-strong hover:bg-brand-50"
                             onClick={() => onRequestOpen(c)}
                             data-testid={`cheque-request-btn-${c.cheque_id}`}
                           >
@@ -1039,7 +1039,7 @@ function ChequeTable({ rows, canOpen, canRequestOpen, canBounce, canDelete, canD
                           <Button
                             size="sm"
                             variant="ghost"
-                            className="h-7 w-7 p-0 text-blue-700 hover:bg-blue-50"
+                            className="h-7 w-7 p-0 text-primary-strong hover:bg-brand-50"
                             title="View cheque details"
                             onClick={() => onView(c)}
                             data-testid={`cheque-view-btn-${c.cheque_id}`}

@@ -384,7 +384,7 @@ export default function REProjectsPage({ embedded = false }) {
   if (loading && !user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <RefreshCw className="h-6 w-6 animate-spin text-purple-600" />
+        <RefreshCw className="h-6 w-6 animate-spin text-primary" />
       </div>
     );
   }
@@ -489,7 +489,7 @@ export default function REProjectsPage({ embedded = false }) {
         <Card>
           <CardHeader className="border-b">
             <CardTitle className="flex items-center gap-2">
-              <Calculator className="h-5 w-5 text-purple-600" />
+              <Calculator className="h-5 w-5 text-primary" />
               RE Projects - {activeTab.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
             </CardTitle>
           </CardHeader>
@@ -598,7 +598,7 @@ export default function REProjectsPage({ embedded = false }) {
                         {canEdit && project.status === 're_requested' && (
                           <Button
                             size="sm"
-                            className="bg-amber-600 hover:bg-amber-700"
+                            className="bg-primary hover:bg-primary-hover"
                             onClick={() => handleStartWork(project)}
                             data-testid={`start-work-${project.re_project_id}`}
                           >
@@ -618,7 +618,7 @@ export default function REProjectsPage({ embedded = false }) {
                             {['re_in_progress', 're_rejected'].includes(project.status) && (
                               <Button 
                                 size="sm"
-                                className="bg-purple-600 hover:bg-purple-700"
+                                className="bg-primary hover:bg-primary-hover"
                                 onClick={() => handleSubmitForApproval(project.re_project_id)}
                                 data-testid={`submit-re-${project.re_project_id}`}
                               >
@@ -642,7 +642,7 @@ export default function REProjectsPage({ embedded = false }) {
                         {canEdit && project.revision_requested && ['re_approved', 'sent_to_client'].includes(project.status) && (
                           <Button 
                             size="sm"
-                            className="bg-amber-600 hover:bg-amber-700 text-white"
+                            className="bg-primary hover:bg-primary-hover text-white"
                             onClick={() => handleCreateRevision(project)}
                             data-testid={`create-revision-requested-${project.re_project_id}`}
                           >
@@ -663,7 +663,7 @@ export default function REProjectsPage({ embedded = false }) {
                           variant="outline" 
                           size="sm"
                           onClick={() => handleGenerateREPDF(project)}
-                          className="text-purple-600 hover:text-purple-700"
+                          className="text-primary-strong hover:text-brand-800"
                         >
                           <Download className="h-4 w-4" />
                         </Button>
@@ -710,7 +710,7 @@ export default function REProjectsPage({ embedded = false }) {
               <Button 
                 size="sm"
                 onClick={() => handleGenerateREPDF(selectedProject)}
-                className="bg-purple-600 hover:bg-purple-700"
+                className="bg-primary hover:bg-primary-hover"
               >
                 <Download className="h-4 w-4 mr-1" /> Download PDF
               </Button>
@@ -784,7 +784,7 @@ export default function REProjectsPage({ embedded = false }) {
               {selectedProject.rough_requirement && (
                 <Card className="bg-amber-50 border-amber-200">
                   <CardContent className="p-4">
-                    <h4 className="font-semibold mb-2 text-sm text-amber-800 flex items-center gap-1.5">
+                    <h4 className="font-semibold mb-2 text-sm text-foreground flex items-center gap-1.5">
                       <FileText className="h-4 w-4" />
                       Rough Requirement from Sales
                     </h4>
@@ -825,11 +825,11 @@ export default function REProjectsPage({ embedded = false }) {
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-3">
                     <h4 className="font-semibold text-sm flex items-center gap-1.5">
-                      <FileText className="h-4 w-4 text-purple-600" />
+                      <FileText className="h-4 w-4 text-primary" />
                       Attachments {(selectedProject.attachments || []).length > 0 && <Badge className="bg-purple-100 text-purple-700 text-[10px]">{(selectedProject.attachments || []).length}</Badge>}
                     </h4>
                     {canEdit && (
-                      <label className="cursor-pointer inline-flex items-center gap-1 text-xs px-2 py-1 rounded bg-purple-600 hover:bg-purple-700 text-white">
+                      <label className="cursor-pointer inline-flex items-center gap-1 text-xs px-2 py-1 rounded bg-primary hover:bg-primary-hover text-white">
                         <Upload className="h-3 w-3" /> Upload File
                         <input
                           type="file"
@@ -866,7 +866,7 @@ export default function REProjectsPage({ embedded = false }) {
                               href={`${API}/crm/re-projects/attachments/${att.file_id}`}
                               target="_blank"
                               rel="noreferrer"
-                              className="truncate font-medium text-purple-700 hover:underline"
+                              className="truncate font-medium text-primary-strong hover:underline"
                             >
                               {att.label || att.filename}
                             </a>
@@ -959,7 +959,7 @@ export default function REProjectsPage({ embedded = false }) {
                         variant="outline"
                         size="sm"
                         onClick={() => setTemplatePickerOpen(true)}
-                        className="text-purple-700 border-purple-300 hover:bg-purple-50"
+                        className="text-primary-strong border-brand-300 hover:bg-brand-50"
                         data-testid="use-template-btn"
                       >
                         <FileText className="h-4 w-4 mr-1" /> Use Template
@@ -1265,7 +1265,7 @@ export default function REProjectsPage({ embedded = false }) {
             )}
             {canEdit && selectedProject?.status === 're_rejected' && (
               <Button 
-                className="bg-purple-600 hover:bg-purple-700"
+                className="bg-primary hover:bg-primary-hover"
                 data-testid="save-and-resubmit-btn"
                 onClick={async () => {
                   await handleSaveProject();
@@ -1285,7 +1285,7 @@ export default function REProjectsPage({ embedded = false }) {
         <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <FileText className="h-5 w-5 text-purple-600" /> Choose RE Template
+              <FileText className="h-5 w-5 text-primary" /> Choose RE Template
             </DialogTitle>
             <DialogDescription>
               Select a template to load its scope items. You can still edit, reorder, and delete them afterwards.
@@ -1320,7 +1320,7 @@ export default function REProjectsPage({ embedded = false }) {
                     return (
                       <div
                         key={tpl.template_id}
-                        className="border rounded-lg p-3 hover:border-purple-400 hover:shadow-sm transition-all bg-white"
+                        className="border rounded-lg p-3 hover:border-brand-300 hover:shadow-sm transition-all bg-white"
                         data-testid={`template-option-${tpl.template_id}`}
                       >
                         <div className="flex items-start justify-between gap-3">
@@ -1341,7 +1341,7 @@ export default function REProjectsPage({ embedded = false }) {
                           <div className="flex flex-col gap-1.5 shrink-0">
                             <Button
                               size="sm"
-                              className="h-8 text-xs bg-purple-600 hover:bg-purple-700"
+                              className="h-8 text-xs bg-primary hover:bg-primary-hover"
                               onClick={() => applyTemplateToRE(tpl, 'replace')}
                               data-testid={`apply-template-${tpl.template_id}`}
                             >
@@ -1403,7 +1403,7 @@ export default function REProjectsPage({ embedded = false }) {
               <XCircle className="h-4 w-4 mr-1" /> Reject
             </Button>
             <Button 
-              className="bg-green-600 hover:bg-green-700"
+              className="bg-primary hover:bg-primary-hover"
               onClick={() => handleApprove(true)}
             >
               <CheckCircle className="h-4 w-4 mr-1" /> Approve
@@ -1417,7 +1417,7 @@ export default function REProjectsPage({ embedded = false }) {
         <DialogContent className="max-w-2xl max-h-[80vh]">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <GitBranch className="h-5 w-5 text-purple-600" />
+              <GitBranch className="h-5 w-5 text-primary" />
               Revision History - {revisionProject?.re_number}
             </DialogTitle>
             <DialogDescription>{revisionProject?.project_name || revisionProject?.client_name}</DialogDescription>

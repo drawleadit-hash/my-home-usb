@@ -56,7 +56,7 @@ export default function AccountantCreditSettlements() {
   return (
     <Card data-testid="accountant-credit-settlements">
       <CardHeader className="p-3 sm:p-4 flex flex-row items-center justify-between">
-        <CardTitle className="text-sm sm:text-base flex items-center gap-2 text-purple-700">
+        <CardTitle className="text-sm sm:text-base flex items-center gap-2 text-foreground">
           <Banknote className="h-4 w-4" /> Credit Settlements ({entries.length})
         </CardTitle>
         <Button size="sm" variant="outline" className="h-7 gap-1 text-xs" onClick={fetchAll}>
@@ -98,7 +98,7 @@ export default function AccountantCreditSettlements() {
                   <div className="mt-2 flex justify-end">
                     <Button
                       size="sm"
-                      className="h-7 text-xs gap-1 bg-emerald-600 hover:bg-emerald-700"
+                      className="h-7 text-xs gap-1 bg-primary hover:bg-primary-hover"
                       onClick={() => setPayDialog({ open: true, entry: e, method: 'bank', bank_ref: '', cheque_no: '', notes: '' })}
                       data-testid={`release-payment-btn-${e.ledger_id}`}
                     >
@@ -155,7 +155,7 @@ export default function AccountantCreditSettlements() {
           )}
           <DialogFooter>
             <Button variant="outline" size="sm" onClick={() => setPayDialog({ open: false, entry: null, method: 'bank', bank_ref: '', cheque_no: '', notes: '' })} disabled={submitting}>Cancel</Button>
-            <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700" onClick={submitPay} disabled={submitting} data-testid="credit-pay-confirm">
+            <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={submitPay} disabled={submitting} data-testid="credit-pay-confirm">
               {submitting ? 'Releasing…' : 'Release & Record Expense'}
             </Button>
           </DialogFooter>

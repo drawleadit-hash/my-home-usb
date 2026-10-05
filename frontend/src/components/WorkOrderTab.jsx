@@ -238,7 +238,7 @@ export default function WorkOrderTab({ projectId, quickAttPopup, onQuickAttClose
       <Card>
         <CardHeader className="p-3 sm:p-6">
           <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-            <ClipboardList className="h-4 w-4 text-blue-600" /> Assigned Contractors
+            <ClipboardList className="h-4 w-4 text-primary" /> Assigned Contractors
           </CardTitle>
           <CardDescription className="text-xs sm:text-sm">Tap a contractor to view their work order stages</CardDescription>
         </CardHeader>
@@ -257,7 +257,7 @@ export default function WorkOrderTab({ projectId, quickAttPopup, onQuickAttClose
                 const activeStages = c.work_orders?.reduce((s, wo) => s + (wo.payment_stages?.filter(st => st.status !== 'approved').length || 0), 0) || 0;
                 const totalAmount = c.work_orders?.reduce((s, wo) => s + (wo.total_amount || 0), 0) || 0;
                 return (
-                  <div key={c.contractor_id} className="flex items-center gap-3 p-3 sm:p-4 rounded-xl border hover:border-blue-300 hover:bg-blue-50/50 cursor-pointer transition-all group"
+                  <div key={c.contractor_id} className="flex items-center gap-3 p-3 sm:p-4 rounded-xl border hover:border-brand-300 hover:bg-blue-50/50 cursor-pointer transition-all group"
                     onClick={() => setSelectedContractor(c)} data-testid={`wo-contractor-${c.contractor_id}`}>
                     <div className="h-10 w-10 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
                       <Users className="h-5 w-5 text-blue-600" />
@@ -483,7 +483,7 @@ export default function WorkOrderTab({ projectId, quickAttPopup, onQuickAttClose
                                   ) : null}
                                   {stage.status === 'pending' && (
                                     <>
-                                      <Button size="sm" className="gap-1 text-xs bg-blue-600 hover:bg-blue-700"
+                                      <Button size="sm" className="gap-1 text-xs bg-primary hover:bg-primary-hover"
                                         onClick={(e) => { e.stopPropagation(); openAttendancePopup(stage, wo); }} data-testid={`add-attendance-${stage.stage_id}`}>
                                         <ClipboardList className="h-3 w-3" /> Daily Attendance
                                       </Button>
@@ -495,7 +495,7 @@ export default function WorkOrderTab({ projectId, quickAttPopup, onQuickAttClose
                                   )}
                                   {stage.status === 'requested' && (
                                     <>
-                                      <Button size="sm" className="gap-1 text-xs bg-blue-600 hover:bg-blue-700"
+                                      <Button size="sm" className="gap-1 text-xs bg-primary hover:bg-primary-hover"
                                         onClick={(e) => { e.stopPropagation(); openAttendancePopup(stage, wo); }} data-testid={`add-attendance-${stage.stage_id}`}>
                                         <ClipboardList className="h-3 w-3" /> Daily Attendance
                                       </Button>
@@ -667,7 +667,7 @@ export default function WorkOrderTab({ projectId, quickAttPopup, onQuickAttClose
           </div>
           <DialogFooter>
             <Button variant="outline" size="sm" onClick={() => setAdvanceRequestDialog({ open: false, stage: null, workOrder: null, amount: '', date: '', reason: '' })}>Cancel</Button>
-            <Button size="sm" onClick={submitAdvanceRequest} disabled={advanceReqSaving} className="gap-1 bg-emerald-600 hover:bg-emerald-700" data-testid="submit-advance-btn">
+            <Button size="sm" onClick={submitAdvanceRequest} disabled={advanceReqSaving} className="gap-1 bg-primary hover:bg-primary-hover" data-testid="submit-advance-btn">
               <Send className="h-3 w-3" /> {advanceReqSaving ? 'Submitting...' : 'Submit Request'}
             </Button>
           </DialogFooter>

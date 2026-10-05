@@ -148,7 +148,7 @@ export default function StageManagement() {
       <div className="min-h-screen bg-gray-50">
         <AppHeader user={user} />
         <div className="flex items-center justify-center h-[60vh]">
-          <RefreshCw className="h-8 w-8 animate-spin text-amber-600" />
+          <RefreshCw className="h-8 w-8 animate-spin text-primary" />
         </div>
       </div>
     );
@@ -171,7 +171,7 @@ export default function StageManagement() {
             <h2 className="text-lg sm:text-xl font-bold text-gray-900" data-testid="stage-mgmt-title">Pipeline Stage Management</h2>
             <p className="text-xs sm:text-sm text-gray-500">Add, edit, reorder, and delete stages for Pre-Sales & Sales pipelines</p>
           </div>
-          <Button size="sm" className="gap-1.5 bg-amber-600 hover:bg-amber-700" onClick={() => setAddDialog(true)} data-testid="add-stage-btn">
+          <Button size="sm" className="gap-1.5 bg-primary hover:bg-primary-hover" onClick={() => setAddDialog(true)} data-testid="add-stage-btn">
             <Plus className="h-4 w-4" /> Add Stage
           </Button>
         </div>
@@ -195,7 +195,7 @@ export default function StageManagement() {
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="w-full grid grid-cols-2 mb-4" data-testid="stage-type-tabs">
-            <TabsTrigger value="pre_sales" className="gap-1.5 data-[state=active]:bg-indigo-100 data-[state=active]:text-indigo-800">
+            <TabsTrigger value="pre_sales" className="gap-1.5 data-[state=active]:bg-brand-100 data-[state=active]:text-primary-strong">
               <ArrowDownRight className="h-4 w-4" /> Pre-Sales ({preSalesCount})
             </TabsTrigger>
             <TabsTrigger value="sales" className="gap-1.5 data-[state=active]:bg-green-100 data-[state=active]:text-green-800">
@@ -281,7 +281,7 @@ export default function StageManagement() {
                               <td className="px-3 py-2 text-center">
                                 {isEditing ? (
                                   <div className="flex items-center justify-center gap-1">
-                                    <Button size="sm" className="h-6 text-[10px] bg-green-600 hover:bg-green-700 px-2" disabled={saving}
+                                    <Button size="sm" className="h-6 text-[10px] bg-primary hover:bg-primary-hover px-2" disabled={saving}
                                       onClick={() => handleUpdateStage(stage.stage_id)} data-testid={`save-stage-${stage.stage_id}`}>
                                       <Save className="h-3 w-3 mr-0.5" /> Save
                                     </Button>
@@ -351,7 +351,7 @@ export default function StageManagement() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setAddDialog(false)}>Cancel</Button>
-            <Button className="bg-amber-600 hover:bg-amber-700" onClick={handleAddStage} disabled={saving} data-testid="confirm-add-stage">
+            <Button className="bg-primary hover:bg-primary-hover" onClick={handleAddStage} disabled={saving} data-testid="confirm-add-stage">
               {saving ? <RefreshCw className="h-4 w-4 animate-spin mr-1" /> : <Plus className="h-4 w-4 mr-1" />} Add Stage
             </Button>
           </DialogFooter>

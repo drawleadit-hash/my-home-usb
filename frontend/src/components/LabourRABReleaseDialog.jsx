@@ -188,7 +188,7 @@ export default function LabourRABReleaseDialog({ item, onClose, onDone }) {
 
         {!loading && ctx && (
           <div className="space-y-3">
-            <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-lg p-3 space-y-2">
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 space-y-2">
               <div className="flex items-center justify-between gap-2 flex-wrap">
                 <div className="flex items-center gap-2 text-xs text-gray-600">
                   <Hammer className="h-3.5 w-3.5 text-amber-700" />
@@ -383,7 +383,7 @@ export default function LabourRABReleaseDialog({ item, onClose, onDone }) {
               >
                 Reject
               </Button>
-              <Button className="bg-emerald-600 hover:bg-emerald-700" onClick={submit} disabled={submitting || loading || !ctx || !entriesMatch || (entries.length === 0 && payable > 0)} data-testid="rab-rel-submit">
+              <Button className="bg-primary hover:bg-primary-hover" onClick={submit} disabled={submitting || loading || !ctx || !entriesMatch || (entries.length === 0 && payable > 0)} data-testid="rab-rel-submit">
                 <CheckCircle className="h-3.5 w-3.5 mr-1" />
                 {submitting ? 'Releasing…' : 'Process Release'}
               </Button>

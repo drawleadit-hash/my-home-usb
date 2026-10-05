@@ -299,7 +299,7 @@ export default function UserManagement() {
           <button
             type="button"
             onClick={() => setCategoryFilter(categoryFilter === 'all' ? 'all' : 'all')}
-            className={`text-left rounded-lg border bg-gradient-to-br from-blue-50 to-blue-100 transition-all ${categoryFilter === 'all' ? 'ring-2 ring-blue-400 border-blue-300 shadow-md' : 'border-blue-200 hover:shadow-md hover:-translate-y-0.5'}`}
+            className={`text-left rounded-lg border bg-blue-50 transition-all ${categoryFilter === 'all' ? 'ring-2 ring-blue-400 border-blue-300 shadow-md' : 'border-blue-200 hover:shadow-md hover:-translate-y-0.5'}`}
             data-testid="stat-card-total"
           >
             <div className="pb-1 sm:pb-2 p-2 sm:p-6">
@@ -315,7 +315,7 @@ export default function UserManagement() {
           <button
             type="button"
             onClick={() => setCategoryFilter(categoryFilter === 'admin' ? 'all' : 'admin')}
-            className={`text-left rounded-lg border bg-gradient-to-br from-red-50 to-red-100 transition-all ${categoryFilter === 'admin' ? 'ring-2 ring-red-400 border-red-300 shadow-md' : 'border-red-200 hover:shadow-md hover:-translate-y-0.5'}`}
+            className={`text-left rounded-lg border bg-red-50 transition-all ${categoryFilter === 'admin' ? 'ring-2 ring-red-400 border-red-300 shadow-md' : 'border-red-200 hover:shadow-md hover:-translate-y-0.5'}`}
             data-testid="stat-card-admins"
           >
             <div className="pb-1 sm:pb-2 p-2 sm:p-6">
@@ -331,7 +331,7 @@ export default function UserManagement() {
           <button
             type="button"
             onClick={() => setCategoryFilter(categoryFilter === 'staff' ? 'all' : 'staff')}
-            className={`text-left rounded-lg border bg-gradient-to-br from-green-50 to-green-100 transition-all ${categoryFilter === 'staff' ? 'ring-2 ring-green-400 border-green-300 shadow-md' : 'border-green-200 hover:shadow-md hover:-translate-y-0.5'}`}
+            className={`text-left rounded-lg border bg-green-50 transition-all ${categoryFilter === 'staff' ? 'ring-2 ring-green-400 border-green-300 shadow-md' : 'border-green-200 hover:shadow-md hover:-translate-y-0.5'}`}
             data-testid="stat-card-staff"
           >
             <div className="pb-1 sm:pb-2 p-2 sm:p-6">
@@ -344,7 +344,7 @@ export default function UserManagement() {
           <button
             type="button"
             onClick={() => setCategoryFilter(categoryFilter === 'client' ? 'all' : 'client')}
-            className={`text-left rounded-lg border bg-gradient-to-br from-teal-50 to-teal-100 transition-all hidden sm:block ${categoryFilter === 'client' ? 'ring-2 ring-teal-400 border-teal-300 shadow-md' : 'border-teal-200 hover:shadow-md hover:-translate-y-0.5'}`}
+            className={`text-left rounded-lg border bg-teal-50 transition-all hidden sm:block ${categoryFilter === 'client' ? 'ring-2 ring-teal-400 border-teal-300 shadow-md' : 'border-teal-200 hover:shadow-md hover:-translate-y-0.5'}`}
             data-testid="stat-card-clients"
           >
             <div className="pb-1 sm:pb-2 p-2 sm:p-6">
@@ -357,7 +357,7 @@ export default function UserManagement() {
           <button
             type="button"
             onClick={() => setCategoryFilter(categoryFilter === 'vendor' ? 'all' : 'vendor')}
-            className={`text-left rounded-lg border bg-gradient-to-br from-gray-50 to-gray-100 transition-all hidden sm:block ${categoryFilter === 'vendor' ? 'ring-2 ring-gray-400 border-gray-300 shadow-md' : 'border-gray-200 hover:shadow-md hover:-translate-y-0.5'}`}
+            className={`text-left rounded-lg border bg-gray-50 transition-all hidden sm:block ${categoryFilter === 'vendor' ? 'ring-2 ring-gray-400 border-gray-300 shadow-md' : 'border-gray-200 hover:shadow-md hover:-translate-y-0.5'}`}
             data-testid="stat-card-vendors"
           >
             <div className="pb-1 sm:pb-2 p-2 sm:p-6">
@@ -411,8 +411,8 @@ export default function UserManagement() {
                     <div key={u.user_id} data-testid={`user-card-mobile-${u.user_id}`} className="p-4">
                       <div className="flex items-start justify-between mb-2">
                         <div className="flex items-center gap-3">
-                          <div className="h-10 w-10 rounded-full bg-amber-50 flex items-center justify-center flex-shrink-0">
-                            <span className="text-amber-600 font-semibold">
+                          <div className="h-10 w-10 rounded-full bg-brand-100 flex items-center justify-center flex-shrink-0">
+                            <span className="text-brand-800 font-semibold">
                               {u.name?.charAt(0).toUpperCase() || '?'}
                             </span>
                           </div>
@@ -494,8 +494,8 @@ export default function UserManagement() {
                         <tr key={u.user_id} data-testid={`user-row-${u.user_id}`} className="hover:bg-gray-50">
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-3">
-                              <div className="h-10 w-10 rounded-full bg-amber-50 flex items-center justify-center">
-                                <span className="text-amber-600 font-semibold">
+                              <div className="h-10 w-10 rounded-full bg-brand-100 flex items-center justify-center">
+                                <span className="text-brand-800 font-semibold">
                                   {u.name?.charAt(0).toUpperCase() || '?'}
                                 </span>
                               </div>

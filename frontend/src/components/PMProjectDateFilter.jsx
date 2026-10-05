@@ -100,7 +100,7 @@ export function PMProjectDateFilter({ filter, itemsCount, testIdPrefix = 'pm-fil
                   key={p.label}
                   onClick={p.fn}
                   data-testid={`${testIdPrefix}-preset-${p.label.toLowerCase().replace(/\s+/g, '-')}`}
-                  className={`w-full text-left text-xs px-2.5 py-1.5 rounded-lg transition-colors ${p.label === 'All Requests' ? 'text-red-500 hover:bg-red-50 mt-2' : 'text-gray-700 hover:bg-amber-50 hover:text-amber-700'}`}
+                  className={`w-full text-left text-xs px-2.5 py-1.5 rounded-lg transition-colors ${p.label === 'All Requests' ? 'text-red-500 hover:bg-red-50 mt-2' : 'text-gray-700 hover:bg-brand-50 hover:text-primary-strong'}`}
                 >
                   {p.label}
                 </button>
@@ -126,12 +126,12 @@ export function PMProjectDateFilter({ filter, itemsCount, testIdPrefix = 'pm-fil
                   table: 'w-full border-collapse', head_row: 'flex',
                   head_cell: 'text-gray-400 rounded-md w-8 font-normal text-[10px] uppercase',
                   row: 'flex w-full mt-1', cell: 'relative p-0 text-center text-sm',
-                  day: 'h-8 w-8 p-0 font-normal text-xs rounded-lg hover:bg-amber-50 transition-colors inline-flex items-center justify-center',
-                  day_selected: 'bg-amber-600 text-white hover:bg-amber-700 font-medium',
-                  day_today: 'bg-gray-100 font-semibold text-amber-600',
-                  day_range_middle: 'bg-amber-50 text-amber-700 rounded-none',
-                  day_range_start: 'bg-amber-600 text-white rounded-l-lg rounded-r-none',
-                  day_range_end: 'bg-amber-600 text-white rounded-r-lg rounded-l-none',
+                  day: 'h-8 w-8 p-0 font-normal text-xs rounded-lg hover:bg-brand-50 transition-colors inline-flex items-center justify-center',
+                  day_selected: 'bg-primary text-white hover:bg-primary-hover font-medium',
+                  day_today: 'bg-gray-100 font-semibold text-primary-strong',
+                  day_range_middle: 'bg-brand-50 text-primary-strong rounded-none',
+                  day_range_start: 'bg-primary text-white rounded-l-lg rounded-r-none',
+                  day_range_end: 'bg-primary text-white rounded-r-lg rounded-l-none',
                   day_outside: 'text-gray-300',
                 }}
               />

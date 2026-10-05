@@ -185,7 +185,7 @@ export default function CSVImportPage() {
   if (loading && !user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <RefreshCw className="h-6 w-6 animate-spin text-indigo-600" />
+        <RefreshCw className="h-6 w-6 animate-spin text-primary" />
       </div>
     );
   }
@@ -207,7 +207,7 @@ export default function CSVImportPage() {
             <React.Fragment key={s.num}>
               <div className={`flex items-center gap-2 ${step >= s.num ? 'text-indigo-600' : 'text-gray-400'}`}>
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center font-semibold ${
-                  step >= s.num ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-500'
+                  step >= s.num ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500'
                 }`}>
                   {step > s.num ? <CheckCircle className="h-5 w-5" /> : s.num}
                 </div>
@@ -225,13 +225,13 @@ export default function CSVImportPage() {
           <Card className="max-w-xl mx-auto">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Upload className="h-5 w-5 text-indigo-600" />
+                <Upload className="h-5 w-5 text-primary" />
                 Upload CSV File
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div 
-                className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-indigo-400 transition-colors cursor-pointer"
+                className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-brand-300 transition-colors cursor-pointer"
                 onClick={() => document.getElementById('csv-upload').click()}
               >
                 <FileText className="h-12 w-12 mx-auto mb-3 text-gray-400" />
@@ -267,7 +267,7 @@ export default function CSVImportPage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <MapPin className="h-5 w-5 text-indigo-600" />
+                <MapPin className="h-5 w-5 text-primary" />
                 Map CSV Columns to Lead Fields
               </CardTitle>
             </CardHeader>
@@ -331,7 +331,7 @@ export default function CSVImportPage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Table className="h-5 w-5 text-indigo-600" />
+                <Table className="h-5 w-5 text-primary" />
                 Preview Import ({csvData.length} leads)
               </CardTitle>
             </CardHeader>

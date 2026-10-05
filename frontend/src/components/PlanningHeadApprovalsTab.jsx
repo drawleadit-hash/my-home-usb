@@ -77,7 +77,7 @@ export default function PlanningHeadApprovalsTab({ onCountChange }) {
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between gap-3 flex-wrap">
             <CardTitle className="text-base flex items-center gap-2">
-              <FileText className="h-4 w-4 text-amber-600" />
+              <FileText className="h-4 w-4 text-primary" />
               Final Estimate Approvals
               {pending.length > 0 && (
                 <Badge className="bg-amber-100 text-amber-700 border-amber-200">{pending.length} pending</Badge>
@@ -111,7 +111,7 @@ export default function PlanningHeadApprovalsTab({ onCountChange }) {
                     <tr key={p.project_id} className="border-b hover:bg-amber-50/30" data-testid={`fe-approval-row-${p.project_id}`}>
                       <td className="px-3 py-2">
                         <button
-                          className="text-blue-700 hover:underline font-medium"
+                          className="text-primary-strong hover:underline font-medium"
                           onClick={() => navigate(`/projects/${p.project_id}`)}
                           data-testid={`fe-approval-open-${p.project_id}`}
                         >
@@ -127,7 +127,7 @@ export default function PlanningHeadApprovalsTab({ onCountChange }) {
                         <div className="flex gap-2 justify-center">
                           <Button
                             size="sm"
-                            className="bg-emerald-600 hover:bg-emerald-700 text-white gap-1 h-8"
+                            className="bg-primary hover:bg-primary-hover text-white gap-1 h-8"
                             onClick={() => handleApprove(p.project_id)}
                             disabled={acting === p.project_id}
                             data-testid={`fe-approval-approve-${p.project_id}`}
@@ -182,7 +182,7 @@ export default function PlanningHeadApprovalsTab({ onCountChange }) {
                       <tr key={p.project_id} className="border-b hover:bg-gray-50">
                         <td className="px-3 py-2">
                           <button
-                            className="text-blue-700 hover:underline font-medium"
+                            className="text-primary-strong hover:underline font-medium"
                             onClick={() => navigate(`/projects/${p.project_id}`)}
                           >
                             {p.name || p.project_id}

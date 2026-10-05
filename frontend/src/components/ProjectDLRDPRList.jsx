@@ -125,7 +125,7 @@ const ProjectDLRDPRList = ({ projectId }) => {
                   <button
                     key={p.label}
                     onClick={p.fn}
-                    className={`w-full text-left text-xs px-2.5 py-1.5 rounded-lg transition-colors ${p.danger ? 'text-red-500 hover:bg-red-50 mt-2' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'}`}
+                    className={`w-full text-left text-xs px-2.5 py-1.5 rounded-lg transition-colors ${p.danger ? 'text-red-500 hover:bg-red-50 mt-2' : 'text-gray-700 hover:bg-brand-50 hover:text-primary-strong'}`}
                     data-testid={`dlr-preset-${p.label.toLowerCase().replace(/ /g, '-')}`}
                   >
                     {p.label}
@@ -142,7 +142,7 @@ const ProjectDLRDPRList = ({ projectId }) => {
                       value={dateFrom}
                       max={dateTo || undefined}
                       onChange={(e) => setDateFrom(e.target.value)}
-                      className="h-8 w-full border border-gray-200 rounded-lg px-2 text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      className="h-8 w-full border border-gray-200 rounded-lg px-2 text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
                       data-testid="dlr-date-start-input"
                     />
                   </div>
@@ -154,7 +154,7 @@ const ProjectDLRDPRList = ({ projectId }) => {
                       value={dateTo}
                       min={dateFrom || undefined}
                       onChange={(e) => setDateTo(e.target.value)}
-                      className="h-8 w-full border border-gray-200 rounded-lg px-2 text-xs focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      className="h-8 w-full border border-gray-200 rounded-lg px-2 text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
                       data-testid="dlr-date-end-input"
                     />
                   </div>
@@ -214,7 +214,7 @@ const ProjectDLRDPRList = ({ projectId }) => {
                   <Button
                     size="sm"
                     variant="ghost"
-                    className="h-6 w-6 p-0 text-blue-600 hover:bg-blue-50"
+                    className="h-6 w-6 p-0 text-primary-strong hover:bg-brand-50"
                     onClick={() => setViewEntry(e)}
                     title="View DLR & DPR report"
                     data-testid={`dlr-view-${e.dlr_id}`}
@@ -251,7 +251,7 @@ const ProjectDLRDPRList = ({ projectId }) => {
                   <Button
                     size="sm"
                     variant="ghost"
-                    className="h-7 px-2 text-[10px] gap-1 text-indigo-700 hover:bg-indigo-50 shrink-0"
+                    className="h-7 px-2 text-[10px] gap-1 text-primary-strong hover:bg-brand-50 shrink-0"
                     onClick={() => openDprDialog(e)}
                     data-testid={`dlr-edit-dpr-${e.dlr_id}`}
                   >
@@ -262,7 +262,7 @@ const ProjectDLRDPRList = ({ projectId }) => {
                 <Button
                   size="sm"
                   variant="outline"
-                  className="mt-2 h-7 text-[11px] gap-1.5 border-indigo-300 text-indigo-700 hover:bg-indigo-50"
+                  className="mt-2 h-7 text-[11px] gap-1.5 border-brand-300 text-primary-strong hover:bg-brand-50"
                   onClick={() => openDprDialog(e)}
                   data-testid={`dlr-add-dpr-${e.dlr_id}`}
                 >
@@ -310,7 +310,7 @@ const ProjectDLRDPRList = ({ projectId }) => {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setDprDialog({ open: false, entry: null, summary: '', saving: false })} disabled={dprDialog.saving}>Cancel</Button>
-            <Button onClick={saveDpr} disabled={dprDialog.saving || !dprDialog.summary.trim()} className="bg-emerald-600 hover:bg-emerald-700" data-testid="dpr-save-btn">
+            <Button onClick={saveDpr} disabled={dprDialog.saving || !dprDialog.summary.trim()} className="bg-primary hover:bg-primary-hover" data-testid="dpr-save-btn">
               {dprDialog.saving ? 'Saving...' : 'Save DPR'}
             </Button>
           </DialogFooter>
@@ -322,7 +322,7 @@ const ProjectDLRDPRList = ({ projectId }) => {
         <DialogContent className="max-w-lg max-h-[85vh] overflow-y-auto" data-testid="dlr-dpr-detail-dialog">
           <DialogHeader>
             <DialogTitle className="text-base flex items-center gap-2">
-              <FileText className="h-4 w-4 text-indigo-600" /> DLR & DPR Report
+              <FileText className="h-4 w-4 text-primary" /> DLR & DPR Report
             </DialogTitle>
             <DialogDescription className="text-xs">
               {viewEntry?.date} · {viewEntry?.contractor_name || '—'}

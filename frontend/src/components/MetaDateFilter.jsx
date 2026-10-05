@@ -120,7 +120,7 @@ export default function MetaDateFilter({ value, onChange, defaultPreset = 'last_
                 onClick={() => apply(p.key)}
                 className={`px-2 py-1.5 text-xs rounded text-left transition-colors ${
                   preset === p.key
-                    ? 'bg-amber-600 text-white font-semibold'
+                    ? 'bg-primary text-white font-semibold'
                     : 'hover:bg-amber-50 text-gray-700'
                 }`}
                 data-testid={`meta-date-preset-${p.key}`}
@@ -149,7 +149,7 @@ export default function MetaDateFilter({ value, onChange, defaultPreset = 'last_
             </div>
             <Button
               size="sm"
-              className="w-full h-7 mt-2 text-xs bg-amber-600 hover:bg-amber-700"
+              className="w-full h-7 mt-2 text-xs bg-primary hover:bg-primary-hover"
               onClick={() => apply('custom')}
               disabled={!customFrom || !customTo}
               data-testid="meta-date-custom-apply"

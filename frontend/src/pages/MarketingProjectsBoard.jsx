@@ -109,13 +109,13 @@ export default function MarketingProjectsBoard() {
   if (!authChecked) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <RefreshCw className="h-8 w-8 animate-spin text-indigo-600" />
+        <RefreshCw className="h-8 w-8 animate-spin text-primary" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-indigo-50">
+    <div className="min-h-screen bg-gray-50">
       <AppHeader user={user} />
 
       <main className="max-w-7xl mx-auto px-4 py-6">
@@ -128,7 +128,7 @@ export default function MarketingProjectsBoard() {
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between gap-3 flex-wrap">
               <CardTitle className="text-base flex items-center gap-2">
-                <Building2 className="h-4 w-4 text-indigo-600" />All Projects
+                <Building2 className="h-4 w-4 text-primary" />All Projects
               </CardTitle>
               <div className="relative">
                 <Search className="absolute left-2.5 top-2 h-4 w-4 text-gray-400" />
@@ -149,7 +149,7 @@ export default function MarketingProjectsBoard() {
                   onClick={() => setActiveTab(tab.key)}
                   className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
                     activeTab === tab.key
-                      ? 'border-indigo-600 text-indigo-700 bg-indigo-50'
+                      ? 'border-primary text-primary-strong bg-brand-50'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'
                   }`}
                   data-testid={`mkt-subtab-${tab.key}`}

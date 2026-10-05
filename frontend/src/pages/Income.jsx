@@ -232,7 +232,7 @@ export default function Income({ embedded = false }) {
           {canManage && (
             <Dialog open={addIncomeDialog} onOpenChange={setAddIncomeDialog}>
               <DialogTrigger asChild>
-                <Button data-testid="add-income-btn" className="gap-2 bg-green-600 hover:bg-green-700">
+                <Button data-testid="add-income-btn" className="gap-2 bg-primary hover:bg-primary-hover">
                   <Plus className="h-4 w-4" />
                   Add Income
                 </Button>
@@ -351,7 +351,7 @@ export default function Income({ embedded = false }) {
                     />
                   </div>
                   
-                  <Button data-testid="submit-income-btn" type="submit" className="w-full bg-green-600 hover:bg-green-700">
+                  <Button data-testid="submit-income-btn" type="submit" className="w-full bg-primary hover:bg-primary-hover">
                     Record Income
                   </Button>
                 </form>
@@ -362,7 +362,7 @@ export default function Income({ embedded = false }) {
 
         {/* Summary Cards */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
-          <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+          <Card className="bg-green-50 border-green-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
                 <IndianRupee className="h-3 w-3" />Total Income
@@ -373,7 +373,7 @@ export default function Income({ embedded = false }) {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-emerald-50 to-emerald-100 border-emerald-200">
+          <Card className="bg-emerald-50 border-emerald-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
                 <Banknote className="h-3 w-3" />Cash
@@ -384,7 +384,7 @@ export default function Income({ embedded = false }) {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+          <Card className="bg-blue-50 border-blue-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
                 <CreditCard className="h-3 w-3" />Cheque
@@ -395,7 +395,7 @@ export default function Income({ embedded = false }) {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+          <Card className="bg-purple-50 border-purple-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
                 <ArrowUpCircle className="h-3 w-3" />Bank Transfer
@@ -406,7 +406,7 @@ export default function Income({ embedded = false }) {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
+          <Card className="bg-orange-50 border-orange-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
                 <Wallet className="h-3 w-3" />Escrow
@@ -417,7 +417,7 @@ export default function Income({ embedded = false }) {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-cyan-50 to-cyan-100 border-cyan-200">
+          <Card className="bg-cyan-50 border-cyan-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
                 <PiggyBank className="h-3 w-3" />Petty Cash
@@ -527,7 +527,7 @@ export default function Income({ embedded = false }) {
                         <td className="px-4 py-4 text-sm">{index + 1}</td>
                         <td className="px-4 py-4">
                           <span 
-                            className="font-medium text-amber-600 cursor-pointer hover:underline"
+                            className="font-medium text-primary-strong cursor-pointer hover:underline"
                             onClick={() => window.location.href = `/projects/${entry.project_id}`}
                           >
                             {entry.project_name}

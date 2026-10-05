@@ -241,7 +241,7 @@ export default function PaymentProcessing() {
       <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6">
         {/* Summary Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <Card className="bg-gradient-to-br from-amber-500 to-orange-500 text-white">
+          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-amber-400 text-white">
             <CardContent className="p-4">
               <Clock className="h-6 w-6 mb-2 opacity-80" />
               <p className="text-2xl font-bold">{pendingRequests.length}</p>
@@ -249,7 +249,7 @@ export default function PaymentProcessing() {
             </CardContent>
           </Card>
           
-          <Card className="bg-gradient-to-br from-blue-500 to-cyan-600 text-white">
+          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-blue-400 text-white">
             <CardContent className="p-4">
               <Key className="h-6 w-6 mb-2 opacity-80" />
               <p className="text-2xl font-bold">{verifiedRequests.length}</p>
@@ -257,7 +257,7 @@ export default function PaymentProcessing() {
             </CardContent>
           </Card>
           
-          <Card className="bg-gradient-to-br from-green-500 to-emerald-600 text-white">
+          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-brand-400 text-white">
             <CardContent className="p-4">
               <CheckCircle className="h-6 w-6 mb-2 opacity-80" />
               <p className="text-2xl font-bold">{completedRequests.length}</p>
@@ -265,7 +265,7 @@ export default function PaymentProcessing() {
             </CardContent>
           </Card>
           
-          <Card className="bg-gradient-to-br from-violet-500 to-purple-600 text-white">
+          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-violet-400 text-white">
             <CardContent className="p-4">
               <IndianRupee className="h-6 w-6 mb-2 opacity-80" />
               <p className="text-2xl font-bold">{formatCurrency(completedRequests.reduce((sum, r) => sum + (r.amount || 0), 0))}</p>
@@ -325,7 +325,7 @@ export default function PaymentProcessing() {
                             </Button>
                           )}
                           {request.status === 'otp_verified' && (
-                            <Button size="sm" className="bg-green-600 hover:bg-green-700" onClick={() => openCompleteDialog(request)} data-testid={`complete-payment-${request.verification_id}`}>
+                            <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={() => openCompleteDialog(request)} data-testid={`complete-payment-${request.verification_id}`}>
                               <CheckCircle className="h-3 w-3 mr-1" /> Complete
                             </Button>
                           )}
@@ -417,7 +417,7 @@ export default function PaymentProcessing() {
           
           <DialogFooter>
             <Button variant="outline" onClick={() => setInitiateDialog(false)}>Cancel</Button>
-            <Button onClick={handleInitiatePayment} className="bg-emerald-600 hover:bg-emerald-700" data-testid="send-otp-btn">
+            <Button onClick={handleInitiatePayment} className="bg-primary hover:bg-primary-hover" data-testid="send-otp-btn">
               <Send className="h-4 w-4 mr-1" /> Send OTP
             </Button>
           </DialogFooter>
@@ -540,7 +540,7 @@ export default function PaymentProcessing() {
           
           <DialogFooter>
             <Button variant="outline" onClick={() => setCompleteDialog(false)}>Cancel</Button>
-            <Button onClick={handleCompletePayment} className="bg-green-600 hover:bg-green-700" data-testid="confirm-payment-btn">
+            <Button onClick={handleCompletePayment} className="bg-primary hover:bg-primary-hover" data-testid="confirm-payment-btn">
               <CheckCircle className="h-4 w-4 mr-1" /> Complete Payment
             </Button>
           </DialogFooter>

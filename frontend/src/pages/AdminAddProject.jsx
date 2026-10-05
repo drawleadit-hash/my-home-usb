@@ -162,7 +162,7 @@ export default function AdminAddProject() {
               <ArrowLeft className="h-4 w-4" /> Back
             </Button>
             <div>
-              <h1 className="text-xl font-bold flex items-center gap-2"><FolderPlus className="h-5 w-5 text-indigo-600" /> Add Project</h1>
+              <h1 className="text-xl font-bold flex items-center gap-2"><FolderPlus className="h-5 w-5 text-primary" /> Add Project</h1>
               <p className="text-xs text-gray-500">Quick-create a project end-to-end (Lead → Sales → Project)</p>
             </div>
           </div>
@@ -177,11 +177,11 @@ export default function AdminAddProject() {
             return (
               <div
                 key={s.id}
-                className={`rounded-xl border px-3 py-2.5 ${isActive ? 'border-indigo-500 bg-indigo-50' : isDone ? 'border-emerald-300 bg-emerald-50/40' : 'border-gray-200 bg-white'}`}
+                className={`rounded-xl border px-3 py-2.5 ${isActive ? 'border-gray-900 bg-gray-50' : isDone ? 'border-emerald-300 bg-emerald-50/40' : 'border-gray-200 bg-white'}`}
                 data-testid={`step-${s.id}`}
               >
                 <div className="flex items-center gap-2">
-                  <div className={`w-7 h-7 rounded-full flex items-center justify-center ${isActive ? 'bg-indigo-600 text-white' : isDone ? 'bg-emerald-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
+                  <div className={`w-7 h-7 rounded-full flex items-center justify-center ${isActive ? 'bg-gray-900 text-white' : isDone ? 'bg-emerald-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
                     {isDone ? <Check className="h-3.5 w-3.5" /> : <Icon className="h-3.5 w-3.5" />}
                   </div>
                   <div className="min-w-0">
@@ -220,11 +220,11 @@ export default function AdminAddProject() {
             <ArrowLeft className="h-4 w-4 mr-1" /> Back
           </Button>
           {step < 4 ? (
-            <Button size="sm" className="bg-indigo-600 hover:bg-indigo-700" onClick={handleNext} data-testid="next-btn">
+            <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={handleNext} data-testid="next-btn">
               Next <ArrowRight className="h-4 w-4 ml-1" />
             </Button>
           ) : (
-            <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700" onClick={handleSubmit} disabled={submitting} data-testid="create-project-btn">
+            <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={handleSubmit} disabled={submitting} data-testid="create-project-btn">
               {submitting ? 'Creating...' : (<><Check className="h-4 w-4 mr-1" /> Create Project</>)}
             </Button>
           )}

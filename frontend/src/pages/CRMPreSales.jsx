@@ -685,7 +685,7 @@ export default function CRMPreSales() {
   if (loading && !dashboard) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <RefreshCw className="h-6 w-6 animate-spin text-indigo-600" />
+        <RefreshCw className="h-6 w-6 animate-spin text-primary" />
       </div>
     );
   }
@@ -792,7 +792,7 @@ export default function CRMPreSales() {
                     <button
                       key={p.label}
                       onClick={p.fn}
-                      className={`w-full text-left text-xs px-2.5 py-1.5 rounded-lg transition-colors ${p.label === 'Clear' ? 'text-red-500 hover:bg-red-50 mt-2' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'}`}
+                      className={`w-full text-left text-xs px-2.5 py-1.5 rounded-lg transition-colors ${p.label === 'Clear' ? 'text-red-500 hover:bg-red-50 mt-2' : 'text-gray-700 hover:bg-brand-50 hover:text-primary-strong'}`}
                     >
                       {p.label}
                     </button>
@@ -827,7 +827,7 @@ export default function CRMPreSales() {
                       row: 'flex w-full mt-1',
                       cell: 'relative p-0 text-center text-sm focus-within:relative',
                       day: 'h-8 w-8 p-0 font-normal text-xs rounded-lg hover:bg-blue-50 transition-colors inline-flex items-center justify-center',
-                      day_selected: 'bg-blue-600 text-white hover:bg-blue-700 font-medium',
+                      day_selected: 'bg-primary text-white hover:bg-primary-hover font-medium',
                       day_today: 'bg-gray-100 font-semibold text-blue-600',
                       day_range_middle: 'bg-blue-50 text-blue-700 rounded-none',
                       day_range_start: 'bg-blue-600 text-white rounded-l-lg rounded-r-none',
@@ -858,7 +858,7 @@ export default function CRMPreSales() {
           </Select>
           
           {user?.role === 'super_admin' && (
-            <Button variant="outline" size="sm" className="gap-1.5 text-gray-600 hover:text-amber-700"
+            <Button variant="outline" size="sm" className="gap-1.5 text-gray-600 hover:text-primary-strong"
               onClick={() => window.location.href = '/settings/stages?type=pre_sales'}
               data-testid="manage-presales-stages-btn">
               <Settings className="h-3.5 w-3.5" /> Manage Stages
@@ -870,7 +870,7 @@ export default function CRMPreSales() {
             <Button
               size="sm"
               onClick={() => setCreateLeadDialog(true)}
-              className="gap-1.5 bg-indigo-600 hover:bg-indigo-700"
+              className="gap-1.5 bg-primary hover:bg-primary-hover"
               data-testid="create-lead-btn"
             >
               <Plus className="h-3.5 w-3.5" />
@@ -921,7 +921,7 @@ export default function CRMPreSales() {
                 <button
                   className={`px-4 py-2.5 text-xs font-medium whitespace-nowrap border-b-2 transition-colors ${
                     activeStage === 'all' 
-                      ? 'border-indigo-500 text-indigo-600 bg-indigo-50' 
+                      ? 'border-primary text-primary-strong bg-brand-50' 
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'
                   }`}
                   onClick={() => setActiveStage('all')}
@@ -933,7 +933,7 @@ export default function CRMPreSales() {
                     key={stage.stage_id}
                     className={`px-4 py-2.5 text-xs font-medium whitespace-nowrap border-b-2 transition-colors ${
                       activeStage === stage.stage_id 
-                        ? 'border-indigo-500 text-indigo-600 bg-indigo-50' 
+                        ? 'border-primary text-primary-strong bg-brand-50' 
                         : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'
                     }`}
                     onClick={() => setActiveStage(stage.stage_id)}
@@ -974,7 +974,7 @@ export default function CRMPreSales() {
                     >
                       <td className="px-2 py-2">
                         <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white text-xs font-semibold flex-shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-white text-xs font-semibold flex-shrink-0">
                             {lead.name?.charAt(0)?.toUpperCase()}
                           </div>
                           <div className="min-w-0">
@@ -999,7 +999,7 @@ export default function CRMPreSales() {
                       <td className="px-2 py-2" data-testid={`lead-assignee-${lead.lead_id}`}>
                         {lead.assigned_to_name ? (
                           <div className="flex items-center gap-1.5 min-w-0">
-                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0" title={lead.assigned_to_name}>
+                            <div className="w-6 h-6 rounded-full bg-gray-800 flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0" title={lead.assigned_to_name}>
                               {lead.assigned_to_name.charAt(0).toUpperCase()}
                             </div>
                             <span className="text-[11px] text-gray-700 truncate" title={lead.assigned_to_name}>{lead.assigned_to_name}</span>
@@ -1076,7 +1076,7 @@ export default function CRMPreSales() {
                                   <Button 
                                     variant="outline" 
                                     size="sm"
-                                    className="h-7 px-1.5 text-[10px] text-amber-600 border-amber-300 hover:bg-amber-50"
+                                    className="h-7 px-1.5 text-[10px] text-primary-strong border-brand-300 hover:bg-brand-50"
                                     data-testid={`new-followup-btn-${lead.lead_id}`}
                                     onClick={(e) => {
                                       e.stopPropagation();
@@ -1092,7 +1092,7 @@ export default function CRMPreSales() {
                                 <Button 
                                   variant="outline" 
                                   size="sm"
-                                  className="h-7 px-1.5 text-[10px] text-amber-600 border-amber-300 hover:bg-amber-50"
+                                  className="h-7 px-1.5 text-[10px] text-primary-strong border-brand-300 hover:bg-brand-50"
                                   data-testid={`followup-btn-${lead.lead_id}`}
                                   onClick={(e) => {
                                     e.stopPropagation();
@@ -1171,7 +1171,7 @@ export default function CRMPreSales() {
                         <div className="flex items-start justify-between mb-2">
                           <div className="flex items-center gap-2">
                             <GripVertical className="h-4 w-4 text-gray-300" />
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white text-sm font-semibold">
+                            <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-white text-sm font-semibold">
                               {lead.name?.charAt(0)?.toUpperCase()}
                             </div>
                           </div>
@@ -1318,7 +1318,7 @@ export default function CRMPreSales() {
                 variant="outline" 
                 size="sm" 
                 onClick={() => setAddFieldDialog(true)}
-                className="text-indigo-600 border-indigo-200 hover:bg-indigo-50"
+                className="text-primary-strong border-brand-300 hover:bg-brand-50"
               >
                 <Plus className="h-4 w-4 mr-1" /> Add Field
               </Button>
@@ -1519,7 +1519,7 @@ export default function CRMPreSales() {
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Plus className="h-5 w-5 text-indigo-600" />
+              <Plus className="h-5 w-5 text-primary" />
               Add Custom Field
             </DialogTitle>
             <DialogDescription>Create a new field for all leads</DialogDescription>
@@ -1623,7 +1623,7 @@ export default function CRMPreSales() {
           <DialogHeader>
             <DialogTitle className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white text-xl font-bold">
+                <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-white text-xl font-bold">
                   {selectedLead?.name?.charAt(0)?.toUpperCase()}
                 </div>
                 <div>
@@ -1640,7 +1640,7 @@ export default function CRMPreSales() {
                 variant="outline" 
                 size="sm" 
                 onClick={() => { setLeadDetailDialog(false); openEditLead(selectedLead); }}
-                className="text-amber-600 border-blue-200 hover:bg-amber-50"
+                className="text-primary-strong border-blue-200 hover:bg-brand-50"
               >
                 <Edit2 className="h-4 w-4 mr-1" /> Edit
               </Button>
@@ -1651,7 +1651,7 @@ export default function CRMPreSales() {
             <Tabs value={detailTab} onValueChange={setDetailTab} className="mt-4">
               {/* Package Link CTA — always visible when the lead has an active link */}
               {selectedLead._package_link && (
-                <div className="flex items-center justify-between gap-2 mb-2 p-2.5 bg-gradient-to-r from-amber-50 to-emerald-50 border border-amber-200 rounded-lg">
+                <div className="flex items-center justify-between gap-2 mb-2 p-2.5 bg-amber-50 border border-amber-200 rounded-lg">
                   <div className="flex items-center gap-2 min-w-0">
                     <div className="h-9 w-9 rounded-full bg-amber-500 flex items-center justify-center text-white shrink-0">📦</div>
                     <div className="min-w-0">
@@ -1661,7 +1661,7 @@ export default function CRMPreSales() {
                   </div>
                   <Button
                     size="sm"
-                    className="bg-amber-600 hover:bg-amber-700 text-white gap-1 shrink-0"
+                    className="bg-primary hover:bg-primary-hover text-white gap-1 shrink-0"
                     onClick={() => setPackageLinkDialog({ open: true, leadId: selectedLead.lead_id, link: selectedLead._package_link })}
                     data-testid="lead-detail-share-pkg-btn"
                   >
@@ -2212,7 +2212,7 @@ export default function CRMPreSales() {
                                 />
                                 <Button
                                   size="sm"
-                                  className="h-8 text-xs bg-green-600 hover:bg-green-700"
+                                  className="h-8 text-xs bg-primary hover:bg-primary-hover"
                                   data-testid={`close-followup-btn-${idx}`}
                                   onClick={async () => {
                                     const remark = document.getElementById(`close-remark-${idx}`)?.value;
@@ -2343,7 +2343,7 @@ export default function CRMPreSales() {
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Edit2 className="h-5 w-5 text-amber-600" />
+              <Edit2 className="h-5 w-5 text-primary" />
               Edit Lead
             </DialogTitle>
             <DialogDescription>Update lead details. Custom fields appear below.</DialogDescription>
@@ -2632,7 +2632,7 @@ export default function CRMPreSales() {
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Settings className="h-5 w-5 text-indigo-600" />
+              <Settings className="h-5 w-5 text-primary" />
               Manage Custom Fields
             </DialogTitle>
             <DialogDescription>View and delete custom fields</DialogDescription>
@@ -2797,7 +2797,7 @@ export default function CRMPreSales() {
           <DialogFooter className="gap-2">
             <Button variant="outline" onClick={() => setApptEditDialog(false)}>Cancel</Button>
             <Button 
-              className="bg-green-600 hover:bg-green-700"
+              className="bg-primary hover:bg-primary-hover"
               onClick={handleSaveApptEdit}
               disabled={!apptEditForm.date || !apptEditForm.time || !apptEditForm.type}
               data-testid="save-appointment-edit-btn"
@@ -2876,7 +2876,7 @@ export default function CRMPreSales() {
           <DialogFooter className="gap-2">
             <Button variant="outline" onClick={() => setAppointmentDialog(false)}>Cancel</Button>
             <Button 
-              className="bg-green-600 hover:bg-green-700"
+              className="bg-primary hover:bg-primary-hover"
               onClick={handleBookAppointment}
               disabled={!appointmentForm.date || !appointmentForm.time || !appointmentForm.type}
               data-testid="book-appointment-btn"
@@ -2893,7 +2893,7 @@ export default function CRMPreSales() {
         <DialogContent className="max-w-sm">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-amber-600" /> Schedule Follow-up
+              <Calendar className="h-5 w-5 text-primary" /> Schedule Follow-up
             </DialogTitle>
             <DialogDescription>Set follow-up date and time before moving to Follow-up stage</DialogDescription>
           </DialogHeader>
@@ -2921,7 +2921,7 @@ export default function CRMPreSales() {
                 handleStageChange(followupMoveLeadId, 'stg_follow_up', null, followupMoveForm);
               }}
               disabled={!followupMoveForm.date || !followupMoveForm.time}
-              className="bg-amber-600 hover:bg-amber-700"
+              className="bg-primary hover:bg-primary-hover"
               data-testid="followup-move-submit"
             >
               Move to Follow-up
@@ -2935,7 +2935,7 @@ export default function CRMPreSales() {
         <DialogContent className="max-w-sm">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-amber-600" /> Schedule Follow-up
+              <Calendar className="h-5 w-5 text-primary" /> Schedule Follow-up
             </DialogTitle>
             <DialogDescription>Set date, time and remarks for next follow-up</DialogDescription>
           </DialogHeader>
@@ -2955,7 +2955,7 @@ export default function CRMPreSales() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setQuickFollowupDialog(false)}>Cancel</Button>
-            <Button onClick={handleQuickFollowup} disabled={!quickFollowupForm.date} className="bg-amber-600 hover:bg-amber-700" data-testid="quick-followup-submit">
+            <Button onClick={handleQuickFollowup} disabled={!quickFollowupForm.date} className="bg-primary hover:bg-primary-hover" data-testid="quick-followup-submit">
               Schedule
             </Button>
           </DialogFooter>
@@ -3095,7 +3095,7 @@ function PackageLinkShareDialog({ state, onClose, currentStageId, onMoveToPackag
               <Button
                 size="sm"
                 onClick={() => onMoveToPackageStage(state.leadId)}
-                className="bg-violet-600 hover:bg-violet-700 text-white whitespace-nowrap"
+                className="bg-primary hover:bg-primary-hover text-white whitespace-nowrap"
                 data-testid="pkg-move-stage-btn"
               >
                 Move to Package Details Send →
@@ -3111,7 +3111,7 @@ function PackageLinkShareDialog({ state, onClose, currentStageId, onMoveToPackag
           <Button variant="outline" onClick={() => { saveGreeting(); copyMessage(); }} className="gap-1" data-testid="pkg-copy-btn">
             📋 Copy Message
           </Button>
-          <Button onClick={openWhatsApp} className="bg-green-600 hover:bg-green-700 text-white gap-1" disabled={saving || !clientPhone} data-testid="pkg-whatsapp-btn">
+          <Button onClick={openWhatsApp} className="bg-primary hover:bg-primary-hover text-white gap-1" disabled={saving || !clientPhone} data-testid="pkg-whatsapp-btn">
             {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : '💬'} WhatsApp
           </Button>
         </DialogFooter>

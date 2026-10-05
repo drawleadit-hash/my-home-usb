@@ -218,7 +218,7 @@ export default function Settings() {
           </div>
           <Button
             onClick={() => window.location.href = '/settings/slots'}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white gap-1"
+            className="bg-primary hover:bg-primary-hover text-white gap-1"
             data-testid="settings-slots-link"
           >
             👥 Slot Management
@@ -227,7 +227,7 @@ export default function Settings() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 mb-4 sm:mb-8">
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200 cursor-pointer hover:shadow-md transition-shadow active:bg-amber-50" onClick={() => setActiveTab('company')}>
+          <Card className="bg-blue-50 border-blue-200 cursor-pointer hover:shadow-md transition-shadow active:bg-amber-50" onClick={() => setActiveTab('company')}>
             <CardHeader className="pb-1 sm:pb-2 p-3 sm:p-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Company Profile</CardTitle>
             </CardHeader>
@@ -238,7 +238,7 @@ export default function Settings() {
               </div>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200 cursor-pointer hover:shadow-md transition-shadow active:bg-green-100" onClick={() => window.location.href = '/materials'}>
+          <Card className="bg-green-50 border-green-200 cursor-pointer hover:shadow-md transition-shadow active:bg-green-100" onClick={() => window.location.href = '/materials'}>
             <CardHeader className="pb-1 sm:pb-2 p-3 sm:p-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Materials</CardTitle>
             </CardHeader>
@@ -249,7 +249,7 @@ export default function Settings() {
               </div>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200 cursor-pointer hover:shadow-md transition-shadow active:bg-purple-100" onClick={() => window.location.href = '/vendor-management'}>
+          <Card className="bg-purple-50 border-purple-200 cursor-pointer hover:shadow-md transition-shadow active:bg-purple-100" onClick={() => window.location.href = '/vendor-management'}>
             <CardHeader className="pb-1 sm:pb-2 p-3 sm:p-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Vendors</CardTitle>
             </CardHeader>
@@ -260,7 +260,7 @@ export default function Settings() {
               </div>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200 cursor-pointer hover:shadow-md transition-shadow active:bg-orange-100" onClick={() => window.location.href = '/users'}>
+          <Card className="bg-orange-50 border-orange-200 cursor-pointer hover:shadow-md transition-shadow active:bg-orange-100" onClick={() => window.location.href = '/users'}>
             <CardHeader className="pb-1 sm:pb-2 p-3 sm:p-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Users</CardTitle>
             </CardHeader>
@@ -441,7 +441,7 @@ export default function Settings() {
               <Card className="hover:shadow-md transition-shadow cursor-pointer active:bg-gray-50" onClick={() => window.location.href = '/packages'}>
                 <CardHeader className="p-4 sm:p-6">
                   <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
-                    <Package className="h-4 w-4 sm:h-5 sm:w-5 text-indigo-600" />
+                    <Package className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                     Package Management
                   </CardTitle>
                   <CardDescription className="text-xs sm:text-sm">Define project packages with scope, materials & labour</CardDescription>
@@ -467,7 +467,7 @@ export default function Settings() {
               <Card className="hover:shadow-md transition-shadow cursor-pointer active:bg-gray-50" onClick={() => window.location.href = '/vendor-management'}>
                 <CardHeader className="p-4 sm:p-6">
                   <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
-                    <Truck className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600" />
+                    <Truck className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                     Vendor Management
                   </CardTitle>
                   <CardDescription className="text-xs sm:text-sm">Manage vendor master data and payment terms</CardDescription>
@@ -493,7 +493,7 @@ export default function Settings() {
               <Card className="hover:shadow-md transition-shadow cursor-pointer active:bg-gray-50" onClick={() => window.location.href = '/settings/stages?type=pre_sales'} data-testid="quick-link-presales-stages">
                 <CardHeader className="p-4 sm:p-6">
                   <CardTitle className="flex items-center gap-2 text-sm sm:text-base">
-                    <ArrowDownRight className="h-4 w-4 sm:h-5 sm:w-5 text-indigo-600" />
+                    <ArrowDownRight className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                     Pre-Sales Stages
                   </CardTitle>
                   <CardDescription className="text-xs sm:text-sm">Manage pipeline stages for the pre-sales CRM module</CardDescription>
@@ -524,7 +524,7 @@ export default function Settings() {
               <Card>
                 <CardHeader className="p-4 sm:p-6">
                   <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-                    <Headphones className="h-5 w-5 text-amber-600" /> CRE Module
+                    <Headphones className="h-5 w-5 text-primary" /> CRE Module
                   </CardTitle>
                   <CardDescription className="text-xs sm:text-sm">
                     Control which optional tabs appear on every CRE Board. Changes apply to all CRE users immediately.
@@ -572,7 +572,7 @@ export default function Settings() {
               <Card>
                 <CardHeader className="p-4 sm:p-6">
                   <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-                    <Building2 className="h-5 w-5 text-indigo-600" /> App Branding
+                    <Building2 className="h-5 w-5 text-primary" /> App Branding
                   </CardTitle>
                   <CardDescription className="text-xs sm:text-sm">
                     Change the app name, login logo, and favicon. New images take effect immediately for everyone (browsers will auto-bust the cache via a version query string).

@@ -179,7 +179,7 @@ export default function SiteEngineerWorkOrdersV2({ projectId }) {
         <Button
           size="sm"
           onClick={() => setGlobalDlrOpen(true)}
-          className="bg-green-600 hover:bg-green-700 text-white gap-1"
+          className="bg-primary hover:bg-primary-hover text-white gap-1"
           data-testid="se-wov2-global-dlr-btn"
         >
           <ClipboardList className="h-3.5 w-3.5" /> Global DLR Report
@@ -187,9 +187,9 @@ export default function SiteEngineerWorkOrdersV2({ projectId }) {
       </div>
       {Object.entries(grouped).map(([type, list]) => (
         <Card key={type} className="overflow-hidden">
-          <div className="bg-gradient-to-r from-amber-100 to-amber-50 border-b border-amber-200 px-4 py-2.5">
+          <div className="bg-amber-50 border-b border-amber-200 px-4 py-2.5">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-bold text-amber-900 uppercase tracking-wide" data-testid={`type-header-${type}`}>{type}</h3>
+              <h3 className="text-sm font-bold text-foreground uppercase tracking-wide" data-testid={`type-header-${type}`}>{type}</h3>
               <Badge variant="outline" className="bg-white text-amber-700 border-amber-300 text-[10px]">
                 {list.length} {list.length === 1 ? 'contractor' : 'contractors'}
               </Badge>
@@ -207,7 +207,7 @@ export default function SiteEngineerWorkOrdersV2({ projectId }) {
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-gray-900 truncate">{wo.contractor_name}</p>
                   </div>
-                  <Button size="sm" variant="outline" className="h-7 text-xs gap-1 border-amber-300 text-amber-700 hover:bg-amber-100" data-testid={`wov2-view-${wo.work_order_id}`}>
+                  <Button size="sm" variant="outline" className="h-7 text-xs gap-1 border-brand-300 text-primary-strong hover:bg-brand-50" data-testid={`wov2-view-${wo.work_order_id}`}>
                     <Eye className="h-3 w-3" /> View
                   </Button>
                   <ChevronRight className="h-4 w-4 text-gray-400" />
@@ -283,7 +283,7 @@ function WorkOrderDetail({ wo, projectId, onBack, onChange }) {
     <div className="space-y-3" data-testid="wov2-detail">
       {/* Header */}
       <Card className="overflow-hidden">
-        <div className="bg-gradient-to-r from-amber-50 to-white border-b border-amber-200 p-3 sm:p-4">
+        <div className="bg-white border-b border-amber-200 p-3 sm:p-4">
           <div className="flex items-start gap-3">
             <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0" onClick={onBack} data-testid="wov2-back-btn">
               <ArrowLeft className="h-4 w-4" />
@@ -312,9 +312,9 @@ function WorkOrderDetail({ wo, projectId, onBack, onChange }) {
             <span className="sm:hidden">Payments</span>
             <span className="hidden sm:inline">Payment Schedule Stages</span>
           </TabsTrigger>
-          <TabsTrigger value="rab" data-testid="wov2-tab-rab" className="shrink-0 text-xs sm:text-sm data-[state=active]:bg-violet-600 data-[state=active]:text-white">{"Total RAB's"}</TabsTrigger>
+          <TabsTrigger value="rab" data-testid="wov2-tab-rab" className="shrink-0 text-xs sm:text-sm data-[state=active]:bg-primary data-[state=active]:text-white">{"Total RAB's"}</TabsTrigger>
           <TabsTrigger value="additional" data-testid="wov2-tab-additional" className="shrink-0 text-xs sm:text-sm">Additional</TabsTrigger>
-          <TabsTrigger value="additional_rab" data-testid="wov2-tab-additional-rab" className="shrink-0 text-xs sm:text-sm data-[state=active]:bg-violet-600 data-[state=active]:text-white">
+          <TabsTrigger value="additional_rab" data-testid="wov2-tab-additional-rab" className="shrink-0 text-xs sm:text-sm data-[state=active]:bg-primary data-[state=active]:text-white">
             <span className="sm:hidden">Add. RAB</span>
             <span className="hidden sm:inline">Additional RAB</span>
           </TabsTrigger>
@@ -439,7 +439,7 @@ function WorkOrderDetail({ wo, projectId, onBack, onChange }) {
               {(wo.additional_work && wo.additional_work.length > 0) && (
                 <div className="border-t mt-2">
                   <div className="px-3 py-2 bg-blue-50 border-b">
-                    <h4 className="text-xs font-semibold text-blue-900">Additional Work</h4>
+                    <h4 className="text-xs font-semibold text-foreground">Additional Work</h4>
                   </div>
                   <table className="w-full text-xs">
                     <tbody className="divide-y">
@@ -678,7 +678,7 @@ function PaymentScheduleTab({ wo, suspenseBalance, onClickStage, stageFilter, ti
     <Card>
       <CardHeader className="p-3 pb-2 flex flex-row items-center justify-between">
         <div>
-          <CardTitle className="text-sm flex items-center gap-2"><Banknote className="h-4 w-4 text-violet-600" /> {title || 'Stages'}</CardTitle>
+          <CardTitle className="text-sm flex items-center gap-2"><Banknote className="h-4 w-4 text-primary" /> {title || 'Stages'}</CardTitle>
           <CardDescription className="text-[11px] mt-0.5">{description || 'Approval flow: You → PM → QC → Planning → Accountant'}</CardDescription>
         </div>
         <Badge variant="outline" className="text-[10px]">{paidStages}/{stages.length} paid</Badge>
@@ -784,7 +784,7 @@ function PaymentScheduleTab({ wo, suspenseBalance, onClickStage, stageFilter, ti
                   <Button
                     size="sm"
                     variant="outline"
-                    className="h-7 text-xs gap-1 border-amber-300 text-amber-700 hover:bg-amber-100 shrink-0"
+                    className="h-7 text-xs gap-1 border-brand-300 text-primary-strong hover:bg-brand-50 shrink-0"
                     onClick={(e) => { e.stopPropagation(); onClickStage(stage); }}
                     data-testid={`wov2-stage-view-${stage.stage_id || i}`}
                   >
@@ -954,7 +954,7 @@ function WorkCompleteSection({ stage, wo, projectId, fullyPaid, onSaved }) {
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setOpen(false)} disabled={submitting}>Cancel</Button>
-            <Button className="bg-emerald-600 hover:bg-emerald-700" onClick={submit} disabled={submitting} data-testid="wov2-work-complete-confirm">
+            <Button className="bg-primary hover:bg-primary-hover" onClick={submit} disabled={submitting} data-testid="wov2-work-complete-confirm">
               <CheckCheck className="h-3.5 w-3.5 mr-1" /> {submitting ? 'Saving…' : 'Confirm Complete'}
             </Button>
           </DialogFooter>
@@ -1479,7 +1479,7 @@ function StageRequestDialog({ stage, wo, projectId, suspenseBalance, onClose, on
           {stage.is_open && (balance > 0 || reworkPR) && (
             <button
               onClick={() => setSubTab('request')}
-              className={`px-3 py-1.5 text-xs font-medium border-b-2 transition-colors ${subTab === 'request' ? 'border-amber-600 text-amber-700' : 'border-transparent text-gray-500 hover:text-amber-700'}`}
+              className={`px-3 py-1.5 text-xs font-medium border-b-2 transition-colors ${subTab === 'request' ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-primary-strong'}`}
               data-testid="wov2-subtab-request"
             >
               {reworkPR ? `Resubmit ${reworkPR.rab_number || 'RAB'}` : 'Request RAB'}
@@ -1487,7 +1487,7 @@ function StageRequestDialog({ stage, wo, projectId, suspenseBalance, onClose, on
           )}
           <button
             onClick={() => setSubTab('totalrab')}
-            className={`px-3 py-1.5 text-xs font-medium border-b-2 transition-colors ${subTab === 'totalrab' ? 'border-violet-600 text-violet-700' : 'border-transparent text-gray-500 hover:text-violet-700'}`}
+            className={`px-3 py-1.5 text-xs font-medium border-b-2 transition-colors ${subTab === 'totalrab' ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-primary-strong'}`}
             data-testid="wov2-subtab-totalrab"
           >
             {"Total RAB's"} {allRequests.length > 0 && <span className="ml-1 text-[10px] opacity-70">({allRequests.length})</span>}
@@ -1561,7 +1561,7 @@ function StageRequestDialog({ stage, wo, projectId, suspenseBalance, onClose, on
                         <Button
                           size="sm"
                           variant="outline"
-                          className="h-6 px-2 text-[10px] text-violet-700 border-violet-200 hover:bg-violet-50"
+                          className="h-6 px-2 text-[10px] text-primary-strong border-brand-300 hover:bg-brand-50"
                           onClick={() => setRabView({ open: true, requestId: pr.request_id })}
                           data-testid={`wov2-pending-view-${pr.request_id}`}
                         >
@@ -1945,7 +1945,7 @@ function StageRequestDialog({ stage, wo, projectId, suspenseBalance, onClose, on
                               <td className="px-1 py-1 text-center">
                                 <button
                                   type="button"
-                                  className="text-violet-600 hover:text-violet-800"
+                                  className="text-primary-strong hover:text-brand-800"
                                   title={`View DLR for ${r.date}`}
                                   data-testid={`wov2-dlr-view-${r.report_id}`}
                                   onClick={() => {
@@ -2003,7 +2003,7 @@ function StageRequestDialog({ stage, wo, projectId, suspenseBalance, onClose, on
                       <span className="text-[9px] text-gray-500">Each cell: workers × per-day rate = amount</span>
                       <button
                         type="button"
-                        className="text-[10px] text-indigo-700 hover:underline font-semibold"
+                        className="text-[10px] text-primary-strong hover:underline font-semibold"
                         onClick={() => setAmount(String(Math.round(dlrPreview.totals.total_cost || 0)))}
                         data-testid="wov2-dlr-apply-cost"
                         disabled={!dlrPreview.totals.total_cost}
@@ -2071,7 +2071,7 @@ function StageRequestDialog({ stage, wo, projectId, suspenseBalance, onClose, on
               />
             </div>
             <Button
-              className="w-full bg-amber-600 hover:bg-amber-700"
+              className="w-full bg-primary hover:bg-primary-hover"
               onClick={submit}
               disabled={submitting}
               data-testid="wov2-rab-submit"
@@ -2138,7 +2138,7 @@ function StageRequestDialog({ stage, wo, projectId, suspenseBalance, onClose, on
                     </div>
 
                     {/* Headline: amount + closing balance hint */}
-                    <div className="rounded-md border border-orange-200 bg-gradient-to-br from-orange-50 to-white p-2 mb-2">
+                    <div className="rounded-md border border-orange-200 bg-white p-2 mb-2">
                       <p className="text-[9px] uppercase tracking-wider text-orange-700 font-semibold">{isReleased ? 'Released Amount' : 'Requested Amount'}</p>
                       <p className="text-lg sm:text-xl font-extrabold text-orange-700">
                         {fmt(isReleased ? (pr.approved_amount || pr.amount) : pr.amount)}
@@ -2200,7 +2200,7 @@ function StageRequestDialog({ stage, wo, projectId, suspenseBalance, onClose, on
                       <Button
                         size="sm"
                         variant="outline"
-                        className="h-6 px-2 text-[10px] text-violet-700 border-violet-200 hover:bg-violet-50"
+                        className="h-6 px-2 text-[10px] text-primary-strong border-brand-300 hover:bg-brand-50"
                         onClick={() => setRabView({ open: true, requestId: pr.request_id })}
                         data-testid={`wov2-pr-view-${pr.request_id || i}`}
                         title={isReleased ? 'View RAB bill (downloadable from popup)' : 'View RAB approval chain'}
@@ -2303,7 +2303,7 @@ function DLRReportTab({ projectId, workOrderId }) {
 
   return (
     <Card>
-      <CardHeader className="p-3 pb-2 bg-gradient-to-r from-teal-50 to-teal-100 border-b">
+      <CardHeader className="p-3 pb-2 bg-teal-50 border-b">
         <CardTitle className="text-sm flex items-center gap-2"><ClipboardList className="h-4 w-4 text-teal-700" /> Daily Labour Report</CardTitle>
         <div className="grid grid-cols-3 gap-2 mt-2">
           <div className="bg-white border border-teal-200 rounded p-2">

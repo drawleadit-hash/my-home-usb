@@ -47,7 +47,7 @@ export function PaymentStageDetailDialog({ open, stageId, onClose }) {
     <Dialog open={open} onOpenChange={(o) => !o && onClose && onClose()}>
       <DialogContent className="max-w-3xl max-h-[88vh] overflow-y-auto" data-testid="stage-detail-dialog">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2 text-blue-700">
+          <DialogTitle className="flex items-center gap-2 text-foreground">
             <Eye className="h-5 w-5" /> Payment Stage Details
           </DialogTitle>
           {data?.summary?.stage_name && (

@@ -489,7 +489,7 @@ function LegEditor({ leg, idx, canRemove, ctx, allCheques, claimedByOther, updat
               <button type="button" className={`flex-1 px-3 py-1.5 text-xs font-medium ${leg.chequeTab === 'active' ? 'bg-white text-emerald-700 border-b-2 border-emerald-500' : 'text-gray-500'}`} onClick={() => update({ chequeTab: 'active' })}>
                 <CheckCircle2 className="h-3 w-3 inline mr-1" /> Active ({visibleActive.length})
               </button>
-              <button type="button" className={`flex-1 px-3 py-1.5 text-xs font-medium ${leg.chequeTab === 'inactive' ? 'bg-white text-amber-700 border-b-2 border-amber-500' : 'text-gray-500'}`} onClick={() => update({ chequeTab: 'inactive' })}>
+              <button type="button" className={`flex-1 px-3 py-1.5 text-xs font-medium ${leg.chequeTab === 'inactive' ? 'bg-white text-primary-strong border-b-2 border-primary' : 'text-gray-500'}`} onClick={() => update({ chequeTab: 'inactive' })}>
                 <Lock className="h-3 w-3 inline mr-1" /> Locked ({visibleInactive.length})
               </button>
             </div>

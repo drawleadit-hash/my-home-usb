@@ -103,7 +103,7 @@ export default function LabourAdvanceQueue({ role }) {
                   </div>
                   {canAct(req) && (
                     <div className="flex items-center gap-2 mt-2">
-                      <Button size="sm" className="h-7 text-xs bg-emerald-600 hover:bg-emerald-700 gap-1" onClick={() => setDecisionDialog({ open: true, request: req, action: 'approve', remarks: '' })} data-testid={`approve-lar-${req.request_id}`}>
+                      <Button size="sm" className="h-7 text-xs bg-primary hover:bg-primary-hover gap-1" onClick={() => setDecisionDialog({ open: true, request: req, action: 'approve', remarks: '' })} data-testid={`approve-lar-${req.request_id}`}>
                         <CheckCircle className="h-3 w-3" /> Approve
                       </Button>
                       <Button size="sm" variant="outline" className="h-7 text-xs text-red-600 border-red-200 hover:bg-red-50 gap-1" onClick={() => setDecisionDialog({ open: true, request: req, action: 'reject', remarks: '' })} data-testid={`reject-lar-${req.request_id}`}>
@@ -155,7 +155,7 @@ export default function LabourAdvanceQueue({ role }) {
             </div>
             <DialogFooter>
               <Button variant="outline" size="sm" onClick={() => setDecisionDialog({ ...decisionDialog, open: false })}>Cancel</Button>
-              <Button size="sm" disabled={busy || (decisionDialog.action === 'reject' && !decisionDialog.remarks.trim())} className={decisionDialog.action === 'approve' ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-red-600 hover:bg-red-700'} onClick={decide} data-testid="confirm-decision-btn">
+              <Button size="sm" disabled={busy || (decisionDialog.action === 'reject' && !decisionDialog.remarks.trim())} className={decisionDialog.action === 'approve' ? 'bg-primary hover:bg-primary-hover' : 'bg-red-600 hover:bg-red-700'} onClick={decide} data-testid="confirm-decision-btn">
                 {busy ? 'Saving…' : (decisionDialog.action === 'approve' ? 'Confirm Approve' : 'Confirm Reject')}
               </Button>
             </DialogFooter>

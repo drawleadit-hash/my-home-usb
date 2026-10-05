@@ -29,7 +29,7 @@ export default function ProspectApp() {
   const name = me?.user?.name || 'there';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-emerald-50 select-none">
+    <div className="min-h-screen bg-amber-50 select-none">
       {/* Mobile container */}
       <div className="max-w-md mx-auto pb-20 min-h-screen flex flex-col">
         {/* Sticky header */}
@@ -119,7 +119,7 @@ function MyQuoteTab({ sales, attachGuard }) {
   return (
     <div className="space-y-3 quote-guard pb-2" ref={attachGuard} style={{ WebkitTouchCallout: 'none', WebkitUserSelect: 'none', userSelect: 'none' }}>
       {/* Cover */}
-      <Card className="bg-gradient-to-br from-emerald-600 to-emerald-700 text-white border-0 shadow-lg">
+      <Card className="bg-primary text-white border-0 shadow-lg">
         <CardContent className="p-4">
           <p className="text-[11px] uppercase tracking-wider opacity-80">Your Stress-Free Quote</p>
           <p className="text-lg font-bold mt-1">{projectTitle}</p>
@@ -242,7 +242,7 @@ function MyQuoteTab({ sales, attachGuard }) {
       {/* Bottom CTA — Call Sales */}
       {sales?.phone && (
         <a href={`tel:${sales.phone}`} className="block">
-          <Button className="w-full h-12 bg-amber-600 hover:bg-amber-700 text-white shadow-lg gap-2" data-testid="quote-call-sales-btn">
+          <Button className="w-full h-12 bg-primary hover:bg-primary-hover text-white shadow-lg gap-2" data-testid="quote-call-sales-btn">
             <PhoneCall className="h-4 w-4" /> Call {sales.name || 'Sales'} — {sales.phone}
           </Button>
         </a>
@@ -346,7 +346,7 @@ function LetsBuildTab({ sales }) {
   return (
     <div className="space-y-4 py-3">
       <div className="text-center pt-4">
-        <div className="inline-flex items-center justify-center h-20 w-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-amber-500 text-white shadow-xl mb-3">
+        <div className="inline-flex items-center justify-center h-20 w-20 rounded-2xl bg-primary text-white shadow-xl mb-3">
           <Building2 className="h-10 w-10" />
         </div>
         <p className="text-2xl font-extrabold text-gray-800 leading-tight">Drawlead</p>
@@ -366,7 +366,7 @@ function LetsBuildTab({ sales }) {
 
       {sales?.phone ? (
         <a href={`tel:${sales.phone}`} className="block">
-          <Button className="w-full h-14 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white shadow-xl text-base gap-2" data-testid="build-call-btn">
+          <Button className="w-full h-14 bg-primary hover:bg-primary-hover text-white shadow-xl text-base gap-2" data-testid="build-call-btn">
             <PhoneCall className="h-5 w-5" /> Call to Sign the Project
           </Button>
         </a>

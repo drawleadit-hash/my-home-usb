@@ -189,7 +189,7 @@ export default function DailyClosingDialog({ open, onClose, date, computed, onSa
     <Dialog open={open} onOpenChange={(o) => !o && onClose && onClose()}>
       <DialogContent className="max-w-4xl max-h-[92vh] overflow-y-auto" data-testid="daily-closing-dialog">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2 text-amber-700">
+          <DialogTitle className="flex items-center gap-2 text-foreground">
             <CheckCircle2 className="h-5 w-5" /> Close Books · {date}
           </DialogTitle>
           <DialogDescription className="text-xs">
@@ -198,7 +198,7 @@ export default function DailyClosingDialog({ open, onClose, date, computed, onSa
         </DialogHeader>
 
         {loading ? (
-          <div className="flex items-center justify-center py-8"><Loader2 className="h-5 w-5 animate-spin text-amber-600" /></div>
+          <div className="flex items-center justify-center py-8"><Loader2 className="h-5 w-5 animate-spin text-primary" /></div>
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -262,7 +262,7 @@ export default function DailyClosingDialog({ open, onClose, date, computed, onSa
                     <button
                       type="button"
                       onClick={() => addSub(r.key)}
-                      className="mt-2 text-[10px] text-amber-700 hover:text-amber-900 flex items-center gap-1 font-medium"
+                      className="mt-2 text-[10px] text-primary-strong hover:text-brand-800 flex items-center gap-1 font-medium"
                       data-testid={`dc-sub-add-${r.key}`}
                     >
                       <Plus className="h-3 w-3" /> Add another source
@@ -309,7 +309,7 @@ export default function DailyClosingDialog({ open, onClose, date, computed, onSa
 
         <DialogFooter>
           <Button variant="outline" size="sm" onClick={onClose} disabled={saving}>Cancel</Button>
-          <Button size="sm" className="bg-amber-600 hover:bg-amber-700" onClick={save} disabled={saving || loading} data-testid="dc-save">
+          <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={save} disabled={saving || loading} data-testid="dc-save">
             {saving ? <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> : <CheckCircle2 className="h-3.5 w-3.5 mr-1" />}
             {saving ? 'Saving…' : 'Save Closing'}
           </Button>

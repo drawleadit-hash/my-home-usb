@@ -38,7 +38,7 @@ export default function WorkflowMasterPage() {
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-2">
-              <Workflow className="h-6 w-6 sm:h-7 sm:w-7 text-indigo-600" /> Workflow Master Setup
+              <Workflow className="h-6 w-6 sm:h-7 sm:w-7 text-primary" /> Workflow Master Setup
             </h1>
             <p className="text-xs sm:text-sm text-gray-500 mt-1">
               Control which menus each role sees on their dashboard. Toggle visibility, drag to reorder.

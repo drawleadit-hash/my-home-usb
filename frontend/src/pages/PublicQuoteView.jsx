@@ -37,7 +37,7 @@ export default function PublicQuoteView() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-emerald-50 flex items-center justify-center">
+      <div className="min-h-screen bg-amber-50 flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="h-8 w-8 animate-spin text-emerald-600 mx-auto" />
           <p className="text-sm text-gray-500 mt-3">Loading your quote…</p>
@@ -48,7 +48,7 @@ export default function PublicQuoteView() {
 
   if (err) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-emerald-50 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-amber-50 flex items-center justify-center px-4">
         <Card className="max-w-md w-full">
           <CardContent className="py-10 text-center">
             <AlertCircle className="h-12 w-12 text-amber-500 mx-auto mb-3" />
@@ -83,7 +83,7 @@ function QuoteView({ data }) {
   const daysLeft = expiresAt ? Math.max(0, Math.ceil((expiresAt - new Date()) / (1000 * 60 * 60 * 24))) : null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-emerald-50 select-none" data-testid="public-quote-view">
+    <div className="min-h-screen bg-amber-50 select-none" data-testid="public-quote-view">
       <div className="max-w-md mx-auto pb-24 min-h-screen flex flex-col">
         <header className="sticky top-0 z-10 bg-white/90 backdrop-blur border-b px-4 py-3">
           <div className="flex items-center justify-between gap-2">
@@ -101,7 +101,7 @@ function QuoteView({ data }) {
         </header>
 
         <main className="flex-1 px-4 py-3 space-y-3" style={{ WebkitTouchCallout: 'none', WebkitUserSelect: 'none', userSelect: 'none' }}>
-          <Card className="bg-gradient-to-br from-amber-500 to-amber-600 text-white border-0 shadow-lg">
+          <Card className="bg-primary text-white border-0 shadow-lg">
             <CardContent className="p-4">
               <p className="text-[11px] uppercase tracking-wider opacity-80">Your Stress-Free Quote</p>
               <p className="text-lg font-bold mt-1">{projectTitle}</p>
@@ -235,7 +235,7 @@ function QuoteView({ data }) {
           <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-[0_-2px_10px_rgba(0,0,0,0.04)] z-20">
             <div className="max-w-md mx-auto p-3">
               <a href={`tel:${sales.phone}`} className="block">
-                <Button className="w-full h-12 bg-amber-600 hover:bg-amber-700 text-white shadow-lg gap-2" data-testid="quote-call-sales-btn">
+                <Button className="w-full h-12 bg-primary hover:bg-primary-hover text-white shadow-lg gap-2" data-testid="quote-call-sales-btn">
                   <PhoneCall className="h-4 w-4" /> Call {sales.name || 'Sales'} — {sales.phone}
                 </Button>
               </a>
@@ -283,7 +283,7 @@ function ExpiredView({ token, data }) {
 
   if (done) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-emerald-50 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-amber-50 flex items-center justify-center px-4">
         <Card className="max-w-md w-full">
           <CardContent className="py-10 text-center">
             <CheckCircle className="h-14 w-14 text-emerald-600 mx-auto mb-3" />
@@ -301,7 +301,7 @@ function ExpiredView({ token, data }) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-emerald-50" data-testid="public-quote-expired">
+    <div className="min-h-screen bg-amber-50" data-testid="public-quote-expired">
       <div className="max-w-md mx-auto pb-12 min-h-screen">
         <header className="bg-white/90 backdrop-blur border-b px-4 py-4">
           <div className="flex items-center gap-2">
@@ -331,7 +331,7 @@ function ExpiredView({ token, data }) {
               </div>
               {sales.phone && (
                 <a href={`tel:${sales.phone}`} className="block mt-3">
-                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700 gap-2" data-testid="expired-call-btn">
+                  <Button className="w-full bg-primary hover:bg-primary-hover gap-2" data-testid="expired-call-btn">
                     <PhoneCall className="h-4 w-4" /> Call Now
                   </Button>
                 </a>
@@ -371,7 +371,7 @@ function ExpiredView({ token, data }) {
                 <Textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Any specific requirements or questions" rows={3} data-testid="appt-notes-input" />
               </div>
 
-              <Button onClick={handleSubmit} disabled={submitting} className="w-full bg-amber-600 hover:bg-amber-700 gap-2" data-testid="appt-submit-btn">
+              <Button onClick={handleSubmit} disabled={submitting} className="w-full bg-primary hover:bg-primary-hover gap-2" data-testid="appt-submit-btn">
                 {submitting ? <><Loader2 className="h-4 w-4 animate-spin" /> Booking…</> : <><CalendarIcon className="h-4 w-4" /> Confirm Appointment</>}
               </Button>
             </CardContent>

@@ -77,7 +77,7 @@ export default function PaymentSchedulePage() {
     return false;
   };
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center bg-gray-50"><RefreshCw className="h-6 w-6 animate-spin text-amber-600" /></div>;
+  if (loading) return <div className="min-h-screen flex items-center justify-center bg-gray-50"><RefreshCw className="h-6 w-6 animate-spin text-primary" /></div>;
 
   const allEntries = schedule.entries || [];
   const pendingArr = allEntries.filter(e => !isCollectedEntry(e));
@@ -261,7 +261,7 @@ export default function PaymentSchedulePage() {
                             <Button
                               size="sm"
                               variant="ghost"
-                              className="h-7 w-7 p-0 text-blue-600 hover:bg-blue-50"
+                              className="h-7 w-7 p-0 text-primary-strong hover:bg-brand-50"
                               title="View stage details"
                               onClick={(ev) => { ev.stopPropagation(); setStageDetailDlg({ open: true, stageId: e.stage_id }); }}
                               data-testid={`acc-ps-view-${e.entry_id}`}

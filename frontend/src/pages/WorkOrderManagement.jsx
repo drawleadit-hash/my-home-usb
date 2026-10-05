@@ -300,10 +300,10 @@ export default function WorkOrderManagement() {
           <Tabs value={activeTab} onValueChange={handleTabChange}>
             <CardHeader className="border-b p-3 sm:p-4">
               <TabsList className="bg-transparent p-0">
-                <TabsTrigger value="all" className="data-[state=active]:border-b-2 data-[state=active]:border-indigo-600 rounded-none">
+                <TabsTrigger value="all" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none">
                   All
                 </TabsTrigger>
-                <TabsTrigger value="labour" className="data-[state=active]:border-b-2 data-[state=active]:border-amber-500 rounded-none">
+                <TabsTrigger value="labour" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none">
                   Labour
                 </TabsTrigger>
                 <TabsTrigger value="material" className="data-[state=active]:border-b-2 data-[state=active]:border-green-600 rounded-none">
@@ -647,7 +647,7 @@ export default function WorkOrderManagement() {
             <Button variant="outline" onClick={() => setCreateDialog(false)}>Cancel</Button>
             <Button 
               onClick={orderType === 'labour' ? handleCreateLabourOrder : handleCreateMaterialOrder}
-              className="bg-indigo-600 hover:bg-indigo-700"
+              className="bg-primary hover:bg-primary-hover"
             >
               Create Work Order
             </Button>

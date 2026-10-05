@@ -78,7 +78,7 @@ export default function CreateClientPortalDialog({ project, open, onOpenChange, 
     <Dialog open={open} onOpenChange={(v) => { if (!v) handleClose(); else onOpenChange(v); }}>
       <DialogContent className="max-w-[95vw] sm:max-w-md" data-testid="create-client-portal-dialog">
         <DialogHeader>
-          <DialogTitle className="text-base flex items-center gap-2"><KeyRound className="h-4 w-4 text-amber-600" /> Create Client Portal</DialogTitle>
+          <DialogTitle className="text-base flex items-center gap-2"><KeyRound className="h-4 w-4 text-primary" /> Create Client Portal</DialogTitle>
           <DialogDescription className="text-xs">For {project?.name} · {project?.client_name}</DialogDescription>
         </DialogHeader>
 
@@ -112,7 +112,7 @@ export default function CreateClientPortalDialog({ project, open, onOpenChange, 
             </div>
             <DialogFooter>
               <Button variant="outline" size="sm" onClick={handleClose}>Cancel</Button>
-              <Button size="sm" className="bg-amber-600 hover:bg-amber-700" disabled={submitting} onClick={submit} data-testid="ccp-submit">
+              <Button size="sm" className="bg-primary hover:bg-primary-hover" disabled={submitting} onClick={submit} data-testid="ccp-submit">
                 {submitting ? 'Creating...' : 'Create Portal'}
               </Button>
             </DialogFooter>
@@ -134,7 +134,7 @@ export default function CreateClientPortalDialog({ project, open, onOpenChange, 
               <Button size="sm" variant="outline" onClick={copyMessage} className="gap-1" data-testid="ccp-copy">
                 {copied ? <Check className="h-3.5 w-3.5 text-green-600" /> : <Copy className="h-3.5 w-3.5" />} {copied ? 'Copied' : 'Copy'}
               </Button>
-              <Button size="sm" className="bg-green-600 hover:bg-green-700 gap-1" onClick={shareWhatsApp} data-testid="ccp-whatsapp">
+              <Button size="sm" className="bg-primary hover:bg-primary-hover gap-1" onClick={shareWhatsApp} data-testid="ccp-whatsapp">
                 <MessageCircle className="h-3.5 w-3.5" /> WhatsApp
               </Button>
             </div>

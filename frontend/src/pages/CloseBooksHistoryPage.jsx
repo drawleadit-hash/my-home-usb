@@ -72,7 +72,7 @@ export default function CloseBooksHistoryPage() {
   if (!authChecked) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-amber-600" />
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     );
   }
@@ -87,7 +87,7 @@ export default function CloseBooksHistoryPage() {
           </Button>
           <div>
             <h1 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-              <CalendarDays className="h-5 w-5 text-amber-600" /> Close Books — History
+              <CalendarDays className="h-5 w-5 text-primary" /> Close Books — History
             </h1>
             <p className="text-sm text-gray-500">Every day the books were closed, with actual vs computed balance per payment mode.</p>
           </div>
@@ -106,7 +106,7 @@ export default function CloseBooksHistoryPage() {
             </div>
 
             {loading ? (
-              <div className="flex items-center justify-center py-10"><Loader2 className="h-5 w-5 animate-spin text-amber-600" /></div>
+              <div className="flex items-center justify-center py-10"><Loader2 className="h-5 w-5 animate-spin text-primary" /></div>
             ) : days.length === 0 ? (
               <div className="text-center py-10 text-sm text-gray-400" data-testid="close-books-history-empty">No closings recorded for this month</div>
             ) : (

@@ -7,6 +7,7 @@ import { Label } from '../components/ui/label';
 import { Button } from '../components/ui/button';
 import { toast } from 'sonner';
 import { Building2, User, Mail, Phone, Lock, ArrowRight, Check, Shield, Eye, EyeOff, AlertTriangle } from 'lucide-react';
+import { BrandMark } from '@/components/BrandMark';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -78,7 +79,7 @@ export default function SetupWizard() {
 
   if (checking) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
+      <div className="min-h-screen bg-[#07110B] bg-[radial-gradient(900px_520px_at_15%_-10%,rgba(50,180,111,0.28),transparent_70%)] flex items-center justify-center">
         <div className="text-white text-sm">Checking setup status...</div>
       </div>
     );
@@ -86,8 +87,8 @@ export default function SetupWizard() {
 
   if (setupLocked) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center px-4" data-testid="setup-locked">
-        <Card className="max-w-md w-full border-0 shadow-2xl text-center">
+      <div className="min-h-screen bg-[#07110B] bg-[radial-gradient(900px_520px_at_15%_-10%,rgba(50,180,111,0.28),transparent_70%)] flex items-center justify-center px-4" data-testid="setup-locked">
+        <Card className="max-w-md w-full rounded-2xl border-0 shadow-2xl text-center">
           <CardContent className="py-12">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-100 mb-4">
               <AlertTriangle className="h-8 w-8 text-amber-600" />
@@ -95,10 +96,10 @@ export default function SetupWizard() {
             <h2 className="text-xl font-bold text-gray-900 mb-2">Setup Already Complete</h2>
             <p className="text-gray-500 mb-4">A Super Admin account already exists. This page is locked.</p>
             <div className="flex flex-col gap-3 items-center">
-              <Button onClick={() => navigate('/login')} className="bg-slate-900 hover:bg-slate-800" data-testid="go-to-login-btn">
+              <Button onClick={() => navigate('/login')} className="rounded-xl" data-testid="go-to-login-btn">
                 Go to Login
               </Button>
-              <button onClick={() => navigate('/forgot-password')} className="text-sm text-indigo-600 hover:text-indigo-800 hover:underline" data-testid="setup-forgot-password-link">
+              <button onClick={() => navigate('/forgot-password')} className="text-sm text-primary-strong hover:text-brand-800 hover:underline" data-testid="setup-forgot-password-link">
                 Forgot Password?
               </button>
             </div>
@@ -109,16 +110,14 @@ export default function SetupWizard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center px-4" data-testid="setup-wizard">
+    <div className="min-h-screen bg-[#07110B] bg-[radial-gradient(900px_520px_at_15%_-10%,rgba(50,180,111,0.28),transparent_70%)] flex items-center justify-center px-4" data-testid="setup-wizard">
       <div className="w-full max-w-lg">
 
         {/* Logo / Brand */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-sm mb-4">
-            <Building2 className="h-8 w-8 text-white" />
-          </div>
+          <BrandMark className="mx-auto mb-4 h-14 w-14" />
           <h1 className="text-2xl font-bold text-white">Welcome to Your Construction OS</h1>
-          <p className="text-slate-400 mt-2 text-sm">Set up your Super Admin account in just a minute</p>
+          <p className="text-white/55 mt-2 text-sm">Set up your Super Admin account in just a minute</p>
         </div>
 
         {/* Progress */}
@@ -128,21 +127,21 @@ export default function SetupWizard() {
               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
                 step > s ? 'bg-green-500 text-white' :
                 step === s ? 'bg-white text-slate-900' :
-                'bg-slate-700 text-slate-400'
+                'bg-white/10 text-white/50'
               }`}>
                 {step > s ? <Check className="h-4 w-4" /> : s}
               </div>
-              {s < 3 && <div className={`w-12 h-0.5 ${step > s ? 'bg-green-500' : 'bg-slate-700'}`} />}
+              {s < 3 && <div className={`w-12 h-0.5 ${step > s ? 'bg-green-500' : 'bg-white/15'}`} />}
             </div>
           ))}
         </div>
 
         {/* Step 1: Company Info */}
         {step === 1 && (
-          <Card className="border-0 shadow-2xl" data-testid="setup-step-1">
+          <Card className="rounded-2xl border-0 shadow-2xl" data-testid="setup-step-1">
             <CardHeader className="pb-2">
               <CardTitle className="text-lg flex items-center gap-2">
-                <Building2 className="h-5 w-5 text-indigo-600" />
+                <Building2 className="h-5 w-5 text-primary" />
                 Company Details
               </CardTitle>
               <p className="text-sm text-gray-500">Tell us about your company</p>
@@ -160,7 +159,7 @@ export default function SetupWizard() {
                 />
               </div>
               <Button
-                className="w-full bg-slate-900 hover:bg-slate-800"
+                className="h-11 w-full rounded-xl"
                 onClick={() => {
                   if (!form.company_name.trim()) { toast.error('Company name is required'); return; }
                   setStep(2);
@@ -175,10 +174,10 @@ export default function SetupWizard() {
 
         {/* Step 2: Admin Account */}
         {step === 2 && (
-          <Card className="border-0 shadow-2xl" data-testid="setup-step-2">
+          <Card className="rounded-2xl border-0 shadow-2xl" data-testid="setup-step-2">
             <CardHeader className="pb-2">
               <CardTitle className="text-lg flex items-center gap-2">
-                <Shield className="h-5 w-5 text-indigo-600" />
+                <Shield className="h-5 w-5 text-primary" />
                 Super Admin Account
               </CardTitle>
               <p className="text-sm text-gray-500">Create your administrator login</p>
@@ -228,7 +227,7 @@ export default function SetupWizard() {
               <div className="flex gap-3">
                 <Button variant="outline" className="flex-1" onClick={() => setStep(1)}>Back</Button>
                 <Button
-                  className="flex-1 bg-indigo-600 hover:bg-indigo-700"
+                  className="flex-1 bg-primary hover:bg-primary-hover"
                   onClick={handleSubmit}
                   disabled={loading}
                   data-testid="setup-submit-btn"
@@ -255,7 +254,7 @@ export default function SetupWizard() {
         )}
 
         {/* Footer */}
-        <p className="text-center text-slate-500 text-xs mt-6">
+        <p className="text-center text-white/40 text-xs mt-6">
           Powered by Drawlead
         </p>
       </div>

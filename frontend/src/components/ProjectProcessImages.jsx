@@ -71,7 +71,7 @@ function CategoryLinks({ projectId, category, canManage }) {
         <div className="space-y-1 mb-2">
           {links.map(l => (
             <div key={l.link_id} className="flex items-center justify-between gap-2 text-xs bg-blue-50 border border-blue-100 rounded px-2 py-1.5">
-              <a href={l.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-blue-700 hover:underline truncate min-w-0">
+              <a href={l.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-primary-strong hover:underline truncate min-w-0">
                 <LinkIcon className="h-3 w-3 shrink-0" />
                 <span className="truncate">{l.label || l.url}</span>
               </a>

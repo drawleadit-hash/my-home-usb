@@ -607,7 +607,7 @@ export default function HRPortal() {
   const activeCount = staff.filter(s => s.status === 'active').length;
   const totalBudget = staff.filter(s => s.status === 'active').reduce((s, e) => s + (e.net_salary || 0), 0);
 
-  if (loading && !user) return <div className="min-h-screen flex items-center justify-center bg-gray-50"><RefreshCw className="h-6 w-6 animate-spin text-amber-600" /></div>;
+  if (loading && !user) return <div className="min-h-screen flex items-center justify-center bg-gray-50"><RefreshCw className="h-6 w-6 animate-spin text-primary" /></div>;
 
   const SectionHeader = ({ id, label, icon: Icon }) => (
     <button onClick={() => setExpandedSection(expandedSection === id ? '' : id)} className="flex items-center justify-between w-full py-2 px-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors" type="button">
@@ -687,7 +687,7 @@ export default function HRPortal() {
           <TabsContent value="employees">
             {/* Active / Left Employees Toggle */}
             <div className="flex gap-2 mb-4">
-              <Button variant={empListView === 'active' ? 'default' : 'outline'} onClick={() => setEmpListView('active')} data-testid="emp-view-active" className={empListView === 'active' ? 'bg-amber-600 hover:bg-amber-700' : ''}>
+              <Button variant={empListView === 'active' ? 'default' : 'outline'} onClick={() => setEmpListView('active')} data-testid="emp-view-active" className={empListView === 'active' ? 'bg-primary hover:bg-primary-hover' : ''}>
                 <Users className="h-4 w-4 mr-1" /> Active Employees ({staff.filter(s => s.status === 'active').length})
               </Button>
               <Button variant={empListView === 'left' ? 'default' : 'outline'} onClick={() => setEmpListView('left')} data-testid="emp-view-left" className={empListView === 'left' ? 'bg-red-600 hover:bg-red-700' : ''}>
@@ -723,10 +723,10 @@ export default function HRPortal() {
                         <SelectItem value="service_new">Service (Newest First)</SelectItem>
                       </SelectContent>
                     </Select>
-                    <Button onClick={openAddEmployee} className="bg-amber-600 hover:bg-amber-700" data-testid="add-employee-btn">
+                    <Button onClick={openAddEmployee} className="bg-primary hover:bg-primary-hover" data-testid="add-employee-btn">
                       <UserPlus className="h-4 w-4 mr-1" /> Add Employee
                     </Button>
-                    <Button onClick={() => setImportDialog(true)} variant="outline" className="border-amber-600 text-amber-600 hover:bg-amber-50" data-testid="import-employees-btn">
+                    <Button onClick={() => setImportDialog(true)} variant="outline" className="border-amber-600 text-primary-strong hover:bg-brand-50" data-testid="import-employees-btn">
                       <Upload className="h-4 w-4 mr-1" /> Import CSV
                     </Button>
                   </div>
@@ -754,7 +754,7 @@ export default function HRPortal() {
                         <tr key={s.staff_id} className="hover:bg-gray-50/80 cursor-pointer" data-testid={`employee-row-${s.staff_id}`} onClick={() => openViewEmployee(s)}>
                           <td className="px-4 py-3">
                             <div className="flex items-center gap-3">
-                              <div className="w-9 h-9 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-sm">{s.name?.charAt(0)?.toUpperCase()}</div>
+                              <div className="w-9 h-9 rounded-full bg-brand-100 text-brand-800 flex items-center justify-center font-bold text-sm">{s.name?.charAt(0)?.toUpperCase()}</div>
                               <div><p className="font-medium text-gray-900">{s.name}</p><p className="text-xs text-gray-500">{s.employee_code}</p></div>
                             </div>
                           </td>
@@ -899,7 +899,7 @@ export default function HRPortal() {
                         <SelectItem value="role_desc">Role (Z to A)</SelectItem>
                       </SelectContent>
                     </Select>
-                    <Button onClick={() => setCreateUserDialog(true)} className="bg-blue-600 hover:bg-blue-700" data-testid="create-user-btn">
+                    <Button onClick={() => setCreateUserDialog(true)} className="bg-primary hover:bg-primary-hover" data-testid="create-user-btn">
                       <UserPlus className="h-4 w-4 mr-1" /> Create User
                     </Button>
                   </div>
@@ -1084,7 +1084,7 @@ export default function HRPortal() {
                   <div><Label>Other Deductions</Label><NumericInput value={staffForm.other_deductions} onChange={(e) => setStaffForm({ ...staffForm, other_deductions: e.target.value })} /></div>
                   <div className="bg-red-50 p-2 rounded flex flex-col justify-center"><span className="text-xs text-red-600">Deductions</span><span className="font-bold text-red-700">-{fmt(salary.deductions)}</span></div>
                 </div>
-                <Card className="bg-gradient-to-r from-emerald-50 to-green-50 border-emerald-200">
+                <Card className="bg-emerald-50 border-emerald-200">
                   <CardContent className="p-3 flex justify-between items-center">
                     <span className="font-semibold text-emerald-700">Net Salary</span>
                     <span className="text-xl font-bold text-emerald-700">{fmt(salary.net)}</span>
@@ -1103,7 +1103,7 @@ export default function HRPortal() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setStaffDialog(false)}>Cancel</Button>
-            <Button onClick={handleSaveEmployee} className="bg-amber-600 hover:bg-amber-700" data-testid="save-employee-btn"><Check className="h-4 w-4 mr-1" /> {selectedStaff ? 'Update' : 'Add'} Employee</Button>
+            <Button onClick={handleSaveEmployee} className="bg-primary hover:bg-primary-hover" data-testid="save-employee-btn"><Check className="h-4 w-4 mr-1" /> {selectedStaff ? 'Update' : 'Add'} Employee</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -1115,7 +1115,7 @@ export default function HRPortal() {
           {viewingStaff && (
             <div className="space-y-4">
               <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-                <div className="w-16 h-16 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-2xl">{viewingStaff.name?.charAt(0)?.toUpperCase()}</div>
+                <div className="w-16 h-16 rounded-full bg-brand-100 text-brand-800 flex items-center justify-center font-bold text-2xl">{viewingStaff.name?.charAt(0)?.toUpperCase()}</div>
                 <div>
                   <h3 className="text-xl font-bold">{viewingStaff.name}</h3>
                   <p className="text-gray-600">{viewingStaff.designation || '-'} | {viewingStaff.department || '-'}</p>
@@ -1207,7 +1207,7 @@ export default function HRPortal() {
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setViewDialog(false)}>Close</Button>
-            <Button onClick={() => { setViewDialog(false); openEditEmployee(viewingStaff); }} className="bg-amber-600 hover:bg-amber-700"><Edit className="h-4 w-4 mr-1" /> Edit</Button>
+            <Button onClick={() => { setViewDialog(false); openEditEmployee(viewingStaff); }} className="bg-primary hover:bg-primary-hover"><Edit className="h-4 w-4 mr-1" /> Edit</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -1241,7 +1241,7 @@ export default function HRPortal() {
                 <Button
                   type="button"
                   size="sm"
-                  className={termDialog.rehire === 'eligible' ? 'bg-green-600 hover:bg-green-700 text-white' : 'bg-white border border-gray-300 text-gray-700 hover:bg-green-50'}
+                  className={termDialog.rehire === 'eligible' ? 'bg-primary hover:bg-primary-hover text-white' : 'bg-white border border-gray-300 text-gray-700 hover:bg-green-50'}
                   onClick={() => setTermDialog(d => ({ ...d, rehire: 'eligible' }))}
                   data-testid="term-rehire-eligible"
                 >
@@ -1280,7 +1280,7 @@ export default function HRPortal() {
               <div className="flex items-center gap-3"><Label>Active</Label><Button size="sm" variant={selectedUser.newActive ? 'default' : 'outline'} className={selectedUser.newActive ? 'bg-green-600' : ''} onClick={() => setSelectedUser({ ...selectedUser, newActive: !selectedUser.newActive })}>{selectedUser.newActive ? 'Active' : 'Inactive'}</Button></div>
             </div>
           )}
-          <DialogFooter><Button variant="outline" onClick={() => setRoleDialog(false)}>Cancel</Button><Button onClick={handleUpdateUser} className="bg-amber-600 hover:bg-amber-700" data-testid="save-user-btn">Save</Button></DialogFooter>
+          <DialogFooter><Button variant="outline" onClick={() => setRoleDialog(false)}>Cancel</Button><Button onClick={handleUpdateUser} className="bg-primary hover:bg-primary-hover" data-testid="save-user-btn">Save</Button></DialogFooter>
         </DialogContent>
       </Dialog>
 
@@ -1337,7 +1337,7 @@ export default function HRPortal() {
             <div><Label>Password *</Label><div className="relative"><Input type={showPassword ? 'text' : 'password'} value={createUserForm.password} onChange={(e) => setCreateUserForm({ ...createUserForm, password: e.target.value })} placeholder="Min 6 characters" className="pr-10" data-testid="create-user-password" /><button type="button" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600" onClick={() => setShowPassword(!showPassword)} data-testid="toggle-password-visibility">{showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}</button></div></div>
             <div><Label>Confirm Password *</Label><div className="relative"><Input type={showConfirmPassword ? 'text' : 'password'} value={createUserForm.confirm_password} onChange={(e) => setCreateUserForm({ ...createUserForm, confirm_password: e.target.value })} placeholder="Confirm password" className="pr-10" data-testid="create-user-confirm-password" /><button type="button" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600" onClick={() => setShowConfirmPassword(!showConfirmPassword)} data-testid="toggle-confirm-password-visibility">{showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}</button></div></div>
           </div>
-          <DialogFooter><Button variant="outline" onClick={() => setCreateUserDialog(false)}>Cancel</Button><Button onClick={handleCreateUser} className="bg-blue-600 hover:bg-blue-700" data-testid="submit-create-user">Create User</Button></DialogFooter>
+          <DialogFooter><Button variant="outline" onClick={() => setCreateUserDialog(false)}>Cancel</Button><Button onClick={handleCreateUser} className="bg-primary hover:bg-primary-hover" data-testid="submit-create-user">Create User</Button></DialogFooter>
         </DialogContent>
       </Dialog>
 
@@ -1350,7 +1350,7 @@ export default function HRPortal() {
             <div><Label>Status</Label><Select value={markData.status} onValueChange={v => setMarkData(p => ({ ...p, status: v }))}><SelectTrigger data-testid="mark-status-select"><SelectValue /></SelectTrigger><SelectContent>{ATT_STATUSES.map(s => <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>)}</SelectContent></Select></div>
             <div><Label>Remarks</Label><Input value={markData.remarks} onChange={e => setMarkData(p => ({ ...p, remarks: e.target.value }))} placeholder="Optional" /></div>
           </div>
-          <DialogFooter><Button variant="outline" onClick={() => setMarkDialog(false)}>Cancel</Button><Button onClick={handleMarkAttendance} className="bg-amber-600 hover:bg-amber-700" data-testid="confirm-mark-btn">Mark</Button></DialogFooter>
+          <DialogFooter><Button variant="outline" onClick={() => setMarkDialog(false)}>Cancel</Button><Button onClick={handleMarkAttendance} className="bg-primary hover:bg-primary-hover" data-testid="confirm-mark-btn">Mark</Button></DialogFooter>
         </DialogContent>
       </Dialog>
 
@@ -1366,7 +1366,7 @@ export default function HRPortal() {
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <FileText className="h-5 w-5 text-blue-600" />
+              <FileText className="h-5 w-5 text-primary" />
               Leave History — {viewLeaveHistory?.name}
             </DialogTitle>
             <DialogDescription>
@@ -1478,7 +1478,7 @@ export default function HRPortal() {
               <Button 
                 onClick={handleBulkImport} 
                 disabled={!importData.length || importing}
-                className="bg-amber-600 hover:bg-amber-700"
+                className="bg-primary hover:bg-primary-hover"
                 data-testid="confirm-import-btn"
               >
                 {importing ? 'Importing...' : `Import ${importData.length} Employees`}
@@ -1766,7 +1766,7 @@ function LeaveTab({ requests, filter, setFilter, onAction }) {
             <td className="px-4 py-3 text-gray-600 max-w-[200px] truncate">{r.reason || '-'}</td>
             <td className="px-4 py-3 text-center"><Badge className={r.status === 'approved' ? 'bg-green-100 text-green-700' : r.status === 'rejected' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'}>{r.status}</Badge></td>
             <td className="px-4 py-3 text-center">{r.status === 'pending' && (<div className="flex justify-center gap-1">
-              <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white h-7 px-2" onClick={() => onAction(r.leave_id, 'approve')} data-testid={`approve-leave-${r.leave_id}`}><CheckCircle2 className="h-3 w-3 mr-1" />Approve</Button>
+              <Button size="sm" className="bg-primary hover:bg-primary-hover text-white h-7 px-2" onClick={() => onAction(r.leave_id, 'approve')} data-testid={`approve-leave-${r.leave_id}`}><CheckCircle2 className="h-3 w-3 mr-1" />Approve</Button>
               <Button size="sm" variant="destructive" className="h-7 px-2" onClick={() => onAction(r.leave_id, 'reject')} data-testid={`reject-leave-${r.leave_id}`}><XCircle className="h-3 w-3 mr-1" />Reject</Button>
             </div>)}</td>
           </tr>);
@@ -1788,7 +1788,7 @@ function PayrollTab({ data, month, year, setMonth, setYear, onCalculate, onViewP
           <Select value={String(month)} onValueChange={v => setMonth(Number(v))}><SelectTrigger className="w-36" data-testid="pay-month-select"><SelectValue /></SelectTrigger><SelectContent>{MONTHS.map((m, i) => <SelectItem key={i} value={String(i + 1)}>{m}</SelectItem>)}</SelectContent></Select>
           <Select value={String(year)} onValueChange={v => setYear(Number(v))}><SelectTrigger className="w-24" data-testid="pay-year-select"><SelectValue /></SelectTrigger><SelectContent>{[2025, 2026, 2027].map(y => <SelectItem key={y} value={String(y)}>{y}</SelectItem>)}</SelectContent></Select>
         </div>
-        <Button onClick={onCalculate} className="bg-amber-600 hover:bg-amber-700" data-testid="calculate-salary-btn"><Calculator className="h-4 w-4 mr-1" />Calculate Salary</Button>
+        <Button onClick={onCalculate} className="bg-primary hover:bg-primary-hover" data-testid="calculate-salary-btn"><Calculator className="h-4 w-4 mr-1" />Calculate Salary</Button>
       </CardContent></Card>
       {data.length > 0 && (<>
         <div className="grid grid-cols-3 gap-4">
@@ -1933,7 +1933,7 @@ function SettingsTab({ settings, setSettings, onSave, user }) {
 
       {user?.role === 'super_admin' && (
         <Card className="border-blue-200">
-          <CardHeader><CardTitle className="text-base flex items-center gap-2"><Key className="h-5 w-5 text-blue-600" />Biometric Sync Key (eSSL)</CardTitle></CardHeader>
+          <CardHeader><CardTitle className="text-base flex items-center gap-2"><Key className="h-5 w-5 text-primary" />Biometric Sync Key (eSSL)</CardTitle></CardHeader>
           <CardContent className="space-y-4">
             <p className="text-sm text-gray-600">Generate a secure API key for the eSSL eTimeTrackLite auto-sync script. This key allows the office PC to push biometric attendance data to the CRM without needing a user password.</p>
             {generatedKey ? (
@@ -1942,7 +1942,7 @@ function SettingsTab({ settings, setSettings, onSave, user }) {
                   <p className="text-xs text-green-700 font-semibold mb-2">New Sync Key Generated — Copy it now! It will NOT be shown again.</p>
                   <div className="flex items-center gap-2">
                     <code className="flex-1 bg-white border rounded px-3 py-2 text-sm font-mono break-all select-all" data-testid="sync-key-value">{generatedKey}</code>
-                    <Button size="sm" variant={keyCopied ? 'default' : 'outline'} onClick={copyKey} data-testid="copy-sync-key-btn" className={keyCopied ? 'bg-green-600 hover:bg-green-700 text-white' : ''}>
+                    <Button size="sm" variant={keyCopied ? 'default' : 'outline'} onClick={copyKey} data-testid="copy-sync-key-btn" className={keyCopied ? 'bg-primary hover:bg-primary-hover text-white' : ''}>
                       {keyCopied ? <><Check className="h-4 w-4 mr-1" />Copied</> : <>Copy</>}
                     </Button>
                   </div>
@@ -1951,7 +1951,7 @@ function SettingsTab({ settings, setSettings, onSave, user }) {
               </div>
             ) : (
               <div className="flex items-center gap-3">
-                <Button onClick={handleGenerateSyncKey} disabled={syncKeyLoading} className="bg-blue-600 hover:bg-blue-700" data-testid="generate-sync-key-btn">
+                <Button onClick={handleGenerateSyncKey} disabled={syncKeyLoading} className="bg-primary hover:bg-primary-hover" data-testid="generate-sync-key-btn">
                   {syncKeyLoading ? <RefreshCw className="h-4 w-4 mr-2 animate-spin" /> : <Key className="h-4 w-4 mr-2" />}
                   Generate Sync Key
                 </Button>
@@ -1995,7 +1995,7 @@ function SettingsTab({ settings, setSettings, onSave, user }) {
           </div>
         ))}</div></CardContent>
       </Card>
-      <Button onClick={onSave} className="bg-amber-600 hover:bg-amber-700" data-testid="save-settings-btn">Save Settings</Button>
+      <Button onClick={onSave} className="bg-primary hover:bg-primary-hover" data-testid="save-settings-btn">Save Settings</Button>
     </div>
   );
 }

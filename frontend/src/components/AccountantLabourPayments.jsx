@@ -99,17 +99,17 @@ export default function AccountantLabourPayments() {
       <div className="flex items-end justify-between gap-2 flex-wrap border-b bg-white rounded-t-lg px-2 pt-1">
         <div className="flex gap-1">
           <button onClick={() => setTab('pending')}
-            className={`px-3 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors ${tab === 'pending' ? 'border-amber-600 text-amber-700 bg-amber-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+            className={`px-3 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors ${tab === 'pending' ? 'border-primary text-primary-strong bg-brand-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
             data-testid="alp-tab-pending">
             Pending Release {tab === 'pending' && visibleItems.length > 0 && <Badge variant="outline" className="ml-1.5 bg-amber-100 text-amber-700 border-amber-300 text-[10px]">{visibleItems.length}</Badge>}
           </button>
           <button onClick={() => setTab('released')}
-            className={`px-3 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors ${tab === 'released' ? 'border-amber-600 text-amber-700 bg-amber-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+            className={`px-3 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors ${tab === 'released' ? 'border-primary text-primary-strong bg-brand-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
             data-testid="alp-tab-released">
             Released {tab === 'released' && visibleItems.length > 0 && <Badge variant="outline" className="ml-1.5 bg-emerald-100 text-emerald-700 border-emerald-300 text-[10px]">{visibleItems.length}</Badge>}
           </button>
           <button onClick={() => setTab('all')}
-            className={`px-3 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors ${tab === 'all' ? 'border-amber-600 text-amber-700 bg-amber-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+            className={`px-3 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors ${tab === 'all' ? 'border-primary text-primary-strong bg-brand-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
             data-testid="alp-tab-all">
             All {tab === 'all' && visibleItems.length > 0 && <Badge variant="outline" className="ml-1.5 bg-violet-100 text-violet-700 border-violet-300 text-[10px]">{visibleItems.length}</Badge>}
           </button>
@@ -207,7 +207,7 @@ export default function AccountantLabourPayments() {
                       </td>
                       <td className="px-3 py-2 text-right font-bold text-amber-600">{fmt(r.suspense_balance)}</td>
                       <td className="px-3 py-2 text-right">
-                        <Button size="sm" className="h-7 text-xs gap-1 bg-green-600 hover:bg-green-700" onClick={() => setOpen(r)} data-testid={`alp-open-${r.request_id}`}>
+                        <Button size="sm" className="h-7 text-xs gap-1 bg-primary hover:bg-primary-hover" onClick={() => setOpen(r)} data-testid={`alp-open-${r.request_id}`}>
                           {r.status === 'planning_approved' ? <><Send className="h-3 w-3" /> Release</> : <>View</>}
                         </Button>
                         {r.is_multi_stage && r.status === 'planning_approved' && (
@@ -403,7 +403,7 @@ function ReleaseDialog({ item, onClose, onDone }) {
         <DialogFooter>
           <Button variant="outline" size="sm" onClick={onClose} disabled={submitting}>Close</Button>
           {isPending && (
-            <Button size="sm" className="bg-green-600 hover:bg-green-700" onClick={submit} disabled={submitting} data-testid="alp-submit">
+            <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={submit} disabled={submitting} data-testid="alp-submit">
               <CheckCircle className="h-3 w-3 mr-1" /> {submitting ? 'Releasing...' : 'Process Release'}
             </Button>
           )}

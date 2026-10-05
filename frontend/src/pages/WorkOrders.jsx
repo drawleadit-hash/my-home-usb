@@ -201,7 +201,7 @@ export default function WorkOrders() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+          <Card className="bg-blue-50 border-blue-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">Total Orders</CardTitle>
             </CardHeader>
@@ -209,7 +209,7 @@ export default function WorkOrders() {
               <div className="text-3xl font-bold text-gray-900">{workOrders.length}</div>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-yellow-50 to-yellow-100 border-yellow-200">
+          <Card className="bg-yellow-50 border-yellow-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">Pending</CardTitle>
             </CardHeader>
@@ -219,7 +219,7 @@ export default function WorkOrders() {
               </div>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+          <Card className="bg-green-50 border-green-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">Approved</CardTitle>
             </CardHeader>
@@ -229,7 +229,7 @@ export default function WorkOrders() {
               </div>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-red-50 to-red-100 border-red-200">
+          <Card className="bg-red-50 border-red-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">Rejected</CardTitle>
             </CardHeader>

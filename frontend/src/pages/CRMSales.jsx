@@ -1412,7 +1412,7 @@ export default function CRMSales() {
                     { label: 'All Leads', fn: () => { setDateFilter(''); setDateFilterEnd(''); } },
                   ].map(p => (
                     <button key={p.label} onClick={p.fn}
-                      className={`w-full text-left text-xs px-2.5 py-1.5 rounded-lg transition-colors ${p.label === 'All Leads' ? 'text-red-500 hover:bg-red-50 mt-2' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'}`}
+                      className={`w-full text-left text-xs px-2.5 py-1.5 rounded-lg transition-colors ${p.label === 'All Leads' ? 'text-red-500 hover:bg-red-50 mt-2' : 'text-gray-700 hover:bg-brand-50 hover:text-primary-strong'}`}
                     >{p.label}</button>
                   ))}
                 </div>
@@ -1437,7 +1437,7 @@ export default function CRMSales() {
                       head_cell: 'text-gray-400 rounded-md w-8 font-normal text-[10px] uppercase',
                       row: 'flex w-full mt-1', cell: 'relative p-0 text-center text-sm',
                       day: 'h-8 w-8 p-0 font-normal text-xs rounded-lg hover:bg-blue-50 transition-colors inline-flex items-center justify-center',
-                      day_selected: 'bg-blue-600 text-white hover:bg-blue-700 font-medium',
+                      day_selected: 'bg-primary text-white hover:bg-primary-hover font-medium',
                       day_today: 'bg-gray-100 font-semibold text-blue-600',
                       day_range_middle: 'bg-blue-50 text-blue-700 rounded-none',
                       day_range_start: 'bg-blue-600 text-white rounded-l-lg rounded-r-none',
@@ -1452,7 +1452,7 @@ export default function CRMSales() {
 
           {/* View Toggle */}
           {user?.role === 'super_admin' && (
-            <Button variant="outline" size="sm" className="gap-1.5 text-gray-600 hover:text-amber-700"
+            <Button variant="outline" size="sm" className="gap-1.5 text-gray-600 hover:text-primary-strong"
               onClick={() => window.location.href = '/settings/stages?type=sales'}
               data-testid="manage-sales-stages-btn">
               <Settings className="h-3.5 w-3.5" /> Manage Stages
@@ -1568,7 +1568,7 @@ export default function CRMSales() {
                     >
                       <td className="px-2 py-2">
                         <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-xs font-semibold flex-shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-semibold flex-shrink-0">
                             {lead.name?.charAt(0)?.toUpperCase()}
                           </div>
                           <div className="min-w-0">
@@ -1606,7 +1606,7 @@ export default function CRMSales() {
                       <td className="px-2 py-2">
                         {lead.assigned_to_name ? (
                           <div className="flex items-center gap-1.5 min-w-0">
-                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white text-[10px] font-semibold flex-shrink-0">
+                            <div className="w-6 h-6 rounded-full bg-gray-800 flex items-center justify-center text-white text-[10px] font-semibold flex-shrink-0">
                               {lead.assigned_to_name.charAt(0).toUpperCase()}
                             </div>
                             <span className="text-xs text-gray-700 truncate" title={lead.assigned_to_name} data-testid={`sales-assignee-${lead.lead_id}`}>{lead.assigned_to_name}</span>
@@ -1688,7 +1688,7 @@ export default function CRMSales() {
                                   <Button
                                     variant="outline"
                                     size="sm"
-                                    className="h-7 px-1.5 text-[10px] text-amber-600 border-amber-300 hover:bg-amber-50"
+                                    className="h-7 px-1.5 text-[10px] text-primary-strong border-brand-300 hover:bg-brand-50"
                                     data-testid={`new-followup-btn-${lead.lead_id}`}
                                     onClick={(e) => {
                                       e.stopPropagation();
@@ -1704,7 +1704,7 @@ export default function CRMSales() {
                                 <Button
                                   variant="outline"
                                   size="sm"
-                                  className="h-7 px-1.5 text-[10px] text-amber-600 border-amber-300 hover:bg-amber-50"
+                                  className="h-7 px-1.5 text-[10px] text-primary-strong border-brand-300 hover:bg-brand-50"
                                   data-testid={`followup-btn-${lead.lead_id}`}
                                   onClick={(e) => {
                                     e.stopPropagation();
@@ -1756,7 +1756,7 @@ export default function CRMSales() {
                             <Button
                               variant="ghost"
                               size="sm"
-                              className="h-7 w-7 p-0 text-purple-600 hover:text-purple-800 hover:bg-purple-50"
+                              className="h-7 w-7 p-0 text-primary-strong hover:text-brand-800 hover:bg-brand-50"
                               onClick={(e) => { e.stopPropagation(); setReassignDialog({ open: true, lead, new_owner: '', reason: '', submitting: false }); }}
                               title={`Reassign (current: ${lead.assigned_to_name || '—'})`}
                               data-testid={`reassign-row-btn-${lead.lead_id}`}
@@ -1831,7 +1831,7 @@ export default function CRMSales() {
                         <div className="flex items-start justify-between mb-2">
                           <div className="flex items-center gap-2">
                             <GripVertical className="h-4 w-4 text-gray-300" />
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-sm font-semibold">
+                            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-sm font-semibold">
                               {lead.name?.charAt(0)?.toUpperCase()}
                             </div>
                           </div>
@@ -1892,7 +1892,7 @@ export default function CRMSales() {
                               <div className="grid grid-cols-2 gap-1 mt-2">
                                 <button
                                   data-testid={`verify-payment-${lead.lead_id}`}
-                                  className="py-1.5 rounded bg-green-600 hover:bg-green-700 text-white text-xs font-medium transition"
+                                  className="py-1.5 rounded bg-primary hover:bg-primary-hover text-white text-xs font-medium transition"
                                   onClick={async (e) => {
                                     e.stopPropagation();
                                     try {
@@ -1991,7 +1991,7 @@ export default function CRMSales() {
                           <div className="mt-2 flex gap-1.5">
                             <Button
                               size="sm"
-                              className="h-7 flex-1 text-[11px] bg-green-600 hover:bg-green-700 text-white"
+                              className="h-7 flex-1 text-[11px] bg-primary hover:bg-primary-hover text-white"
                               onClick={(e) => { e.stopPropagation(); openReClientAction(lead, 'approved'); }}
                               data-testid={`kanban-re-approve-${lead.lead_id}`}
                             >
@@ -2037,7 +2037,7 @@ export default function CRMSales() {
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                className="h-6 w-6 p-0 text-purple-600 hover:text-purple-800 hover:bg-purple-50"
+                                className="h-6 w-6 p-0 text-primary-strong hover:text-brand-800 hover:bg-brand-50"
                                 onClick={(e) => { e.stopPropagation(); setReassignDialog({ open: true, lead, new_owner: '', reason: '', submitting: false }); }}
                                 title={`Reassign (current: ${lead.assigned_to_name || '—'})`}
                                 data-testid={`reassign-kanban-btn-${lead.lead_id}`}
@@ -2048,7 +2048,7 @@ export default function CRMSales() {
                             <Button 
                               variant="ghost" 
                               size="sm"
-                              className="h-6 w-6 p-0 text-amber-500 hover:text-amber-700 hover:bg-amber-50"
+                              className="h-6 w-6 p-0 text-primary-strong hover:text-brand-800 hover:bg-brand-50"
                               onClick={(e) => { e.stopPropagation(); setFollowupLeadId(lead.lead_id); setFollowupDate(''); setFollowupNote(''); setFollowupDialog(true); }}
                               title="Schedule Follow-up"
                               data-testid={`schedule-followup-${lead.lead_id}`}
@@ -2090,7 +2090,7 @@ export default function CRMSales() {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-3">
 
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white font-bold">
+              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold">
                 {selectedLead?.name?.charAt(0)?.toUpperCase()}
               </div>
               <div>
@@ -2108,7 +2108,7 @@ export default function CRMSales() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="h-8 gap-1 text-purple-700 hover:bg-purple-50"
+                  className="h-8 gap-1 text-primary-strong hover:bg-brand-50"
                   onClick={() => setReassignDialog({ open: true, lead: leadDetail || selectedLead, new_owner: '', reason: '', submitting: false })}
                   data-testid="reassign-lead-btn"
                   title="Reassign to another salesperson"
@@ -2138,7 +2138,7 @@ export default function CRMSales() {
                 <TabsContent value="overview" className="space-y-4 mt-3">
                   {/* RE-Client / RE-Planning stage actions (prominent banner) */}
                   {['stg_re_to_client', 'stg_re_from_planning'].includes(selectedLead.current_stage_id) && (
-                    <div className="bg-gradient-to-r from-green-50 to-orange-50 border-2 border-dashed border-amber-300 rounded-lg p-3">
+                    <div className="bg-green-50 border-2 border-dashed border-amber-300 rounded-lg p-3">
                       <div className="flex flex-col gap-3">
                         <div className="min-w-0">
                           <p className="text-sm font-semibold text-gray-800">RE Sent to Client — Awaiting Decision</p>
@@ -2166,7 +2166,7 @@ export default function CRMSales() {
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                           <Button
                             size="sm"
-                            className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+                            className="w-full bg-primary hover:bg-primary-hover text-white"
                             onClick={() => handleGenerateQuoteLink(selectedLead)}
                             disabled={quoteLinkLoading}
                             data-testid="detail-generate-re-link-btn"
@@ -2176,7 +2176,7 @@ export default function CRMSales() {
                           <Button
                             size="sm"
                             variant="outline"
-                            className="w-full text-purple-700 border-purple-400 hover:bg-purple-50"
+                            className="w-full text-primary-strong border-brand-300 hover:bg-brand-50"
                             onClick={() => { setRegenDialog({ open: true, lead: selectedLead }); setRegenRemarks(''); }}
                             data-testid="detail-regenerate-re-btn"
                           >
@@ -2184,7 +2184,7 @@ export default function CRMSales() {
                           </Button>
                           <Button
                             size="sm"
-                            className="w-full bg-green-600 hover:bg-green-700 text-white"
+                            className="w-full bg-primary hover:bg-primary-hover text-white"
                             onClick={() => openReClientAction(selectedLead, 'approved')}
                             data-testid="detail-re-approve-btn"
                           >
@@ -2527,7 +2527,7 @@ export default function CRMSales() {
                     <Label className="text-xs text-gray-500 mb-1 block">Lead Summary</Label>
                     <textarea value={summary} onChange={(e) => setSummary(e.target.value)} placeholder="Write a summary about this lead..." className="w-full rounded-md border p-3 text-sm min-h-[120px] resize-y focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" data-testid="lead-summary-input" />
                   </div>
-                  <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700" onClick={handleSaveSummary} data-testid="save-summary-btn">Save Summary</Button>
+                  <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={handleSaveSummary} data-testid="save-summary-btn">Save Summary</Button>
                   {selectedLead.notes && (<div className="bg-gray-50 rounded-lg p-3"><Label className="text-xs text-gray-500 block mb-1">Notes</Label><p className="text-sm">{selectedLead.notes}</p></div>)}
                 </TabsContent>
                 
@@ -2538,7 +2538,7 @@ export default function CRMSales() {
                     <div className="flex gap-2">
                       <Input type="date" value={followUpForm.date} onChange={(e) => setFollowUpForm({...followUpForm, date: e.target.value})} className="text-sm flex-1" min={new Date().toISOString().split('T')[0]} data-testid="followup-date" />
                       <Input value={followUpForm.note} onChange={(e) => setFollowUpForm({...followUpForm, note: e.target.value})} placeholder="Note..." className="text-sm flex-[2]" data-testid="followup-note" />
-                      <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700" onClick={handleAddFollowUp} data-testid="add-followup-btn">Add</Button>
+                      <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={handleAddFollowUp} data-testid="add-followup-btn">Add</Button>
                     </div>
                   </div>
                   <div className="space-y-2">
@@ -2558,7 +2558,7 @@ export default function CRMSales() {
                 <TabsContent value="remarks" className="space-y-3 mt-3">
                   <div className="flex gap-2">
                     <Input value={remarkForm} onChange={(e) => setRemarkForm(e.target.value)} placeholder="Add a remark..." className="text-sm" data-testid="remark-input" />
-                    <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700" onClick={handleAddRemark} data-testid="add-remark-btn">Add</Button>
+                    <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={handleAddRemark} data-testid="add-remark-btn">Add</Button>
                   </div>
                   <div className="space-y-2">
                     {(leadDetail?.remarks || []).length === 0 && <p className="text-sm text-gray-400 text-center py-4">No remarks yet</p>}
@@ -2787,7 +2787,7 @@ export default function CRMSales() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setEditDialog(false)}>Cancel</Button>
-            <Button className="bg-emerald-600 hover:bg-emerald-700" onClick={handleUpdateLead} data-testid="save-lead-btn">Save Changes</Button>
+            <Button className="bg-primary hover:bg-primary-hover" onClick={handleUpdateLead} data-testid="save-lead-btn">Save Changes</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -2830,7 +2830,7 @@ export default function CRMSales() {
           </div>
           <DialogFooter className="gap-2">
             <Button variant="outline" onClick={() => setApptDialog(false)}>Cancel</Button>
-            <Button className="bg-green-600 hover:bg-green-700" onClick={handleSaveAppointment} disabled={!apptForm.date || !apptForm.time || !apptForm.type} data-testid="save-appointment-btn">
+            <Button className="bg-primary hover:bg-primary-hover" onClick={handleSaveAppointment} disabled={!apptForm.date || !apptForm.time || !apptForm.type} data-testid="save-appointment-btn">
               <Calendar className="h-4 w-4 mr-2" /> Save Appointment
             </Button>
           </DialogFooter>
@@ -2848,7 +2848,7 @@ export default function CRMSales() {
               </div>
               <Button 
                 onClick={handleGenerateREPDF} 
-                className="bg-purple-600 hover:bg-purple-700"
+                className="bg-primary hover:bg-primary-hover"
                 size="sm"
               >
                 <Download className="h-4 w-4 mr-1" /> Download PDF
@@ -2875,7 +2875,7 @@ export default function CRMSales() {
                         onClick={() => setSelectedREProject(rev)}
                         className={`px-3 py-1.5 rounded-md text-xs font-semibold border transition-all ${
                           isActive
-                            ? 'bg-purple-600 text-white border-purple-600 shadow-sm'
+                            ? 'bg-primary text-white border-primary shadow-sm'
                             : isApproved
                               ? 'bg-green-100 text-green-800 border-green-300 ring-1 ring-green-400'
                               : isDimmed
@@ -2970,7 +2970,7 @@ export default function CRMSales() {
               {/* Full Scope of Works */}
               <Card className="border-purple-200">
                 <CardContent className="p-4">
-                  <h4 className="font-semibold mb-3 text-purple-800">Scope of Works</h4>
+                  <h4 className="font-semibold mb-3 text-foreground">Scope of Works</h4>
                   {selectedREProject.rough_scope_items?.length > 0 ? (
                     <div className="overflow-x-auto">
                       <table className="w-full text-sm">
@@ -3016,7 +3016,7 @@ export default function CRMSales() {
               </Card>
               
               {/* Estimated Total Summary */}
-              <Card className="bg-gradient-to-r from-purple-600 to-purple-700">
+              <Card className="bg-gray-900">
                 <CardContent className="p-4 text-center">
                   <p className="text-sm text-purple-100">Estimated Total</p>
                   <p className="text-3xl font-bold text-white">
@@ -3088,10 +3088,10 @@ export default function CRMSales() {
           <DialogFooter className="flex gap-2 flex-wrap">
             {selectedREProject?.status === 're_approved' && (
               <>
-                <Button onClick={handleSendToClient} className="bg-blue-600 hover:bg-blue-700" data-testid="send-to-client-btn">
+                <Button onClick={handleSendToClient} className="bg-primary hover:bg-primary-hover" data-testid="send-to-client-btn">
                   <Send className="h-4 w-4 mr-1" /> Send to Client
                 </Button>
-                <Button onClick={handleRequestRevision} variant="outline" className="border-amber-300 text-amber-700 hover:bg-amber-50" data-testid="request-revision-btn">
+                <Button onClick={handleRequestRevision} variant="outline" className="border-brand-300 text-primary-strong hover:bg-brand-50" data-testid="request-revision-btn">
                   <GitBranch className="h-4 w-4 mr-1" /> Request Revision
                 </Button>
               </>
@@ -3101,10 +3101,10 @@ export default function CRMSales() {
                 <Button onClick={openClientFeedbackDialog} variant="outline" className="border-orange-300 text-orange-700 hover:bg-orange-50" data-testid="client-feedback-btn">
                   <MessageSquare className="h-4 w-4 mr-1" /> Client Feedback
                 </Button>
-                <Button onClick={handleClientApprove} className="bg-green-600 hover:bg-green-700" data-testid="client-approve-btn">
+                <Button onClick={handleClientApprove} className="bg-primary hover:bg-primary-hover" data-testid="client-approve-btn">
                   <CheckCircle className="h-4 w-4 mr-1" /> Client Approved
                 </Button>
-                <Button onClick={handleRequestRevision} variant="outline" className="border-amber-300 text-amber-700 hover:bg-amber-50" data-testid="request-revision-sent-btn">
+                <Button onClick={handleRequestRevision} variant="outline" className="border-brand-300 text-primary-strong hover:bg-brand-50" data-testid="request-revision-sent-btn">
                   <GitBranch className="h-4 w-4 mr-1" /> Request Revision
                 </Button>
               </>
@@ -3119,7 +3119,7 @@ export default function CRMSales() {
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-blue-600" />
+              <Calendar className="h-5 w-5 text-primary" />
               Schedule Office Visit
             </DialogTitle>
             <DialogDescription>Enter the date, time, and location for the client's office visit.</DialogDescription>
@@ -3144,7 +3144,7 @@ export default function CRMSales() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setOfficeVisitDialog(false)}>Cancel</Button>
-            <Button onClick={handleOfficeVisitSubmit} disabled={!officeVisitForm.date || !officeVisitForm.time} className="bg-blue-600 hover:bg-blue-700" data-testid="office-visit-submit">
+            <Button onClick={handleOfficeVisitSubmit} disabled={!officeVisitForm.date || !officeVisitForm.time} className="bg-primary hover:bg-primary-hover" data-testid="office-visit-submit">
               Schedule Visit
             </Button>
           </DialogFooter>
@@ -3156,7 +3156,7 @@ export default function CRMSales() {
         <DialogContent className="max-w-lg">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <FileText className="h-5 w-5 text-amber-600" />
+              <FileText className="h-5 w-5 text-primary" />
               Rough Requirement for Estimate
             </DialogTitle>
             <DialogDescription>
@@ -3183,7 +3183,7 @@ export default function CRMSales() {
             <Button 
               onClick={handleSubmitRoughEstimate} 
               disabled={!roughEstForm.trim()} 
-              className="bg-amber-600 hover:bg-amber-700"
+              className="bg-primary hover:bg-primary-hover"
               data-testid="submit-rough-estimate"
             >
               <Send className="h-4 w-4 mr-1.5" />
@@ -3240,7 +3240,7 @@ export default function CRMSales() {
         <DialogContent className="max-w-lg">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <IndianRupee className="h-5 w-5 text-purple-600" />
+              <IndianRupee className="h-5 w-5 text-primary" />
               Advance Payment Collection
             </DialogTitle>
             <DialogDescription>
@@ -3297,7 +3297,7 @@ export default function CRMSales() {
             <Button 
               onClick={handleCollectAdvance}
               disabled={!advanceForm.amount}
-              className="bg-purple-600 hover:bg-purple-700"
+              className="bg-primary hover:bg-primary-hover"
               data-testid="submit-advance-btn"
             >
               <IndianRupee className="h-4 w-4 mr-1" />
@@ -3347,7 +3347,7 @@ export default function CRMSales() {
             <Button 
               onClick={handleMoveToPlanningSubmit}
               disabled={!projectDescription.trim()}
-              className="bg-green-600 hover:bg-green-700"
+              className="bg-primary hover:bg-primary-hover"
               data-testid="submit-planning-btn"
             >
               <ArrowRight className="h-4 w-4 mr-1" />
@@ -3361,7 +3361,7 @@ export default function CRMSales() {
       <Dialog open={clientLandDialog} onOpenChange={setClientLandDialog}>
         <DialogContent className="max-w-lg" style={{ overflowY: 'auto' }}>
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-purple-600"><MapPin className="h-5 w-5" />Site Visit - Client Land</DialogTitle>
+            <DialogTitle className="flex items-center gap-2 text-foreground"><MapPin className="h-5 w-5" />Site Visit - Client Land</DialogTitle>
             <DialogDescription>Assign a Sr. Site Engineer for client land visit</DialogDescription>
           </DialogHeader>
           {clientLandLead && (
@@ -3395,7 +3395,7 @@ export default function CRMSales() {
           )}
           <DialogFooter className="gap-2 mt-4">
             <Button variant="outline" onClick={() => setClientLandDialog(false)}>Cancel</Button>
-            <Button onClick={handleAssignClientLandVisit} disabled={!selectedSrEngineer} className="bg-purple-600 hover:bg-purple-700" data-testid="confirm-client-land-visit">
+            <Button onClick={handleAssignClientLandVisit} disabled={!selectedSrEngineer} className="bg-primary hover:bg-primary-hover" data-testid="confirm-client-land-visit">
               <UserCheck className="h-4 w-4 mr-2" />Assign Engineer
             </Button>
           </DialogFooter>
@@ -3406,7 +3406,7 @@ export default function CRMSales() {
       <Dialog open={ongoingProjectDialog} onOpenChange={setOngoingProjectDialog}>
         <DialogContent className="max-w-2xl max-h-[90vh]" style={{ overflowY: 'auto' }}>
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-blue-600"><Building2 className="h-5 w-5" />Site Visit - Our Ongoing Projects</DialogTitle>
+            <DialogTitle className="flex items-center gap-2 text-foreground"><Building2 className="h-5 w-5" />Site Visit - Our Ongoing Projects</DialogTitle>
             <DialogDescription>Select an ongoing project for the client to visit</DialogDescription>
           </DialogHeader>
           {ongoingProjectLead && (
@@ -3429,7 +3429,7 @@ export default function CRMSales() {
                   .map(project => (
                     <div
                       key={project.project_id}
-                      className={`border rounded-lg p-3 cursor-pointer transition-all ${selectedProject?.project_id === project.project_id ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200' : 'hover:border-gray-400'}`}
+                      className={`border rounded-lg p-3 cursor-pointer transition-all ${selectedProject?.project_id === project.project_id ? 'border-primary bg-brand-50 ring-2 ring-brand-200' : 'hover:border-gray-400'}`}
                       onClick={() => setSelectedProject(project)}
                       data-testid={`project-option-${project.project_id}`}
                     >
@@ -3474,7 +3474,7 @@ export default function CRMSales() {
           )}
           <DialogFooter className="gap-2 mt-4">
             <Button variant="outline" onClick={() => setOngoingProjectDialog(false)}>Cancel</Button>
-            <Button onClick={handleAssignOngoingProjectVisit} disabled={!selectedProject} className="bg-blue-600 hover:bg-blue-700" data-testid="confirm-ongoing-project-visit">
+            <Button onClick={handleAssignOngoingProjectVisit} disabled={!selectedProject} className="bg-primary hover:bg-primary-hover" data-testid="confirm-ongoing-project-visit">
               <CheckCircle className="h-4 w-4 mr-2" />Assign Visit
             </Button>
           </DialogFooter>
@@ -3485,7 +3485,7 @@ export default function CRMSales() {
       <Dialog open={followupDialog} onOpenChange={(open) => { setFollowupDialog(open); if (!open) setFollowupPendingStageId(null); }}>
         <DialogContent className="max-w-sm">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-amber-600"><Calendar className="h-5 w-5" />Schedule Follow-up</DialogTitle>
+            <DialogTitle className="flex items-center gap-2 text-foreground"><Calendar className="h-5 w-5" />Schedule Follow-up</DialogTitle>
             {followupPendingStageId && (
               <DialogDescription>Set follow-up date and time before moving to Follow-up stage</DialogDescription>
             )}
@@ -3506,7 +3506,7 @@ export default function CRMSales() {
           </div>
           <DialogFooter className="gap-2 mt-4">
             <Button variant="outline" onClick={() => setFollowupDialog(false)}>Cancel</Button>
-            <Button onClick={handleScheduleFollowup} disabled={!followupDate} className="bg-amber-600 hover:bg-amber-700" data-testid="confirm-followup-btn">
+            <Button onClick={handleScheduleFollowup} disabled={!followupDate} className="bg-primary hover:bg-primary-hover" data-testid="confirm-followup-btn">
               <Calendar className="h-4 w-4 mr-2" />Schedule
             </Button>
           </DialogFooter>
@@ -3518,7 +3518,7 @@ export default function CRMSales() {
         <DialogContent className="max-w-sm">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-amber-600" /> Schedule Follow-up
+              <Calendar className="h-5 w-5 text-primary" /> Schedule Follow-up
             </DialogTitle>
             <DialogDescription>Set date, time and remarks for next follow-up</DialogDescription>
           </DialogHeader>
@@ -3538,7 +3538,7 @@ export default function CRMSales() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setQuickFollowupDialog(false)}>Cancel</Button>
-            <Button onClick={handleQuickFollowup} disabled={!quickFollowupForm.date} className="bg-amber-600 hover:bg-amber-700" data-testid="quick-followup-submit">
+            <Button onClick={handleQuickFollowup} disabled={!quickFollowupForm.date} className="bg-primary hover:bg-primary-hover" data-testid="quick-followup-submit">
               <Calendar className="h-4 w-4 mr-2" /> Schedule
             </Button>
           </DialogFooter>
@@ -3611,7 +3611,7 @@ export default function CRMSales() {
             {reClientAction === 'approved' ? (
               <Button
                 onClick={handleReClientAction}
-                className="bg-green-600 hover:bg-green-700"
+                className="bg-primary hover:bg-primary-hover"
                 data-testid="confirm-re-approve-btn"
               >
                 <CheckCircle className="h-4 w-4 mr-2" /> Confirm Approved
@@ -3675,7 +3675,7 @@ export default function CRMSales() {
             <Button variant="outline" onClick={() => setRemarksDialog(false)}>Cancel</Button>
             <Button 
               onClick={handleRemarksStageMove}
-              className={remarksStageId === 'stg_lost' ? 'bg-red-600 hover:bg-red-700' : 'bg-blue-600 hover:bg-blue-700'}
+              className={remarksStageId === 'stg_lost' ? 'bg-red-600 hover:bg-red-700' : 'bg-primary hover:bg-primary-hover'}
               data-testid="confirm-remarks-btn"
             >
               {remarksStageId === 'stg_lost' ? 'Mark as Lost' : `Move to ${remarksStageName}`}
@@ -3739,7 +3739,7 @@ export default function CRMSales() {
 
               {convertDealRE && (
                 <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
-                  <h4 className="font-semibold text-purple-800 flex items-center gap-2 mb-2"><FileText className="h-4 w-4" />Rough Estimate Reference</h4>
+                  <h4 className="font-semibold text-foreground flex items-center gap-2 mb-2"><FileText className="h-4 w-4" />Rough Estimate Reference</h4>
                   <div className="grid grid-cols-4 gap-4 text-sm">
                     <div><p className="text-xs text-purple-600">Project</p><p className="font-medium">{convertDealRE.project_name}</p></div>
                     <div><p className="text-xs text-purple-600">Area</p><p className="font-medium">{convertDealRE.sqft?.toLocaleString()} sqft</p></div>
@@ -3749,7 +3749,7 @@ export default function CRMSales() {
                 </div>
               )}
               <div className="border rounded-lg p-4">
-                <h4 className="font-semibold mb-3 flex items-center gap-2"><Building2 className="h-4 w-4 text-amber-600" />Project Details</h4>
+                <h4 className="font-semibold mb-3 flex items-center gap-2"><Building2 className="h-4 w-4 text-primary" />Project Details</h4>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="col-span-2"><Label>Project Name *</Label><Input value={convertForm.name} onChange={(e) => setConvertForm({ ...convertForm, name: e.target.value })} className="mt-1" data-testid="convert-project-name" /></div>
                   <div><Label>Location *</Label><Input value={convertForm.location} onChange={(e) => setConvertForm({ ...convertForm, location: e.target.value })} className="mt-1" data-testid="convert-location" /></div>
@@ -3808,7 +3808,7 @@ export default function CRMSales() {
           )}
           <DialogFooter className="gap-2 mt-4">
             <Button variant="outline" onClick={() => setConvertDealDialog(false)}>Cancel</Button>
-            <Button onClick={handleConvertDealFromSales} className="bg-green-600 hover:bg-green-700" disabled={!convertAdvanceAmount || parseFloat(convertAdvanceAmount) <= 0 || convertPaymentEntries.length === 0 || !convertAccountantConfirmed} data-testid="confirm-convert-deal-sales">
+            <Button onClick={handleConvertDealFromSales} className="bg-primary hover:bg-primary-hover" disabled={!convertAdvanceAmount || parseFloat(convertAdvanceAmount) <= 0 || convertPaymentEntries.length === 0 || !convertAccountantConfirmed} data-testid="confirm-convert-deal-sales">
               <CheckCircle className="h-4 w-4 mr-2" />Create Project
             </Button>
           </DialogFooter>
@@ -3827,7 +3827,7 @@ export default function CRMSales() {
       <Dialog open={regenDialog.open} onOpenChange={(o) => !o && setRegenDialog({ open: false, lead: null })}>
         <DialogContent className="max-w-md" data-testid="regen-re-dialog">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2"><RefreshCw className="h-5 w-5 text-purple-600" /> Regenerate Rough Estimate</DialogTitle>
+            <DialogTitle className="flex items-center gap-2"><RefreshCw className="h-5 w-5 text-primary" /> Regenerate Rough Estimate</DialogTitle>
             <DialogDescription>
               Send this RE back to Planning for a fresh revision. The current public link stays live until the new RE is GM-approved.
             </DialogDescription>
@@ -3846,7 +3846,7 @@ export default function CRMSales() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setRegenDialog({ open: false, lead: null })}>Cancel</Button>
-            <Button onClick={handleRegenerateRE} className="bg-purple-600 hover:bg-purple-700 text-white" data-testid="regen-submit-btn">
+            <Button onClick={handleRegenerateRE} className="bg-primary hover:bg-primary-hover text-white" data-testid="regen-submit-btn">
               <RefreshCw className="h-4 w-4 mr-1" /> Send to Planning
             </Button>
           </DialogFooter>
@@ -3857,7 +3857,7 @@ export default function CRMSales() {
       <Dialog open={reassignDialog.open} onOpenChange={(o) => !o && !reassignDialog.submitting && setReassignDialog({ open: false, lead: null, new_owner: '', reason: '', submitting: false })}>
         <DialogContent className="max-w-md" data-testid="reassign-dialog">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2"><UserCheck className="h-5 w-5 text-purple-600" /> Reassign Lead</DialogTitle>
+            <DialogTitle className="flex items-center gap-2"><UserCheck className="h-5 w-5 text-primary" /> Reassign Lead</DialogTitle>
             <DialogDescription>
               Move this lead to another teammate. Current owner: <b>{reassignDialog.lead?.assigned_to_name || '—'}</b>
             </DialogDescription>
@@ -3891,7 +3891,7 @@ export default function CRMSales() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setReassignDialog({ open: false, lead: null, new_owner: '', reason: '', submitting: false })} disabled={reassignDialog.submitting}>Cancel</Button>
-            <Button onClick={handleReassignSubmit} disabled={reassignDialog.submitting || !reassignDialog.new_owner} className="bg-purple-600 hover:bg-purple-700 text-white" data-testid="reassign-submit-btn">
+            <Button onClick={handleReassignSubmit} disabled={reassignDialog.submitting || !reassignDialog.new_owner} className="bg-primary hover:bg-primary-hover text-white" data-testid="reassign-submit-btn">
               <UserCheck className="h-4 w-4 mr-1" /> Reassign
             </Button>
           </DialogFooter>

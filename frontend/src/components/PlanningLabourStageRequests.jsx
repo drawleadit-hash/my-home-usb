@@ -101,8 +101,8 @@ export default function PlanningLabourPayments({ mode = 'all' }) {
       {(mode === 'stages' || mode === 'all') && openReqs.length > 0 && (
         <Card className="border-amber-300">
           <CardHeader className="p-3 pb-2">
-            <CardTitle className="text-sm flex items-center gap-2 text-amber-800">
-              <Eye className="h-4 w-4 text-amber-600" /> Stage Open Requests · {openReqs.length}
+            <CardTitle className="text-sm flex items-center gap-2 text-foreground">
+              <Eye className="h-4 w-4 text-primary" /> Stage Open Requests · {openReqs.length}
             </CardTitle>
           </CardHeader>
           <CardContent className="p-0">
@@ -130,7 +130,7 @@ export default function PlanningLabourPayments({ mode = 'all' }) {
                       <td className="px-3 py-2">{r.requested_by_name}</td>
                       <td className="px-3 py-2 text-gray-600 text-[11px]">{r.notes || '—'}</td>
                       <td className="px-3 py-2 text-right">
-                        <Button size="sm" className="h-7 text-xs gap-1 bg-green-600 hover:bg-green-700" disabled={openingId === r.stage_id} onClick={() => approveOpen(r)} data-testid={`pls-open-approve-${r.stage_id}`}>
+                        <Button size="sm" className="h-7 text-xs gap-1 bg-primary hover:bg-primary-hover" disabled={openingId === r.stage_id} onClick={() => approveOpen(r)} data-testid={`pls-open-approve-${r.stage_id}`}>
                           <CheckCircle className="h-3 w-3" /> {openingId === r.stage_id ? 'Opening...' : 'Open Stage'}
                         </Button>
                       </td>
@@ -157,7 +157,7 @@ export default function PlanningLabourPayments({ mode = 'all' }) {
             key={t.key}
             onClick={() => setTab(t.key)}
             className={`px-3 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
-              tab === t.key ? 'border-amber-600 text-amber-700 bg-amber-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'
+              tab === t.key ? 'border-primary text-primary-strong bg-brand-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
             data-testid={`pls-tab-${t.key}`}
           >
@@ -172,7 +172,7 @@ export default function PlanningLabourPayments({ mode = 'all' }) {
       <Card>
         <CardHeader className="p-3 pb-2">
           <CardTitle className="text-sm flex items-center gap-2">
-            <Banknote className="h-4 w-4 text-amber-600" />
+            <Banknote className="h-4 w-4 text-primary" />
             Labour Payments {!loading && `· ${items.length}`}
           </CardTitle>
         </CardHeader>
@@ -206,7 +206,7 @@ export default function PlanningLabourPayments({ mode = 'all' }) {
                       <td className="px-3 py-2 text-gray-700">{r.stage_name}</td>
                       <td className="px-3 py-2 text-right font-bold text-amber-700">{fmt(r.amount)}</td>
                       <td className="px-3 py-2 text-right">
-                        <Button size="sm" className="h-7 text-xs gap-1 bg-green-600 hover:bg-green-700" onClick={() => setOpen(r)} data-testid={`pls-open-${r.request_id}`}>
+                        <Button size="sm" className="h-7 text-xs gap-1 bg-primary hover:bg-primary-hover" onClick={() => setOpen(r)} data-testid={`pls-open-${r.request_id}`}>
                           <Eye className="h-3 w-3" /> {tab === 'new' ? 'Approve' : 'View'}
                         </Button>
                       </td>
@@ -340,7 +340,7 @@ function DetailDialog({ item, onClose, onActionDone }) {
               </button>
               <button
                 onClick={() => setMode('approve_diff')}
-                className={`px-2.5 py-1.5 text-xs rounded-md border transition-colors ${mode === 'approve_diff' ? 'bg-amber-600 text-white border-amber-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'}`}
+                className={`px-2.5 py-1.5 text-xs rounded-md border transition-colors ${mode === 'approve_diff' ? 'bg-primary text-white border-primary' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'}`}
                 data-testid="pls-mode-diff"
               >
                 <Pencil className="h-3 w-3 inline mr-1" /> Different Amount
@@ -389,7 +389,7 @@ function DetailDialog({ item, onClose, onActionDone }) {
           {isNew && (
             <Button
               size="sm"
-              className={mode === 'reject' ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600 hover:bg-green-700'}
+              className={mode === 'reject' ? 'bg-red-600 hover:bg-red-700' : 'bg-primary hover:bg-primary-hover'}
               onClick={handleSubmit}
               disabled={submitting}
               data-testid="pls-submit"

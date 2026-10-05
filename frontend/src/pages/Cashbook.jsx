@@ -96,7 +96,7 @@ export default function Cashbook() {
 
   if (loading && !user) return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="w-10 h-10 border-3 border-amber-500 border-t-transparent rounded-full animate-spin" />
+      <div className="w-10 h-10 border-3 border-primary border-t-transparent rounded-full animate-spin" />
     </div>
   );
   if (!user) return null;
@@ -225,7 +225,7 @@ export default function Cashbook() {
                       <p className="font-semibold text-red-800 truncate">Income · {r.project_name || '—'} · ₹{Number(r.amount || 0).toLocaleString('en-IN')} <span className="text-gray-500 font-normal">({r.payment_mode})</span></p>
                       <p className="text-[11px] text-red-600 truncate">Reason: {r.rejection_reason || '—'} {r.rejected_by_name && <span className="text-gray-500">(by {r.rejected_by_name})</span>}</p>
                     </div>
-                    <Button size="sm" className="h-7 text-xs bg-amber-600 hover:bg-amber-700 shrink-0" onClick={() => setFixDialog({ open: true, type: 'income', entry: r, form: { ...r } })} data-testid={`fix-income-${r.income_id}`}>Fix &amp; Resubmit</Button>
+                    <Button size="sm" className="h-7 text-xs bg-primary hover:bg-primary-hover shrink-0" onClick={() => setFixDialog({ open: true, type: 'income', entry: r, form: { ...r } })} data-testid={`fix-income-${r.income_id}`}>Fix &amp; Resubmit</Button>
                   </div>
                 ))}
                 {rejectedExpense.map(r => (
@@ -234,7 +234,7 @@ export default function Cashbook() {
                       <p className="font-semibold text-red-800 truncate">Expense · {r.project_name || '—'} · ₹{Number(r.amount || 0).toLocaleString('en-IN')} <span className="text-gray-500 font-normal">({r.category})</span></p>
                       <p className="text-[11px] text-red-600 truncate">Reason: {r.rejection_reason || '—'} {r.rejected_by_name && <span className="text-gray-500">(by {r.rejected_by_name})</span>}</p>
                     </div>
-                    <Button size="sm" className="h-7 text-xs bg-amber-600 hover:bg-amber-700 shrink-0" onClick={() => setFixDialog({ open: true, type: 'expense', entry: r, form: { ...r } })} data-testid={`fix-expense-${r.expense_id}`}>Fix &amp; Resubmit</Button>
+                    <Button size="sm" className="h-7 text-xs bg-primary hover:bg-primary-hover shrink-0" onClick={() => setFixDialog({ open: true, type: 'expense', entry: r, form: { ...r } })} data-testid={`fix-expense-${r.expense_id}`}>Fix &amp; Resubmit</Button>
                   </div>
                 ))}
               </div>
@@ -395,7 +395,7 @@ export default function Cashbook() {
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setFixDialog({ open: false, type: null, entry: null, form: {} })} disabled={fixBusy}>Cancel</Button>
-            <Button className="bg-amber-600 hover:bg-amber-700" disabled={fixBusy} data-testid="fix-resubmit-btn"
+            <Button className="bg-primary hover:bg-primary-hover" disabled={fixBusy} data-testid="fix-resubmit-btn"
               onClick={async () => {
                 if (!fixDialog.entry) return;
                 setFixBusy(true);

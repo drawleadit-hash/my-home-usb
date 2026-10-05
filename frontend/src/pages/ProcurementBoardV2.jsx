@@ -432,7 +432,7 @@ export default function ProcurementBoardV2() {
   if (loading && !user) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     );
   }
@@ -445,7 +445,7 @@ export default function ProcurementBoardV2() {
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Dashboard Metrics */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mb-8">
-          <Card className="bg-gradient-to-br from-amber-50 to-amber-100">
+          <Card className="bg-amber-50">
             <CardContent className="p-4">
               <div className="flex items-center gap-2 text-amber-600 mb-2">
                 <AlertCircle className="h-5 w-5" />
@@ -455,7 +455,7 @@ export default function ProcurementBoardV2() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100">
+          <Card className="bg-blue-50">
             <CardContent className="p-4">
               <div className="flex items-center gap-2 text-blue-600 mb-2">
                 <Clock className="h-5 w-5" />
@@ -465,7 +465,7 @@ export default function ProcurementBoardV2() {
             </CardContent>
           </Card>
           
-          <Card className="bg-gradient-to-br from-purple-50 to-purple-100">
+          <Card className="bg-purple-50">
             <CardContent className="p-4">
               <div className="flex items-center gap-2 text-purple-600 mb-2">
                 <Package className="h-5 w-5" />
@@ -475,7 +475,7 @@ export default function ProcurementBoardV2() {
             </CardContent>
           </Card>
           
-          <Card className="bg-gradient-to-br from-yellow-50 to-yellow-100">
+          <Card className="bg-yellow-50">
             <CardContent className="p-4">
               <div className="flex items-center gap-2 text-yellow-600 mb-2">
                 <Wallet className="h-5 w-5" />
@@ -485,7 +485,7 @@ export default function ProcurementBoardV2() {
             </CardContent>
           </Card>
           
-          <Card className="bg-gradient-to-br from-orange-50 to-orange-100">
+          <Card className="bg-orange-50">
             <CardContent className="p-4">
               <div className="flex items-center gap-2 text-orange-600 mb-2">
                 <Truck className="h-5 w-5" />
@@ -495,7 +495,7 @@ export default function ProcurementBoardV2() {
             </CardContent>
           </Card>
           
-          <Card className="bg-gradient-to-br from-red-50 to-red-100">
+          <Card className="bg-red-50">
             <CardContent className="p-4">
               <div className="flex items-center gap-2 text-red-600 mb-2">
                 <CreditCard className="h-5 w-5" />
@@ -505,7 +505,7 @@ export default function ProcurementBoardV2() {
             </CardContent>
           </Card>
           
-          <Card className="bg-gradient-to-br from-green-50 to-green-100">
+          <Card className="bg-green-50">
             <CardContent className="p-4">
               <div className="flex items-center gap-2 text-green-600 mb-2">
                 <CheckCircle className="h-5 w-5" />
@@ -784,7 +784,7 @@ export default function ProcurementBoardV2() {
                           {req.remarks && <p className="text-xs text-gray-400 mt-1">Remarks: {req.remarks}</p>}
                         </div>
                         <div className="flex gap-2 flex-shrink-0">
-                          <Button size="sm" className="bg-green-600 hover:bg-green-700 gap-1" onClick={() => handleProcurementApprove(req.request_id)} data-testid={`approve-btn-${req.request_id}`}>
+                          <Button size="sm" className="bg-primary hover:bg-primary-hover gap-1" onClick={() => handleProcurementApprove(req.request_id)} data-testid={`approve-btn-${req.request_id}`}>
                             <Check className="h-3.5 w-3.5" /> Approve
                           </Button>
                           <Button size="sm" variant="outline" className="text-red-600 border-red-300 hover:bg-red-50 gap-1" onClick={() => handleProcurementReject(req.request_id)} data-testid={`reject-btn-${req.request_id}`}>
@@ -862,18 +862,18 @@ export default function ProcurementBoardV2() {
                               <div className="bg-red-50 border border-red-200 rounded px-2 py-1 text-xs text-red-700 mb-1">
                                 <span className="font-medium">Rejected:</span> {req.rejection_reason || 'No reason given'}
                               </div>
-                              <Button onClick={() => openVendorDialog(req)} className="gap-2 bg-amber-600 hover:bg-amber-700" data-testid={`resubmit-${req.request_id}`}>
+                              <Button onClick={() => openVendorDialog(req)} className="gap-2 bg-primary hover:bg-primary-hover" data-testid={`resubmit-${req.request_id}`}>
                                 <Edit className="h-4 w-4" /> Re-edit & Resubmit
                               </Button>
                             </div>
                           )}
                           {req.status === 'payment_approved' && (
-                            <Button onClick={() => handleGeneratePO(req)} className="gap-2 bg-indigo-600 hover:bg-indigo-700">
+                            <Button onClick={() => handleGeneratePO(req)} className="gap-2 bg-primary hover:bg-primary-hover">
                               <FileText className="h-4 w-4" /> Generate PO
                             </Button>
                           )}
                           {req.status === 'vendor_selected' && (req.payment_type === 'credit' || req.payment_type === 'post_delivery') && (
-                            <Button onClick={() => handleGeneratePO(req)} className="gap-2 bg-indigo-600 hover:bg-indigo-700">
+                            <Button onClick={() => handleGeneratePO(req)} className="gap-2 bg-primary hover:bg-primary-hover">
                               <FileText className="h-4 w-4" /> Generate PO ({req.payment_type === 'credit' ? 'Credit' : 'Post-Delivery'})
                             </Button>
                           )}

@@ -536,7 +536,7 @@ export default function AccountantModule() {
                 {/* CRE Requests */}
                 {(requestFilter === 'all' || requestFilter === 'cre') && creRequests.filter(r => r.status === 'pending_payment').length > 0 && (
                   <div className="p-4 border-b">
-                    <h3 className="text-sm font-semibold text-amber-700 mb-3 flex items-center gap-2">
+                    <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
                       <IndianRupee className="h-4 w-4" /> CRE Advance Payment Verification
                     </h3>
                     <div className="space-y-3">
@@ -550,7 +550,7 @@ export default function AccountantModule() {
                               <p className="text-xs text-gray-500">Mode: {req.advance_payment_mode}</p>
                             </div>
                             <div className="flex gap-2">
-                              <Button size="sm" className="bg-green-600 hover:bg-green-700" onClick={() => openVerifyDialog(req, 'cre')}>
+                              <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={() => openVerifyDialog(req, 'cre')}>
                                 <CheckCircle className="h-4 w-4 mr-1" /> Verify
                               </Button>
                               <Button size="sm" variant="destructive" onClick={() => openRejectDialog(req, 'cre')}>
@@ -581,7 +581,7 @@ export default function AccountantModule() {
                               <p className="text-lg font-bold text-green-600">{formatCurrency(req.total_amount)}</p>
                             </div>
                             <div className="flex gap-2">
-                              <Button size="sm" className="bg-green-600 hover:bg-green-700" onClick={() => openVerifyDialog(req, 'material')}>
+                              <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={() => openVerifyDialog(req, 'material')}>
                                 <CheckCircle className="h-4 w-4 mr-1" /> Approve
                               </Button>
                               <Button size="sm" variant="destructive" onClick={() => openRejectDialog(req, 'material')}>
@@ -612,7 +612,7 @@ export default function AccountantModule() {
                               <p className="text-lg font-bold text-orange-600">{formatCurrency(req.total_amount)}</p>
                             </div>
                             <div className="flex gap-2">
-                              <Button size="sm" className="bg-green-600 hover:bg-green-700" onClick={() => openVerifyDialog(req, 'labour')}>
+                              <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={() => openVerifyDialog(req, 'labour')}>
                                 <CheckCircle className="h-4 w-4 mr-1" /> Approve
                               </Button>
                               <Button size="sm" variant="destructive" onClick={() => openRejectDialog(req, 'labour')}>
@@ -640,7 +640,7 @@ export default function AccountantModule() {
                 {/* Petty Cash Requests */}
                 {(requestFilter === 'all' || requestFilter === 'petty_cash') && pettyCashRequests.filter(r => ['requested', 'pm_approved', 'pending_settlement'].includes(r.status)).length > 0 && (
                   <div className="p-4">
-                    <h3 className="text-sm font-semibold text-violet-700 mb-3 flex items-center gap-2">
+                    <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
                       <Wallet className="h-4 w-4" /> Petty Cash Verification
                     </h3>
                     <div className="space-y-3">
@@ -673,7 +673,7 @@ export default function AccountantModule() {
                             <div className="flex gap-2">
                               {(req.status === 'requested' || req.status === 'pm_approved') && (
                                 <>
-                                  <Button size="sm" className="bg-green-600 hover:bg-green-700" onClick={() => openVerifyDialog(req, 'petty_cash')} data-testid={`pc-issue-${req.petty_cash_id}`}>
+                                  <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={() => openVerifyDialog(req, 'petty_cash')} data-testid={`pc-issue-${req.petty_cash_id}`}>
                                     <Wallet className="h-4 w-4 mr-1" /> Issue Cash
                                   </Button>
                                   <Button size="sm" variant="destructive" onClick={() => openRejectDialog(req, 'petty_cash')} data-testid={`pc-reject-${req.petty_cash_id}`}>
@@ -682,7 +682,7 @@ export default function AccountantModule() {
                                 </>
                               )}
                               {req.status === 'pending_settlement' && (
-                                <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700" onClick={() => openVerifyDialog(req, 'petty_cash_settle')}>
+                                <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={() => openVerifyDialog(req, 'petty_cash_settle')}>
                                   <CheckCircle className="h-4 w-4 mr-1" /> Settle
                                 </Button>
                               )}
@@ -1013,7 +1013,7 @@ export default function AccountantModule() {
           
           <DialogFooter>
             <Button variant="outline" onClick={() => setVerifyDialog(false)}>Cancel</Button>
-            <Button onClick={handleVerify} className="bg-green-600 hover:bg-green-700" data-testid="confirm-verify">
+            <Button onClick={handleVerify} className="bg-primary hover:bg-primary-hover" data-testid="confirm-verify">
               <CheckCircle className="h-4 w-4 mr-1" /> 
               {requestType === 'petty_cash' ? 'Issue Cash' : requestType === 'petty_cash_settle' ? 'Settle' : 'Verify'}
             </Button>

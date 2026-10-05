@@ -151,7 +151,7 @@ export default function Notifications() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white" data-testid="notifications-page">
+    <div className="min-h-screen bg-white" data-testid="notifications-page">
       <AppHeader user={user} />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 pb-24">
@@ -183,7 +183,7 @@ export default function Notifications() {
 
         {/* STAT TILES */}
         <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-5">
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100/50 border-blue-200">
+          <Card className="bg-blue-50 border-blue-200">
             <CardContent className="p-3 sm:p-4">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] sm:text-xs uppercase tracking-wide text-blue-700 font-medium">Total</span>
@@ -192,7 +192,7 @@ export default function Notifications() {
               <p className="text-xl sm:text-2xl font-bold text-blue-900 mt-1" data-testid="notif-stat-total">{notifications.length}</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-amber-50 to-amber-100/50 border-amber-200">
+          <Card className="bg-amber-50 border-amber-200">
             <CardContent className="p-3 sm:p-4">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] sm:text-xs uppercase tracking-wide text-amber-700 font-medium">Unread</span>
@@ -201,7 +201,7 @@ export default function Notifications() {
               <p className="text-xl sm:text-2xl font-bold text-amber-900 mt-1" data-testid="notif-stat-unread">{unreadCount}</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-emerald-50 to-emerald-100/50 border-emerald-200">
+          <Card className="bg-emerald-50 border-emerald-200">
             <CardContent className="p-3 sm:p-4">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] sm:text-xs uppercase tracking-wide text-emerald-700 font-medium">Today</span>
@@ -273,7 +273,7 @@ export default function Notifications() {
                           key={n.notification_id}
                           onClick={() => handleOpen(n)}
                           data-testid={`notif-${n.notification_id}`}
-                          className={`group p-3 sm:p-4 flex items-start gap-3 cursor-pointer transition-colors ${!n.read ? 'bg-gradient-to-r from-amber-50/60 to-transparent' : 'hover:bg-gray-50'}`}
+                          className={`group p-3 sm:p-4 flex items-start gap-3 cursor-pointer transition-colors ${!n.read ? 'bg-amber-50' : 'hover:bg-gray-50'}`}
                         >
                           <div className={`h-10 w-10 rounded-full ${tc.bg} flex items-center justify-center ring-2 ${tc.ring} shrink-0`}>
                             <Icon className={`h-5 w-5 ${tc.text}`} />
@@ -290,7 +290,7 @@ export default function Notifications() {
                               {!n.read && (
                                 <button
                                   onClick={(e) => { e.stopPropagation(); handleMarkRead(n); }}
-                                  className="inline-flex items-center gap-1 hover:text-amber-700"
+                                  className="inline-flex items-center gap-1 hover:text-primary-strong"
                                   data-testid={`notif-mark-read-${n.notification_id}`}
                                 >
                                   <Check className="h-2.5 w-2.5" /> Mark as read

@@ -114,7 +114,7 @@ export default function CREFEDetail() {
               <Button
                 size="sm"
                 variant="outline"
-                className="border-amber-400 text-amber-700 hover:bg-amber-50 gap-1"
+                className="border-brand-300 text-primary-strong hover:bg-brand-50 gap-1"
                 onClick={() => setCredDialog({ open: true, email: data?.project?.client_email || data?.client_email || '', password: '', showPwd: false, submitting: false })}
                 data-testid="fe-detail-edit-credentials"
               >
@@ -123,7 +123,7 @@ export default function CREFEDetail() {
             ) : (
               <Button
                 size="sm"
-                className="bg-amber-600 hover:bg-amber-700 text-white gap-1"
+                className="bg-primary hover:bg-primary-hover text-white gap-1"
                 onClick={() => setCredDialog({ open: true, email: data?.client_email || '', password: '', showPwd: false, submitting: false })}
                 data-testid="fe-detail-create-credentials"
               >
@@ -142,7 +142,7 @@ export default function CREFEDetail() {
             <div className="flex justify-between items-start gap-3 flex-wrap">
               <div>
                 <CardTitle className="text-xl text-gray-900 flex items-center gap-2">
-                  <FileText className="h-5 w-5 text-purple-600" />
+                  <FileText className="h-5 w-5 text-primary" />
                   {data.project_name}
                 </CardTitle>
                 <p className="text-sm text-gray-500 mt-0.5">Final Estimate · Revision {data.revision || 0}</p>
@@ -248,7 +248,7 @@ export default function CREFEDetail() {
       <Dialog open={credDialog.open} onOpenChange={(o) => !credDialog.submitting && setCredDialog(c => ({ ...c, open: o }))}>
         <DialogContent className="max-w-md">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2"><KeyRound className="h-5 w-5 text-amber-600" /> Create Client Portal Credentials</DialogTitle>
+            <DialogTitle className="flex items-center gap-2"><KeyRound className="h-5 w-5 text-primary" /> Create Client Portal Credentials</DialogTitle>
           </DialogHeader>
           <div className="space-y-3 pt-2">
             <p className="text-xs text-gray-500">These credentials let your client log into the portal to view their Final Estimate, payment schedule, and approve milestones. Share via WhatsApp once created.</p>
@@ -286,7 +286,7 @@ export default function CREFEDetail() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setCredDialog({ open: false, email: '', password: '', showPwd: false, submitting: false })} disabled={credDialog.submitting}>Cancel</Button>
-            <Button className="bg-amber-600 hover:bg-amber-700" onClick={handleCreateCredentials} disabled={credDialog.submitting} data-testid="cred-submit-btn">
+            <Button className="bg-primary hover:bg-primary-hover" onClick={handleCreateCredentials} disabled={credDialog.submitting} data-testid="cred-submit-btn">
               {credDialog.submitting ? 'Creating…' : 'Create'}
             </Button>
           </DialogFooter>

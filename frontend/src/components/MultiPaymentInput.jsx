@@ -91,7 +91,7 @@ export function MultiPaymentInput({ totalAmount, entries, onChange, allowPartial
           {!isOver && !isBalanced && remaining > 0 && !allowPartial && <Badge className="text-[10px] bg-orange-100 text-orange-700">{fmtCurrency(remaining)} remaining</Badge>}
           {isBalanced && <Badge className="text-[10px] bg-green-100 text-green-700">{allowPartial ? 'Full Amount' : 'Balanced'}</Badge>}
         </div>
-        <Button type="button" size="sm" variant="outline" className="h-6 text-[10px] gap-1 border-blue-300 text-blue-700 hover:bg-blue-50"
+        <Button type="button" size="sm" variant="outline" className="h-6 text-[10px] gap-1 border-brand-300 text-primary-strong hover:bg-brand-50"
           onClick={addEntry} data-testid="add-payment-entry-btn">
           <Plus className="h-3 w-3" /> Add Payment
         </Button>

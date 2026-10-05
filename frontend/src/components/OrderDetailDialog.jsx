@@ -476,7 +476,7 @@ export default function OrderDetailDialog({ open, onClose, order, onUpdate, onRe
           {(order.vendor_name || order.assigned_vendor_name || order.total_amount) && (
             <div>
               <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-1.5">
-                <User className="h-4 w-4 text-blue-600" /> Vendor & Pricing
+                <User className="h-4 w-4 text-primary" /> Vendor & Pricing
               </h3>
               <div className="bg-blue-50/50 border border-blue-100 rounded-lg p-3 space-y-2">
                 {(order.vendor_name || order.assigned_vendor_name) && (
@@ -529,7 +529,7 @@ export default function OrderDetailDialog({ open, onClose, order, onUpdate, onRe
           {(order.vehicle_number || order.receipt_otp) && (
             <div>
               <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-1.5">
-                <Truck className="h-4 w-4 text-blue-600" /> Transit Details
+                <Truck className="h-4 w-4 text-primary" /> Transit Details
               </h3>
               <div className="bg-gray-50 border rounded-lg p-3 grid grid-cols-2 gap-2">
                 {order.vehicle_number && (

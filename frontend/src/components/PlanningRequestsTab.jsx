@@ -521,7 +521,7 @@ export default function PlanningRequestsTab({ projects = [], onCountChange, view
                     <div className="flex items-center gap-2 flex-shrink-0">
                       <Button
                         size="sm"
-                        className="h-8 text-xs bg-green-600 hover:bg-green-700 gap-1 px-3"
+                        className="h-8 text-xs bg-primary hover:bg-primary-hover gap-1 px-3"
                         disabled={processing === id}
                         onClick={() => setApproveDialog({ open: true, req, type: activeType })}
                         data-testid={`approve-${activeType}-btn-${id}`}
@@ -1140,7 +1140,7 @@ function ApproveReviewDialog({ state, onCancel, onSubmit, onRevision, onReject, 
                   </Button>
                 </>
               )}
-              <Button className="bg-green-600 hover:bg-green-700" onClick={handle} disabled={processing} data-testid="approve-confirm-btn">
+              <Button className="bg-primary hover:bg-primary-hover" onClick={handle} disabled={processing} data-testid="approve-confirm-btn">
                 {processing ? <><Loader2 className="h-4 w-4 mr-1 animate-spin" /> Approving…</> : <><ThumbsUp className="h-4 w-4 mr-1" /> Approve</>}
               </Button>
             </>
@@ -1539,7 +1539,7 @@ function PlanningMaterialCard({ req, onClick, processing, readOnly = false, onDe
             {isActionable ? (
               <Button
                 size="sm"
-                className={`h-8 flex-1 text-xs gap-1 mt-3 sm:mt-0 ${isInitialReview ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-green-600 hover:bg-green-700'}`}
+                className={`h-8 flex-1 text-xs gap-1 mt-3 sm:mt-0 ${isInitialReview ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-primary hover:bg-primary-hover'}`}
                 disabled={isProcessing}
                 onClick={(e) => { e.stopPropagation(); onClick(); }}
                 data-testid={`planning-mat-card-approve-${id}`}
@@ -1744,7 +1744,7 @@ function CreditSettlementApprovalList({ entries, loading, onAction }) {
                 </Button>
                 <Button
                   size="sm"
-                  className="h-8 text-xs gap-1 bg-emerald-600 hover:bg-emerald-700"
+                  className="h-8 text-xs gap-1 bg-primary hover:bg-primary-hover"
                   onClick={() => approve(e)}
                   disabled={processing === e.ledger_id}
                   data-testid={`credit-approve-btn-${e.ledger_id}`}

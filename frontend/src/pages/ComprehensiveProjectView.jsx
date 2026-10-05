@@ -237,7 +237,7 @@ export default function ComprehensiveProjectView() {
 
         {/* Summary Cards */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+          <Card className="bg-blue-50 border-blue-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
                 <IndianRupee className="h-3 w-3" />Project Value
@@ -248,7 +248,7 @@ export default function ComprehensiveProjectView() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+          <Card className="bg-green-50 border-green-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
                 <TrendingUp className="h-3 w-3" />Total Received
@@ -259,7 +259,7 @@ export default function ComprehensiveProjectView() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
+          <Card className="bg-orange-50 border-orange-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
                 <Receipt className="h-3 w-3" />Total Expenses
@@ -270,7 +270,7 @@ export default function ComprehensiveProjectView() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+          <Card className="bg-purple-50 border-purple-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
                 <Wallet className="h-3 w-3" />Cash in Book
@@ -283,7 +283,7 @@ export default function ComprehensiveProjectView() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-cyan-50 to-cyan-100 border-cyan-200">
+          <Card className="bg-cyan-50 border-cyan-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
                 <Plus className="h-3 w-3" />Additional Cost
@@ -294,7 +294,7 @@ export default function ComprehensiveProjectView() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-red-50 to-red-100 border-red-200">
+          <Card className="bg-red-50 border-red-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
                 <AlertCircle className="h-3 w-3" />Balance Due
@@ -313,25 +313,25 @@ export default function ComprehensiveProjectView() {
               <TabsList className="bg-transparent border-0 p-0 h-auto flex-wrap gap-2">
                 <TabsTrigger 
                   value="overview" 
-                  className="data-[state=active]:border-b-2 data-[state=active]:border-amber-500 rounded-none px-4"
+                  className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4"
                 >
                   Overview
                 </TabsTrigger>
                 <TabsTrigger 
                   value="boq"
-                  className="data-[state=active]:border-b-2 data-[state=active]:border-amber-500 rounded-none px-4"
+                  className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4"
                 >
                   BOQ / Project Value
                 </TabsTrigger>
                 <TabsTrigger 
                   value="payment-schedule"
-                  className="data-[state=active]:border-b-2 data-[state=active]:border-amber-500 rounded-none px-4"
+                  className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4"
                 >
                   Payment Schedule
                 </TabsTrigger>
                 <TabsTrigger 
                   value="additional-costs"
-                  className="data-[state=active]:border-b-2 data-[state=active]:border-amber-500 rounded-none px-4"
+                  className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4"
                 >
                   Additional Costs
                 </TabsTrigger>
@@ -345,7 +345,7 @@ export default function ComprehensiveProjectView() {
                 <Card className="border-2 border-blue-100">
                   <CardHeader className="bg-amber-50 border-b">
                     <CardTitle className="text-lg flex items-center gap-2">
-                      <IndianRupee className="h-5 w-5 text-amber-600" />
+                      <IndianRupee className="h-5 w-5 text-primary" />
                       Project Value Summary
                     </CardTitle>
                   </CardHeader>

@@ -237,7 +237,7 @@ export default function PackageManagement() {
 
   const estTotal = estForm.items.reduce((s, it) => s + ((parseFloat(it.amount) || 0) * (parseFloat(it.qty) || 0)), 0);
 
-  if (loading && !user) return <div className="min-h-screen flex items-center justify-center bg-gray-50"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-600" /></div>;
+  if (loading && !user) return <div className="min-h-screen flex items-center justify-center bg-gray-50"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" /></div>;
 
   // ============ ROUGH ESTIMATES VIEW ============
   if (selectedPkg) return (
@@ -253,7 +253,7 @@ export default function PackageManagement() {
               <span className="text-sm text-gray-500">{fmt(selectedPkg.base_rate_per_sqft)}/sq.ft</span>
             </div>
           </div>
-          <Button onClick={openCreateEstimate} className="ml-auto bg-amber-600 hover:bg-amber-700" data-testid="create-estimate-btn"><Plus className="h-4 w-4 mr-1" />New Rough Estimate</Button>
+          <Button onClick={openCreateEstimate} className="ml-auto bg-primary hover:bg-primary-hover" data-testid="create-estimate-btn"><Plus className="h-4 w-4 mr-1" />New Rough Estimate</Button>
         </div>
 
         {estimates.length === 0 ? (
@@ -367,7 +367,7 @@ export default function PackageManagement() {
               </table>
             </div>
           </div>
-          <DialogFooter><Button variant="outline" onClick={() => setEstDialog(false)}>Cancel</Button><Button onClick={handleSaveEstimate} className="bg-amber-600 hover:bg-amber-700" data-testid="save-estimate-btn"><Save className="h-4 w-4 mr-1" />{editingEst ? 'Update' : 'Save'}</Button></DialogFooter>
+          <DialogFooter><Button variant="outline" onClick={() => setEstDialog(false)}>Cancel</Button><Button onClick={handleSaveEstimate} className="bg-primary hover:bg-primary-hover" data-testid="save-estimate-btn"><Save className="h-4 w-4 mr-1" />{editingEst ? 'Update' : 'Save'}</Button></DialogFooter>
         </DialogContent>
       </Dialog>
       <MobileBottomNav user={user} />
@@ -385,7 +385,7 @@ export default function PackageManagement() {
             <p className="text-sm text-gray-500">Manage construction packages, materials & rough estimates</p>
           </div>
           {packages.length < 4 && (
-            <Button onClick={openCreate} className="bg-amber-600 hover:bg-amber-700" data-testid="create-package-btn"><Plus className="h-4 w-4 mr-1" />New Package</Button>
+            <Button onClick={openCreate} className="bg-primary hover:bg-primary-hover" data-testid="create-package-btn"><Plus className="h-4 w-4 mr-1" />New Package</Button>
           )}
         </div>
 
@@ -547,7 +547,7 @@ export default function PackageManagement() {
               </TabsContent>
             </Tabs>
           </div>
-          <DialogFooter><Button variant="outline" onClick={() => setEditDialog(false)}>Cancel</Button><Button onClick={handleSave} className="bg-amber-600 hover:bg-amber-700" data-testid="save-package-btn"><Save className="h-4 w-4 mr-1" />{editingPackage ? 'Update' : 'Create'} Package</Button></DialogFooter>
+          <DialogFooter><Button variant="outline" onClick={() => setEditDialog(false)}>Cancel</Button><Button onClick={handleSave} className="bg-primary hover:bg-primary-hover" data-testid="save-package-btn"><Save className="h-4 w-4 mr-1" />{editingPackage ? 'Update' : 'Create'} Package</Button></DialogFooter>
         </DialogContent>
       </Dialog>
 
@@ -556,7 +556,7 @@ export default function PackageManagement() {
         <DialogContent className="max-w-sm">
           <DialogHeader><DialogTitle>Create New Brand</DialogTitle><DialogDescription>Add a brand for material selection</DialogDescription></DialogHeader>
           <div><Label>Brand Name</Label><Input value={newBrandName} onChange={e => setNewBrandName(e.target.value)} placeholder="e.g., Zuari, Dalmia" data-testid="new-brand-input" onKeyDown={e => e.key === 'Enter' && createBrand()} /></div>
-          <DialogFooter><Button variant="outline" onClick={() => setBrandDialog(false)}>Cancel</Button><Button onClick={createBrand} className="bg-amber-600 hover:bg-amber-700" data-testid="save-brand-btn">Create</Button></DialogFooter>
+          <DialogFooter><Button variant="outline" onClick={() => setBrandDialog(false)}>Cancel</Button><Button onClick={createBrand} className="bg-primary hover:bg-primary-hover" data-testid="save-brand-btn">Create</Button></DialogFooter>
         </DialogContent>
       </Dialog>
 
@@ -568,7 +568,7 @@ export default function PackageManagement() {
             <div><Label>New Name *</Label><Input value={dupName} onChange={e => setDupName(e.target.value)} data-testid="dup-name" /></div>
             <div><Label>Tag</Label><Input value={dupTag} onChange={e => setDupTag(e.target.value)} data-testid="dup-tag" /></div>
           </div>
-          <DialogFooter><Button variant="outline" onClick={() => setDupDialog(false)}>Cancel</Button><Button onClick={handleDuplicate} className="bg-amber-600 hover:bg-amber-700" data-testid="confirm-dup-btn">Duplicate</Button></DialogFooter>
+          <DialogFooter><Button variant="outline" onClick={() => setDupDialog(false)}>Cancel</Button><Button onClick={handleDuplicate} className="bg-primary hover:bg-primary-hover" data-testid="confirm-dup-btn">Duplicate</Button></DialogFooter>
         </DialogContent>
       </Dialog>
 

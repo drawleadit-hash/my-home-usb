@@ -99,7 +99,7 @@ function TopCategoryDialog({ open, onClose, existing, totalPercentageElsewhere, 
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={onClose}>Cancel</Button>
-          <Button onClick={handleSave} disabled={saving} className="bg-violet-600 hover:bg-violet-700" data-testid="top-category-save">{saving ? 'Saving...' : 'Save'}</Button>
+          <Button onClick={handleSave} disabled={saving} className="bg-primary hover:bg-primary-hover" data-testid="top-category-save">{saving ? 'Saving...' : 'Save'}</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -149,7 +149,7 @@ function SubCategoryDialog({ open, onClose, topCategoryId, parentSubId, parentSu
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={onClose}>Cancel</Button>
-          <Button onClick={handleSave} disabled={saving} className="bg-violet-600 hover:bg-violet-700" data-testid="sub-category-save">{saving ? 'Saving...' : 'Save'}</Button>
+          <Button onClick={handleSave} disabled={saving} className="bg-primary hover:bg-primary-hover" data-testid="sub-category-save">{saving ? 'Saving...' : 'Save'}</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -215,7 +215,7 @@ function TopCategoryRow({ cat, onEdit, onDelete, onAddSub, onDeleteSub, canManag
         </div>
         {canManage && (
           <div className="flex items-center gap-1">
-            <button onClick={() => onEdit(cat)} className="p-1.5 rounded hover:bg-violet-100 text-violet-600" data-testid={`top-category-edit-${cat.top_category_id}`}><Edit className="h-3.5 w-3.5" /></button>
+            <button onClick={() => onEdit(cat)} className="p-1.5 rounded hover:bg-brand-50 text-primary-strong" data-testid={`top-category-edit-${cat.top_category_id}`}><Edit className="h-3.5 w-3.5" /></button>
             <button onClick={() => onDelete(cat)} className="p-1.5 rounded hover:bg-red-100 text-red-600" data-testid={`top-category-delete-${cat.top_category_id}`}><Trash2 className="h-3.5 w-3.5" /></button>
           </div>
         )}
@@ -238,7 +238,7 @@ function TopCategoryRow({ cat, onEdit, onDelete, onAddSub, onDeleteSub, canManag
                   <span className="text-[10px] text-gray-400">{(subSubs[s.sub_category_id] || []).length} child</span>
                   {canManage && (
                     <>
-                      <button onClick={() => onAddSub(cat.top_category_id, s.sub_category_id, s.name)} className="p-1 rounded hover:bg-violet-100 text-violet-600" title="Add sub-sub-category" data-testid={`add-sub-sub-${s.sub_category_id}`}><Plus className="h-3 w-3" /></button>
+                      <button onClick={() => onAddSub(cat.top_category_id, s.sub_category_id, s.name)} className="p-1 rounded hover:bg-brand-50 text-primary-strong" title="Add sub-sub-category" data-testid={`add-sub-sub-${s.sub_category_id}`}><Plus className="h-3 w-3" /></button>
                       <button onClick={() => onDeleteSub(s)} className="p-1 rounded hover:bg-red-100 text-red-600"><Trash2 className="h-3 w-3" /></button>
                     </>
                   )}
@@ -353,14 +353,14 @@ export function ExpenseSplitSection({ userRole }) {
       </div>
 
       <Card>
-        <div className="flex items-center justify-between px-3 py-2 border-b bg-gradient-to-r from-violet-50 to-white">
+        <div className="flex items-center justify-between px-3 py-2 border-b bg-white">
           <div className="flex items-center gap-2">
             <Layers className="h-4 w-4 text-violet-600" />
             <p className="text-sm font-semibold text-gray-800">Top Categories</p>
             <Badge variant="outline" className="text-[10px]">{cats.length}</Badge>
           </div>
           {canManage && (
-            <Button size="sm" className="h-7 text-xs gap-1 bg-violet-600 hover:bg-violet-700" onClick={() => { setEditingTop(null); setTopDialogOpen(true); }} data-testid="add-top-category">
+            <Button size="sm" className="h-7 text-xs gap-1 bg-primary hover:bg-primary-hover" onClick={() => { setEditingTop(null); setTopDialogOpen(true); }} data-testid="add-top-category">
               <Plus className="h-3 w-3" /> Top Category
             </Button>
           )}
@@ -658,7 +658,7 @@ export function MultiProjectIndirectCostDialog({ open, onClose, onCreated }) {
             </Card>
             <div className="relative">
               <Search className="h-3.5 w-3.5 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
-              <input type="text" value={pickerSearch} onChange={(e) => setPickerSearch(e.target.value)} placeholder="Search project..." className="w-full pl-8 pr-3 py-1.5 text-xs border rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500" data-testid="step2-search" />
+              <input type="text" value={pickerSearch} onChange={(e) => setPickerSearch(e.target.value)} placeholder="Search project..." className="w-full pl-8 pr-3 py-1.5 text-xs border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50" data-testid="step2-search" />
             </div>
             <div className="border rounded-md max-h-80 overflow-y-auto" data-testid="step2-project-list">
               {filteredProjects.length === 0 ? (
@@ -733,9 +733,9 @@ export function MultiProjectIndirectCostDialog({ open, onClose, onCreated }) {
         <DialogFooter className="gap-2">
           {step > 1 && <Button variant="outline" onClick={() => setStep(s => s - 1)} data-testid="step-back">Back</Button>}
           <Button variant="outline" onClick={onClose}>Cancel</Button>
-          {step === 1 && <Button onClick={goPickProjects} className="bg-violet-600 hover:bg-violet-700 gap-1" data-testid="step1-next">Select Projects <ArrowRight className="h-3.5 w-3.5" /></Button>}
-          {step === 2 && <Button onClick={goAllocate} disabled={selectedCount === 0} className="bg-violet-600 hover:bg-violet-700 gap-1" data-testid="step2-next">Allocation <ArrowRight className="h-3.5 w-3.5" /></Button>}
-          {step === 3 && <Button onClick={handleSubmit} disabled={!fullyAllocated || saving} className="bg-emerald-600 hover:bg-emerald-700 gap-1" data-testid="step3-submit"><CheckCircle className="h-3.5 w-3.5" /> {saving ? 'Recording...' : 'Allocate & Record'}</Button>}
+          {step === 1 && <Button onClick={goPickProjects} className="bg-primary hover:bg-primary-hover gap-1" data-testid="step1-next">Select Projects <ArrowRight className="h-3.5 w-3.5" /></Button>}
+          {step === 2 && <Button onClick={goAllocate} disabled={selectedCount === 0} className="bg-primary hover:bg-primary-hover gap-1" data-testid="step2-next">Allocation <ArrowRight className="h-3.5 w-3.5" /></Button>}
+          {step === 3 && <Button onClick={handleSubmit} disabled={!fullyAllocated || saving} className="bg-primary hover:bg-primary-hover gap-1" data-testid="step3-submit"><CheckCircle className="h-3.5 w-3.5" /> {saving ? 'Recording...' : 'Allocate & Record'}</Button>}
         </DialogFooter>
       </DialogContent>
     </Dialog>

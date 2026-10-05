@@ -273,7 +273,7 @@ export default function DTSelectToPayDialog({ open, onOpenChange, dtIncome, onAs
 
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)} disabled={submitting}>Cancel</Button>
-          <Button onClick={submit} disabled={submitting || totalCount === 0} className="bg-emerald-600 hover:bg-emerald-700" data-testid="dt-submit-assign">
+          <Button onClick={submit} disabled={submitting || totalCount === 0} className="bg-primary hover:bg-primary-hover" data-testid="dt-submit-assign">
             {submitting ? <><Loader2 className="h-4 w-4 mr-1 animate-spin" /> Submitting…</> : <><CheckCircle2 className="h-4 w-4 mr-1" /> Submit · {fmt(totalSelected)} ({totalCount} items)</>}
           </Button>
         </DialogFooter>

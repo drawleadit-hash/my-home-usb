@@ -248,13 +248,13 @@ export default function DTBoard({ embedded = false }) {
               <DialogFooter>
                 <Button variant="outline" onClick={() => setActive(null)}>Close</Button>
                 {active.dt_status === 'pending_cre_recv' && (
-                  <Button className="bg-emerald-600 hover:bg-emerald-700" onClick={submit} disabled={submitting} data-testid="dt-cre-submit">
+                  <Button className="bg-primary hover:bg-primary-hover" onClick={submit} disabled={submitting} data-testid="dt-cre-submit">
                     {submitting ? <><Loader2 className="h-4 w-4 mr-1 animate-spin" /> Submitting…</> : <><CheckCircle2 className="h-4 w-4 mr-1" /> Submit to Accountant</>}
                   </Button>
                 )}
                 {active.dt_status === 'pending_accountant_review' && (
                   <Button
-                    className="bg-purple-600 hover:bg-purple-700"
+                    className="bg-primary hover:bg-primary-hover"
                     onClick={async () => {
                       try {
                         await axios.post(`${API}/dt/${active.income_id}/approve`);

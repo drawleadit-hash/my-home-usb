@@ -229,7 +229,7 @@ export default function MaterialReceipt() {
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Stats */}
         <div className="grid grid-cols-2 gap-4 mb-8">
-          <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
+          <Card className="bg-orange-50 border-orange-200">
             <CardContent className="p-4">
               <div className="flex items-center gap-2 text-orange-600 mb-2">
                 <Truck className="h-5 w-5" />
@@ -239,7 +239,7 @@ export default function MaterialReceipt() {
               <p className="text-xs text-orange-600 mt-1">Awaiting receipt</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+          <Card className="bg-green-50 border-green-200">
             <CardContent className="p-4">
               <div className="flex items-center gap-2 text-green-600 mb-2">
                 <CheckCircle className="h-5 w-5" />
@@ -298,7 +298,7 @@ export default function MaterialReceipt() {
                         )}
                       </div>
                       <div className="flex flex-col gap-2">
-                        <Button onClick={() => openReceiptDialog(order)} className="gap-2 bg-green-600 hover:bg-green-700" data-testid={`receive-btn-${order.request_id}`}>
+                        <Button onClick={() => openReceiptDialog(order)} className="gap-2 bg-primary hover:bg-primary-hover" data-testid={`receive-btn-${order.request_id}`}>
                           <CheckCircle className="h-4 w-4" /> Receive Material
                         </Button>
                         <Button variant="outline" size="sm" onClick={() => { setViewOrder(order); setViewDialog(true); }} data-testid={`view-btn-${order.request_id}`}>
@@ -407,7 +407,7 @@ export default function MaterialReceipt() {
                   size="sm" 
                   onClick={requestOtpEmail} 
                   disabled={otpSending}
-                  className="gap-1 border-blue-300 text-amber-700 hover:bg-amber-50"
+                  className="gap-1 border-blue-300 text-primary-strong hover:bg-brand-50"
                   data-testid="send-otp-email-btn"
                 >
                   {otpSending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Mail className="h-4 w-4" />}
@@ -535,7 +535,7 @@ export default function MaterialReceipt() {
             <Button 
               data-testid="confirm-receipt-btn"
               onClick={handleSubmitReceipt}
-              className="bg-green-600 hover:bg-green-700 gap-2"
+              className="bg-primary hover:bg-primary-hover gap-2"
               disabled={!gpsLocation.lat || !receiptForm.otp || !receiptForm.received_qty}
             >
               <CheckCircle className="h-4 w-4" /> Confirm Receipt

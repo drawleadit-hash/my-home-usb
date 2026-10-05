@@ -195,7 +195,7 @@ export default function CustomFieldsBuilder() {
   if (loading && !user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <RefreshCw className="h-6 w-6 animate-spin text-indigo-600" />
+        <RefreshCw className="h-6 w-6 animate-spin text-primary" />
       </div>
     );
   }
@@ -207,7 +207,7 @@ export default function CustomFieldsBuilder() {
 
       <div className="max-w-5xl mx-auto px-4 py-6 sm:px-6">
         {/* Field Types Reference */}
-        <Card className="mb-6 bg-gradient-to-r from-indigo-50 to-purple-50 border-indigo-200">
+        <Card className="mb-6 bg-indigo-50 border-indigo-200">
           <CardContent className="p-4">
             <p className="text-sm font-semibold text-indigo-700 mb-3">Available Field Types</p>
             <div className="flex flex-wrap gap-2">
@@ -228,7 +228,7 @@ export default function CustomFieldsBuilder() {
         <Card>
           <CardHeader className="border-b">
             <CardTitle className="flex items-center gap-2">
-              <Settings className="h-5 w-5 text-indigo-600" />
+              <Settings className="h-5 w-5 text-primary" />
               Custom Fields ({fields.length})
             </CardTitle>
           </CardHeader>

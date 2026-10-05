@@ -72,19 +72,19 @@ export default function MaterialVendorPaymentSummary() {
     <div className="space-y-3" data-testid="material-vendor-summary">
       {/* Roll-up summary pills — Total | Paid | Pending | Suspense */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2" data-testid="mv-summary-pills">
-        <div className="rounded-full bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 px-4 py-2.5 shadow-sm">
+        <div className="rounded-full bg-blue-50 border border-blue-200 px-4 py-2.5 shadow-sm">
           <p className="text-[9px] font-semibold text-blue-600 uppercase tracking-wider">Total</p>
           <p className="text-base font-bold text-blue-900" data-testid="mv-total">{fmt(totals.total)}</p>
         </div>
-        <div className="rounded-full bg-gradient-to-br from-green-50 to-green-100 border border-green-200 px-4 py-2.5 shadow-sm">
+        <div className="rounded-full bg-green-50 border border-green-200 px-4 py-2.5 shadow-sm">
           <p className="text-[9px] font-semibold text-green-700 uppercase tracking-wider">Paid</p>
           <p className="text-base font-bold text-green-900" data-testid="mv-paid">{fmt(totals.paid)}</p>
         </div>
-        <div className="rounded-full bg-gradient-to-br from-indigo-50 to-indigo-100 border border-indigo-200 px-4 py-2.5 shadow-sm">
+        <div className="rounded-full bg-indigo-50 border border-indigo-200 px-4 py-2.5 shadow-sm">
           <p className="text-[9px] font-semibold text-indigo-700 uppercase tracking-wider">Pending</p>
           <p className="text-base font-bold text-indigo-900" data-testid="mv-pending">{fmt(totals.pending)}</p>
         </div>
-        <div className={`rounded-full bg-gradient-to-br ${totals.suspense < 0 ? 'from-rose-50 to-rose-100 border-rose-200' : 'from-amber-50 to-amber-100 border-amber-200'} border px-4 py-2.5 shadow-sm`}>
+        <div className={`rounded-full ${totals.suspense < 0 ? 'bg-rose-50 border-rose-200' : 'bg-amber-50 border-amber-200'} border px-4 py-2.5 shadow-sm`}>
           <p className={`text-[9px] font-semibold uppercase tracking-wider ${totals.suspense < 0 ? 'text-rose-700' : 'text-amber-700'}`}>Suspense</p>
           <p className={`text-base font-bold ${totals.suspense < 0 ? 'text-rose-900' : 'text-amber-900'}`} data-testid="mv-suspense">{fmt(totals.suspense)}</p>
         </div>
@@ -95,7 +95,7 @@ export default function MaterialVendorPaymentSummary() {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div>
               <CardTitle className="text-sm flex items-center gap-2">
-                <Package className="h-4 w-4 text-blue-600" /> Material Vendor Payment Summary
+                <Package className="h-4 w-4 text-primary" /> Material Vendor Payment Summary
               </CardTitle>
               <CardDescription className="text-[11px]">Cross-project material vendor payment & suspense overview · Accountant / Planning / Procurement / Super Admin only</CardDescription>
             </div>
@@ -150,7 +150,7 @@ export default function MaterialVendorPaymentSummary() {
                         {Number(r.suspense_balance || 0) > 0.5 && <p className="text-[9px] text-amber-600 font-normal mt-0.5">credit avl.</p>}
                       </td>
                       <td className="px-3 py-2 text-right">
-                        <Button size="sm" variant="outline" className="h-6 text-[10px] gap-1 border-blue-300 text-blue-700 hover:bg-blue-50" onClick={() => openLedgerFor(r)} data-testid={`mv-ledger-btn-${i}`}>
+                        <Button size="sm" variant="outline" className="h-6 text-[10px] gap-1 border-brand-300 text-primary-strong hover:bg-brand-50" onClick={() => openLedgerFor(r)} data-testid={`mv-ledger-btn-${i}`}>
                           <Eye className="h-3 w-3" /> View
                         </Button>
                       </td>
@@ -167,7 +167,7 @@ export default function MaterialVendorPaymentSummary() {
         <DialogContent className="max-w-[95vw] sm:max-w-3xl max-h-[85vh] overflow-y-auto" data-testid="mv-ledger-dialog">
           <DialogHeader>
             <DialogTitle className="text-base flex items-center gap-2">
-              <Package className="h-4 w-4 text-blue-600" /> {openVendor?.vendor_name} · Activity Timeline
+              <Package className="h-4 w-4 text-primary" /> {openVendor?.vendor_name} · Activity Timeline
             </DialogTitle>
             <DialogDescription className="text-xs">
               Total <span className="font-semibold">{fmt(openVendor?.total_value)}</span>

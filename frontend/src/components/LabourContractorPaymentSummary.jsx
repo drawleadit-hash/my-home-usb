@@ -78,19 +78,19 @@ export default function LabourContractorPaymentSummary() {
     <div className="space-y-3" data-testid="labour-contractor-summary">
       {/* Roll-up summary pills — Total | Paid | Pending | Suspense */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2" data-testid="lcs-summary-pills">
-        <div className="rounded-full bg-gradient-to-br from-violet-50 to-violet-100 border border-violet-200 px-4 py-2.5 shadow-sm">
+        <div className="rounded-full bg-violet-50 border border-violet-200 px-4 py-2.5 shadow-sm">
           <p className="text-[9px] font-semibold text-violet-600 uppercase tracking-wider">Total WO</p>
           <p className="text-base font-bold text-violet-900" data-testid="lcs-total">{fmt(totals.total)}</p>
         </div>
-        <div className="rounded-full bg-gradient-to-br from-green-50 to-green-100 border border-green-200 px-4 py-2.5 shadow-sm">
+        <div className="rounded-full bg-green-50 border border-green-200 px-4 py-2.5 shadow-sm">
           <p className="text-[9px] font-semibold text-green-700 uppercase tracking-wider">Paid</p>
           <p className="text-base font-bold text-green-900" data-testid="lcs-paid">{fmt(totals.paid)}</p>
         </div>
-        <div className="rounded-full bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 px-4 py-2.5 shadow-sm">
+        <div className="rounded-full bg-blue-50 border border-blue-200 px-4 py-2.5 shadow-sm">
           <p className="text-[9px] font-semibold text-blue-700 uppercase tracking-wider">Pending</p>
           <p className="text-base font-bold text-blue-900" data-testid="lcs-pending">{fmt(totals.pending)}</p>
         </div>
-        <div className="rounded-full bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-200 px-4 py-2.5 shadow-sm">
+        <div className="rounded-full bg-amber-50 border border-amber-200 px-4 py-2.5 shadow-sm">
           <p className="text-[9px] font-semibold text-amber-700 uppercase tracking-wider">Suspense</p>
           <p className="text-base font-bold text-amber-900" data-testid="lcs-suspense">{fmt(totals.suspense)}</p>
         </div>
@@ -101,7 +101,7 @@ export default function LabourContractorPaymentSummary() {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div>
               <CardTitle className="text-sm flex items-center gap-2">
-                <Wallet className="h-4 w-4 text-violet-600" /> Labour Contractor Payment Summary
+                <Wallet className="h-4 w-4 text-primary" /> Labour Contractor Payment Summary
               </CardTitle>
               <CardDescription className="text-[11px]">Cross-project payment &amp; suspense overview · Accountant / Planning / Super Admin only</CardDescription>
             </div>
@@ -148,7 +148,7 @@ export default function LabourContractorPaymentSummary() {
                       <td className="px-3 py-2 text-right text-blue-700">{fmt(r.pending_amount)}</td>
                       <td className="px-3 py-2 text-right font-bold text-amber-700">{fmt(r.suspense_balance)}</td>
                       <td className="px-3 py-2 text-right">
-                        <Button size="sm" variant="outline" className="h-6 text-[10px] gap-1 border-violet-300 text-violet-700 hover:bg-violet-50" onClick={() => openLedgerFor(r)} data-testid={`lcs-ledger-${i}`}>
+                        <Button size="sm" variant="outline" className="h-6 text-[10px] gap-1 border-brand-300 text-primary-strong hover:bg-brand-50" onClick={() => openLedgerFor(r)} data-testid={`lcs-ledger-${i}`}>
                           <Eye className="h-3 w-3" /> View
                         </Button>
                       </td>
@@ -165,7 +165,7 @@ export default function LabourContractorPaymentSummary() {
         <DialogContent className="max-w-[95vw] sm:max-w-3xl max-h-[85vh] overflow-y-auto" data-testid="lcs-ledger-dialog">
           <DialogHeader>
             <DialogTitle className="text-base flex items-center gap-2">
-              <Wallet className="h-4 w-4 text-violet-600" /> {openContractor?.contractor_name} · Activity Timeline
+              <Wallet className="h-4 w-4 text-primary" /> {openContractor?.contractor_name} · Activity Timeline
             </DialogTitle>
             <DialogDescription className="text-xs">
               Total <span className="font-semibold">{fmt(openContractor?.total_value)}</span>

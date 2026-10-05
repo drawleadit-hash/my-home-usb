@@ -135,7 +135,7 @@ export const CorrectionDialog = ({
           <div className="mt-3 space-y-3">
             <div className="flex items-center justify-between">
               <h4 className="text-sm font-bold text-gray-800 flex items-center gap-1.5">
-                <Edit3 className="h-4 w-4 text-blue-600" />
+                <Edit3 className="h-4 w-4 text-primary" />
                 Edit &amp; Resubmit
               </h4>
               {!editing && (
@@ -212,7 +212,7 @@ export const CorrectionDialog = ({
               data-testid="correction-resubmit-btn"
               onClick={handleResubmit}
               disabled={submitting}
-              className="bg-emerald-600 hover:bg-emerald-700"
+              className="bg-primary hover:bg-primary-hover"
             >
               {submitting ? "Resubmitting..." : "Save & Resubmit for Approval"}
             </AlertDialogAction>

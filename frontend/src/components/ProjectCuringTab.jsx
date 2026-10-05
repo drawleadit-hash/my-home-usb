@@ -67,7 +67,7 @@ export default function ProjectCuringTab({ projectId, projectName, user }) {
       <Card>
         <CardHeader className="p-3 sm:p-6 flex flex-row items-center justify-between">
           <div>
-            <CardTitle className="text-base sm:text-lg flex items-center gap-2 text-purple-700">
+            <CardTitle className="text-base sm:text-lg flex items-center gap-2 text-foreground">
               <Video className="h-5 w-5" /> Curing Video Log
             </CardTitle>
             <CardDescription className="text-xs sm:text-sm">{projectName} · daily curing video records sent to client.</CardDescription>
@@ -76,7 +76,7 @@ export default function ProjectCuringTab({ projectId, projectName, user }) {
             <Button size="sm" variant="outline" className="h-8 gap-1" onClick={fetchHistory} data-testid="curing-refresh">
               <RefreshCw className="h-3 w-3" /> Refresh
             </Button>
-            <Button size="sm" className="h-8 gap-1 bg-green-600 hover:bg-green-700" onClick={() => setDialogOpen(true)} data-testid="curing-record-btn">
+            <Button size="sm" className="h-8 gap-1 bg-primary hover:bg-primary-hover" onClick={() => setDialogOpen(true)} data-testid="curing-record-btn">
               <Video className="h-3 w-3" /> Record Curing
             </Button>
           </div>
@@ -115,11 +115,11 @@ export default function ProjectCuringTab({ projectId, projectName, user }) {
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent className="max-w-md" data-testid="curing-dialog">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-purple-700"><Video className="h-5 w-5" /> Record Curing Video</DialogTitle>
+            <DialogTitle className="flex items-center gap-2 text-foreground"><Video className="h-5 w-5" /> Record Curing Video</DialogTitle>
             <DialogDescription className="text-xs">{projectName}. Tick if curing is fully done — we'll auto-open WhatsApp to notify the client.</DialogDescription>
           </DialogHeader>
           <div className="space-y-3">
-            <label className="flex items-center gap-2 cursor-pointer p-3 rounded-md border hover:border-purple-400 hover:bg-purple-50/50 transition-colors">
+            <label className="flex items-center gap-2 cursor-pointer p-3 rounded-md border hover:border-brand-300 hover:bg-purple-50/50 transition-colors">
               <Checkbox checked={done} onCheckedChange={setDone} data-testid="curing-done-checkbox" />
               <div>
                 <p className="text-sm font-medium">Curing fully done</p>
@@ -129,7 +129,7 @@ export default function ProjectCuringTab({ projectId, projectName, user }) {
           </div>
           <DialogFooter>
             <Button variant="outline" size="sm" onClick={() => setDialogOpen(false)} disabled={submitting}>Cancel</Button>
-            <Button size="sm" className="bg-purple-600 hover:bg-purple-700" onClick={submit} disabled={submitting} data-testid="curing-submit">
+            <Button size="sm" className="bg-primary hover:bg-primary-hover" onClick={submit} disabled={submitting} data-testid="curing-submit">
               {submitting ? 'Saving…' : 'Save Record'}
             </Button>
           </DialogFooter>

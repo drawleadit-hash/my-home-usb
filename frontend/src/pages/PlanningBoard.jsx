@@ -1313,7 +1313,7 @@ export default function PlanningBoard({ embedded = false }) {
               <button
                 key={t.value}
                 onClick={() => handleTabChange(t.value)}
-                className={`px-3 py-1.5 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${activeTab === t.value ? 'border-blue-600 text-blue-700' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+                className={`px-3 py-1.5 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${activeTab === t.value ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
                 data-testid={`planning-embedded-tab-${t.value}`}
               >
                 {t.label}
@@ -1340,7 +1340,7 @@ export default function PlanningBoard({ embedded = false }) {
                   key={tab.key}
                   onClick={() => handleDashSubTabChange(tab.key)}
                   className={`px-3 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
-                    dashSubTab === tab.key ? 'border-indigo-600 text-indigo-700 bg-indigo-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'
+                    dashSubTab === tab.key ? 'border-primary text-primary-strong bg-brand-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'
                   }`}
                   data-testid={`dash-subtab-${tab.key}`}
                 >
@@ -1355,7 +1355,7 @@ export default function PlanningBoard({ embedded = false }) {
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between gap-3 flex-wrap">
                   <CardTitle className="text-base flex items-center gap-2">
-                    <Building2 className="h-4 w-4 text-indigo-600" />All Projects
+                    <Building2 className="h-4 w-4 text-primary" />All Projects
                   </CardTitle>
                 </div>
                 {/* Sub-tabs */}
@@ -1371,7 +1371,7 @@ export default function PlanningBoard({ embedded = false }) {
                       onClick={() => handleProjectSubTabChange(tab.key)}
                       className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
                         projectSubTab === tab.key
-                          ? 'border-indigo-600 text-indigo-700 bg-indigo-50'
+                          ? 'border-primary text-primary-strong bg-brand-50'
                           : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'
                       }`}
                       data-testid={`subtab-${tab.key}`}
@@ -1542,7 +1542,7 @@ export default function PlanningBoard({ embedded = false }) {
                     <div className="mt-2 rounded-md border border-indigo-200 bg-indigo-50 px-3 py-1.5 text-xs flex items-center gap-2" data-testid="team-member-filter-banner">
                       <Users className="h-3.5 w-3.5 text-indigo-600" />
                       <span><b>{u?.name || 'Selected member'}</b>{u?.role ? ` (${u.role.replace(/_/g, ' ')})` : ''} — <b>{subCount}</b> {subCount === 1 ? 'project' : 'projects'} in this view</span>
-                      <button onClick={() => { setTeamMemberFilterUserId(''); setTeamMemberQuery(''); }} className="ml-auto text-indigo-600 hover:underline">Clear filter</button>
+                      <button onClick={() => { setTeamMemberFilterUserId(''); setTeamMemberQuery(''); }} className="ml-auto text-primary-strong hover:underline">Clear filter</button>
                     </div>
                   );
                 })()}
@@ -1706,7 +1706,7 @@ export default function PlanningBoard({ embedded = false }) {
                                   {projectSubTab === 'new' && (
                                     <Button
                                       size="sm"
-                                      className="h-7 text-xs bg-green-600 hover:bg-green-700"
+                                      className="h-7 text-xs bg-primary hover:bg-primary-hover"
                                       onClick={() => handlePlanningStatusChange(p.project_id, 'active')}
                                       data-testid={`ready-to-construction-${p.project_id}`}
                                     >
@@ -1717,7 +1717,7 @@ export default function PlanningBoard({ embedded = false }) {
                                     <Button
                                       size="sm"
                                       variant="ghost"
-                                      className="h-7 text-xs text-indigo-700 hover:bg-indigo-50 border border-indigo-200"
+                                      className="h-7 text-xs text-primary-strong hover:bg-brand-50 border border-brand-300"
                                       onClick={() => {
                                         if (window.confirm(`Move "${p.name}" back to New Projects?`)) {
                                           handlePlanningStatusChange(p.project_id, 'new');
@@ -1733,7 +1733,7 @@ export default function PlanningBoard({ embedded = false }) {
                                     <Button
                                       size="sm"
                                       variant="ghost"
-                                      className="h-7 text-xs text-amber-700 hover:bg-amber-50 border border-amber-200"
+                                      className="h-7 text-xs text-primary-strong hover:bg-brand-50 border border-brand-300"
                                       onClick={() => {
                                         if (window.confirm(`Move "${p.name}" back to Current Projects?`)) {
                                           handlePlanningStatusChange(p.project_id, 'active');
@@ -1749,7 +1749,7 @@ export default function PlanningBoard({ embedded = false }) {
                                     <Button
                                       size="sm"
                                       variant="ghost"
-                                      className="h-7 text-xs text-amber-700 hover:bg-amber-50"
+                                      className="h-7 text-xs text-primary-strong hover:bg-brand-50"
                                       onClick={() => openArchiveDialog(p.project_id, p.name)}
                                       data-testid={`archive-${p.project_id}`}
                                       title="Archive project (Super Admin only — requires email OTP)"
@@ -1828,7 +1828,7 @@ export default function PlanningBoard({ embedded = false }) {
                         </div>
                         <Button size="sm" variant="outline" onClick={() => handleScheduleMonthChange(1)} data-testid="schedule-next-month"><ArrowRight className="h-4 w-4" /></Button>
                       </div>
-                      <Button onClick={openAddStagesDialog} className="bg-amber-600 hover:bg-amber-700" data-testid="add-stages-btn"><Plus className="h-4 w-4 mr-1" />Add Stages</Button>
+                      <Button onClick={openAddStagesDialog} className="bg-primary hover:bg-primary-hover" data-testid="add-stages-btn"><Plus className="h-4 w-4 mr-1" />Add Stages</Button>
                     </div>
                   </CardContent>
                 </Card>
@@ -1988,7 +1988,7 @@ export default function PlanningBoard({ embedded = false }) {
                                       type="date"
                                       defaultValue={releaseDate}
                                       disabled={isCollected}
-                                      className="border border-gray-300 rounded px-2 py-1 text-xs w-[140px] focus:outline-none focus:ring-1 focus:ring-indigo-500 disabled:bg-gray-100"
+                                      className="border border-gray-300 rounded px-2 py-1 text-xs w-[140px] focus:outline-none focus:ring-1 focus:ring-primary/50 disabled:bg-gray-100"
                                       data-testid={`release-date-${e.stage_id}`}
                                       onBlur={async (ev) => {
                                         const newDate = ev.target.value;
@@ -2011,7 +2011,7 @@ export default function PlanningBoard({ embedded = false }) {
                                         <Button
                                           size="sm"
                                           variant="ghost"
-                                          className="h-7 w-7 p-0 text-blue-600 hover:bg-blue-50"
+                                          className="h-7 w-7 p-0 text-primary-strong hover:bg-brand-50"
                                           title="View stage details (Super Admin)"
                                           onClick={() => setStageDetailDlg({ open: true, stageId: e.stage_id })}
                                           data-testid={`planning-ps-view-${e.entry_id}`}
@@ -2044,7 +2044,7 @@ export default function PlanningBoard({ embedded = false }) {
                                         </p>
                                         <Button
                                           size="sm"
-                                          className="h-7 text-xs bg-blue-600 hover:bg-blue-700 shrink-0"
+                                          className="h-7 text-xs bg-primary hover:bg-primary-hover shrink-0"
                                           data-testid={`planning-resubmit-${e.stage_id}`}
                                           onClick={async () => {
                                             const newAmt = window.prompt(`Current amount: ₹${(e.amount || 0).toLocaleString('en-IN')}. Enter corrected amount (leave blank to keep same):`, '');
@@ -2095,7 +2095,7 @@ export default function PlanningBoard({ embedded = false }) {
                   <button
                     type="button"
                     onClick={() => setDlrDprSubTab('dlr')}
-                    className={`px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-md border-2 transition ${dlrDprSubTab === 'dlr' ? 'border-indigo-600 bg-indigo-100 text-indigo-900' : 'border-gray-300 bg-gray-50 text-gray-700 hover:brightness-95'}`}
+                    className={`px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-md border-2 transition ${dlrDprSubTab === 'dlr' ? 'border-primary bg-brand-100 text-brand-900' : 'border-gray-300 bg-gray-50 text-gray-700 hover:brightness-95'}`}
                     data-testid="dlrdpr-subtab-dlr"
                   >
                     DLR & DPR
@@ -2103,7 +2103,7 @@ export default function PlanningBoard({ embedded = false }) {
                   <button
                     type="button"
                     onClick={() => setDlrDprSubTab('inventory')}
-                    className={`px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-md border-2 transition ${dlrDprSubTab === 'inventory' ? 'border-indigo-600 bg-indigo-100 text-indigo-900' : 'border-gray-300 bg-gray-50 text-gray-700 hover:brightness-95'}`}
+                    className={`px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-md border-2 transition ${dlrDprSubTab === 'inventory' ? 'border-primary bg-brand-100 text-brand-900' : 'border-gray-300 bg-gray-50 text-gray-700 hover:brightness-95'}`}
                     data-testid="dlrdpr-subtab-inventory"
                   >
                     Inventory
@@ -2247,7 +2247,7 @@ export default function PlanningBoard({ embedded = false }) {
                     <CardHeader className="pb-3">
                       <div className="flex flex-wrap items-center justify-between gap-3">
                         <div>
-                          <CardTitle className="text-base flex items-center gap-2"><Package className="h-5 w-5 text-indigo-600" /> Inventory — {user?.role === 'planning_person' ? 'My Projects' : 'All Projects'}</CardTitle>
+                          <CardTitle className="text-base flex items-center gap-2"><Package className="h-5 w-5 text-primary" /> Inventory — {user?.role === 'planning_person' ? 'My Projects' : 'All Projects'}</CardTitle>
                           <p className="text-xs text-gray-500 mt-0.5">Project-wise current stock, unit rate, plus stock-in and stock-out for the selected date range.</p>
                         </div>
                         <div className="flex items-center gap-2">
@@ -2378,7 +2378,7 @@ export default function PlanningBoard({ embedded = false }) {
                                         <button
                                           type="button"
                                           onClick={(e) => { e.stopPropagation(); openRateBreakdown(row.project_id, row.project_name, row.material_name, row.request_number); }}
-                                          className="text-gray-300 hover:text-indigo-600"
+                                          className="text-gray-300 hover:text-primary"
                                           title="See this request's own rate detail and Out Stock history"
                                           data-testid={`inv-rate-info-${row.project_id}-${row.material_name}`}
                                         >
@@ -2410,7 +2410,7 @@ export default function PlanningBoard({ embedded = false }) {
                 <Dialog open={rateBreakdown.open} onOpenChange={(o) => !o && setRateBreakdown(s => ({ ...s, open: false }))}>
                   <DialogContent className="max-w-2xl" data-testid="inv-rate-breakdown-dialog">
                     <DialogHeader>
-                      <DialogTitle className="flex items-center gap-2 text-indigo-700">
+                      <DialogTitle className="flex items-center gap-2 text-foreground">
                         <Info className="h-5 w-5" /> {rateBreakdown.requestNumber ? `${rateBreakdown.requestNumber} Detail` : 'Rate Breakdown'}
                       </DialogTitle>
                       <DialogDescription className="text-xs">
@@ -2418,7 +2418,7 @@ export default function PlanningBoard({ embedded = false }) {
                       </DialogDescription>
                     </DialogHeader>
                     {rateBreakdown.loading ? (
-                      <div className="flex items-center justify-center py-8"><Loader2 className="h-5 w-5 animate-spin text-indigo-600" /></div>
+                      <div className="flex items-center justify-center py-8"><Loader2 className="h-5 w-5 animate-spin text-primary" /></div>
                     ) : !rateBreakdown.data?.rows?.length ? (
                       <p className="text-sm text-gray-400 text-center py-8">No contributing records found.</p>
                     ) : (
@@ -2476,11 +2476,11 @@ export default function PlanningBoard({ embedded = false }) {
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between gap-3 flex-wrap">
                   <CardTitle className="text-base flex items-center gap-2">
-                    <Package className="h-4 w-4 text-amber-600" />Packages ({filteredPackages.length})
+                    <Package className="h-4 w-4 text-primary" />Packages ({filteredPackages.length})
                   </CardTitle>
                   <div className="flex items-center gap-2">
                     <div className="relative"><Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-gray-400" /><Input placeholder="Search packages..." value={packageSearch} onChange={e => setPackageSearch(e.target.value)} className="pl-8 h-9 w-48 text-sm" data-testid="package-search" /></div>
-                    <Button size="sm" onClick={() => openPackageDialog()} className="bg-amber-600 hover:bg-amber-700" data-testid="add-package-btn"><Plus className="h-3.5 w-3.5 mr-1" />Add Package</Button>
+                    <Button size="sm" onClick={() => openPackageDialog()} className="bg-primary hover:bg-primary-hover" data-testid="add-package-btn"><Plus className="h-3.5 w-3.5 mr-1" />Add Package</Button>
                   </div>
                 </div>
               </CardHeader>
@@ -2490,7 +2490,7 @@ export default function PlanningBoard({ embedded = false }) {
                 ) : (
                   <div className="space-y-3">
                     {filteredPackages.map(pkg => (
-                      <div key={pkg.package_id} className="border rounded-lg p-4 hover:border-amber-300 transition" data-testid={`package-card-${pkg.package_id}`}>
+                      <div key={pkg.package_id} className="border rounded-lg p-4 hover:border-brand-300 transition" data-testid={`package-card-${pkg.package_id}`}>
                         <div className="flex items-start justify-between gap-3">
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-1">
@@ -2612,7 +2612,7 @@ export default function PlanningBoard({ embedded = false }) {
                                 {addingMaterialFor === idx ? (
                                   <div className="flex items-center gap-1">
                                     <Input placeholder="New material name..." value={newMaterialName} onChange={e => setNewMaterialName(e.target.value)} className="h-8 text-xs flex-1" data-testid={`new-mat-input-${idx}`} onKeyDown={e => { if (e.key === 'Enter') handleCreateMaterialName(idx); }} />
-                                    <Button size="sm" className="h-8 px-2 bg-green-600 hover:bg-green-700" onClick={() => handleCreateMaterialName(idx)}><Check className="h-3 w-3" /></Button>
+                                    <Button size="sm" className="h-8 px-2 bg-primary hover:bg-primary-hover" onClick={() => handleCreateMaterialName(idx)}><Check className="h-3 w-3" /></Button>
                                     <Button size="sm" variant="ghost" className="h-8 px-2" onClick={() => setAddingMaterialFor(null)}><X className="h-3 w-3" /></Button>
                                   </div>
                                 ) : (
@@ -2631,7 +2631,7 @@ export default function PlanningBoard({ embedded = false }) {
                                 {addingBrandFor === idx ? (
                                   <div className="flex items-center gap-1">
                                     <Input placeholder="New brand name..." value={newBrandName} onChange={e => setNewBrandName(e.target.value)} className="h-8 text-xs flex-1" data-testid={`new-brand-input-${idx}`} onKeyDown={e => { if (e.key === 'Enter') handleCreateBrand(idx); }} />
-                                    <Button size="sm" className="h-8 px-2 bg-green-600 hover:bg-green-700" onClick={() => handleCreateBrand(idx)}><Check className="h-3 w-3" /></Button>
+                                    <Button size="sm" className="h-8 px-2 bg-primary hover:bg-primary-hover" onClick={() => handleCreateBrand(idx)}><Check className="h-3 w-3" /></Button>
                                     <Button size="sm" variant="ghost" className="h-8 px-2" onClick={() => setAddingBrandFor(null)}><X className="h-3 w-3" /></Button>
                                   </div>
                                 ) : (
@@ -2689,7 +2689,7 @@ export default function PlanningBoard({ embedded = false }) {
                 </div>
                 <DialogFooter>
                   <Button variant="outline" onClick={() => setPackageDialog(false)}>Cancel</Button>
-                  <Button onClick={handleSavePackage} className="bg-amber-600 hover:bg-amber-700" data-testid="save-package-btn">{editingPackage ? 'Update Package' : 'Create Package'}</Button>
+                  <Button onClick={handleSavePackage} className="bg-primary hover:bg-primary-hover" data-testid="save-package-btn">{editingPackage ? 'Update Package' : 'Create Package'}</Button>
                 </DialogFooter>
               </DialogContent>
             </Dialog>
@@ -2864,8 +2864,8 @@ export default function PlanningBoard({ embedded = false }) {
               <Card>
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between gap-3 flex-wrap">
-                    <CardTitle className="text-base flex items-center gap-2"><Users className="h-4 w-4 text-amber-600" />Contractor Types ({contractorTypes.length})</CardTitle>
-                    <Button size="sm" onClick={() => setTypeDialog({ open: true, editing: null, name: '', description: '' })} className="bg-amber-600 hover:bg-amber-700" data-testid="add-type-btn"><Plus className="h-4 w-4 mr-1" />Add Type</Button>
+                    <CardTitle className="text-base flex items-center gap-2"><Users className="h-4 w-4 text-primary" />Contractor Types ({contractorTypes.length})</CardTitle>
+                    <Button size="sm" onClick={() => setTypeDialog({ open: true, editing: null, name: '', description: '' })} className="bg-primary hover:bg-primary-hover" data-testid="add-type-btn"><Plus className="h-4 w-4 mr-1" />Add Type</Button>
                   </div>
                 </CardHeader>
                 <CardContent className="p-0">
@@ -2907,10 +2907,10 @@ export default function PlanningBoard({ embedded = false }) {
             <Card>
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between gap-3 flex-wrap">
-                  <CardTitle className="text-base flex items-center gap-2"><Users className="h-4 w-4 text-amber-600" />Labour Contractors ({filteredContractors.length})</CardTitle>
+                  <CardTitle className="text-base flex items-center gap-2"><Users className="h-4 w-4 text-primary" />Labour Contractors ({filteredContractors.length})</CardTitle>
                   <div className="flex items-center gap-2">
                     <div className="relative"><Search className="absolute left-2.5 top-2 h-4 w-4 text-gray-400" /><Input placeholder="Search..." value={contractorSearch} onChange={(e) => setContractorSearch(e.target.value)} className="pl-8 h-8 w-40 text-sm" /></div>
-                    <Button size="sm" onClick={() => openContractorDialog()} className="bg-amber-600 hover:bg-amber-700" data-testid="add-contractor-btn"><Plus className="h-4 w-4 mr-1" />Add Contractor</Button>
+                    <Button size="sm" onClick={() => openContractorDialog()} className="bg-primary hover:bg-primary-hover" data-testid="add-contractor-btn"><Plus className="h-4 w-4 mr-1" />Add Contractor</Button>
                   </div>
                 </div>
               </CardHeader>
@@ -2964,7 +2964,7 @@ export default function PlanningBoard({ embedded = false }) {
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between gap-3 flex-wrap">
                   <CardTitle className="text-base flex items-center gap-2">
-                    <FileText className="h-4 w-4 text-purple-600" />
+                    <FileText className="h-4 w-4 text-primary" />
                     RE Templates ({filteredTemplates.length})
                   </CardTitle>
                   <div className="flex items-center gap-2">
@@ -3057,7 +3057,7 @@ export default function PlanningBoard({ embedded = false }) {
             <div><Label>Current Stage</Label><div className="mt-1">{getStageBadge(selectedProject?.current_stage || 'yet_to_start')}</div></div>
             <div><Label>Move to</Label><Select value={newStage} onValueChange={setNewStage}><SelectTrigger className="mt-1"><SelectValue /></SelectTrigger><SelectContent>{stages.map(s => <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>)}</SelectContent></Select></div>
           </div>
-          <DialogFooter><Button variant="outline" onClick={() => setStageDialog(false)}>Cancel</Button><Button onClick={handleUpdateStage} className="bg-indigo-600 hover:bg-indigo-700">Update</Button></DialogFooter>
+          <DialogFooter><Button variant="outline" onClick={() => setStageDialog(false)}>Cancel</Button><Button onClick={handleUpdateStage} className="bg-primary hover:bg-primary-hover">Update</Button></DialogFooter>
         </DialogContent>
       </Dialog>
 
@@ -3081,7 +3081,7 @@ export default function PlanningBoard({ embedded = false }) {
             <div><Label>Description</Label><Input value={materialForm.description} onChange={(e) => setMaterialForm({ ...materialForm, description: e.target.value })} placeholder="Optional" className="mt-1" /></div>
             <div><Label>HSN Code</Label><Input value={materialForm.hsn_code} onChange={(e) => setMaterialForm({ ...materialForm, hsn_code: e.target.value })} placeholder="e.g. 2523" className="mt-1" /></div>
           </div>
-          <DialogFooter><Button variant="outline" onClick={() => setMaterialDialog(false)}>Cancel</Button><Button onClick={handleSaveMaterial} className="bg-blue-600 hover:bg-blue-700" data-testid="save-material-btn">{editingMaterial ? 'Update' : 'Create'}</Button></DialogFooter>
+          <DialogFooter><Button variant="outline" onClick={() => setMaterialDialog(false)}>Cancel</Button><Button onClick={handleSaveMaterial} className="bg-primary hover:bg-primary-hover" data-testid="save-material-btn">{editingMaterial ? 'Update' : 'Create'}</Button></DialogFooter>
         </DialogContent>
       </Dialog>
 
@@ -3277,7 +3277,7 @@ export default function PlanningBoard({ embedded = false }) {
               </TabsContent>
             )}
           </Tabs>
-          <DialogFooter><Button variant="outline" onClick={() => setContractorDialog(false)}>Cancel</Button><Button onClick={handleSaveContractor} className="bg-amber-600 hover:bg-amber-700" data-testid="save-contractor-btn">{editingContractor ? 'Update' : 'Create'}</Button></DialogFooter>
+          <DialogFooter><Button variant="outline" onClick={() => setContractorDialog(false)}>Cancel</Button><Button onClick={handleSaveContractor} className="bg-primary hover:bg-primary-hover" data-testid="save-contractor-btn">{editingContractor ? 'Update' : 'Create'}</Button></DialogFooter>
         </DialogContent>
       </Dialog>
 
@@ -3432,7 +3432,7 @@ export default function PlanningBoard({ embedded = false }) {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setAddStagesDialog(false)}>Cancel</Button>
-            <Button onClick={handleAddStagesToSchedule} disabled={selectedStageIds.length === 0} className="bg-amber-600 hover:bg-amber-700" data-testid="confirm-add-stages">
+            <Button onClick={handleAddStagesToSchedule} disabled={selectedStageIds.length === 0} className="bg-primary hover:bg-primary-hover" data-testid="confirm-add-stages">
               Add {selectedStageIds.length} Stage{selectedStageIds.length !== 1 ? 's' : ''}
             </Button>
           </DialogFooter>
@@ -3444,7 +3444,7 @@ export default function PlanningBoard({ embedded = false }) {
         <DialogContent className="max-w-5xl max-h-[92vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2" data-testid="template-dialog-title">
-              <FileText className="h-5 w-5 text-purple-600" />
+              <FileText className="h-5 w-5 text-primary" />
               {editingTemplate ? 'Edit Template' : 'Create RE Template'}
             </DialogTitle>
             <DialogDescription>
@@ -3583,7 +3583,7 @@ export default function PlanningBoard({ embedded = false }) {
 
           <DialogFooter>
             <Button variant="outline" onClick={() => setTemplateDialog(false)}>Cancel</Button>
-            <Button onClick={handleSaveTemplate} className="bg-purple-600 hover:bg-purple-700" data-testid="save-template-btn">
+            <Button onClick={handleSaveTemplate} className="bg-primary hover:bg-primary-hover" data-testid="save-template-btn">
               {editingTemplate ? 'Update Template' : 'Save Template'}
             </Button>
           </DialogFooter>
@@ -3615,7 +3615,7 @@ export default function PlanningBoard({ embedded = false }) {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setTypeDialog({ open: false, editing: null, name: '', description: '' })}>Cancel</Button>
-            <Button className="bg-amber-600 hover:bg-amber-700" onClick={handleSaveType} data-testid="type-save-btn">{typeDialog.editing ? 'Update' : 'Create'}</Button>
+            <Button className="bg-primary hover:bg-primary-hover" onClick={handleSaveType} data-testid="type-save-btn">{typeDialog.editing ? 'Update' : 'Create'}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -3624,7 +3624,7 @@ export default function PlanningBoard({ embedded = false }) {
       <Dialog open={typeViewDialog.open} onOpenChange={(o) => !o && setTypeViewDialog({ open: false, type: null, contractors: [], loading: false })}>
         <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2"><Users className="h-4 w-4 text-amber-600" />Contractors of "{typeViewDialog.type?.name || ''}"</DialogTitle>
+            <DialogTitle className="flex items-center gap-2"><Users className="h-4 w-4 text-primary" />Contractors of "{typeViewDialog.type?.name || ''}"</DialogTitle>
             <DialogDescription className="text-xs text-gray-500">{typeViewDialog.type?.description || 'All active contractors that include this type.'}</DialogDescription>
           </DialogHeader>
           {typeViewDialog.loading ? (
@@ -3688,7 +3688,7 @@ export default function PlanningBoard({ embedded = false }) {
       >
         <DialogContent className="max-w-md" data-testid="archive-otp-dialog">
           <DialogHeader>
-            <DialogTitle className="text-amber-700">Archive Project — Email OTP Required</DialogTitle>
+            <DialogTitle className="text-foreground">Archive Project — Email OTP Required</DialogTitle>
             <DialogDescription>
               You're about to archive <strong>{archiveDialog.projectName}</strong>. For your safety, an OTP has been sent to your registered email.
             </DialogDescription>
@@ -3733,7 +3733,7 @@ export default function PlanningBoard({ embedded = false }) {
             </Button>
             <Button
               size="sm"
-              className="bg-amber-600 hover:bg-amber-700"
+              className="bg-primary hover:bg-primary-hover"
               onClick={submitArchiveOtp}
               disabled={archiveDialog.submitting || archiveDialog.sending || archiveDialog.otp.length !== 6}
               data-testid="archive-otp-confirm"

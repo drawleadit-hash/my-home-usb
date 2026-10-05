@@ -330,7 +330,7 @@ export default function ExpenseManagement() {
 
         {/* Summary Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 mb-4 sm:mb-8">
-          <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
+          <Card className="bg-orange-50 border-orange-200">
             <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600 flex items-center gap-1">
                 <Package className="h-3 w-3" />Material
@@ -342,7 +342,7 @@ export default function ExpenseManagement() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+          <Card className="bg-blue-50 border-blue-200">
             <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600 flex items-center gap-1">
                 <Users className="h-3 w-3" />Labour
@@ -354,7 +354,7 @@ export default function ExpenseManagement() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+          <Card className="bg-purple-50 border-purple-200">
             <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600 flex items-center gap-1">
                 <Briefcase className="h-3 w-3" />Vendor
@@ -366,7 +366,7 @@ export default function ExpenseManagement() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-red-50 to-red-100 border-red-200">
+          <Card className="bg-red-50 border-red-200">
             <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
               <CardTitle className="text-xs sm:text-sm font-medium text-gray-600 flex items-center gap-1">
                 <IndianRupee className="h-3 w-3" />Total
@@ -388,10 +388,10 @@ export default function ExpenseManagement() {
                   <TabsTrigger value="material" className="data-[state=active]:border-b-2 data-[state=active]:border-orange-600 rounded-none px-2 sm:px-4 text-xs sm:text-sm">
                     <Package className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />Material
                   </TabsTrigger>
-                  <TabsTrigger value="labour" className="data-[state=active]:border-b-2 data-[state=active]:border-amber-500 rounded-none px-2 sm:px-4 text-xs sm:text-sm">
+                  <TabsTrigger value="labour" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-2 sm:px-4 text-xs sm:text-sm">
                     <Users className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />Labour
                   </TabsTrigger>
-                  <TabsTrigger value="vendor" className="data-[state=active]:border-b-2 data-[state=active]:border-purple-600 rounded-none px-2 sm:px-4 text-xs sm:text-sm">
+                  <TabsTrigger value="vendor" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-2 sm:px-4 text-xs sm:text-sm">
                     <Briefcase className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />Vendor
                   </TabsTrigger>
                 </TabsList>
@@ -525,7 +525,7 @@ export default function ExpenseManagement() {
                     {activeTab === 'vendor' && (
                       <Dialog open={vendorServiceDialog} onOpenChange={setVendorServiceDialog}>
                         <DialogTrigger asChild>
-                          <Button data-testid="add-vendor-btn" className="gap-1 sm:gap-2 bg-purple-600 hover:bg-purple-700 flex-1 sm:flex-none text-xs sm:text-sm">
+                          <Button data-testid="add-vendor-btn" className="gap-1 sm:gap-2 bg-primary hover:bg-primary-hover flex-1 sm:flex-none text-xs sm:text-sm">
                             <Plus className="h-3 w-3 sm:h-4 sm:w-4" /><span className="hidden sm:inline">Add </span>Vendor
                           </Button>
                         </DialogTrigger>
@@ -568,7 +568,7 @@ export default function ExpenseManagement() {
                               <Label>Remarks</Label>
                               <Textarea value={vendorServiceForm.remarks} onChange={(e) => setVendorServiceForm({...vendorServiceForm, remarks: e.target.value})} />
                             </div>
-                            <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700">Submit Expense</Button>
+                            <Button type="submit" className="w-full bg-primary hover:bg-primary-hover">Submit Expense</Button>
                           </form>
                         </DialogContent>
                       </Dialog>

@@ -259,7 +259,7 @@ export default function RABApprovalQueue({ role, title }) {
                   ><Eye className="h-3 w-3 mr-1" /> View</Button>
                   <Button
                     size="sm"
-                    className="h-7 text-xs bg-emerald-600 hover:bg-emerald-700"
+                    className="h-7 text-xs bg-primary hover:bg-primary-hover"
                     onClick={() => setDecisionDialog({ open: true, item, mode: 'approve', notes: '', reason: '' })}
                     data-testid={`rab-approve-${item.request_id}`}
                   ><CheckCircle className="h-3 w-3 mr-1" /> Approve → {cfg.nextRole}</Button>
@@ -335,7 +335,7 @@ export default function RABApprovalQueue({ role, title }) {
           <DialogFooter>
             <Button variant="outline" onClick={() => setDecisionDialog({ ...decisionDialog, open: false })} disabled={busy}>Cancel</Button>
             <Button
-              className={decisionDialog.mode === 'approve' ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-red-600 hover:bg-red-700'}
+              className={decisionDialog.mode === 'approve' ? 'bg-primary hover:bg-primary-hover' : 'bg-red-600 hover:bg-red-700'}
               onClick={submitDecision}
               disabled={busy}
               data-testid="rab-decision-confirm"

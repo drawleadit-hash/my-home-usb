@@ -135,7 +135,7 @@ export default function FinancialOverview() {
   const summary = data.summary;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
       <AppHeader user={user} />
 
@@ -148,7 +148,7 @@ export default function FinancialOverview() {
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
-          <Card className="bg-gradient-to-br from-gray-700 to-gray-800 text-white border-0 shadow-lg">
+          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-brand-400 text-white border-0 shadow-lg">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-blue-100 flex items-center gap-2">
                 <IndianRupee className="h-4 w-4" />
@@ -161,7 +161,7 @@ export default function FinancialOverview() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white border-0 shadow-lg">
+          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-brand-400 text-white border-0 shadow-lg">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-green-100 flex items-center gap-2">
                 <TrendingUp className="h-4 w-4" />
@@ -176,7 +176,7 @@ export default function FinancialOverview() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-orange-500 to-orange-600 text-white border-0 shadow-lg">
+          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-orange-400 text-white border-0 shadow-lg">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-orange-100 flex items-center gap-2">
                 <TrendingDown className="h-4 w-4" />
@@ -189,7 +189,7 @@ export default function FinancialOverview() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-purple-500 to-purple-600 text-white border-0 shadow-lg">
+          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-purple-400 text-white border-0 shadow-lg">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-purple-100 flex items-center gap-2">
                 <Receipt className="h-4 w-4" />
@@ -202,7 +202,7 @@ export default function FinancialOverview() {
             </CardContent>
           </Card>
 
-          <Card className={`border-0 shadow-lg ${summary.total_cash_in_book >= 0 ? 'bg-gradient-to-br from-teal-500 to-teal-600' : 'bg-gradient-to-br from-red-500 to-red-600'} text-white`}>
+          <Card className={`border-0 shadow-lg ${summary.total_cash_in_book >= 0 ? 'bg-primary' : 'bg-red-600'} text-white`}>
             <CardHeader className="pb-2">
               <CardTitle className={`text-sm font-medium flex items-center gap-2 ${summary.total_cash_in_book >= 0 ? 'text-teal-100' : 'text-red-100'}`}>
                 <Wallet className="h-4 w-4" />
@@ -254,7 +254,7 @@ export default function FinancialOverview() {
                       variant="ghost" 
                       size="icon"
                       onClick={() => openEditDialog(project)}
-                      className="text-gray-400 hover:text-amber-600"
+                      className="text-gray-400 hover:text-primary"
                     >
                       <Edit2 className="h-4 w-4" />
                     </Button>

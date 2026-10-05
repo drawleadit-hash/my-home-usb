@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
+import { BrandMark } from '@/components/BrandMark';
 import {
   Building2,
   LogOut,
@@ -347,7 +348,7 @@ export default function ClientPortal() {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-500 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-gray-600">Loading your projects...</p>
         </div>
       </div>
@@ -372,9 +373,10 @@ export default function ClientPortal() {
         <nav className="bg-white border-b border-gray-200 px-4 py-3 sm:px-6 sm:py-4 print:hidden">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 sm:gap-3">
+              <BrandMark className="h-9 w-9 shrink-0" />
               <div>
                 <h1 className="text-base sm:text-xl font-bold text-gray-900">Drawlead Construction ERP</h1>
-                <p className="text-xs text-gray-500">Client Portal</p>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-primary-strong">Client Portal</p>
               </div>
             </div>
             
@@ -484,9 +486,10 @@ export default function ClientPortal() {
                 <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
             )}
+            <BrandMark className="h-9 w-9 shrink-0" />
             <div>
               <h1 className="text-base sm:text-xl font-bold text-gray-900">Drawlead Construction ERP</h1>
-              <p className="text-xs text-gray-500 hidden sm:block">Client Portal</p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-primary-strong hidden sm:block">Client Portal</p>
             </div>
           </div>
           
@@ -566,7 +569,7 @@ export default function ClientPortal() {
             <button
               type="button"
               onClick={() => setActiveTab('income')}
-              className="w-full mb-6 group rounded-xl border border-red-300 bg-gradient-to-r from-red-50 to-red-100/50 px-4 py-3 sm:px-5 sm:py-4 flex items-center gap-3 sm:gap-4 hover:shadow-md transition-all text-left"
+              className="w-full mb-6 group rounded-xl border border-red-300 bg-red-50 px-4 py-3 sm:px-5 sm:py-4 flex items-center gap-3 sm:gap-4 hover:shadow-md transition-all text-left"
               data-testid="cp-global-bounce-alert"
             >
               <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-red-200 flex items-center justify-center shrink-0 animate-pulse">
@@ -643,22 +646,22 @@ export default function ClientPortal() {
               {/* Section 1 — Project Value Calculation (4 cards) */}
               <SectionBox
                 title="Project Value Calculation"
-                accent={{ border: 'border-blue-200', bg: 'bg-gradient-to-br from-blue-50/60 to-blue-50/20', text: 'text-blue-700' }}
+                accent={{ border: 'border-blue-200', bg: 'bg-blue-50', text: 'text-blue-700' }}
                 testid="client-section-project-value"
                 colSpan="lg:col-span-4"
               >
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  {card('Scope Value',  scope,          'bg-white border-blue-200 hover:border-blue-300',     'client-proj-scope',      { valueClass: 'text-blue-700' })}
+                  {card('Scope Value',  scope,          'bg-white border-blue-200 hover:border-brand-300',     'client-proj-scope',      { valueClass: 'text-blue-700' })}
                   {card('Additions',    additionsTotal, 'bg-white border-cyan-200 hover:border-cyan-300',     'client-proj-additions',  { valueClass: 'text-cyan-700' })}
                   {card('Deductions',   deductionsTotal,'bg-white border-orange-200 hover:border-orange-300', 'client-proj-deductions', { valueClass: 'text-orange-700' })}
-                  {card('Grand Total',  grandTotal,     'bg-gradient-to-br from-violet-600 to-violet-700 border-violet-700 shadow-md hover:shadow-lg', 'client-proj-grandtotal', { labelClass: 'text-white/80', valueClass: 'text-white' })}
+                  {card('Grand Total',  grandTotal,     'bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-violet-400 border-violet-700 shadow-md hover:shadow-lg', 'client-proj-grandtotal', { labelClass: 'text-white/80', valueClass: 'text-white' })}
                 </div>
               </SectionBox>
 
               {/* Section 2 — Financial Performance (2 cards) */}
               <SectionBox
                 title="Financial Performance"
-                accent={{ border: 'border-emerald-200', bg: 'bg-gradient-to-br from-emerald-50/60 to-emerald-50/20', text: 'text-emerald-700' }}
+                accent={{ border: 'border-emerald-200', bg: 'bg-emerald-50', text: 'text-emerald-700' }}
                 testid="client-section-financial-performance"
                 colSpan="lg:col-span-2"
               >
@@ -695,7 +698,7 @@ export default function ClientPortal() {
                         <div className={`
                           w-10 h-10 rounded-full flex items-center justify-center
                           ${isCompleted ? 'bg-green-500 text-white' : 
-                            isCurrent ? 'bg-amber-500 text-white' : 
+                            isCurrent ? 'bg-primary text-white' : 
                             'bg-gray-200 text-gray-500'}
                         `}>
                           {isCompleted ? (
@@ -725,7 +728,7 @@ export default function ClientPortal() {
             {/* Aug 6 2026 — Below `lg` the bottom nav (Overview/Income/
                 Payments/Additional/More) now drives these same tabs via
                 ?tab=, so this top strip is desktop-only. */}
-            <CardHeader className="hidden lg:block border-b print:hidden bg-gradient-to-r from-gray-50 via-white to-gray-50 py-3 sm:py-4 px-3 sm:px-4">
+            <CardHeader className="hidden lg:block border-b print:hidden bg-gray-50 py-3 sm:py-4 px-3 sm:px-4">
               <div className="overflow-x-auto -mx-3 sm:-mx-4 px-3 sm:px-4 scrollbar-thin">
                 <TabsList className="bg-transparent p-0 h-auto w-max flex flex-nowrap gap-1 sm:gap-1.5 justify-start">
                   {[
@@ -749,9 +752,9 @@ export default function ClientPortal() {
                         text-[11px] lg:text-xs font-medium whitespace-nowrap
                         rounded-lg border border-transparent
                         text-gray-600 bg-transparent
-                        hover:bg-violet-50 hover:text-violet-700 hover:border-violet-100
-                        data-[state=active]:bg-violet-600 data-[state=active]:text-white
-                        data-[state=active]:border-violet-700 data-[state=active]:shadow-md
+                        hover:bg-brand-50 hover:text-primary-strong hover:border-brand-300
+                        data-[state=active]:bg-primary data-[state=active]:text-white
+                        data-[state=active]:border-primary data-[state=active]:shadow-md
                         data-[state=active]:hover:bg-violet-700
                         transition-all
                       "
@@ -771,7 +774,7 @@ export default function ClientPortal() {
             <TabsContent value="overview" className="p-4 sm:p-6 print:break-inside-avoid">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                 {/* Project Details Card */}
-                <div className="rounded-2xl border bg-gradient-to-br from-white to-blue-50/30 p-5 sm:p-6 shadow-sm">
+                <div className="rounded-2xl border bg-white p-5 sm:p-6 shadow-sm">
                   <div className="flex items-center gap-3 mb-5 pb-4 border-b border-blue-100">
                     <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
                       <Building2 className="h-5 w-5 text-blue-600" />
@@ -812,7 +815,7 @@ export default function ClientPortal() {
                         </div>
                       </div>
                     ))}
-                    <div className="flex items-center gap-3 p-2.5 mt-2 rounded-lg bg-gradient-to-r from-violet-50/50 to-violet-50/20 border border-violet-100">
+                    <div className="flex items-center gap-3 p-2.5 mt-2 rounded-lg bg-violet-50 border border-violet-100">
                       <div className="w-9 h-9 rounded-lg bg-violet-100 flex items-center justify-center shrink-0">
                         <AlertCircle className="h-4 w-4 text-violet-600" />
                       </div>
@@ -838,7 +841,7 @@ export default function ClientPortal() {
                 </div>
 
                 {/* Financial Summary Card */}
-                <div className="rounded-2xl border bg-gradient-to-br from-white to-emerald-50/30 p-5 sm:p-6 shadow-sm">
+                <div className="rounded-2xl border bg-white p-5 sm:p-6 shadow-sm">
                   <div className="flex items-center gap-3 mb-5 pb-4 border-b border-emerald-100">
                     <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center">
                       <IndianRupee className="h-5 w-5 text-emerald-600" />
@@ -861,7 +864,7 @@ export default function ClientPortal() {
                     </div>
                     <div className="w-full h-2 rounded-full bg-gray-100 overflow-hidden">
                       <div
-                        className="h-full bg-gradient-to-r from-emerald-400 to-emerald-600 transition-all duration-500"
+                        className="h-full bg-primary transition-all duration-500"
                         style={{ width: `${progressPercent}%` }}
                       />
                     </div>
@@ -1194,11 +1197,11 @@ export default function ClientPortal() {
                   <>
                     {/* Master "Approve All Pending" — appears when there's anything to act on */}
                     {pendingAll.length > 0 && (
-                      <div className="mx-4 mt-3 mb-2 p-3 rounded-lg bg-gradient-to-r from-emerald-50 to-emerald-100/40 border border-emerald-200 flex items-center justify-between gap-3 flex-wrap print:hidden" data-testid="client-approve-all-banner">
+                      <div className="mx-4 mt-3 mb-2 p-3 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-between gap-3 flex-wrap print:hidden" data-testid="client-approve-all-banner">
                         <div className="text-sm text-emerald-800">
                           <span className="font-bold">{pendingAll.length}</span> addition{pendingAll.length === 1 ? '' : 's'} awaiting your approval &middot; <span className="font-bold">₹{pendingAll.reduce((s,c)=>s+(c.estimated_amount||0),0).toLocaleString('en-IN')}</span>
                         </div>
-                        <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 h-8" onClick={handleApproveAll} data-testid="client-approve-all-btn">
+                        <Button size="sm" className="bg-primary hover:bg-primary-hover h-8" onClick={handleApproveAll} data-testid="client-approve-all-btn">
                           <CheckCircle2 className="h-3.5 w-3.5 mr-1" /> Approve All Pending
                         </Button>
                       </div>
@@ -1258,7 +1261,7 @@ export default function ClientPortal() {
                               const onReview  = () => handleSectionRowBatch(items, 'review');
                               return (
                                 <div className="flex items-center gap-2 print:hidden">
-                                  <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 h-8" onClick={onApprove} data-testid={`client-section-approve-${s.section_id}`}>
+                                  <Button size="sm" className="bg-primary hover:bg-primary-hover h-8" onClick={onApprove} data-testid={`client-section-approve-${s.section_id}`}>
                                     <CheckCircle2 className="h-3.5 w-3.5 mr-1" /> Approve
                                   </Button>
                                   <Button size="sm" variant="outline" className="h-8 border-rose-300 text-rose-700 hover:bg-rose-50" onClick={onReject} data-testid={`client-section-reject-${s.section_id}`}>
@@ -1356,7 +1359,7 @@ export default function ClientPortal() {
                         <div className="flex items-center justify-center gap-2 flex-wrap">
                           {isPending && (
                             <>
-                              <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white h-8 px-3" onClick={() => handleClientApproveDeduction(ded)} data-testid={`client-ded-approve-${ded.deduction_id}`}>
+                              <Button size="sm" className="bg-primary hover:bg-primary-hover text-white h-8 px-3" onClick={() => handleClientApproveDeduction(ded)} data-testid={`client-ded-approve-${ded.deduction_id}`}>
                                 <CheckCircle2 className="h-3.5 w-3.5 mr-1" /> Approve
                               </Button>
                               <Button size="sm" variant="outline" className="border-rose-300 text-rose-700 hover:bg-rose-50 h-8 px-3" onClick={() => handleClientRejectDeduction(ded)} data-testid={`client-ded-reject-${ded.deduction_id}`}>
@@ -1505,7 +1508,7 @@ export default function ClientPortal() {
                 const bouncedTotal = bouncedCheques.reduce((s, c) => s + (c.amount || 0), 0);
                 return (
                   <Tabs defaultValue={bouncedCheques.length > 0 ? 'cheque_bounced' : 'amount'} className="w-full">
-                    <div className="px-4 sm:px-6 pt-4 border-b bg-gradient-to-r from-emerald-50/40 to-white">
+                    <div className="px-4 sm:px-6 pt-4 border-b bg-white">
                       <TabsList className="bg-transparent p-0 h-auto gap-2 mb-3">
                         <TabsTrigger
                           value="amount"
@@ -1546,7 +1549,7 @@ export default function ClientPortal() {
 
                     {/* Amount sub-tab — full income ledger */}
                     <TabsContent value="amount" className="m-0">
-                      <div className="px-4 sm:px-6 py-4 border-b bg-gradient-to-r from-emerald-50/40 to-white flex flex-wrap items-center justify-between gap-3">
+                      <div className="px-4 sm:px-6 py-4 border-b bg-white flex flex-wrap items-center justify-between gap-3">
                         <div>
                           <p className="text-xs text-emerald-700 font-semibold uppercase tracking-wide">Total Approved Income</p>
                           <p className="text-2xl font-bold text-emerald-700 mt-0.5">₹{approvedSum.toLocaleString('en-IN', { maximumFractionDigits: 0 })}</p>
@@ -1651,7 +1654,7 @@ export default function ClientPortal() {
                         </div>
                       ) : (
                         <>
-                          <div className="px-4 sm:px-6 py-4 border-b bg-gradient-to-r from-red-50/60 to-red-100/30 flex flex-wrap items-center justify-between gap-3">
+                          <div className="px-4 sm:px-6 py-4 border-b bg-red-50 flex flex-wrap items-center justify-between gap-3">
                             <div className="flex items-center gap-3">
                               <div className="w-10 h-10 rounded-lg bg-red-200 flex items-center justify-center shrink-0">
                                 <AlertTriangle className="h-5 w-5 text-red-700" />
@@ -1845,7 +1848,7 @@ export default function ClientPortal() {
                           </Button>
                           <Button
                             size="sm"
-                            className="bg-violet-600 hover:bg-violet-700 text-white"
+                            className="bg-primary hover:bg-primary-hover text-white"
                             onClick={async (e) => {
                               e.preventDefault();
                               try {
@@ -2094,11 +2097,11 @@ function ClientFinalEstimateView({ data, onAction, projectId }) {
   return (
     <div className="space-y-5">
       {/* Header */}
-      <div className="rounded-2xl border border-blue-100 bg-gradient-to-br from-white to-blue-50/30 p-5 sm:p-6 shadow-sm">
+      <div className="rounded-2xl border border-blue-100 bg-white p-5 sm:p-6 shadow-sm">
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
           <div>
             <h2 className="text-lg sm:text-xl font-bold text-gray-900 flex items-center gap-2">
-              <FileText className="h-5 w-5 text-blue-600" /> Final Estimate
+              <FileText className="h-5 w-5 text-primary" /> Final Estimate
             </h2>
             <p className="text-xs text-gray-500 mt-0.5">
               {isPreparing
@@ -2208,11 +2211,11 @@ function ClientFinalEstimateView({ data, onAction, projectId }) {
       {/* Approve / Reject actions */}
       {isPendingClient && (
         <div className="rounded-xl border-2 border-blue-200 bg-blue-50/40 p-4 sm:p-5" data-testid="cp-fe-actions">
-          <h4 className="text-sm font-semibold text-blue-900 mb-1">Your Decision</h4>
+          <h4 className="text-sm font-semibold text-foreground mb-1">Your Decision</h4>
           <p className="text-xs text-blue-700 mb-3">Approve to confirm the estimate or request a revision with your feedback.</p>
           <div className="flex flex-col sm:flex-row gap-2">
             <Button
-              className="bg-emerald-600 hover:bg-emerald-700 text-white gap-2"
+              className="bg-primary hover:bg-primary-hover text-white gap-2"
               onClick={() => setDecision({ open: true, mode: 'approve', reason: '', submitting: false })}
               data-testid="cp-fe-approve-btn"
             >
@@ -2261,7 +2264,7 @@ function ClientFinalEstimateView({ data, onAction, projectId }) {
           <DialogFooter>
             <Button variant="outline" onClick={() => setDecision({ open: false, mode: null, reason: '', submitting: false })} disabled={decision.submitting}>Cancel</Button>
             <Button
-              className={decision.mode === 'approve' ? 'bg-emerald-600 hover:bg-emerald-700 text-white' : 'bg-rose-600 hover:bg-rose-700 text-white'}
+              className={decision.mode === 'approve' ? 'bg-primary hover:bg-primary-hover text-white' : 'bg-rose-600 hover:bg-rose-700 text-white'}
               onClick={submit}
               disabled={decision.submitting || (decision.mode === 'reject' && !decision.reason.trim())}
               data-testid="cp-fe-decision-confirm"

@@ -147,7 +147,7 @@ export default function HomePackagesAdmin() {
   return (
     <div>
       {/* Master Package Brochure Uploader */}
-      <Card className="mb-4 border-amber-200 bg-gradient-to-r from-amber-50 to-white">
+      <Card className="mb-4 border-amber-200 bg-white">
         <CardContent className="p-3 sm:p-4">
           <div className="flex items-start gap-3">
             <div className="h-10 w-10 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
@@ -187,7 +187,7 @@ export default function HomePackagesAdmin() {
               size="sm"
               onClick={() => pdfInputRef.current?.click()}
               disabled={brochureUploading}
-              className="bg-amber-600 hover:bg-amber-700 gap-1"
+              className="bg-primary hover:bg-primary-hover gap-1"
               data-testid="brochure-upload-btn"
             >
               {brochureUploading ? <><Loader2 className="h-3.5 w-3.5 animate-spin" /> Uploading…</> : <><Upload className="h-3.5 w-3.5" /> {brochure ? 'Replace PDF' : 'Upload PDF'}</>}
@@ -216,7 +216,7 @@ export default function HomePackagesAdmin() {
               Seed 3 Defaults
             </Button>
           )}
-          <Button onClick={openCreate} className="bg-amber-600 hover:bg-amber-700 gap-1" data-testid="hp-add-btn">
+          <Button onClick={openCreate} className="bg-primary hover:bg-primary-hover gap-1" data-testid="hp-add-btn">
             <Plus className="h-4 w-4" /> Add Package
           </Button>
         </div>
@@ -338,7 +338,7 @@ export default function HomePackagesAdmin() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setDialog({ open: false, editing: null })} disabled={submitting}>Cancel</Button>
-            <Button className="bg-amber-600 hover:bg-amber-700" onClick={submit} disabled={submitting} data-testid="hp-submit">
+            <Button className="bg-primary hover:bg-primary-hover" onClick={submit} disabled={submitting} data-testid="hp-submit">
               {submitting ? <><Loader2 className="h-4 w-4 mr-1 animate-spin" /> Saving…</> : (dialog.editing ? 'Save Changes' : 'Create Package')}
             </Button>
           </DialogFooter>

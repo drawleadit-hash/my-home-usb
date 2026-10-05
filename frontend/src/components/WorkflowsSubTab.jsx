@@ -151,7 +151,7 @@ export default function WorkflowsSubTab() {
         <DialogContent className="max-w-sm" data-testid="workflow-pwd-dialog">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-base">
-              <ShieldCheck className="h-5 w-5 text-indigo-600" />
+              <ShieldCheck className="h-5 w-5 text-primary" />
               Confirm Workflow Change
             </DialogTitle>
             <DialogDescription className="text-xs">
@@ -197,7 +197,7 @@ export default function WorkflowsSubTab() {
             >Cancel</Button>
             <Button
               size="sm"
-              className="bg-indigo-600 hover:bg-indigo-700 text-white"
+              className="bg-primary hover:bg-primary-hover text-white"
               onClick={confirmAndSave}
               disabled={saving || !password.trim()}
               data-testid="workflow-pwd-confirm"
@@ -214,7 +214,7 @@ export default function WorkflowsSubTab() {
 function FlowCard({ active, disabled, onClick, icon, tone, title, subtitle, description, steps, testId }) {
   // Static class strings keep Tailwind JIT happy.
   const palette = tone === 'amber'
-    ? { wrap: active ? 'border-amber-500 bg-amber-50 ring-2 ring-amber-200' : 'border-gray-200 bg-white hover:border-amber-300', badge: 'bg-amber-100 text-amber-800 border-amber-200', step: 'text-amber-700' }
+    ? { wrap: active ? 'border-primary bg-brand-50 ring-2 ring-brand-200' : 'border-gray-200 bg-white hover:border-brand-300', badge: 'bg-amber-100 text-amber-800 border-amber-200', step: 'text-amber-700' }
     : { wrap: active ? 'border-emerald-500 bg-emerald-50 ring-2 ring-emerald-200' : 'border-gray-200 bg-white hover:border-emerald-300', badge: 'bg-emerald-100 text-emerald-800 border-emerald-200', step: 'text-emerald-700' };
   return (
     <button
