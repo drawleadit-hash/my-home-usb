@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { AuthLayout } from '@/components/AuthLayout';
+import { useBranding } from '@/hooks/useBranding';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -72,13 +73,10 @@ export default function Login() {
 
   // Feb 26 2026 — Branding (app name + logo URL) loaded from /api/branding
   // so the Super Admin can change them without a deploy.
-  const [branding, setBranding] = useState({
-    app_name: 'Drawlead Construction ERP',
-    logo_url: '/logo.webp',
-  });
+  const branding = useBranding();
   useEffect(() => {
-    axios.get(`${API}/branding`).then(r => setBranding(r.data)).catch(() => {});
-  }, []);
+    try { document.title = branding.app_name; } catch { /* ignore */ }
+  }, [branding.app_name]);
   const [demoMode, setDemoMode] = useState(false);
 
   // Check if setup is needed
@@ -161,6 +159,14 @@ export default function Login() {
       <div data-testid="login-card">
         {/* Header / Branding */}
         <div className="mb-8">
+          {branding.logo_url && (
+            <img
+              src={branding.logo_url}
+              alt={branding.app_name}
+              className="mb-6 h-16 w-auto max-w-[240px] object-contain object-left"
+              data-testid="login-logo"
+            />
+          )}
           <p
             className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-strong ring-1 ring-inset ring-brand-200/70 dark:bg-brand-950/40 dark:ring-brand-800/60"
             data-testid="login-subtitle"

@@ -14,7 +14,8 @@ import { Sheet, SheetContent, SheetTitle, SheetDescription } from '@/components/
 import axios from 'axios';
 import { useTheme } from '../hooks/useTheme';
 import USBLookupBar from './USBLookupBar';
-import { BrandMark } from './BrandMark';
+import { AppMark } from './BrandMark';
+import { useBranding } from '../hooks/useBranding';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -234,6 +235,8 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
   const navigate = useNavigate();
   const location = useLocation();
   const { isDark, toggleTheme } = useTheme();
+  const branding = useBranding();
+  const appName = branding.app_name;
   const [collapsed, setCollapsed] = useState(readCollapsed);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -423,11 +426,10 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
         className="flex min-w-0 items-center gap-3 rounded-lg text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         data-testid={withTestId ? 'header-brand' : undefined}
       >
-        <BrandMark className="h-8 w-8 shrink-0" />
+        <AppMark branding={branding} className="h-8 w-8 shrink-0" />
         {!rail && (
-          <span className="min-w-0 leading-tight">
-            <span className="block text-[15px] font-bold tracking-tight text-white">Drawlead</span>
-            <span className="block text-[11px] font-medium text-sidebar-muted">Construction ERP</span>
+          <span className="line-clamp-2 min-w-0 text-[14px] font-bold leading-tight tracking-tight text-white" title={appName} data-testid="sidebar-app-name">
+            {appName}
           </span>
         )}
       </button>
@@ -620,9 +622,9 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
                 onClick={goHome}
                 data-testid={hasSidebar ? 'header-brand-mobile' : 'header-brand'}
               >
-                <BrandMark className="h-8 w-8 shrink-0" />
-                <div className={`leading-tight ${backTo ? 'hidden sm:block' : ''}`}>
-                  <span className="block text-[15px] font-bold tracking-tight text-foreground">Drawlead</span>
+                <AppMark branding={branding} className="h-8 w-8 shrink-0" />
+                <div className={`min-w-0 leading-tight ${backTo ? 'hidden sm:block' : ''}`}>
+                  <span className="block max-w-[11rem] truncate text-[15px] font-bold tracking-tight text-foreground sm:max-w-[18rem]" title={appName}>{appName}</span>
                   <span className="block text-[10px] font-semibold uppercase tracking-[0.12em] text-primary-strong">
                     {roleLabel(role)}
                   </span>

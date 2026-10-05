@@ -5,6 +5,7 @@ import { Toaster } from '@/components/ui/sonner';
 import '@/App.css';
 // Side-effect import: applies the persisted theme to <html> before React paints.
 import '@/hooks/useTheme';
+import { loadBranding, useBranding } from '@/hooks/useBranding';
 
 import Login from '@/pages/Login';
 import ForgotPassword from '@/pages/ForgotPassword';
@@ -116,21 +117,14 @@ function AppRouter() {
   // Feb 26 2026 — Sync the browser tab title and favicon with the
   // app-name / favicon configured in Super Admin → Settings → Branding.
   // One fetch per mount, kept lightweight (public endpoint, no auth).
+  // loadBranding() also applies the favicon; signed-in pages prefix the
+  // title with the role (see ProtectedRoute).
   useEffect(() => {
-    axios.get(`${API}/branding`).then(r => {
-      const b = r.data || {};
-      if (b.app_name) {
+    loadBranding().then(b => {
+      if (b?.app_name && !document.title.includes(' | ')) {
         try { document.title = b.app_name; } catch (e) { /* ignore */ }
       }
-      if (b.favicon_url) {
-        try {
-          const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-          link.rel = 'icon';
-          link.href = b.favicon_url;
-          document.head.appendChild(link);
-        } catch (e) { /* ignore */ }
-      }
-    }).catch(() => {});
+    });
   }, []);
   
   return (
@@ -302,6 +296,7 @@ function ProtectedRoute({ children }) {
   // skip the blocking "Authenticating…" screen and revalidate silently.
   const [isAuthenticated, setIsAuthenticated] = useState(cachedUser ? true : null);
   const [user, setUser] = useState(cachedUser || null);
+  const branding = useBranding();
 
   useEffect(() => {
     const hasCache = !!cachedUser;
@@ -350,9 +345,9 @@ function ProtectedRoute({ children }) {
         pre_sales: 'Pre Sales', sales: 'Sales', architect: 'Architect',
         marketing_head: 'Marketing Head', drawlead_marketing: 'Drawlead Marketing', client: 'Client', vendor: 'Vendor',
       };
-      document.title = `${roleLabels[user.role] || user.role} | Drawlead Construction ERP`;
+      document.title = `${roleLabels[user.role] || user.role} | ${branding.app_name}`;
     }
-  }, [user]);
+  }, [user, branding.app_name]);
 
   if (isAuthenticated === null) {
     return (

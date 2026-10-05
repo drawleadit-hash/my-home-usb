@@ -12,6 +12,8 @@ import { toast } from 'sonner';
 import MobileBottomNav from '../components/MobileBottomNav';
 import { AppHeader } from '../components/AppHeader';
 import { NumericInput } from '../components/NumericInput';
+import { BrandMark } from '../components/BrandMark';
+import { publishBranding, resolveBrandUrl } from '../hooks/useBranding';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -99,7 +101,7 @@ export default function Settings() {
     try {
       const r = await axios.patch(`${API}/admin/branding`, { app_name: n });
       setBranding(r.data);
-      try { document.title = n; } catch (e) { /* ignore */ }
+      publishBranding(r.data);
       toast.success('App name updated.');
     } catch (e) {
       toast.error(e?.response?.data?.detail || 'Failed to save app name');
@@ -115,6 +117,7 @@ export default function Settings() {
     try {
       const r = await axios.post(`${API}/admin/branding/upload?slot=${slot}`, fd, { headers: { 'Content-Type': 'multipart/form-data' } });
       setBranding(r.data);
+      publishBranding(r.data);
       toast.success(`${slot === 'logo' ? 'Logo' : 'Favicon'} uploaded. New version live.`);
     } catch (e) {
       toast.error(e?.response?.data?.detail || `Failed to upload ${slot}`);
@@ -601,21 +604,25 @@ export default function Settings() {
                     <div className="rounded-lg border p-4 bg-slate-50">
                       <p className="text-sm font-semibold mb-2">Login Logo</p>
                       <div className="h-24 w-24 mx-auto rounded-md bg-white border flex items-center justify-center overflow-hidden">
-                        {branding?.logo_url && (
-                          <img src={branding.logo_url} alt="logo" className="max-h-full max-w-full object-contain" data-testid="branding-logo-preview" />
+                        {branding?.logo_url ? (
+                          <img src={resolveBrandUrl(branding.logo_url)} alt="logo" className="max-h-full max-w-full object-contain" data-testid="branding-logo-preview" />
+                        ) : (
+                          <BrandMark className="h-14 w-14" />
                         )}
                       </div>
-                      <p className="text-[11px] text-gray-500 mt-2 text-center">Recommended: 500 × 500 PNG / WebP, ≤ 2 MB</p>
+                      <p className="text-[11px] text-gray-500 mt-2 text-center">{branding?.logo_url ? 'Shown on the login screen.' : 'Using the default Drawlead mark.'} Recommended: 500 × 500 PNG / WebP, ≤ 2 MB</p>
                       <Input type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" onChange={(e) => uploadBrandAsset('logo', e)} className="mt-2" data-testid="branding-logo-upload" />
                     </div>
                     <div className="rounded-lg border p-4 bg-slate-50">
                       <p className="text-sm font-semibold mb-2">Favicon</p>
                       <div className="h-24 w-24 mx-auto rounded-md bg-white border flex items-center justify-center overflow-hidden">
-                        {branding?.favicon_url && (
-                          <img src={branding.favicon_url} alt="favicon" className="max-h-full max-w-full object-contain" data-testid="branding-favicon-preview" />
+                        {branding?.has_custom_favicon ? (
+                          <img src={resolveBrandUrl(branding.favicon_url)} alt="favicon" className="max-h-full max-w-full object-contain" data-testid="branding-favicon-preview" />
+                        ) : (
+                          <BrandMark className="h-14 w-14" />
                         )}
                       </div>
-                      <p className="text-[11px] text-gray-500 mt-2 text-center">Recommended: 512 × 512 PNG, ≤ 2 MB (used for browser tab + PWA install)</p>
+                      <p className="text-[11px] text-gray-500 mt-2 text-center">{branding?.has_custom_favicon ? '' : 'Using the default Drawlead mark. '}Recommended: 512 × 512 PNG, ≤ 2 MB (used for browser tab, sidebar icon + PWA install)</p>
                       <Input type="file" accept="image/png,image/jpeg,image/webp" onChange={(e) => uploadBrandAsset('favicon', e)} className="mt-2" data-testid="branding-favicon-upload" />
                     </div>
                   </div>

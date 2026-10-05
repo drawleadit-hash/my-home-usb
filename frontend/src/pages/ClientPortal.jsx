@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
-import { BrandMark } from '@/components/BrandMark';
+import { AppMark } from '@/components/BrandMark';
+import { useBranding } from '@/hooks/useBranding';
 import {
   Building2,
   LogOut,
@@ -82,6 +83,8 @@ function getProjectPhase(project) {
 export default function ClientPortal() {
   const { projectId } = useParams();
   const navigate = useNavigate();
+  const branding = useBranding();
+  const appName = branding.app_name;
   const printRef = useRef();
   const [user, setUser] = useState(null);
   const [projects, setProjects] = useState([]);
@@ -373,9 +376,9 @@ export default function ClientPortal() {
         <nav className="bg-white border-b border-gray-200 px-4 py-3 sm:px-6 sm:py-4 print:hidden">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 sm:gap-3">
-              <BrandMark className="h-9 w-9 shrink-0" />
+              <AppMark branding={branding} className="h-9 w-9 shrink-0" />
               <div>
-                <h1 className="text-base sm:text-xl font-bold text-gray-900">Drawlead Construction ERP</h1>
+                <h1 className="text-base sm:text-xl font-bold text-gray-900">{appName}</h1>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-primary-strong">Client Portal</p>
               </div>
             </div>
@@ -486,9 +489,9 @@ export default function ClientPortal() {
                 <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
             )}
-            <BrandMark className="h-9 w-9 shrink-0" />
+            <AppMark branding={branding} className="h-9 w-9 shrink-0" />
             <div>
-              <h1 className="text-base sm:text-xl font-bold text-gray-900">Drawlead Construction ERP</h1>
+              <h1 className="text-base sm:text-xl font-bold text-gray-900">{appName}</h1>
               <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-primary-strong hidden sm:block">Client Portal</p>
             </div>
           </div>
@@ -518,7 +521,7 @@ export default function ClientPortal() {
       <div className="hidden print:block p-6 border-b">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold">Drawlead Construction ERP</h1>
+            <h1 className="text-2xl font-bold">{appName}</h1>
             <p className="text-gray-500">Project Report</p>
           </div>
           <div className="text-right">
@@ -1883,7 +1886,7 @@ export default function ClientPortal() {
 
         {/* Print Footer */}
         <div className="hidden print:block mt-8 pt-4 border-t text-center text-sm text-gray-500">
-          <p>Generated from Drawlead Construction ERP Client Portal • {new Date().toLocaleDateString('en-IN')}</p>
+          <p>Generated from {appName} Client Portal • {new Date().toLocaleDateString('en-IN')}</p>
         </div>
       </div>
       <MobileBottomNav user={user} />

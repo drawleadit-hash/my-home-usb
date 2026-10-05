@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BrandMark } from '@/components/BrandMark';
+import { AppMark } from '@/components/BrandMark';
+import { useBranding } from '@/hooks/useBranding';
 import { Building2, LogOut, Package, Truck, CheckCircle, Clock, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -15,6 +16,8 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 export default function VendorPortal() {
+  const branding = useBranding();
+  const appName = branding.app_name;
   const [user, setUser] = useState(null);
   const [dashboardData, setDashboardData] = useState(null);
   const [dispatchDialogOpen, setDispatchDialogOpen] = useState(false);
@@ -91,9 +94,9 @@ export default function VendorPortal() {
       <nav className="bg-white border-b border-gray-200 px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <BrandMark className="h-10 w-10 shrink-0" />
+            <AppMark branding={branding} className="h-10 w-10 shrink-0" />
             <div>
-              <h1 className="text-xl font-bold text-gray-900">Drawlead Construction ERP</h1>
+              <h1 className="text-xl font-bold text-gray-900">{appName}</h1>
               <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-primary-strong">Vendor Portal</p>
             </div>
           </div>

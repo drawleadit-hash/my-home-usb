@@ -1,5 +1,6 @@
 import { FolderKanban, Wallet, ShoppingCart } from 'lucide-react';
-import { BrandMark } from './BrandMark';
+import { AppMark } from './BrandMark';
+import { useBranding } from '../hooks/useBranding';
 
 const HIGHLIGHTS = [
   { icon: FolderKanban, title: 'Projects & planning', text: 'BOQ, stages and site progress on one timeline.' },
@@ -10,6 +11,7 @@ const HIGHLIGHTS = [
 // Split-screen shell for the signed-out screens: brand panel on the left
 // (desktop only), the form column on the right.
 export function AuthLayout({ children, footer = null }) {
+  const branding = useBranding();
   return (
     <div className="min-h-screen bg-background lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
       <aside className="relative hidden overflow-hidden bg-[#07110B] p-12 text-white lg:flex lg:flex-col lg:justify-between xl:p-16">
@@ -28,10 +30,10 @@ export function AuthLayout({ children, footer = null }) {
         </div>
 
         <div className="relative flex items-center gap-3">
-          <BrandMark className="h-10 w-10" />
-          <div className="leading-tight">
-            <p className="text-lg font-bold tracking-tight">Drawlead</p>
-            <p className="text-xs text-white/50">Construction ERP</p>
+          <AppMark branding={branding} className="h-10 w-10 shrink-0" />
+          <div className="min-w-0 leading-tight">
+            <p className="text-lg font-bold tracking-tight">{branding.app_name}</p>
+            <p className="text-xs text-white/50">Powered by Drawlead</p>
           </div>
         </div>
 
@@ -62,8 +64,8 @@ export function AuthLayout({ children, footer = null }) {
 
       <main className="flex min-h-screen flex-col px-5 py-8 sm:px-10">
         <div className="flex items-center gap-2.5 lg:hidden">
-          <BrandMark className="h-9 w-9" />
-          <span className="text-base font-bold tracking-tight text-foreground">Drawlead</span>
+          <AppMark branding={branding} className="h-9 w-9 shrink-0" />
+          <span className="truncate text-base font-bold tracking-tight text-foreground">{branding.app_name}</span>
         </div>
         <div className="flex flex-1 items-center justify-center py-10">
           <div className="w-full max-w-[420px]">{children}</div>
