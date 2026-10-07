@@ -29,6 +29,8 @@ jobs:
         working-directory: frontend
         env:
           CI: false
+          # Don't publish .map files - they expose the full frontend source and slow the build/upload
+          GENERATE_SOURCEMAP: false
         run: |
           echo "REACT_APP_BACKEND_URL=https://construction.drawlead.com" > .env
           yarn build
@@ -115,11 +117,15 @@ jobs:
               echo "No separate nginx root to sync (or it has no index.html) - skipping"
             fi
 
+            echo "==> Removing source maps left by earlier builds (cp never deletes old files)"
+            if [ -n "$NGINX_ROOT" ] && [ -d "$NGINX_ROOT/static" ]; then echo "Deleted $(find "$NGINX_ROOT/static" -type f -name '*.map' -print -delete | wc -l) .map file(s) from $NGINX_ROOT/static"; fi
+
             echo "==> Verifying deployment"
             ls frontend/build/index.html
             pm2 status
-            sleep 10
             echo "--- Backend health (local) ---"
+            # Poll up to 30s instead of a fixed sleep; kept on one line so script_stop can't abort mid-loop
+            for i in $(seq 1 30); do curl -sf -o /dev/null http://127.0.0.1:8001/api/auth/setup-status && break; sleep 1; done; echo "health check attempts: $i"
             curl -s -o /dev/null -w "setup-status HTTP %{http_code}\n" http://127.0.0.1:8001/api/auth/setup-status || echo "backend not responding on 8001"
             pm2 logs backend --lines 30 --nostream || true
             echo "--- nginx web roots (must match $PWD/frontend/build) ---"
