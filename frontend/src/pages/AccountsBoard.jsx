@@ -2423,11 +2423,11 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
           exist as long as the lock has a non-zero Cash → Expense value. */}
       {(() => {
         const cbBuckets = [
-          { key: 'cash',             lockKey: 'cash',             label: 'Cash',         accent: 'border-l-amber-500 bg-amber-50/40',   Icon: Banknote },
-          { key: 'current_account',  lockKey: 'current_account',  label: 'HDFC Current', accent: 'border-l-blue-500 bg-blue-50/40',     Icon: Landmark },
-          { key: 'savings_account',  lockKey: 'savings',          label: 'HDFC Savings', accent: 'border-l-emerald-500 bg-emerald-50/40', Icon: PiggyBank },
-          { key: 'cheque',           lockKey: 'cheque',           label: 'Cheque',       accent: 'border-l-violet-500 bg-violet-50/40', Icon: FileText },
-          { key: 'direct_transfer',  lockKey: 'direct_transfer',  label: 'Cash DT',      accent: 'border-l-rose-500 bg-rose-50/40',     Icon: TrendingUp },
+          { key: 'cash',             lockKey: 'cash',             label: 'Cash',         Icon: Banknote },
+          { key: 'current_account',  lockKey: 'current_account',  label: 'HDFC Current', Icon: Landmark },
+          { key: 'savings_account',  lockKey: 'savings',          label: 'HDFC Savings', Icon: PiggyBank },
+          { key: 'cheque',           lockKey: 'cheque',           label: 'Cheque',       Icon: FileText },
+          { key: 'direct_transfer',  lockKey: 'direct_transfer',  label: 'Cash DT',      Icon: TrendingUp },
         ];
         const lockBuckets = cashbookData?.closing_balance_buckets || {};
         // NOTE: lock.income values flow into the live cashbook via the
@@ -2479,7 +2479,7 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
               return (
                 <div
                   key={b.key}
-                  className={`rounded-lg border-l-4 ${b.accent} p-3 shadow-sm cursor-pointer hover:shadow-md hover:scale-[1.02] transition-all`}
+                  className="rounded-[6px] border border-border/80 bg-card p-3 shadow-sm cursor-pointer hover:shadow-md hover:scale-[1.02] transition-all"
                   data-testid={`cb-bucket-${b.key}`}
                   role="button"
                   tabIndex={0}
@@ -2531,7 +2531,7 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
             {/* Total card — dark theme to match the Carry Forward tab.
                 Clicking opens a combined Income+Expense drilldown across all modes. */}
             <div
-              className="rounded-lg p-3 shadow-sm bg-slate-900 text-white cursor-pointer hover:shadow-md hover:scale-[1.02] transition-all"
+              className="rounded-[6px] border border-slate-900 p-3 shadow-sm bg-slate-900 text-white cursor-pointer hover:shadow-md hover:scale-[1.02] transition-all"
               data-testid="cb-bucket-total"
               role="button"
               tabIndex={0}
