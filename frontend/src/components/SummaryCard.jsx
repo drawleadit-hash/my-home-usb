@@ -17,7 +17,7 @@ const ACCENTS = {
 export function SummaryCard({ label, value, sub, icon: Icon, accent = 'green', onClick, title, testId, compact = false }) {
   return (
     <Card
-      className={`group rounded-2xl ${onClick ? 'cursor-pointer transition-shadow hover:shadow-md' : ''}`}
+      className={`group rounded-[6px] ${onClick ? 'cursor-pointer transition-shadow hover:shadow-md' : ''}`}
       onClick={onClick}
       title={title}
       data-testid={testId}
