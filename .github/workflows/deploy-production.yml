@@ -14,7 +14,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Detect what changed
+        id: changes
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          # Skip the frontend build only when every changed file is under backend/.
+          # Manual runs, new branches and force-pushes (BEFORE missing/unfetchable) always build.
+          frontend=true
+          if [ "${{ github.event_name }}" = "push" ] && [ -n "$BEFORE" ] && [ "$BEFORE" != "0000000000000000000000000000000000000000" ] && git fetch -q --depth=1 origin "$BEFORE"; then
+            changed=$(git diff --name-only "$BEFORE" "$GITHUB_SHA")
+            echo "Changed files:"; echo "$changed"
+            if [ -n "$changed" ] && ! echo "$changed" | grep -qv '^backend/'; then
+              frontend=false
+            fi
+          fi
+          echo "Frontend build needed: $frontend"
+          echo "frontend=$frontend" >> "$GITHUB_OUTPUT"
+
       - name: Setup Node
+        if: steps.changes.outputs.frontend == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -22,10 +41,12 @@ jobs:
           cache-dependency-path: frontend/yarn.lock
 
       - name: Install dependencies
+        if: steps.changes.outputs.frontend == 'true'
         working-directory: frontend
         run: yarn install --frozen-lockfile
 
       - name: Build with production env
+        if: steps.changes.outputs.frontend == 'true'
         working-directory: frontend
         env:
           CI: false
@@ -59,10 +80,11 @@ jobs:
             venv/bin/pip install -r requirements.txt || true
             cd ..
 
-            echo "==> Preparing fresh build directory"
-            rm -rf frontend/build
+            # One line so script_stop can't abort on the else branch; keep the old build when no new one is uploaded
+            if [ "${{ steps.changes.outputs.frontend }}" = "true" ]; then echo "==> Preparing fresh build directory"; rm -rf frontend/build; else echo "==> Backend-only change: keeping existing frontend build"; fi
 
       - name: Copy built frontend to VPS
+        if: steps.changes.outputs.frontend == 'true'
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
