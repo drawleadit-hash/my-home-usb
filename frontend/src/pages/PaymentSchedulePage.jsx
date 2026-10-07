@@ -13,15 +13,9 @@ import {
   Calendar,
   Eye,
   Search,
-  X,
-  CalendarClock,
-  CheckCircle2,
-  Hourglass,
-  History,
-  Send
+  X
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
-import { KpiTile } from '../components/KpiTile';
 import { useNavigate } from 'react-router-dom';
 import { PaymentStageDetailDialog } from '../components/PaymentStageDetailDialog';
 import MetaDateFilter from '../components/MetaDateFilter';
@@ -137,15 +131,21 @@ export default function PaymentSchedulePage() {
         </Card>
 
         {/* Summary */}
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 mb-4" data-testid="ps-summary-cards">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-4">
           {[
-            { key: 'planned', label: 'Total Planned', value: formatCurrency(sum.total_planned), sub: `${sum.total_entries || 0} stages`, icon: CalendarClock, accent: 'indigo' },
-            { key: 'collected', label: 'Collected', value: formatCurrency(sum.total_received), sub: `${sum.collected_count || 0} collected`, icon: CheckCircle2, accent: 'brand' },
-            { key: 'balance', label: 'Balance', value: formatCurrency(sum.total_balance), sub: 'yet to collect', icon: Hourglass, accent: 'amber' },
-            { key: 'carryover', label: 'Carry Over', value: sum.carryover_count || 0, sub: 'from prev months', icon: History, accent: 'red' },
-            { key: 'requested', label: 'Requested', value: sum.requested_count || 0, sub: 'sent to CRE', icon: Send, accent: 'blue' },
+            { label: 'Total Planned', value: formatCurrency(sum.total_planned), sub: `${sum.total_entries || 0} stages`, color: 'indigo' },
+            { label: 'Collected', value: formatCurrency(sum.total_received), sub: `${sum.collected_count || 0} collected`, color: 'green' },
+            { label: 'Balance', value: formatCurrency(sum.total_balance), sub: '', color: 'amber' },
+            { label: 'Carry Over', value: sum.carryover_count || 0, sub: 'from prev months', color: 'red' },
+            { label: 'Requested', value: sum.requested_count || 0, sub: 'sent to CRE', color: 'blue' },
           ].map(c => (
-            <KpiTile key={c.key} label={c.label} value={c.value} sub={c.sub} icon={c.icon} accent={c.accent} testId={`ps-summary-${c.key}`} />
+            <Card key={c.label} className={`border-l-4 border-l-${c.color}-500`}>
+              <CardContent className="p-3">
+                <p className="text-[10px] text-gray-500 uppercase font-medium">{c.label}</p>
+                <p className={`text-lg font-bold text-${c.color}-700`}>{c.value}</p>
+                {c.sub && <p className="text-[10px] text-gray-400">{c.sub}</p>}
+              </CardContent>
+            </Card>
           ))}
         </div>
 
