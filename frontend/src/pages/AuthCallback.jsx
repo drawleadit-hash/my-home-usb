@@ -32,8 +32,7 @@ export default function AuthCallback() {
         });
 
         const user = response.data;
-        toast.success(`Welcome, ${user.name}!`);
-        
+
         // Navigate based on role
         if (user.role === 'client') {
           navigate('/client-portal', { state: { user }, replace: true });
