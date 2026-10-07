@@ -116,3 +116,9 @@
 3. Gradually deprecate routes in `server.py`
 4. Once all routes migrated, switch entry point to `main.py`
 5. Archive `server.py`
+
+## Deploying Backend Changes
+
+A push to `main` where every changed file is under `backend/` skips the frontend build and upload
+(see `.github/workflows/deploy-production.yml`), so it deploys in about 30 seconds instead of ~2.5 minutes.
+Keep backend-only fixes in their own commit/push to get the fast path.
