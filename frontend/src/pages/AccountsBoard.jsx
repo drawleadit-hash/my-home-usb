@@ -2381,7 +2381,6 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
           value={<MaskedValue value={totals.total_income || 0} formatFn={fmtFull} testId="kpi-overall-income" />}
           sub="For selected period"
           icon={ArrowDownRight}
-          accent="green"
           onClick={() => setDrilldown({ type: 'category', category: 'overall_income', entries: incomeEntries, label: 'Overall Income' })}
           title="Click to see all income entries"
           testId="kpi-card-income"
@@ -2392,7 +2391,6 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
           value={<MaskedValue value={totals.total_expense || 0} formatFn={fmtFull} testId="kpi-expense" />}
           sub="For selected period"
           icon={ArrowUpRight}
-          accent="red"
           onClick={() => setDrilldown({ type: 'category', category: 'overall_expense', entries: allExpenseEntries, label: 'All Expense' })}
           title="Click to see all expense entries (includes Other / uncategorised)"
           testId="kpi-card-expense"
@@ -2406,7 +2404,6 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
               value={<MaskedValue value={bal} formatFn={fmtFull} testId="kpi-balance" />}
               sub="Income − Expense (period)"
               icon={Wallet}
-              accent={bal >= 0 ? 'blue' : 'orange'}
               onClick={() => setDrilldown({ type: 'category', category: 'overall_expense', entries: allExpenseEntries, label: 'All Expense (Balance contribution)' })}
               title="Click to see expense rows driving the balance"
               testId="kpi-card-balance"

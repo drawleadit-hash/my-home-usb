@@ -139,13 +139,13 @@ export default function PaymentSchedulePage() {
         {/* Summary */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 mb-4" data-testid="ps-summary-cards">
           {[
-            { key: 'planned', label: 'Total Planned', value: formatCurrency(sum.total_planned), sub: `${sum.total_entries || 0} stages`, icon: CalendarClock, accent: 'indigo' },
-            { key: 'collected', label: 'Collected', value: formatCurrency(sum.total_received), sub: `${sum.collected_count || 0} collected`, icon: CheckCircle2, accent: 'green' },
-            { key: 'balance', label: 'Balance', value: formatCurrency(sum.total_balance), sub: 'yet to collect', icon: Hourglass, accent: 'amber' },
-            { key: 'carryover', label: 'Carry Over', value: sum.carryover_count || 0, sub: 'from prev months', icon: History, accent: 'red' },
-            { key: 'requested', label: 'Requested', value: sum.requested_count || 0, sub: 'sent to CRE', icon: Send, accent: 'blue' },
+            { key: 'planned', label: 'Total Planned', value: formatCurrency(sum.total_planned), sub: `${sum.total_entries || 0} stages`, icon: CalendarClock },
+            { key: 'collected', label: 'Collected', value: formatCurrency(sum.total_received), sub: `${sum.collected_count || 0} collected`, icon: CheckCircle2 },
+            { key: 'balance', label: 'Balance', value: formatCurrency(sum.total_balance), sub: 'yet to collect', icon: Hourglass },
+            { key: 'carryover', label: 'Carry Over', value: sum.carryover_count || 0, sub: 'from prev months', icon: History },
+            { key: 'requested', label: 'Requested', value: sum.requested_count || 0, sub: 'sent to CRE', icon: Send },
           ].map(c => (
-            <SummaryCard key={c.key} compact label={c.label} value={c.value} sub={c.sub} icon={c.icon} accent={c.accent} testId={`ps-summary-${c.key}`} />
+            <SummaryCard key={c.key} compact label={c.label} value={c.value} sub={c.sub} icon={c.icon} testId={`ps-summary-${c.key}`} />
           ))}
         </div>
 
