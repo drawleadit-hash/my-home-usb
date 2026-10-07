@@ -21,6 +21,7 @@ import DTSelectToPayDialog from '../components/DTSelectToPayDialog';
 import PhotoLightbox from '../components/PhotoLightbox';
 import { StatusPill, pillState } from '../components/StatusPill';
 import { CorrectionDialog } from '../components/CorrectionDialog';
+import { SummaryCard } from '../components/SummaryCard';
 import { toast } from 'sonner';
 import MobileBottomNav from '../components/MobileBottomNav';
 import { ExpenseSplitSection, MultiProjectIndirectCostDialog } from '../components/ExpenseSplitSection';
@@ -2374,70 +2375,42 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
           the Direct Expense tab below.
           Feb 26 2026 — Profit (all-time cumulative) card removed per user
           request; only 3 cards now show. */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3" data-testid="kpi-cards">
-        <Card
-          className="border-l-4 border-l-green-500 bg-white cursor-pointer hover:shadow-md transition-shadow"
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" data-testid="kpi-cards">
+        <SummaryCard
+          label="Overall Income"
+          value={<MaskedValue value={totals.total_income || 0} formatFn={fmtFull} testId="kpi-overall-income" />}
+          sub="For selected period"
+          icon={ArrowDownRight}
+          accent="green"
           onClick={() => setDrilldown({ type: 'category', category: 'overall_income', entries: incomeEntries, label: 'Overall Income' })}
-          data-testid="kpi-card-income"
           title="Click to see all income entries"
-        >
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">Overall Income</p>
-                <p className="text-2xl font-bold text-green-700 mt-1"><MaskedValue value={totals.total_income || 0} className="text-green-700" formatFn={fmtFull} testId="kpi-overall-income" /></p>
-                <p className="text-[10px] text-gray-400 mt-0.5">For selected period</p>
-              </div>
-              <div className="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center">
-                <ArrowDownRight className="h-5 w-5 text-green-600" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+          testId="kpi-card-income"
+        />
 
-        <Card
-          className="border-l-4 border-l-red-500 bg-white cursor-pointer hover:shadow-md transition-shadow"
+        <SummaryCard
+          label="Expense"
+          value={<MaskedValue value={totals.total_expense || 0} formatFn={fmtFull} testId="kpi-expense" />}
+          sub="For selected period"
+          icon={ArrowUpRight}
+          accent="red"
           onClick={() => setDrilldown({ type: 'category', category: 'overall_expense', entries: allExpenseEntries, label: 'All Expense' })}
-          data-testid="kpi-card-expense"
           title="Click to see all expense entries (includes Other / uncategorised)"
-        >
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">Expense</p>
-                <p className="text-2xl font-bold text-red-600 mt-1"><MaskedValue value={totals.total_expense || 0} className="text-red-600" formatFn={fmtFull} testId="kpi-expense" /></p>
-                <p className="text-[10px] text-gray-400 mt-0.5">For selected period</p>
-              </div>
-              <div className="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center">
-                <ArrowUpRight className="h-5 w-5 text-red-600" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+          testId="kpi-card-expense"
+        />
 
         {(() => {
           const bal = (totals.total_income || 0) - (totals.total_expense || 0);
-          const isPos = bal >= 0;
           return (
-            <Card
-              className={`border-l-4 ${isPos ? 'border-l-blue-500 bg-white' : 'border-l-orange-500 bg-white'} cursor-pointer hover:shadow-md transition-shadow`}
+            <SummaryCard
+              label="Balance"
+              value={<MaskedValue value={bal} formatFn={fmtFull} testId="kpi-balance" />}
+              sub="Income − Expense (period)"
+              icon={Wallet}
+              accent={bal >= 0 ? 'blue' : 'orange'}
               onClick={() => setDrilldown({ type: 'category', category: 'overall_expense', entries: allExpenseEntries, label: 'All Expense (Balance contribution)' })}
-              data-testid="kpi-card-balance"
               title="Click to see expense rows driving the balance"
-            >
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">Balance</p>
-                    <p className={`text-2xl font-bold mt-1 ${isPos ? 'text-blue-700' : 'text-orange-600'}`}><MaskedValue value={bal} className={isPos ? 'text-blue-700' : 'text-orange-600'} formatFn={fmtFull} testId="kpi-balance" /></p>
-                    <p className="text-[10px] text-gray-400 mt-0.5">Income − Expense (period)</p>
-                  </div>
-                  <div className={`h-10 w-10 rounded-full ${isPos ? 'bg-blue-100' : 'bg-orange-100'} flex items-center justify-center`}>
-                    <Wallet className={`h-5 w-5 ${isPos ? 'text-blue-600' : 'text-orange-600'}`} />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+              testId="kpi-card-balance"
+            />
           );
         })()}
       </div>
