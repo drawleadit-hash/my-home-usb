@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link, useSearchParams } from 'react-router-dom';
-import { Eye, EyeOff, Mail, Lock, Shield } from 'lucide-react';
+import { AlertTriangle, Eye, EyeOff, Mail, Lock, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -38,6 +38,13 @@ function getRoleRedirect(role) {
     super_admin: '/finance-board'
   };
   return roleRoutes[role] || '/dashboard';
+}
+
+// nginx answers 502/503/504 with an HTML page when the backend is down, so
+// there is no `detail` to show — say what actually happened instead.
+function loginErrorMessage(error) {
+  if (!error.response || error.response.status >= 502) return "Can't reach the server. Please try again in a minute.";
+  return typeof error.response.data?.detail === 'string' ? error.response.data.detail : 'Login failed';
 }
 
 const DEMO_USERS = [
@@ -78,15 +85,30 @@ export default function Login() {
     try { document.title = branding.app_name; } catch { /* ignore */ }
   }, [branding.app_name]);
   const [demoMode, setDemoMode] = useState(false);
+  const [serverDown, setServerDown] = useState(false);
 
-  // Check if setup is needed
+  // Check if setup is needed. demo_mode only arrives with this response, so if
+  // the backend is unreachable, say so and keep retrying — otherwise the Demo
+  // Access tab stays hidden until a manual refresh after the backend recovers.
   useEffect(() => {
-    axios.get(`${API}/auth/setup-status`).then(res => {
-      if (!res.data.setup_complete) {
-        navigate('/setup', { replace: true });
-      }
-      setDemoMode(res.data.demo_mode && !window.location.hostname.includes('myhomeusb.com'));
-    }).catch(() => {});
+    let cancelled = false;
+    let retry;
+    const check = () => {
+      axios.get(`${API}/auth/setup-status`).then(res => {
+        if (cancelled) return;
+        setServerDown(false);
+        if (!res.data.setup_complete) {
+          navigate('/setup', { replace: true });
+        }
+        setDemoMode(res.data.demo_mode && !window.location.hostname.includes('myhomeusb.com'));
+      }).catch(() => {
+        if (cancelled) return;
+        setServerDown(true);
+        retry = setTimeout(check, 10000);
+      });
+    };
+    check();
+    return () => { cancelled = true; clearTimeout(retry); };
   }, [navigate]);
 
   const handlePasswordLogin = async (e) => {
@@ -126,7 +148,7 @@ export default function Login() {
       const target = getRoleRedirect(data.role);
       navigate(target, { replace: true });
     } catch (error) {
-      toast.error(typeof error.response?.data?.detail === 'string' ? error.response.data.detail : 'Login failed');
+      toast.error(loginErrorMessage(error));
     } finally {
       setIsLoading(false);
     }
@@ -146,7 +168,7 @@ export default function Login() {
       const target = getRoleRedirect(user.role);
       navigate(target, { replace: true });
     } catch (error) {
-      toast.error(typeof error.response?.data?.detail === 'string' ? error.response.data.detail : 'Login failed');
+      toast.error(loginErrorMessage(error));
     } finally {
       setIsLoading(false);
     }
@@ -179,6 +201,16 @@ export default function Login() {
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">Welcome back. Sign in to continue to your workspace.</p>
         </div>
+
+        {serverDown && (
+          <div
+            className="mb-6 flex items-start gap-2.5 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:border-amber-900/60 dark:bg-amber-950/30 dark:text-amber-200"
+            data-testid="server-down-notice"
+          >
+            <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
+            <p>Can't reach the server right now. Login and Demo Access will come back automatically once it's up.</p>
+          </div>
+        )}
 
         <Tabs value={loginTab} onValueChange={setLoginTab}>
           <TabsList className={`grid h-11 w-full ${demoMode ? 'grid-cols-2' : 'grid-cols-1'}`} data-testid="login-tabs">
