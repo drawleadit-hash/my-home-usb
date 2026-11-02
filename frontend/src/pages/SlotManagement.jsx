@@ -11,6 +11,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Textarea } from '../components/ui/textarea';
 import { Plus, Users, Loader2, Clock, UserCircle, RefreshCw, ArrowRight, Trash2 } from 'lucide-react';
+import { tabChipClass } from '../components/ui/tabs';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -383,7 +384,7 @@ function FilterChip({ label, active, onClick }) {
   return (
     <button
       onClick={onClick}
-      className={`text-xs px-3 py-1.5 rounded-full font-medium transition-all ${active ? 'bg-primary text-white shadow' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'}`}
+      className={tabChipClass(active, 'text-xs px-3 py-1.5')}
     >
       {label}
     </button>

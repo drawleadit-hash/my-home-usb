@@ -12,7 +12,7 @@ import { DayPicker } from 'react-day-picker';
 import { Textarea } from '../components/ui/textarea';
 import { Label } from '../components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger, tabChipClass } from '../components/ui/tabs';
 import { toast } from 'sonner';
 import { Checkbox } from '../components/ui/checkbox';
 import MobileBottomNav from '../components/MobileBottomNav';
@@ -925,7 +925,7 @@ export default function CREBoard() {
         {/* Main Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <div className="flex items-center justify-between mb-3 gap-3 flex-wrap">
-            <TabsList className="bg-white border shadow-sm">
+            <TabsList>
               {(() => {
                 // Render tabs in the order saved by Super Admin via Workflow Master.
                 // Each entry must be enabled in workflow + pass the optional CRE Module flag.
@@ -1668,7 +1668,7 @@ export default function CREBoard() {
                       <button
                         key={t.key}
                         onClick={() => setAcSubTab(t.key)}
-                        className={`px-3 py-1.5 rounded-full text-xs font-medium border transition ${acSubTab === t.key ? 'bg-primary text-white border-primary' : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'}`}
+                        className={tabChipClass(acSubTab === t.key, 'px-3 py-1.5 text-xs')}
                         data-testid={`ac-subtab-${t.key}`}
                       >
                         {t.label} <span className={`ml-1 inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full text-[10px] ${acSubTab === t.key ? 'bg-white text-indigo-700' : t.color}`}>{t.count}</span>
@@ -1758,11 +1758,11 @@ export default function CREBoard() {
           </DialogHeader>
 
           {/* Toggle: Full Project vs Request RE */}
-          <div className="flex gap-2 p-1 bg-gray-100 rounded-lg mb-4" data-testid="create-mode-toggle">
-            <button className={`flex-1 py-2 px-3 text-sm rounded-md transition-colors ${!requestREMode ? 'bg-white shadow font-medium' : 'text-gray-500'}`} onClick={() => setRequestREMode(false)}>
+          <div className="flex gap-2 mb-4" data-testid="create-mode-toggle">
+            <button className={tabChipClass(!requestREMode, 'flex-1 py-2 px-3 text-sm')} onClick={() => setRequestREMode(false)}>
               Full Project + Advance
             </button>
-            <button className={`flex-1 py-2 px-3 text-sm rounded-md transition-colors ${requestREMode ? 'bg-white shadow font-medium text-amber-700' : 'text-gray-500'}`} onClick={() => setRequestREMode(true)}>
+            <button className={tabChipClass(requestREMode, 'flex-1 py-2 px-3 text-sm')} onClick={() => setRequestREMode(true)}>
               Request RE from Planning
             </button>
           </div>

@@ -10,6 +10,7 @@ import { Badge } from './ui/badge';
 import { Card, CardContent } from './ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Loader2, CheckCircle2, AlertCircle, Banknote, Building2, CreditCard, FileText, Wallet, Search, Lock, Send, Plus, Trash2 } from 'lucide-react';
+import { tabChipClass } from './ui/tabs';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 const fmt = (n) => '₹' + (Number(n) || 0).toLocaleString('en-IN');
@@ -485,11 +486,11 @@ function LegEditor({ leg, idx, canRemove, ctx, allCheques, claimedByOther, updat
         {/* Method-specific inputs */}
         {leg.method === 'cheque' && (
           <div className="border rounded-md overflow-hidden">
-            <div className="flex bg-gray-50 border-b">
-              <button type="button" className={`flex-1 px-3 py-1.5 text-xs font-medium ${leg.chequeTab === 'active' ? 'bg-white text-emerald-700 border-b-2 border-emerald-500' : 'text-gray-500'}`} onClick={() => update({ chequeTab: 'active' })}>
+            <div className="flex gap-2 border-b p-2">
+              <button type="button" className={tabChipClass(leg.chequeTab === 'active', 'flex-1 px-3 py-1.5 text-xs')} onClick={() => update({ chequeTab: 'active' })}>
                 <CheckCircle2 className="h-3 w-3 inline mr-1" /> Active ({visibleActive.length})
               </button>
-              <button type="button" className={`flex-1 px-3 py-1.5 text-xs font-medium ${leg.chequeTab === 'inactive' ? 'bg-white text-primary-strong border-b-2 border-primary' : 'text-gray-500'}`} onClick={() => update({ chequeTab: 'inactive' })}>
+              <button type="button" className={tabChipClass(leg.chequeTab === 'inactive', 'flex-1 px-3 py-1.5 text-xs')} onClick={() => update({ chequeTab: 'inactive' })}>
                 <Lock className="h-3 w-3 inline mr-1" /> Locked ({visibleInactive.length})
               </button>
             </div>

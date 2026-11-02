@@ -733,7 +733,7 @@ export default function ClientPortal() {
                 ?tab=, so this top strip is desktop-only. */}
             <CardHeader className="hidden lg:block border-b print:hidden bg-gray-50 py-3 sm:py-4 px-3 sm:px-4">
               <div className="overflow-x-auto -mx-3 sm:-mx-4 px-3 sm:px-4 scrollbar-thin">
-                <TabsList className="bg-transparent p-0 h-auto w-max flex flex-nowrap gap-1 sm:gap-1.5 justify-start">
+                <TabsList className="w-max flex flex-nowrap justify-start">
                   {[
                     { v: 'overview',       label: 'Overview',         Icon: LayoutDashboard, show: true,                                tid: 'cp-tab-overview' },
                     { v: 'final_estimate', label: 'Final Estimate',   Icon: FileCheck,       show: !!projectData?.final_estimate,       tid: 'cp-tab-final-estimate',
@@ -750,17 +750,7 @@ export default function ClientPortal() {
                       key={v}
                       value={v}
                       data-testid={tid}
-                      className="
-                        relative gap-1.5 px-2.5 lg:px-3 py-2
-                        text-[11px] lg:text-xs font-medium whitespace-nowrap
-                        rounded-lg border border-transparent
-                        text-gray-600 bg-transparent
-                        hover:bg-brand-50 hover:text-primary-strong hover:border-brand-300
-                        data-[state=active]:bg-primary data-[state=active]:text-white
-                        data-[state=active]:border-primary data-[state=active]:shadow-md
-                        data-[state=active]:hover:bg-violet-700
-                        transition-all
-                      "
+                      className="relative gap-1.5 px-2.5 lg:px-3 text-[11px] lg:text-xs whitespace-nowrap transition-all"
                     >
                       <Icon className="h-3.5 w-3.5 shrink-0" />
                       <span>{label}</span>
@@ -1512,19 +1502,11 @@ export default function ClientPortal() {
                 return (
                   <Tabs defaultValue={bouncedCheques.length > 0 ? 'cheque_bounced' : 'amount'} className="w-full">
                     <div className="px-4 sm:px-6 pt-4 border-b bg-white">
-                      <TabsList className="bg-transparent p-0 h-auto gap-2 mb-3">
+                      <TabsList className="mb-3">
                         <TabsTrigger
                           value="amount"
                           data-testid="cp-income-subtab-amount"
-                          className="
-                            gap-2 px-4 py-2 text-xs sm:text-sm font-medium
-                            rounded-lg border border-transparent
-                            text-gray-600 bg-transparent
-                            hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-100
-                            data-[state=active]:bg-emerald-600 data-[state=active]:text-white
-                            data-[state=active]:border-emerald-700 data-[state=active]:shadow-md
-                            transition-all
-                          "
+                          className="gap-2 px-4 text-xs sm:text-sm transition-all"
                         >
                           <Receipt className="h-4 w-4" />
                           Amount
@@ -1533,15 +1515,7 @@ export default function ClientPortal() {
                         <TabsTrigger
                           value="cheque_bounced"
                           data-testid="cp-income-subtab-bounced"
-                          className="
-                            gap-2 px-4 py-2 text-xs sm:text-sm font-medium
-                            rounded-lg border border-transparent
-                            text-gray-600 bg-transparent
-                            hover:bg-red-50 hover:text-red-700 hover:border-red-100
-                            data-[state=active]:bg-red-600 data-[state=active]:text-white
-                            data-[state=active]:border-red-700 data-[state=active]:shadow-md
-                            transition-all
-                          "
+                          className="gap-2 px-4 text-xs sm:text-sm transition-all"
                         >
                           <AlertTriangle className="h-4 w-4" />
                           Cheque Bounced

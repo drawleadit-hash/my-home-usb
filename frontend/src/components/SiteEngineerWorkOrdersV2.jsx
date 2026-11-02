@@ -31,7 +31,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger, tabChipClass } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { toast } from 'sonner';
@@ -307,14 +307,14 @@ function WorkOrderDetail({ wo, projectId, onBack, onChange }) {
           horizontally with short labels below `sm`; full grid + full
           labels from `sm` up. */}
       <Tabs value={tab} onValueChange={setTab}>
-        <TabsList className="w-full flex overflow-x-auto sm:grid sm:grid-cols-6 gap-1 sm:gap-0 justify-start sm:justify-center">
+        <TabsList className="w-full flex overflow-x-auto sm:grid sm:grid-cols-6 justify-start sm:justify-center">
           <TabsTrigger value="payments" data-testid="wov2-tab-payments" className="shrink-0 text-xs sm:text-sm">
             <span className="sm:hidden">Payments</span>
             <span className="hidden sm:inline">Payment Schedule Stages</span>
           </TabsTrigger>
-          <TabsTrigger value="rab" data-testid="wov2-tab-rab" className="shrink-0 text-xs sm:text-sm data-[state=active]:bg-primary data-[state=active]:text-white">{"Total RAB's"}</TabsTrigger>
+          <TabsTrigger value="rab" data-testid="wov2-tab-rab" className="shrink-0 text-xs sm:text-sm">{"Total RAB's"}</TabsTrigger>
           <TabsTrigger value="additional" data-testid="wov2-tab-additional" className="shrink-0 text-xs sm:text-sm">Additional</TabsTrigger>
-          <TabsTrigger value="additional_rab" data-testid="wov2-tab-additional-rab" className="shrink-0 text-xs sm:text-sm data-[state=active]:bg-primary data-[state=active]:text-white">
+          <TabsTrigger value="additional_rab" data-testid="wov2-tab-additional-rab" className="shrink-0 text-xs sm:text-sm">
             <span className="sm:hidden">Add. RAB</span>
             <span className="hidden sm:inline">Additional RAB</span>
           </TabsTrigger>
@@ -335,7 +335,7 @@ function WorkOrderDetail({ wo, projectId, onBack, onChange }) {
             automatically — Planning unlocks them from the Project board. */}
         <TabsContent value="additional" className="mt-3">
           <Tabs defaultValue="claimable" className="w-full">
-            <TabsList className="w-full flex overflow-x-auto sm:grid sm:grid-cols-4 gap-1 sm:gap-0 justify-start sm:justify-center">
+            <TabsList className="w-full flex overflow-x-auto sm:grid sm:grid-cols-4 justify-start sm:justify-center">
               <TabsTrigger value="claimable" data-testid="se-add-tab-claimable" className="shrink-0 text-xs sm:text-sm">
                 <span className="sm:hidden">Claimable</span>
                 <span className="hidden sm:inline">Claimable From Client</span>
@@ -1470,7 +1470,7 @@ function StageRequestDialog({ stage, wo, projectId, suspenseBalance, onClose, on
         {/* Sub-tabs — Request RAB first (primary action), then the comprehensive
             Total RAB's history (released bills with full RAB-card UI), then any
             Pending RAB chips that are still in-flight. */}
-        <div className="flex gap-1 border-b">
+        <div className="flex flex-wrap gap-2">
           {/* Hide the Request RAB sub-tab once the stage is fully funded —
               balance==0 means every paise has been released or queued, so
               raising a new RAB would just bounce off the hard cap. The
@@ -1479,7 +1479,7 @@ function StageRequestDialog({ stage, wo, projectId, suspenseBalance, onClose, on
           {stage.is_open && (balance > 0 || reworkPR) && (
             <button
               onClick={() => setSubTab('request')}
-              className={`px-3 py-1.5 text-xs font-medium border-b-2 transition-colors ${subTab === 'request' ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-primary-strong'}`}
+              className={tabChipClass(subTab === 'request', 'px-3 py-1.5 text-xs')}
               data-testid="wov2-subtab-request"
             >
               {reworkPR ? `Resubmit ${reworkPR.rab_number || 'RAB'}` : 'Request RAB'}
@@ -1487,7 +1487,7 @@ function StageRequestDialog({ stage, wo, projectId, suspenseBalance, onClose, on
           )}
           <button
             onClick={() => setSubTab('totalrab')}
-            className={`px-3 py-1.5 text-xs font-medium border-b-2 transition-colors ${subTab === 'totalrab' ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-primary-strong'}`}
+            className={tabChipClass(subTab === 'totalrab', 'px-3 py-1.5 text-xs')}
             data-testid="wov2-subtab-totalrab"
           >
             {"Total RAB's"} {allRequests.length > 0 && <span className="ml-1 text-[10px] opacity-70">({allRequests.length})</span>}
@@ -1501,7 +1501,7 @@ function StageRequestDialog({ stage, wo, projectId, suspenseBalance, onClose, on
             return (
               <button
                 onClick={() => setSubTab('pending')}
-                className={`px-3 py-1.5 text-xs font-medium border-b-2 transition-colors ${subTab === 'pending' ? 'border-orange-600 text-orange-700' : 'border-transparent text-gray-500 hover:text-orange-700'}`}
+                className={tabChipClass(subTab === 'pending', 'px-3 py-1.5 text-xs')}
                 data-testid="wov2-subtab-pending"
               >
                 Pending RAB <span className="ml-1 text-[10px] opacity-70">({pending.length})</span>

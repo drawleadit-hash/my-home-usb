@@ -103,8 +103,9 @@
       "base": "h-9 rounded-lg border-input bg-background shadow-xs hover:border-ink-300 focus-visible:border-primary focus-visible:ring-4 focus-visible:ring-ring/15"
     },
     "tabs": {
-      "segmented": "TabsList h-11 rounded-2xl border bg-muted/80 p-1; active trigger rounded-xl bg-background shadow",
-      "underline": "border-b-2 border-primary text-primary-strong font-semibold, items spaced gap-5/gap-7"
+      "style": "Every tab is its own bordered pill (rounded-full border px-4 py-2 text-sm): idle bg-card border-border text-muted-foreground; active bg-primary-soft border-primary/50 text-primary-strong font-semibold. Tabs sit apart with gap-2 — no shared track, no underline.",
+      "radix": "<TabsList>/<TabsTrigger> render the pill by default — pass only layout classes (grid, flex-1, w-full, text size, px), never colours, borders or data-[state=active] styles.",
+      "buttons": "Hand-rolled tab buttons and nav strips use tabChipClass(active, 'size/layout classes') from components/ui/tabs.jsx."
     },
     "tables": {
       "head": "h-11 px-4 text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground, no fill",
@@ -139,7 +140,8 @@
     "5. NAVIGATION: AppHeader renders the sidebar + top bar; pages only pass customNav/headerActions/backTo/hideNav.",
     "6. MOBILE FIRST: stack forms/dashboards on mobile; large touch targets on site flows.",
     "7. DATA-TESTID: add data-testid to every interactive element.",
-    "8. SUMMARY ROWS: never hand-build KPI tiles — use SummaryCard for counts/totals and ChannelCard for per-account or per-bucket figures; no tinted (bg-*-50) or left-border (border-l-4) tiles."
+    "8. SUMMARY ROWS: never hand-build KPI tiles — use SummaryCard for counts/totals and ChannelCard for per-account or per-bucket figures; no tinted (bg-*-50) or left-border (border-l-4) tiles.",
+    "9. TABS: use <TabsTrigger> or tabChipClass — never underline tabs, segmented tracks or per-page active colours."
   ],
   "universal_guidelines": [
     "Flat tints and black/white tiles; the only gradient is the soft brand glow on dark hero tiles.",

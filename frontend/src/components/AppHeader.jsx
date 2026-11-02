@@ -12,6 +12,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { tabChipClass } from '@/components/ui/tabs';
 import axios from 'axios';
 import { useTheme } from '../hooks/useTheme';
 import USBLookupBar from './USBLookupBar';
@@ -230,13 +231,8 @@ const readCollapsed = () => {
   return true;
 };
 
-// Underline tab used by the sub-navigation strips.
-const stripTabClass = (active) =>
-  `relative -mb-px inline-flex items-center gap-2 whitespace-nowrap border-b-2 px-0.5 py-3 text-sm transition-colors ${
-    active
-      ? 'border-primary font-semibold text-primary-strong'
-      : 'border-transparent font-medium text-muted-foreground hover:border-ink-300 hover:text-foreground'
-  }`;
+// Sub-navigation strips use the same bordered pill as every other tab.
+const stripTabClass = (active) => tabChipClass(active);
 
 export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, onCustomNavChange, headerActions, hideNav = false, backTo = null }) {
   const navigate = useNavigate();
@@ -404,7 +400,7 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
     };
     return (
       <div className="sticky top-0 z-40 border-b border-border bg-background/90 px-3 backdrop-blur-md lg:px-8" data-testid="embedded-sub-nav">
-        <nav className="flex items-center gap-5 overflow-x-auto scrollbar-hide lg:gap-7">
+        <nav className="flex items-center gap-2 overflow-x-auto py-2.5 scrollbar-hide">
           {embeddedNav.map((item) => {
             // Preserve embedded flags when navigating between sub-nav items
             const sep = item.path.includes('?') ? '&' : '?';
@@ -749,7 +745,7 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
             here so the Super Admin shell stays visible at the top. */}
         {!hideNav && customNavAsSub && customNav && customNav.length > 0 && (
           <div className="border-b border-border bg-background/90 px-3 backdrop-blur-md sm:px-4 lg:px-8" data-testid="sub-nav">
-            <div className="flex items-center gap-5 overflow-x-auto scrollbar-hide lg:gap-7">
+            <div className="flex items-center gap-2 overflow-x-auto py-2.5 scrollbar-hide">
               {customNav.map((item) => (
                 <button
                   key={item.value}
@@ -768,7 +764,7 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
             expanded sidebar, so the strip is only needed on smaller screens. */}
         {!hideNav && !hasCustomNav && subItems && subItems.length > 1 && (
           <div className={`border-b border-border bg-background/90 px-3 backdrop-blur-md sm:px-4 lg:px-8 ${moduleInSidebar ? 'lg:hidden' : ''}`} data-testid="sub-nav">
-            <div className="flex items-center gap-5 overflow-x-auto scrollbar-hide lg:gap-7">
+            <div className="flex items-center gap-2 overflow-x-auto py-2.5 scrollbar-hide">
               {subItems.map((item) => (
                 <button
                   key={item.path}

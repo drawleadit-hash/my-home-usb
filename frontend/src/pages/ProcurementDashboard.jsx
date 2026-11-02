@@ -360,20 +360,20 @@ export default function ProcurementDashboard() {
         <Card>
           <Tabs value={activeTab} onValueChange={handleTabChange}>
             <CardHeader className="border-b p-3 sm:p-6">
-              <TabsList className="bg-transparent border-0 p-0 h-auto flex-wrap gap-1 sm:gap-2 w-full overflow-x-auto">
-                <TabsTrigger value="pending" className="data-[state=active]:border-b-2 data-[state=active]:border-yellow-600 rounded-none px-2 sm:px-4 text-xs sm:text-sm">
+              <TabsList className="flex-wrap w-full overflow-x-auto">
+                <TabsTrigger value="pending" className="px-2 sm:px-4 text-xs sm:text-sm">
                   Pending
                 </TabsTrigger>
-                <TabsTrigger value="pricing_in_progress" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-2 sm:px-4 text-xs sm:text-sm">
+                <TabsTrigger value="pricing_in_progress" className="px-2 sm:px-4 text-xs sm:text-sm">
                   Pricing
                 </TabsTrigger>
-                <TabsTrigger value="waiting_accounts" className="data-[state=active]:border-b-2 data-[state=active]:border-orange-600 rounded-none px-2 sm:px-4 text-xs sm:text-sm">
+                <TabsTrigger value="waiting_accounts" className="px-2 sm:px-4 text-xs sm:text-sm">
                   Waiting
                 </TabsTrigger>
-                <TabsTrigger value="approved" className="data-[state=active]:border-b-2 data-[state=active]:border-green-600 rounded-none px-2 sm:px-4 text-xs sm:text-sm">
+                <TabsTrigger value="approved" className="px-2 sm:px-4 text-xs sm:text-sm">
                   Approved
                 </TabsTrigger>
-                <TabsTrigger value="delivered" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-2 sm:px-4 text-xs sm:text-sm">
+                <TabsTrigger value="delivered" className="px-2 sm:px-4 text-xs sm:text-sm">
                   Delivered
                 </TabsTrigger>
               </TabsList>

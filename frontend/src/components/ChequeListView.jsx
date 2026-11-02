@@ -11,6 +11,7 @@ import { Search, CheckCircle2, Lock, FileText, Loader2, Building2, AlertTriangle
 import { Popover, PopoverTrigger, PopoverContent } from './ui/popover';
 import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from './ui/command';
 import { SummaryCard as SharedSummaryCard } from './SummaryCard';
+import { tabChipClass } from './ui/tabs';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -1198,10 +1199,10 @@ function ChequeUsageBody({ data }) {
       </Card>
 
       {/* Sub-tabs */}
-      <div className="flex bg-gray-100 rounded-lg p-0.5">
+      <div className="flex gap-2">
         <button
           type="button"
-          className={`flex-1 px-3 py-2 text-xs font-medium rounded-md transition-colors flex items-center justify-center gap-1.5 ${tab === 'income' ? 'bg-white text-emerald-700 shadow-sm' : 'text-gray-500'}`}
+          className={tabChipClass(tab === 'income', 'flex-1 px-3 py-2 text-xs flex justify-center gap-1.5')}
           onClick={() => setTab('income')}
           data-testid="usage-tab-income"
         >
@@ -1209,7 +1210,7 @@ function ChequeUsageBody({ data }) {
         </button>
         <button
           type="button"
-          className={`flex-1 px-3 py-2 text-xs font-medium rounded-md transition-colors flex items-center justify-center gap-1.5 ${tab === 'used' ? 'bg-white text-orange-700 shadow-sm' : 'text-gray-500'}`}
+          className={tabChipClass(tab === 'used', 'flex-1 px-3 py-2 text-xs flex justify-center gap-1.5')}
           onClick={() => setTab('used')}
           data-testid="usage-tab-used"
         >
@@ -1217,7 +1218,7 @@ function ChequeUsageBody({ data }) {
         </button>
         <button
           type="button"
-          className={`flex-1 px-3 py-2 text-xs font-medium rounded-md transition-colors flex items-center justify-center gap-1.5 ${tab === 'bounce' ? 'bg-white text-red-700 shadow-sm' : 'text-gray-500'}`}
+          className={tabChipClass(tab === 'bounce', 'flex-1 px-3 py-2 text-xs flex justify-center gap-1.5')}
           onClick={() => setTab('bounce')}
           data-testid="usage-tab-bounce"
         >

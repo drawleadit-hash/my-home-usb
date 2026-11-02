@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { ChannelCard } from '../components/SummaryCard';
 import { Badge } from '../components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '../components/ui/dialog';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger, tabChipClass } from '../components/ui/tabs';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Textarea } from '../components/ui/textarea';
@@ -2098,7 +2098,7 @@ export default function PlanningBoard({ embedded = false }) {
                   <button
                     type="button"
                     onClick={() => setDlrDprSubTab('dlr')}
-                    className={`px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-md border-2 transition ${dlrDprSubTab === 'dlr' ? 'border-primary bg-brand-100 text-brand-900' : 'border-gray-300 bg-gray-50 text-gray-700 hover:brightness-95'}`}
+                    className={tabChipClass(dlrDprSubTab === 'dlr', 'px-3 py-1.5 text-xs sm:text-sm')}
                     data-testid="dlrdpr-subtab-dlr"
                   >
                     DLR & DPR
@@ -2106,7 +2106,7 @@ export default function PlanningBoard({ embedded = false }) {
                   <button
                     type="button"
                     onClick={() => setDlrDprSubTab('inventory')}
-                    className={`px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-md border-2 transition ${dlrDprSubTab === 'inventory' ? 'border-primary bg-brand-100 text-brand-900' : 'border-gray-300 bg-gray-50 text-gray-700 hover:brightness-95'}`}
+                    className={tabChipClass(dlrDprSubTab === 'inventory', 'px-3 py-1.5 text-xs sm:text-sm')}
                     data-testid="dlrdpr-subtab-inventory"
                   >
                     Inventory
@@ -2704,14 +2704,14 @@ export default function PlanningBoard({ embedded = false }) {
             <div className="flex items-center gap-2 mb-3 flex-wrap" data-testid="material-subtabs">
               <button
                 onClick={() => setMaterialSubTab('vendors')}
-                className={`px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors ${materialSubTab === 'vendors' ? 'bg-teal-50 text-teal-700 border border-teal-300' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'}`}
+                className={tabChipClass(materialSubTab === 'vendors', 'px-3 py-1.5 text-xs sm:text-sm')}
                 data-testid="material-subtab-vendors"
               >
                 Material Vendor <Badge className="ml-1 bg-gray-100 text-gray-700 text-[10px]">{filteredVendors.length}</Badge>
               </button>
               <button
                 onClick={() => setMaterialSubTab('materials')}
-                className={`px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors ${materialSubTab === 'materials' ? 'bg-teal-50 text-teal-700 border border-teal-300' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'}`}
+                className={tabChipClass(materialSubTab === 'materials', 'px-3 py-1.5 text-xs sm:text-sm')}
                 data-testid="material-subtab-materials"
               >
                 Materials <Badge className="ml-1 bg-gray-100 text-gray-700 text-[10px]">{materials.length}</Badge>
@@ -2849,14 +2849,14 @@ export default function PlanningBoard({ embedded = false }) {
             <div className="flex items-center gap-2 mb-3 flex-wrap" data-testid="contractor-subtabs">
               <button
                 onClick={() => setContractorSubTab('contractors')}
-                className={`px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors ${contractorSubTab === 'contractors' ? 'bg-amber-50 text-amber-700 border border-amber-300' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'}`}
+                className={tabChipClass(contractorSubTab === 'contractors', 'px-3 py-1.5 text-xs sm:text-sm')}
                 data-testid="contractor-subtab-contractors"
               >
                 Contractors <Badge className="ml-1 bg-gray-100 text-gray-700 text-[10px]">{filteredContractors.length}</Badge>
               </button>
               <button
                 onClick={() => setContractorSubTab('types')}
-                className={`px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors ${contractorSubTab === 'types' ? 'bg-amber-50 text-amber-700 border border-amber-300' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'}`}
+                className={tabChipClass(contractorSubTab === 'types', 'px-3 py-1.5 text-xs sm:text-sm')}
                 data-testid="contractor-subtab-types"
               >
                 Contractor Types <Badge className="ml-1 bg-gray-100 text-gray-700 text-[10px]">{contractorTypes.length}</Badge>

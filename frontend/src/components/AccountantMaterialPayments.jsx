@@ -9,6 +9,7 @@ import PayApprovalDialog from './PayApprovalDialog';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from './ui/dialog';
 import { Textarea } from './ui/textarea';
 import PhotoLightbox from './PhotoLightbox';
+import { tabChipClass } from './ui/tabs';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 const fmt = (n) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(n || 0);
@@ -177,11 +178,11 @@ export default function AccountantMaterialPayments({ onRefresh, legacyExpenses =
   return (
     <>
       {/* Sub-tabs: Pending | Partially Collected */}
-      <div className="flex items-center gap-1.5 mb-2" data-testid="acc-material-subtabs">
+      <div className="flex items-center gap-2 mb-2" data-testid="acc-material-subtabs">
         <button
           type="button"
           onClick={() => setSubTab('pending')}
-          className={`px-3 py-1.5 text-[11px] font-semibold rounded-full border transition ${subTab === 'pending' ? 'bg-primary text-white border-primary' : 'border-brand-300 text-primary-strong hover:bg-brand-50'}`}
+          className={tabChipClass(subTab === 'pending', 'px-3 py-1.5 text-[11px]')}
           data-testid="acc-material-subtab-pending"
         >
           Pending ({pendingCount})
@@ -189,7 +190,7 @@ export default function AccountantMaterialPayments({ onRefresh, legacyExpenses =
         <button
           type="button"
           onClick={() => setSubTab('partial')}
-          className={`px-3 py-1.5 text-[11px] font-semibold rounded-full border transition ${subTab === 'partial' ? 'bg-yellow-500 text-white border-yellow-500' : 'border-yellow-400 text-yellow-700 hover:bg-yellow-50'}`}
+          className={tabChipClass(subTab === 'partial', 'px-3 py-1.5 text-[11px]')}
           data-testid="acc-material-subtab-partial"
         >
           Partially Collected ({partialCount})

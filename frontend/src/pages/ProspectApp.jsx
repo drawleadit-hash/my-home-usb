@@ -5,6 +5,7 @@ import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
 import { FileText, Sparkles, PhoneCall, Loader2, Building2, MapPin, Phone, Play } from 'lucide-react';
+import { tabChipClass } from '../components/ui/tabs';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 const fmt = (n) => '₹' + (Number(n) || 0).toLocaleString('en-IN');
@@ -266,7 +267,7 @@ function InspirationTab() {
   return (
     <div className="space-y-3">
       {/* Sub-tabs */}
-      <div className="flex gap-1 bg-gray-100 rounded-full p-1">
+      <div className="flex gap-2">
         {[
           { k: 'testimonials', l: 'Testimonials' },
           { k: 'completed', l: 'Completed' },
@@ -275,7 +276,7 @@ function InspirationTab() {
           <button
             key={k}
             onClick={() => setSub(k)}
-            className={`flex-1 text-[11px] font-medium px-3 py-1.5 rounded-full transition-all ${sub === k ? 'bg-white shadow text-emerald-700' : 'text-gray-500'}`}
+            className={tabChipClass(sub === k, 'flex-1 text-[11px] px-3 py-1.5')}
             data-testid={`inspire-sub-${k}`}
           >
             {l} <span className="ml-0.5 opacity-60">({(data[k] || []).length})</span>

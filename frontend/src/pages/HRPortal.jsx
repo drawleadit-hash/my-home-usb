@@ -9,7 +9,7 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Textarea } from '../components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger, tabChipClass } from '../components/ui/tabs';
 import { toast } from 'sonner';
 import MobileBottomNav from '../components/MobileBottomNav';
 import {
@@ -629,7 +629,7 @@ export default function HRPortal() {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="mb-4 flex flex-wrap gap-1">
+          <TabsList className="mb-4 flex flex-wrap">
             <TabsTrigger value="dashboard" data-testid="tab-dashboard"><TrendingUp className="h-4 w-4 mr-1" />Dashboard</TabsTrigger>
             <TabsTrigger value="employees" data-testid="tab-employees"><Users className="h-4 w-4 mr-1" />Employees</TabsTrigger>
             <TabsTrigger value="credentials" data-testid="tab-credentials"><Shield className="h-4 w-4 mr-1" />Roles & Credentials</TabsTrigger>
@@ -683,12 +683,12 @@ export default function HRPortal() {
           <TabsContent value="employees">
             {/* Active / Left Employees Toggle */}
             <div className="flex gap-2 mb-4">
-              <Button variant={empListView === 'active' ? 'default' : 'outline'} onClick={() => setEmpListView('active')} data-testid="emp-view-active" className={empListView === 'active' ? 'bg-primary hover:bg-primary-hover' : ''}>
-                <Users className="h-4 w-4 mr-1" /> Active Employees ({staff.filter(s => s.status === 'active').length})
-              </Button>
-              <Button variant={empListView === 'left' ? 'default' : 'outline'} onClick={() => setEmpListView('left')} data-testid="emp-view-left" className={empListView === 'left' ? 'bg-red-600 hover:bg-red-700' : ''}>
-                <UserX className="h-4 w-4 mr-1" /> Left Employees ({terminatedStaff.length})
-              </Button>
+              <button type="button" onClick={() => setEmpListView('active')} data-testid="emp-view-active" className={tabChipClass(empListView === 'active')}>
+                <Users className="h-4 w-4" /> Active Employees ({staff.filter(s => s.status === 'active').length})
+              </button>
+              <button type="button" onClick={() => setEmpListView('left')} data-testid="emp-view-left" className={tabChipClass(empListView === 'left')}>
+                <UserX className="h-4 w-4" /> Left Employees ({terminatedStaff.length})
+              </button>
             </div>
 
             {empListView === 'active' ? (

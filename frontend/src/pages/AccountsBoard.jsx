@@ -9,7 +9,7 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Textarea } from '../components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger, tabChipClass } from '../components/ui/tabs';
 import { Popover, PopoverContent, PopoverTrigger } from '../components/ui/popover';
 import { DayPicker } from 'react-day-picker';
 import { CashbookDateFilter, filterByDateRange } from '../components/CashbookDateFilter';
@@ -601,10 +601,10 @@ function ModeDrilldownView({ label, incomeEntries, expenseEntries, onBack, canDe
       </div>
       <Tabs defaultValue="income">
         <TabsList className="grid grid-cols-2 w-full mb-3">
-          <TabsTrigger value="income" className="data-[state=active]:bg-green-100 data-[state=active]:text-green-800 gap-1">
+          <TabsTrigger value="income" className="gap-1">
             <ArrowDownRight className="h-3.5 w-3.5" /> Income ({filteredIncome.length})
           </TabsTrigger>
-          <TabsTrigger value="expense" className="data-[state=active]:bg-red-100 data-[state=active]:text-red-800 gap-1">
+          <TabsTrigger value="expense" className="gap-1">
             <ArrowUpRight className="h-3.5 w-3.5" /> Expense ({filteredExpense.length})
           </TabsTrigger>
         </TabsList>
@@ -2610,17 +2610,17 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
           <CardContent className="p-3">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
               {/* Left: small segmented Direct | Indirect */}
-              <div className="inline-flex bg-gray-100 rounded-lg p-0.5 self-start">
+              <div className="flex gap-2 self-start">
                 <button
                   onClick={() => setSubTab('expense')}
-                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors gap-1 inline-flex items-center ${subTab === 'expense' ? 'bg-red-600 text-white shadow-sm' : 'text-gray-600 hover:text-gray-900'}`}
+                  className={tabChipClass(subTab === 'expense', 'gap-1 px-3 py-1.5 text-xs')}
                   data-testid="expense-only-direct-tab"
                 >
                   <ArrowUpRight className="h-3.5 w-3.5" /> Direct
                 </button>
                 <button
                   onClick={() => setSubTab('indirect')}
-                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors gap-1 inline-flex items-center ${subTab === 'indirect' ? 'bg-primary text-white shadow-sm' : 'text-gray-600 hover:text-gray-900'}`}
+                  className={tabChipClass(subTab === 'indirect', 'gap-1 px-3 py-1.5 text-xs')}
                   data-testid="expense-only-indirect-tab"
                 >
                   <PieChart className="h-3.5 w-3.5" /> Indirect
@@ -2662,13 +2662,13 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
       <Tabs value={subTab} onValueChange={setSubTab}>
         {!expenseOnly && (
           <TabsList className="w-full grid grid-cols-3 mb-3">
-            <TabsTrigger value="income" className="data-[state=active]:bg-green-100 data-[state=active]:text-green-800 gap-1.5" data-testid="cashbook-income-tab">
+            <TabsTrigger value="income" className="gap-1.5" data-testid="cashbook-income-tab">
               <ArrowDownRight className="h-4 w-4" /> Income ({incomeEntries.length})
             </TabsTrigger>
-            <TabsTrigger value="expense" className="data-[state=active]:bg-red-100 data-[state=active]:text-red-800 gap-1.5" data-testid="cashbook-expense-tab">
+            <TabsTrigger value="expense" className="gap-1.5" data-testid="cashbook-expense-tab">
               <ArrowUpRight className="h-4 w-4" /> <span className="hidden sm:inline">Direct </span>Expense ({allExpenseEntries.length})
             </TabsTrigger>
-            <TabsTrigger value="indirect" className="data-[state=active]:bg-brand-100 data-[state=active]:text-primary-strong gap-1.5" data-testid="cashbook-indirect-tab">
+            <TabsTrigger value="indirect" className="gap-1.5" data-testid="cashbook-indirect-tab">
               <PieChart className="h-4 w-4" /> Indirect
             </TabsTrigger>
           </TabsList>
@@ -4126,10 +4126,10 @@ function ApprovalsTab() {
       {/* Top-level Approval Category Tabs */}
       <Tabs value={['materials','labour','vendor'].includes(activeTab) ? 'expense' : 'income'} onValueChange={(v) => setActiveTab(v === 'income' ? 'income' : 'materials')}>
         <TabsList className="w-full grid grid-cols-2 mb-3" data-testid="approval-main-tabs">
-          <TabsTrigger value="income" className="text-xs sm:text-sm data-[state=active]:bg-green-100 data-[state=active]:text-green-800 gap-1" data-testid="approval-income-tab">
+          <TabsTrigger value="income" className="text-xs sm:text-sm gap-1" data-testid="approval-income-tab">
             <ArrowDownRight className="h-3.5 w-3.5" /> Income Approvals ({fSummary.income_count})
           </TabsTrigger>
-          <TabsTrigger value="expense" className="text-xs sm:text-sm data-[state=active]:bg-red-100 data-[state=active]:text-red-800 gap-1" data-testid="approval-expense-tab">
+          <TabsTrigger value="expense" className="text-xs sm:text-sm gap-1" data-testid="approval-expense-tab">
             <ArrowUpRight className="h-3.5 w-3.5" /> Expense Approvals ({fSummary.material_count + fSummary.labour_count + fSummary.vendor_count})
           </TabsTrigger>
         </TabsList>
@@ -4139,13 +4139,13 @@ function ApprovalsTab() {
       {['materials','labour','vendor'].includes(activeTab) && (
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="w-full grid grid-cols-3 mb-3" data-testid="approval-expense-sub-tabs">
-            <TabsTrigger value="materials" className="text-xs sm:text-sm data-[state=active]:bg-brand-100 data-[state=active]:text-primary-strong gap-1">
+            <TabsTrigger value="materials" className="text-xs sm:text-sm gap-1">
               <Building2 className="h-3.5 w-3.5" /> Materials ({fSummary.material_count})
             </TabsTrigger>
-            <TabsTrigger value="labour" className="text-xs sm:text-sm data-[state=active]:bg-brand-100 data-[state=active]:text-primary-strong gap-1">
+            <TabsTrigger value="labour" className="text-xs sm:text-sm gap-1">
               <Wallet className="h-3.5 w-3.5" /> Labour Work Order ({fSummary.labour_count})
             </TabsTrigger>
-            <TabsTrigger value="vendor" className="text-xs sm:text-sm data-[state=active]:bg-orange-100 data-[state=active]:text-orange-800 gap-1">
+            <TabsTrigger value="vendor" className="text-xs sm:text-sm gap-1">
               <CreditCard className="h-3.5 w-3.5" /> Petty Cash ({fSummary.petty_cash_count + filteredRecordedExpenses.length})
             </TabsTrigger>
           </TabsList>
@@ -4314,10 +4314,10 @@ function ApprovalsTab() {
         <TabsContent value="vendor">
           <Tabs defaultValue="req_petty_cash" className="w-full">
             <TabsList className="grid grid-cols-2 mb-3 max-w-md">
-              <TabsTrigger value="req_petty_cash" className="text-xs gap-1 data-[state=active]:bg-brand-100 data-[state=active]:text-primary-strong">
+              <TabsTrigger value="req_petty_cash" className="text-xs gap-1">
                 <Wallet className="h-3.5 w-3.5" /> Req Petty Cash ({filteredPettyCash.length})
               </TabsTrigger>
-              <TabsTrigger value="record_expense" className="text-xs gap-1 data-[state=active]:bg-emerald-100 data-[state=active]:text-emerald-800">
+              <TabsTrigger value="record_expense" className="text-xs gap-1">
                 <FileText className="h-3.5 w-3.5" /> Record Expense ({filteredRecordedExpenses.length})
               </TabsTrigger>
             </TabsList>
@@ -4908,19 +4908,19 @@ function IncomeTabsView({ incomeEntries, classifyMode, onView, onPrint, onDelete
         <button
           type="button"
           onClick={() => setTab('main')}
-          className={`px-4 py-1.5 text-xs font-medium rounded-full border transition-all ${tab === 'main' ? 'bg-green-50 border-green-300 text-green-800 ring-1 ring-green-200' : 'bg-white border-gray-200 text-gray-600 hover:border-gray-300'}`}
+          className={tabChipClass(tab === 'main', 'px-4 py-1.5 text-xs')}
           data-testid="income-tab-main"
         >Main Income <span className="ml-1 font-bold">({main.length})</span></button>
         <button
           type="button"
           onClick={() => setTab('dt')}
-          className={`px-4 py-1.5 text-xs font-medium rounded-full border transition-all ${tab === 'dt' ? 'bg-emerald-50 border-emerald-300 text-emerald-800 ring-1 ring-emerald-200' : 'bg-white border-gray-200 text-gray-600 hover:border-gray-300'}`}
+          className={tabChipClass(tab === 'dt', 'px-4 py-1.5 text-xs')}
           data-testid="income-tab-dt"
         >Direct Transfer <span className="ml-1 font-bold">({dt.length})</span></button>
         <button
           type="button"
           onClick={() => setTab('cf')}
-          className={`px-4 py-1.5 text-xs font-medium rounded-full border transition-all ${tab === 'cf' ? 'bg-indigo-50 border-indigo-300 text-indigo-800 ring-1 ring-indigo-200' : 'bg-white border-gray-200 text-gray-600 hover:border-gray-300'}`}
+          className={tabChipClass(tab === 'cf', 'px-4 py-1.5 text-xs')}
           data-testid="income-tab-carry-forward"
         >Carry Forward <span className="ml-1 font-bold">({carryForward.length})</span></button>
       </div>

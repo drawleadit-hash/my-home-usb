@@ -4,6 +4,7 @@ import { toast } from 'sonner';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Upload, Loader2, X, Link2 } from 'lucide-react';
+import { tabChipClass } from './ui/tabs';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -55,11 +56,11 @@ export default function ImageUpload({ value, onChange, label = 'Image', testId =
     <div data-testid={testId}>
       <div className="flex items-center justify-between">
         <label className="text-xs font-medium text-gray-700">{label}</label>
-        <div className="flex items-center gap-0.5 rounded bg-gray-100 p-0.5 text-[10px]">
+        <div className="flex items-center gap-1.5">
           <button
             type="button"
             onClick={() => setMode('upload')}
-            className={`px-2 py-0.5 rounded ${mode === 'upload' ? 'bg-white shadow-sm font-semibold text-emerald-700' : 'text-gray-500'}`}
+            className={tabChipClass(mode === 'upload', 'px-2.5 py-0.5 text-xs')}
             data-testid={`${testId}-mode-upload`}
           >
             <Upload className="inline h-2.5 w-2.5 mr-0.5" /> Upload
@@ -67,7 +68,7 @@ export default function ImageUpload({ value, onChange, label = 'Image', testId =
           <button
             type="button"
             onClick={() => setMode('url')}
-            className={`px-2 py-0.5 rounded ${mode === 'url' ? 'bg-white shadow-sm font-semibold text-emerald-700' : 'text-gray-500'}`}
+            className={tabChipClass(mode === 'url', 'px-2.5 py-0.5 text-xs')}
             data-testid={`${testId}-mode-url`}
           >
             <Link2 className="inline h-2.5 w-2.5 mr-0.5" /> URL

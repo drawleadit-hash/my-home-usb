@@ -186,10 +186,10 @@ export default function StageManagement() {
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="w-full grid grid-cols-2 mb-4" data-testid="stage-type-tabs">
-            <TabsTrigger value="pre_sales" className="gap-1.5 data-[state=active]:bg-brand-100 data-[state=active]:text-primary-strong">
+            <TabsTrigger value="pre_sales" className="gap-1.5">
               <ArrowDownRight className="h-4 w-4" /> Pre-Sales ({preSalesCount})
             </TabsTrigger>
-            <TabsTrigger value="sales" className="gap-1.5 data-[state=active]:bg-green-100 data-[state=active]:text-green-800">
+            <TabsTrigger value="sales" className="gap-1.5">
               <Users className="h-4 w-4" /> Sales ({salesCount})
             </TabsTrigger>
           </TabsList>

@@ -34,7 +34,7 @@ import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger, tabChipClass } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import ProjectFilterCombobox from '@/components/ProjectFilterCombobox';
 import { toast } from 'sonner';
@@ -171,10 +171,10 @@ function MiniCashbookSection({ projects }) {
             <CardContent className="p-0">
               <Tabs defaultValue="petty_cash">
                 <TabsList className="grid grid-cols-2 w-full max-w-xs ml-3 mt-2">
-                  <TabsTrigger value="petty_cash" className="text-xs gap-1 data-[state=active]:bg-green-100">
+                  <TabsTrigger value="petty_cash" className="text-xs gap-1">
                     <ArrowDownRight className="h-3 w-3" /> Income ({cb.petty_cash_entries.length})
                   </TabsTrigger>
-                  <TabsTrigger value="expenses" className="text-xs gap-1 data-[state=active]:bg-red-100">
+                  <TabsTrigger value="expenses" className="text-xs gap-1">
                     <ArrowUpRight className="h-3 w-3" /> Expense ({cb.expense_entries.length})
                   </TabsTrigger>
                 </TabsList>
@@ -1190,17 +1190,17 @@ export default function SiteEngineerDashboard() {
             exact complement — and keep it for lg+ screens, which have no
             bottom nav at all. */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-4">
-          <TabsList className={`hidden lg:grid ${user?.role === 'sr_site_engineer' || user?.role === 'super_admin' ? 'lg:grid-cols-5' : 'lg:grid-cols-4'} w-full h-auto bg-gray-100 p-1 rounded-lg`} data-testid="se-dashboard-tabs">
+          <TabsList className={`hidden lg:grid ${user?.role === 'sr_site_engineer' || user?.role === 'super_admin' ? 'lg:grid-cols-5' : 'lg:grid-cols-4'} w-full`} data-testid="se-dashboard-tabs">
             <TabsTrigger
               value="projects"
-              className="gap-2 text-base sm:text-lg font-semibold py-3 data-[state=active]:bg-white data-[state=active]:text-primary-strong data-[state=active]:shadow"
+              className="gap-2 text-base sm:text-lg"
               data-testid="tab-projects"
             >
               <Building2 className="h-5 w-5" /> My Projects
             </TabsTrigger>
             <TabsTrigger
               value="dlrdpr"
-              className="gap-2 text-base sm:text-lg font-semibold py-3 data-[state=active]:bg-white data-[state=active]:text-orange-700 data-[state=active]:shadow"
+              className="gap-2 text-base sm:text-lg"
               data-testid="tab-dlrdpr"
             >
               <FileText className="h-5 w-5" /> DLR & DPR
@@ -1208,7 +1208,7 @@ export default function SiteEngineerDashboard() {
             {(user?.role === 'sr_site_engineer' || user?.role === 'super_admin') && (
               <TabsTrigger
                 value="requests"
-                className="gap-2 text-base sm:text-lg font-semibold py-3 data-[state=active]:bg-white data-[state=active]:text-primary-strong data-[state=active]:shadow"
+                className="gap-2 text-base sm:text-lg"
                 data-testid="tab-sr-se-requests"
               >
                 <ClipboardList className="h-5 w-5" /> Requests
@@ -1216,7 +1216,7 @@ export default function SiteEngineerDashboard() {
             )}
             <TabsTrigger
               value="pettycash"
-              className="gap-2 text-base sm:text-lg font-semibold py-3 data-[state=active]:bg-white data-[state=active]:text-emerald-700 data-[state=active]:shadow"
+              className="gap-2 text-base sm:text-lg"
               data-testid="tab-pettycash"
             >
               <Wallet className="h-5 w-5" /> Petty Cash
@@ -1228,7 +1228,7 @@ export default function SiteEngineerDashboard() {
             </TabsTrigger>
             <TabsTrigger
               value="attendance"
-              className="gap-2 text-base sm:text-lg font-semibold py-3 data-[state=active]:bg-white data-[state=active]:text-primary-strong data-[state=active]:shadow"
+              className="gap-2 text-base sm:text-lg"
               data-testid="tab-attendance"
             >
               <Clock className="h-5 w-5" /> Attendance
@@ -1248,7 +1248,7 @@ export default function SiteEngineerDashboard() {
               <button
                 type="button"
                 onClick={() => setDlrDprSubTab('dlr')}
-                className={`px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-md border-2 transition ${dlrDprSubTab === 'dlr' ? 'border-orange-600 bg-orange-100 text-orange-900' : 'border-gray-300 bg-gray-50 text-gray-700 hover:brightness-95'}`}
+                className={tabChipClass(dlrDprSubTab === 'dlr', 'px-3 py-1.5 text-xs sm:text-sm')}
                 data-testid="dlrdpr-subtab-dlr"
               >
                 DLR & DPR
@@ -1256,7 +1256,7 @@ export default function SiteEngineerDashboard() {
               <button
                 type="button"
                 onClick={() => setDlrDprSubTab('inventory')}
-                className={`px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-md border-2 transition ${dlrDprSubTab === 'inventory' ? 'border-orange-600 bg-orange-100 text-orange-900' : 'border-gray-300 bg-gray-50 text-gray-700 hover:brightness-95'}`}
+                className={tabChipClass(dlrDprSubTab === 'inventory', 'px-3 py-1.5 text-xs sm:text-sm')}
                 data-testid="dlrdpr-subtab-inventory"
               >
                 Inventory

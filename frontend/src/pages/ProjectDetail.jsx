@@ -57,7 +57,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChannelCard } from '../components/SummaryCard';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger, tabChipClass } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -808,13 +808,13 @@ function PaymentSummarySection({ user, projectId, paymentSummary, formatCurrency
           <CardHeader className="pb-0 pt-3 px-4 border-b">
             <Tabs value={financeTab} onValueChange={setFinanceTab}>
               <TabsList className="grid grid-cols-3 w-full max-w-md">
-                <TabsTrigger value="income" className="gap-1.5 data-[state=active]:bg-green-100 data-[state=active]:text-green-800" data-testid="project-income-tab">
+                <TabsTrigger value="income" className="gap-1.5" data-testid="project-income-tab">
                   <ArrowDownRight className="h-3.5 w-3.5" /> Income ({incomeEntries.length})
                 </TabsTrigger>
-                <TabsTrigger value="expense" className="gap-1.5 data-[state=active]:bg-red-100 data-[state=active]:text-red-800" data-testid="project-expense-tab">
+                <TabsTrigger value="expense" className="gap-1.5" data-testid="project-expense-tab">
                   <ArrowUpRight className="h-3.5 w-3.5" /> Expense
                 </TabsTrigger>
-                <TabsTrigger value="cashflow" className="gap-1.5 data-[state=active]:bg-brand-100 data-[state=active]:text-primary-strong" data-testid="project-cashflow-tab">
+                <TabsTrigger value="cashflow" className="gap-1.5" data-testid="project-cashflow-tab">
                   <Wallet className="h-3.5 w-3.5" /> Cashflow Engine
                 </TabsTrigger>
               </TabsList>
@@ -4721,44 +4721,44 @@ export default function ProjectDetail() {
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <CardHeader className="border-b p-3 sm:p-6">
               {user?.role === 'quality_check' ? (
-                <TabsList className="bg-transparent border-0 p-0 h-auto gap-0 w-full justify-between overflow-x-auto flex-nowrap" data-testid="qc-restricted-tabs">
-                  <TabsTrigger value="project-stages" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center" data-testid="tab-project-stages">
+                <TabsList className="w-full justify-between overflow-x-auto flex-nowrap" data-testid="qc-restricted-tabs">
+                  <TabsTrigger value="project-stages" className="px-4 text-[15px] whitespace-nowrap flex-1" data-testid="tab-project-stages">
                     Stages - Project Stages
                   </TabsTrigger>
                 </TabsList>
               ) : (
-              <TabsList className="bg-transparent border-0 p-0 h-auto gap-0 w-full justify-between overflow-x-auto flex-nowrap">
+              <TabsList className="w-full justify-between overflow-x-auto flex-nowrap">
                 {/* Order: Estimate → Final Estimate → Payment Schedule → Work Order → Materials →
                     Payment Summary → Team → Construction Stage (CRE) → Project Stages → Documents */}
-                {tabAllowed('rough-estimate') && <TabsTrigger value="rough-estimate" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center">
+                {tabAllowed('rough-estimate') && <TabsTrigger value="rough-estimate" className="px-4 text-[15px] whitespace-nowrap flex-1">
                   Estimate
                 </TabsTrigger>}
-                {tabAllowed('scope') && <TabsTrigger value="scope" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center">
+                {tabAllowed('scope') && <TabsTrigger value="scope" className="px-4 text-[15px] whitespace-nowrap flex-1">
                   Final Estimate
                 </TabsTrigger>}
-                {canSeeFinancials && tabAllowed('payments') && <TabsTrigger value="payments" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center">
+                {canSeeFinancials && tabAllowed('payments') && <TabsTrigger value="payments" className="px-4 text-[15px] whitespace-nowrap flex-1">
                   Payment Schedule
                 </TabsTrigger>}
-                {tabAllowed('labours') && <TabsTrigger value="labours" className="data-[state=active]:border-b-2 data-[state=active]:border-teal-500 rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center" data-testid="tab-labours">
+                {tabAllowed('labours') && <TabsTrigger value="labours" className="px-4 text-[15px] whitespace-nowrap flex-1" data-testid="tab-labours">
                   Work Order (Labour)
                 </TabsTrigger>}
-                {tabAllowed('materials') && <TabsTrigger value="materials" className="data-[state=active]:border-b-2 data-[state=active]:border-orange-500 rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center" data-testid="tab-materials">
+                {tabAllowed('materials') && <TabsTrigger value="materials" className="px-4 text-[15px] whitespace-nowrap flex-1" data-testid="tab-materials">
                   Materials
                 </TabsTrigger>}
-                {canSeeFinancials && tabAllowed('payment-summary') && <TabsTrigger value="payment-summary" className="data-[state=active]:border-b-2 data-[state=active]:border-green-600 rounded-none px-4 py-3 text-[15px] font-medium bg-green-50 whitespace-nowrap flex-1 text-center">
+                {canSeeFinancials && tabAllowed('payment-summary') && <TabsTrigger value="payment-summary" className="px-4 text-[15px] whitespace-nowrap flex-1">
                   Payment Summary
                 </TabsTrigger>}
-                {tabAllowed('team') && <TabsTrigger value="team" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center" data-testid="tab-team">
+                {tabAllowed('team') && <TabsTrigger value="team" className="px-4 text-[15px] whitespace-nowrap flex-1" data-testid="tab-team">
                   Team
                 </TabsTrigger>}
-                {tabAllowed('construction-stage') && <TabsTrigger value="construction-stage" className="data-[state=active]:border-b-2 data-[state=active]:border-rose-600 rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center" data-testid="tab-construction-stage">
+                {tabAllowed('construction-stage') && <TabsTrigger value="construction-stage" className="px-4 text-[15px] whitespace-nowrap flex-1" data-testid="tab-construction-stage">
                   Pre-Construction Stages
                 </TabsTrigger>}
-                {tabAllowed('project-stages') && <TabsTrigger value="project-stages" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center" data-testid="tab-project-stages">
+                {tabAllowed('project-stages') && <TabsTrigger value="project-stages" className="px-4 text-[15px] whitespace-nowrap flex-1" data-testid="tab-project-stages">
                   Stages - Project Stages
                 </TabsTrigger>}
                 {/* Cheques tab moved INSIDE Payment Summary as a sub-tab — kept as a hidden mount-point so /tab=cheques deep links still resolve */}
-                {tabAllowed('documents') && <TabsTrigger value="documents" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4 py-3 text-[15px] font-medium whitespace-nowrap flex-1 text-center">
+                {tabAllowed('documents') && <TabsTrigger value="documents" className="px-4 text-[15px] whitespace-nowrap flex-1">
                   Documents
                 </TabsTrigger>}
               </TabsList>
@@ -4897,16 +4897,16 @@ export default function ProjectDetail() {
                   {/* Inner tabs: Scope of Work / Payment Schedule — each with its own Convert action */}
                   {((reProject.rough_scope_items || reProject.scope_items)?.length > 0 || (reProject.payment_schedule || []).length > 0) && (
                     <div className="border rounded-lg overflow-hidden" data-testid="re-inner-tabs">
-                      <div className="flex border-b bg-gray-50">
+                      <div className="flex gap-2 border-b p-2">
                         <button
-                          className={`flex-1 px-4 py-2.5 text-sm font-medium transition ${reInnerTab === 'scope' ? 'bg-white text-primary-strong border-b-2 border-primary' : 'text-gray-600 hover:bg-gray-100'}`}
+                          className={tabChipClass(reInnerTab === 'scope', 'flex-1 px-4 py-2.5 text-sm')}
                           onClick={() => setReInnerTab('scope')}
                           data-testid="re-tab-scope"
                         >
                           Scope of Work ({(reProject.rough_scope_items || reProject.scope_items || []).length})
                         </button>
                         <button
-                          className={`flex-1 px-4 py-2.5 text-sm font-medium transition ${reInnerTab === 'payments' ? 'bg-white text-primary-strong border-b-2 border-primary' : 'text-gray-600 hover:bg-gray-100'}`}
+                          className={tabChipClass(reInnerTab === 'payments', 'flex-1 px-4 py-2.5 text-sm')}
                           onClick={() => setReInnerTab('payments')}
                           data-testid="re-tab-payments"
                         >
@@ -5662,9 +5662,9 @@ export default function ProjectDetail() {
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {projectStages.length > 0 && (
-                      <div className="flex border rounded-lg overflow-hidden" data-testid="stages-view-toggle">
-                        <button className={`px-3 py-1.5 text-xs font-medium transition-colors ${stagesView === 'table' ? 'bg-gray-800 text-white' : 'bg-white text-gray-600 hover:bg-gray-100'}`} onClick={() => setStagesView('table')}>Table</button>
-                        <button className={`px-3 py-1.5 text-xs font-medium transition-colors ${stagesView === 'gantt' ? 'bg-gray-800 text-white' : 'bg-white text-gray-600 hover:bg-gray-100'}`} onClick={() => setStagesView('gantt')} data-testid="gantt-view-btn">Gantt</button>
+                      <div className="flex gap-2" data-testid="stages-view-toggle">
+                        <button className={tabChipClass(stagesView === 'table', 'px-3 py-1.5 text-xs')} onClick={() => setStagesView('table')}>Table</button>
+                        <button className={tabChipClass(stagesView === 'gantt', 'px-3 py-1.5 text-xs')} onClick={() => setStagesView('gantt')} data-testid="gantt-view-btn">Gantt</button>
                       </div>
                     )}
                     {!showAddStages && canManage && projectStages.length > 0 && (
@@ -9596,12 +9596,12 @@ export default function ProjectDetail() {
                             </div>
                           </div>
                           <Tabs defaultValue="scope" className="w-full">
-                            <TabsList className="w-full rounded-none border-b bg-white h-auto p-0 gap-0">
-                              <TabsTrigger value="scope" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5">Scope ({wo.scope_items?.length || 0})</TabsTrigger>
-                              <TabsTrigger value="stages" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5">Stages ({wo.stages?.length || 0})</TabsTrigger>
-                              <TabsTrigger value="additional" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5">Additional ({wo.additional_work?.length || 0})</TabsTrigger>
-                              <TabsTrigger value="dlr" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5" data-testid="wo-dlr-tab">DLR</TabsTrigger>
-                              <TabsTrigger value="rab" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5" data-testid="wo-rab-tab">RAB</TabsTrigger>
+                            <TabsList className="w-full">
+                              <TabsTrigger value="scope" className="flex-1 text-xs">Scope ({wo.scope_items?.length || 0})</TabsTrigger>
+                              <TabsTrigger value="stages" className="flex-1 text-xs">Stages ({wo.stages?.length || 0})</TabsTrigger>
+                              <TabsTrigger value="additional" className="flex-1 text-xs">Additional ({wo.additional_work?.length || 0})</TabsTrigger>
+                              <TabsTrigger value="dlr" className="flex-1 text-xs" data-testid="wo-dlr-tab">DLR</TabsTrigger>
+                              <TabsTrigger value="rab" className="flex-1 text-xs" data-testid="wo-rab-tab">RAB</TabsTrigger>
                             </TabsList>
                             <TabsContent value="scope" className="p-3">
                               {(() => {
@@ -10960,12 +10960,12 @@ export default function ProjectDetail() {
                                 </div>
                               </div>
                               <Tabs defaultValue="scope" className="w-full">
-                                <TabsList className="w-full rounded-none border-b bg-white h-auto p-0 gap-0">
-                                  <TabsTrigger value="scope" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5">Scope ({wo.scope_items?.length || 0})</TabsTrigger>
-                                  <TabsTrigger value="stages" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5">Stages ({wo.stages?.length || 0})</TabsTrigger>
-                                  <TabsTrigger value="additional" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5">Additional ({wo.additional_work?.length || 0})</TabsTrigger>
-                                  <TabsTrigger value="dlr" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5" data-testid="labour-wo-dlr-tab">DLR</TabsTrigger>
-                                  <TabsTrigger value="rab" className="flex-1 text-xs rounded-none border-b-2 border-transparent data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:border-primary data-[state=active]:font-semibold data-[state=active]:shadow-none py-2.5" data-testid="labour-wo-rab-tab">RAB</TabsTrigger>
+                                <TabsList className="w-full">
+                                  <TabsTrigger value="scope" className="flex-1 text-xs">Scope ({wo.scope_items?.length || 0})</TabsTrigger>
+                                  <TabsTrigger value="stages" className="flex-1 text-xs">Stages ({wo.stages?.length || 0})</TabsTrigger>
+                                  <TabsTrigger value="additional" className="flex-1 text-xs">Additional ({wo.additional_work?.length || 0})</TabsTrigger>
+                                  <TabsTrigger value="dlr" className="flex-1 text-xs" data-testid="labour-wo-dlr-tab">DLR</TabsTrigger>
+                                  <TabsTrigger value="rab" className="flex-1 text-xs" data-testid="labour-wo-rab-tab">RAB</TabsTrigger>
                                 </TabsList>
                                 <TabsContent value="scope" className="p-3">
                                   {(() => {

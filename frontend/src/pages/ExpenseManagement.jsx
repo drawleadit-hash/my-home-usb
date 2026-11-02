@@ -342,14 +342,14 @@ export default function ExpenseManagement() {
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <CardHeader className="border-b p-3 sm:p-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <TabsList className="bg-transparent border-0 p-0 h-auto flex-wrap gap-1 sm:gap-2 w-full sm:w-auto">
-                  <TabsTrigger value="material" className="data-[state=active]:border-b-2 data-[state=active]:border-orange-600 rounded-none px-2 sm:px-4 text-xs sm:text-sm">
+                <TabsList className="flex-wrap w-full sm:w-auto">
+                  <TabsTrigger value="material" className="px-2 sm:px-4 text-xs sm:text-sm">
                     <Package className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />Material
                   </TabsTrigger>
-                  <TabsTrigger value="labour" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-2 sm:px-4 text-xs sm:text-sm">
+                  <TabsTrigger value="labour" className="px-2 sm:px-4 text-xs sm:text-sm">
                     <Users className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />Labour
                   </TabsTrigger>
-                  <TabsTrigger value="vendor" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-2 sm:px-4 text-xs sm:text-sm">
+                  <TabsTrigger value="vendor" className="px-2 sm:px-4 text-xs sm:text-sm">
                     <Briefcase className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />Vendor
                   </TabsTrigger>
                 </TabsList>

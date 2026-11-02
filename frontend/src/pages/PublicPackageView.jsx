@@ -189,12 +189,12 @@ function PackagesNav({ packages }) {
   return (
     <div className="px-3 py-2">
       <Tabs defaultValue={defaultId}>
-        <TabsList className="w-full h-auto py-1 bg-white border sticky top-[72px] z-[5]" style={{ display: 'grid', gridTemplateColumns: `repeat(${packages.length}, minmax(0, 1fr))` }}>
+        <TabsList className="w-full bg-white sticky top-[72px] z-[5]" style={{ display: 'grid', gridTemplateColumns: `repeat(${packages.length}, minmax(0, 1fr))` }}>
           {packages.map(p => (
             <TabsTrigger
               key={p.package_id}
               value={p.package_id}
-              className="text-[10px] py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white"
+              className="text-[10px]"
               data-testid={`pkg-tab-${p.short_name?.toLowerCase().replace(/\s+/g, '-') || p.package_id}`}
             >
               <span className="flex items-center gap-1 min-w-0">
@@ -269,11 +269,11 @@ function PackageCard({ pkg }) {
 function TestimonialsNav({ testimonials, homeTours }) {
   return (
     <Tabs defaultValue="testimonial">
-      <TabsList className="grid grid-cols-2 w-full h-auto py-1 bg-white border sticky top-[72px] z-[5]">
-        <TabsTrigger value="testimonial" className="text-[11px] py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white" data-testid="inner-tab-testimonial">
+      <TabsList className="grid grid-cols-2 w-full bg-white sticky top-[72px] z-[5]">
+        <TabsTrigger value="testimonial" className="text-[11px]" data-testid="inner-tab-testimonial">
           <Quote className="h-3 w-3 mr-1" /> Testimonial <span className="ml-1 opacity-70">({testimonials.length})</span>
         </TabsTrigger>
-        <TabsTrigger value="home-tour" className="text-[11px] py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white" data-testid="inner-tab-home-tour">
+        <TabsTrigger value="home-tour" className="text-[11px]" data-testid="inner-tab-home-tour">
           <Home className="h-3 w-3 mr-1" /> Home Tour <span className="ml-1 opacity-70">({homeTours.length})</span>
         </TabsTrigger>
       </TabsList>
@@ -357,14 +357,14 @@ function TestimonialCard({ item }) {
 function ProjectsNav({ completed, ongoing, upcoming }) {
   return (
     <Tabs defaultValue="completed">
-      <TabsList className="grid grid-cols-3 w-full h-auto py-1 bg-white border sticky top-[72px] z-[5]">
-        <TabsTrigger value="completed" className="text-[10px] py-1.5 data-[state=active]:bg-emerald-500 data-[state=active]:text-white" data-testid="proj-tab-completed">
+      <TabsList className="grid grid-cols-3 w-full bg-white sticky top-[72px] z-[5]">
+        <TabsTrigger value="completed" className="text-[10px]" data-testid="proj-tab-completed">
           <CheckCircle className="h-3 w-3 mr-1" /> Completed <span className="ml-1 opacity-70">({completed.length})</span>
         </TabsTrigger>
-        <TabsTrigger value="ongoing" className="text-[10px] py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white" data-testid="proj-tab-ongoing">
+        <TabsTrigger value="ongoing" className="text-[10px]" data-testid="proj-tab-ongoing">
           <Construction className="h-3 w-3 mr-1" /> Ongoing <span className="ml-1 opacity-70">({ongoing.length})</span>
         </TabsTrigger>
-        <TabsTrigger value="upcoming" className="text-[10px] py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white" data-testid="proj-tab-upcoming">
+        <TabsTrigger value="upcoming" className="text-[10px]" data-testid="proj-tab-upcoming">
           <Sparkles className="h-3 w-3 mr-1" /> Upcoming <span className="ml-1 opacity-70">({upcoming.length})</span>
         </TabsTrigger>
       </TabsList>

@@ -42,13 +42,12 @@ export default function FinanceBoard() {
 
       <Tabs value={active} onValueChange={setActive} className="flex-1 flex flex-col">
         <div className="bg-background border-b border-border px-4 lg:px-8">
-          <TabsList className="h-auto w-full justify-start gap-5 overflow-x-auto rounded-none border-0 bg-transparent p-0 scrollbar-hide lg:gap-7" data-testid="finance-board-tabs">
+          <TabsList className="w-full justify-start overflow-x-auto py-2.5 scrollbar-hide" data-testid="finance-board-tabs">
             {TABS.map(t => (
               <TabsTrigger
                 key={t.value}
                 value={t.value}
-                data-testid={`fb-tab-${t.value}`}
-                className="-mb-px gap-2 rounded-none border-b-2 border-transparent px-0.5 py-3 text-sm text-muted-foreground hover:border-ink-300 data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:text-primary-strong data-[state=active]:shadow-none"
+                data-testid={`fb-tab-${t.value}`}
               >
                 <t.icon className="h-4 w-4" />
                 {t.label}
@@ -64,7 +63,7 @@ export default function FinanceBoard() {
                 title={t.label}
                 src={t.src}
                 data-testid={`fb-frame-${t.value}`}
-                className="w-full border-0 h-[calc(100vh-102px)] lg:h-[calc(100vh-122px)]"
+                className="w-full border-0 h-[calc(100vh-116px)] lg:h-[calc(100vh-136px)]"
               />
             ) : (
               <div data-testid="fb-projection-placeholder" className="h-[60vh] flex flex-col items-center justify-center text-center px-4">

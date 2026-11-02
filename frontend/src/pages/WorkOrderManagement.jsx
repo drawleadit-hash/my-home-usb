@@ -280,14 +280,14 @@ export default function WorkOrderManagement() {
         <Card>
           <Tabs value={activeTab} onValueChange={handleTabChange}>
             <CardHeader className="border-b p-3 sm:p-4">
-              <TabsList className="bg-transparent p-0">
-                <TabsTrigger value="all" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none">
+              <TabsList>
+                <TabsTrigger value="all">
                   All
                 </TabsTrigger>
-                <TabsTrigger value="labour" className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none">
+                <TabsTrigger value="labour">
                   Labour
                 </TabsTrigger>
-                <TabsTrigger value="material" className="data-[state=active]:border-b-2 data-[state=active]:border-green-600 rounded-none">
+                <TabsTrigger value="material">
                   Material
                 </TabsTrigger>
               </TabsList>

@@ -6,7 +6,7 @@ import LabourAdvanceQueue from '../components/LabourAdvanceQueue';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger, tabChipClass } from '../components/ui/tabs';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Textarea } from '../components/ui/textarea';
@@ -514,10 +514,10 @@ const GMDashboard = () => {
           const isFE = activeTab === 'final_estimate';
           const isPlanningBoard = activeTab === 'planning_board';
           return (
-            <div className="bg-white border shadow-sm p-1 rounded-md inline-flex gap-1 flex-wrap mb-4" data-testid="gm-main-tabs">
+            <div className="inline-flex gap-2 flex-wrap mb-4" data-testid="gm-main-tabs">
               <button
                 onClick={() => setActiveTab('final_estimate')}
-                className={`flex items-center gap-2 px-4 py-2 rounded text-sm font-medium transition-colors ${isFE ? 'bg-primary text-white shadow-sm' : 'text-gray-700 hover:bg-gray-50'}`}
+                className={tabChipClass(isFE, 'flex gap-2 px-4 py-2 text-sm')}
                 data-testid="gm-tab-fe"
               >
                 <FileText className="h-4 w-4" /> Final Estimate
@@ -527,7 +527,7 @@ const GMDashboard = () => {
               </button>
               <button
                 onClick={() => setActiveTab('planning')}
-                className={`flex items-center gap-2 px-4 py-2 rounded text-sm font-medium transition-colors ${isRE ? 'bg-primary text-white shadow-sm' : 'text-gray-700 hover:bg-gray-50'}`}
+                className={tabChipClass(isRE, 'flex gap-2 px-4 py-2 text-sm')}
                 data-testid="gm-tab-re"
               >
                 <Calculator className="h-4 w-4" /> Rough Estimate
@@ -537,14 +537,14 @@ const GMDashboard = () => {
               </button>
               <button
                 onClick={() => setActiveTab('planning_board')}
-                className={`flex items-center gap-2 px-4 py-2 rounded text-sm font-medium transition-colors ${isPlanningBoard ? 'bg-primary text-white shadow-sm' : 'text-gray-700 hover:bg-gray-50'}`}
+                className={tabChipClass(isPlanningBoard, 'flex gap-2 px-4 py-2 text-sm')}
                 data-testid="gm-tab-planning-board"
               >
                 <Building2 className="h-4 w-4" /> Planning
               </button>
               <button
                 onClick={() => setActiveTab('labour_advance')}
-                className={`flex items-center gap-2 px-4 py-2 rounded text-sm font-medium transition-colors ${activeTab === 'labour_advance' ? 'bg-primary text-white shadow-sm' : 'text-gray-700 hover:bg-gray-50'}`}
+                className={tabChipClass(activeTab === 'labour_advance', 'flex gap-2 px-4 py-2 text-sm')}
                 data-testid="gm-tab-labour-advance-pill"
               >
                 <Wallet className="h-4 w-4" /> Labour Advance

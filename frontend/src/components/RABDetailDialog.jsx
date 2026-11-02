@@ -341,27 +341,27 @@ function RABCardTabs({ rab, inr, fmtDate, releasedSiblings = [], onView, onDownl
   };
   return (
     <Tabs defaultValue="summary" className="w-full" onValueChange={(v) => { if (v === 'dlr') loadDlr(); }}>
-      <TabsList className="bg-gray-50 p-1 h-auto gap-1 mb-3">
+      <TabsList className="mb-3">
         <TabsTrigger
           value="summary"
-          className="text-[11px] px-3 py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white"
+          className="text-[11px] px-3"
           data-testid={`rab-${rab.rab_number}-tab-summary`}
         >Summary</TabsTrigger>
         <TabsTrigger
           value="timeline"
-          className="text-[11px] px-3 py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white"
+          className="text-[11px] px-3"
           data-testid={`rab-${rab.rab_number}-tab-timeline`}
         >Timeline</TabsTrigger>
         <TabsTrigger
           value="dlr"
           disabled={!hasDateWindow}
-          className="text-[11px] px-3 py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white disabled:opacity-40"
+          className="text-[11px] px-3 disabled:opacity-40"
           data-testid={`rab-${rab.rab_number}-tab-dlr`}
           title={hasDateWindow ? 'DLR rollup for the billing window' : 'No billing window set for this RAB'}
         >DLR Report</TabsTrigger>
         <TabsTrigger
           value="totalrab"
-          className="text-[11px] px-3 py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white"
+          className="text-[11px] px-3"
           data-testid={`rab-${rab.rab_number}-tab-totalrab`}
         >{"Total RAB's"}
           <span className="ml-1.5 text-[9px] font-bold opacity-80">({releasedSiblings.length})</span>
@@ -712,9 +712,9 @@ function RABFocusedDialog({ open, rab, inr, fmtDate, onClose, onDownload }) {
 
             {/* Summary + Timeline only (no further drill-down). */}
             <Tabs defaultValue="summary" className="w-full">
-              <TabsList className="bg-gray-50 p-1 h-auto gap-1 mb-3">
-                <TabsTrigger value="summary" className="text-[11px] px-3 py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white">Summary</TabsTrigger>
-                <TabsTrigger value="timeline" className="text-[11px] px-3 py-1.5 data-[state=active]:bg-primary data-[state=active]:text-white">Timeline</TabsTrigger>
+              <TabsList className="mb-3">
+                <TabsTrigger value="summary" className="text-[11px] px-3">Summary</TabsTrigger>
+                <TabsTrigger value="timeline" className="text-[11px] px-3">Timeline</TabsTrigger>
               </TabsList>
               <TabsContent value="summary" className="m-0">
                 <div className="rounded-lg border border-orange-200 bg-white p-3 mb-2">

@@ -1075,20 +1075,20 @@ export default function MarketingBoard() {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-          <TabsList className="bg-white border">
-            <TabsTrigger value="overview" className="data-[state=active]:bg-brand-100">
+          <TabsList>
+            <TabsTrigger value="overview">
               <BarChart3 className="h-4 w-4 mr-2" /> Overview
             </TabsTrigger>
-            <TabsTrigger value="team" className="data-[state=active]:bg-brand-100">
+            <TabsTrigger value="team">
               <Users className="h-4 w-4 mr-2" /> Sales Team
             </TabsTrigger>
-            <TabsTrigger value="leads" className="data-[state=active]:bg-brand-100">
+            <TabsTrigger value="leads">
               <Layers className="h-4 w-4 mr-2" /> All Leads
             </TabsTrigger>
-            <TabsTrigger value="sources" className="data-[state=active]:bg-brand-100">
+            <TabsTrigger value="sources">
               <TrendingUp className="h-4 w-4 mr-2" /> Lead Sources
             </TabsTrigger>
-            <TabsTrigger value="google_sheets" className="data-[state=active]:bg-emerald-100" data-testid="google-sheets-tab">
+            <TabsTrigger value="google_sheets" data-testid="google-sheets-tab">
               <FileSpreadsheet className="h-4 w-4 mr-2" /> Google Sheets
             </TabsTrigger>
           </TabsList>
@@ -2684,14 +2684,14 @@ export default function MarketingBoard() {
             {/* Tabs for Sources */}
             {sheetsConfig?.is_connected && (
               <Tabs value={sheetsTab} onValueChange={setSheetsTab} className="mt-4">
-                <TabsList className="bg-gray-100">
-                  <TabsTrigger value="website" className="data-[state=active]:bg-white">
+                <TabsList>
+                  <TabsTrigger value="website">
                     <Building2 className="h-4 w-4 mr-2" /> Website
                   </TabsTrigger>
-                  <TabsTrigger value="sources" className="data-[state=active]:bg-white">
+                  <TabsTrigger value="sources">
                     <Table className="h-4 w-4 mr-2" /> All Sources
                   </TabsTrigger>
-                  <TabsTrigger value="add" className="data-[state=active]:bg-white">
+                  <TabsTrigger value="add">
                     <Plus className="h-4 w-4 mr-2" /> Add More
                   </TabsTrigger>
                 </TabsList>

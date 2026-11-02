@@ -14,6 +14,7 @@ import { toast } from 'sonner';
 import MobileBottomNav from '../components/MobileBottomNav';
 import { AppHeader } from '../components/AppHeader';
 import { useAutoRefresh } from '../hooks/useAutoRefresh';
+import { tabChipClass } from '../components/ui/tabs';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -191,7 +192,7 @@ export default function Notifications() {
 
         {/* FILTERS + SEARCH */}
         <div className="flex flex-col sm:flex-row gap-2 mb-3">
-          <div className="flex gap-1 bg-white border rounded-lg p-1" data-testid="notif-filters">
+          <div className="flex gap-2" data-testid="notif-filters">
             {[
               { v: 'all', label: 'All', count: notifications.length },
               { v: 'unread', label: 'Unread', count: unreadCount },
@@ -201,7 +202,7 @@ export default function Notifications() {
                 key={v}
                 onClick={() => setFilter(v)}
                 data-testid={`notif-filter-${v}`}
-                className={`px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium flex items-center gap-1 transition-colors ${filter === v ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-100'}`}
+                className={tabChipClass(filter === v, 'px-3 py-1.5 text-xs sm:text-sm flex gap-1')}
               >
                 {label}
                 {count > 0 && (

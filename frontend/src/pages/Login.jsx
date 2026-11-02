@@ -213,7 +213,7 @@ export default function Login() {
         )}
 
         <Tabs value={loginTab} onValueChange={setLoginTab}>
-          <TabsList className={`grid h-11 w-full ${demoMode ? 'grid-cols-2' : 'grid-cols-1'}`} data-testid="login-tabs">
+          <TabsList className={`grid w-full ${demoMode ? 'grid-cols-2' : 'grid-cols-1'}`} data-testid="login-tabs">
             <TabsTrigger value="password" className="h-9" data-testid="tab-password">Login</TabsTrigger>
             {demoMode && <TabsTrigger value="demo" className="h-9" data-testid="tab-demo">Demo Access</TabsTrigger>}
           </TabsList>

@@ -4,7 +4,7 @@ import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '../components/ui/dialog';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger, tabChipClass } from '../components/ui/tabs';
 import LabourAdvanceQueue from '../components/LabourAdvanceQueue';
 import RABApprovalQueue from '../components/RABApprovalQueue';
 import { Input } from '../components/ui/input';
@@ -332,7 +332,7 @@ export default function PMDashboard() {
       <AppHeader user={user} />
       <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="bg-white border shadow-sm mb-3 flex-wrap">
+          <TabsList className="mb-3 flex-wrap">
             <TabsTrigger value="all_projects" className="text-xs sm:text-sm" data-testid="tab-all-projects">All Projects</TabsTrigger>
             <TabsTrigger value="requests" className="text-xs sm:text-sm" data-testid="tab-requests">Requests<CountBadge count={requestCount} /></TabsTrigger>
             <TabsTrigger value="dlrdpr" className="text-xs sm:text-sm" data-testid="tab-dlrdpr">DLR & DPR</TabsTrigger>
@@ -562,14 +562,14 @@ export default function PMDashboard() {
           <TabsContent value="requests">
             <div className="space-y-3" data-testid="pm-requests-tab">
               <Tabs defaultValue="material_requests" className="w-full">
-                <TabsList className="bg-amber-50/40 border border-amber-100 rounded-lg p-1 flex flex-wrap">
-                  <TabsTrigger value="material_requests" className="text-xs sm:text-sm data-[state=active]:bg-white data-[state=active]:text-primary-strong data-[state=active]:shadow-sm" data-testid="pm-req-sub-material">
+                <TabsList className="flex flex-wrap">
+                  <TabsTrigger value="material_requests" className="text-xs sm:text-sm" data-testid="pm-req-sub-material">
                     Material Requests<CountBadge count={materialRequests?.length || 0} />
                   </TabsTrigger>
-                  <TabsTrigger value="work_order_labour" className="text-xs sm:text-sm data-[state=active]:bg-white data-[state=active]:text-primary-strong data-[state=active]:shadow-sm" data-testid="pm-req-sub-labour">
+                  <TabsTrigger value="work_order_labour" className="text-xs sm:text-sm" data-testid="pm-req-sub-labour">
                     Work Order / Labour (RAB)<CountBadge count={labourRequests?.length || 0} />
                   </TabsTrigger>
-                  <TabsTrigger value="petty_cash" className="text-xs sm:text-sm data-[state=active]:bg-white data-[state=active]:text-primary-strong data-[state=active]:shadow-sm" data-testid="pm-req-sub-petty">
+                  <TabsTrigger value="petty_cash" className="text-xs sm:text-sm" data-testid="pm-req-sub-petty">
                     Petty Cash<CountBadge count={pendingPcCount} />
                   </TabsTrigger>
                 </TabsList>
@@ -597,7 +597,7 @@ export default function PMDashboard() {
               <button
                 type="button"
                 onClick={() => setDlrDprSubTab('dlr')}
-                className={`px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-md border-2 transition ${dlrDprSubTab === 'dlr' ? 'border-orange-600 bg-orange-100 text-orange-900' : 'border-gray-300 bg-gray-50 text-gray-700 hover:brightness-95'}`}
+                className={tabChipClass(dlrDprSubTab === 'dlr', 'px-3 py-1.5 text-xs sm:text-sm')}
                 data-testid="dlrdpr-subtab-dlr"
               >
                 DLR & DPR
@@ -605,7 +605,7 @@ export default function PMDashboard() {
               <button
                 type="button"
                 onClick={() => setDlrDprSubTab('inventory')}
-                className={`px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-md border-2 transition ${dlrDprSubTab === 'inventory' ? 'border-orange-600 bg-orange-100 text-orange-900' : 'border-gray-300 bg-gray-50 text-gray-700 hover:brightness-95'}`}
+                className={tabChipClass(dlrDprSubTab === 'inventory', 'px-3 py-1.5 text-xs sm:text-sm')}
                 data-testid="dlrdpr-subtab-inventory"
               >
                 Inventory

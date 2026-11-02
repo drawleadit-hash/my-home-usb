@@ -8,7 +8,7 @@ import { Label } from '../components/ui/label';
 import { Textarea } from '../components/ui/textarea';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '../components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/tabs';
+import { Tabs, TabsList, TabsTrigger, TabsContent, tabChipClass } from '../components/ui/tabs';
 import { Checkbox } from '../components/ui/checkbox';
 import { Popover, PopoverTrigger, PopoverContent } from '../components/ui/popover';
 // Procurement Dashboard sub-tabs embed these two pages so the operator
@@ -2902,11 +2902,11 @@ function MaterialVendorsTab() {
 
   return (
     <div className="space-y-3" data-testid="proc-vendors-tab">
-      <div className="flex gap-1 border-b bg-white rounded-t-lg px-2 pt-1">
-        <button onClick={() => setView('vendors')} className={`px-3 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors ${view === 'vendors' ? 'border-primary text-primary-strong bg-brand-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'}`} data-testid="proc-vendor-view-vendors">
+      <div className="flex gap-2">
+        <button onClick={() => setView('vendors')} className={tabChipClass(view === 'vendors', 'px-3 py-2 text-xs sm:text-sm')} data-testid="proc-vendor-view-vendors">
           Material Vendor <Badge variant="outline" className="ml-1 text-[10px]">{filteredVendors.length}</Badge>
         </button>
-        <button onClick={() => setView('materials')} className={`px-3 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors ${view === 'materials' ? 'border-primary text-primary-strong bg-brand-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'}`} data-testid="proc-vendor-view-materials">
+        <button onClick={() => setView('materials')} className={tabChipClass(view === 'materials', 'px-3 py-2 text-xs sm:text-sm')} data-testid="proc-vendor-view-materials">
           Materials <Badge variant="outline" className="ml-1 text-[10px]">{filteredMaterials.length}</Badge>
         </button>
       </div>

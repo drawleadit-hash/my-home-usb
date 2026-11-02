@@ -444,17 +444,17 @@ export default function WORABTab({ projectId, workOrder, onOpenRabView, stageIdF
         {/* Aug 6 2026 — no overflow handling meant "Requested RAB" (and
             whatever came after it) just got cut off on narrow screens
             instead of wrapping or scrolling into view. */}
-        <TabsList className="w-full flex justify-start overflow-x-auto bg-gray-50 border-b rounded-none h-auto p-0">
-          <TabsTrigger value="all" className="shrink-0 whitespace-nowrap text-xs flex items-center gap-1.5 px-3 py-2 data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none">
+        <TabsList className="w-full flex justify-start overflow-x-auto">
+          <TabsTrigger value="all" className="shrink-0 whitespace-nowrap text-xs flex items-center gap-1.5 px-3">
             <FileText className="h-3 w-3" /> All <Badge className="ml-1 bg-violet-100 text-violet-700 border-0 text-[10px]">{rabs.length}</Badge>
           </TabsTrigger>
-          <TabsTrigger value="released" className="shrink-0 whitespace-nowrap text-xs flex items-center gap-1.5 px-3 py-2 data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-emerald-600 rounded-none">
+          <TabsTrigger value="released" className="shrink-0 whitespace-nowrap text-xs flex items-center gap-1.5 px-3">
             <CheckCircle2 className="h-3 w-3" />
             <span className="sm:hidden">Released</span>
             <span className="hidden sm:inline">Released RAB</span>
             <Badge className="ml-1 bg-emerald-100 text-emerald-700 border-0 text-[10px]">{RELEASED.length}</Badge>
           </TabsTrigger>
-          <TabsTrigger value="requested" className="shrink-0 whitespace-nowrap text-xs flex items-center gap-1.5 px-3 py-2 data-[state=active]:bg-white data-[state=active]:border-b-2 data-[state=active]:border-orange-600 rounded-none">
+          <TabsTrigger value="requested" className="shrink-0 whitespace-nowrap text-xs flex items-center gap-1.5 px-3">
             <Clock className="h-3 w-3" />
             <span className="sm:hidden">Requested</span>
             <span className="hidden sm:inline">Requested RAB</span>

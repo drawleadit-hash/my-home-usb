@@ -250,28 +250,28 @@ export default function ComprehensiveProjectView() {
         <Card>
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <CardHeader className="border-b">
-              <TabsList className="bg-transparent border-0 p-0 h-auto flex-wrap gap-2">
+              <TabsList className="flex-wrap">
                 <TabsTrigger 
                   value="overview" 
-                  className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4"
+                  className="px-4"
                 >
                   Overview
                 </TabsTrigger>
                 <TabsTrigger 
                   value="boq"
-                  className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4"
+                  className="px-4"
                 >
                   BOQ / Project Value
                 </TabsTrigger>
                 <TabsTrigger 
                   value="payment-schedule"
-                  className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4"
+                  className="px-4"
                 >
                   Payment Schedule
                 </TabsTrigger>
                 <TabsTrigger 
                   value="additional-costs"
-                  className="data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none px-4"
+                  className="px-4"
                 >
                   Additional Costs
                 </TabsTrigger>

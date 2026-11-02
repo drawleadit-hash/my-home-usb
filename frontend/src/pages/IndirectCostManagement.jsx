@@ -204,7 +204,7 @@ export default function IndirectCostManagement() {
 
         {/* Main Tabs */}
         <Tabs value={mainTab} onValueChange={setMainTab} className="space-y-4">
-          <TabsList className="bg-white border">
+          <TabsList>
             <TabsTrigger value="budget" className="gap-1.5" data-testid="budget-tab"><PieChart className="h-3.5 w-3.5" /> Budget Overview</TabsTrigger>
             <TabsTrigger value="expenses" className="gap-1.5" data-testid="expenses-tab"><Clock className="h-3.5 w-3.5" /> Expenses ({costs.length})</TabsTrigger>
             <TabsTrigger value="allocations" className="gap-1.5" data-testid="allocations-tab"><ArrowRight className="h-3.5 w-3.5" /> Allocations ({allocations.length})</TabsTrigger>

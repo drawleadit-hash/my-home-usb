@@ -194,7 +194,7 @@ export default function ArchitectDashboard() {
           </div>
 
           <Tabs value={projectTab} onValueChange={setProjectTab}>
-            <TabsList className="bg-white border shadow-sm mb-3">
+            <TabsList className="mb-3">
               <TabsTrigger value="site_plans" className="text-xs sm:text-sm" data-testid="tab-site-plans">
                 <Layers className="h-3 w-3 mr-1" />Site Plans ({sitePlans.length})
               </TabsTrigger>

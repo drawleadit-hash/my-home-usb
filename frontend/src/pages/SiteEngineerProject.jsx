@@ -11,7 +11,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger, tabChipClass } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -1289,17 +1289,17 @@ export default function SiteEngineerProject() {
           {/* MATERIALS TAB (with Requests | Inventory sub-tabs) */}
           <TabsContent value="materials">
             {/* Materials sub-tabs: Requests | Inventory */}
-            <div className="flex gap-1 mb-3 border-b">
+            <div className="flex gap-2 mb-3">
               <button
                 onClick={() => setMaterialsSubTab('requests')}
-                className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${materialsSubTab === 'requests' ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+                className={tabChipClass(materialsSubTab === 'requests', 'px-4 py-2 text-sm')}
                 data-testid="mat-subtab-requests"
               >
                 Material Requests
               </button>
               <button
                 onClick={() => { setMaterialsSubTab('inventory'); fetchStockData(stockDate); }}
-                className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${materialsSubTab === 'inventory' ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+                className={tabChipClass(materialsSubTab === 'inventory', 'px-4 py-2 text-sm')}
                 data-testid="mat-subtab-inventory"
               >
                 Inventory

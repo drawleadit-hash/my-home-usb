@@ -273,7 +273,7 @@ export default function CashflowEngine() {
 
         {/* Tabs */}
         <Tabs value={tab} onValueChange={setTab}>
-          <TabsList className="bg-white border" data-testid="cf-tabs">
+          <TabsList data-testid="cf-tabs">
             <TabsTrigger value="summary" data-testid="cf-tab-summary"><BarChart3 className="h-4 w-4 mr-1" /> Summary</TabsTrigger>
             <TabsTrigger value="income" data-testid="cf-tab-income"><ArrowDownLeft className="h-4 w-4 mr-1" /> Income ({incomeRows.length})</TabsTrigger>
             <TabsTrigger value="expense" data-testid="cf-tab-expense"><ArrowUpRight className="h-4 w-4 mr-1" /> Expense ({expenseRows.length})</TabsTrigger>

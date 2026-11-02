@@ -5,6 +5,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
+import { tabChipClass } from '../components/ui/tabs';
 import { Badge } from '../components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '../components/ui/dialog';
 import { Input } from '../components/ui/input';
@@ -253,12 +254,12 @@ export default function MaterialReceipt() {
 
         {/* Tabs */}
         <div className="flex gap-2 mb-6">
-          <Button variant={activeTab === 'pending' ? 'default' : 'outline'} onClick={() => setActiveTab('pending')} className="gap-2" data-testid="pending-tab">
+          <button type="button" onClick={() => setActiveTab('pending')} className={tabChipClass(activeTab === 'pending')} data-testid="pending-tab">
             <Truck className="h-4 w-4" /> Pending Receipt ({transitOrders.length})
-          </Button>
-          <Button variant={activeTab === 'received' ? 'default' : 'outline'} onClick={() => setActiveTab('received')} className="gap-2" data-testid="received-tab">
+          </button>
+          <button type="button" onClick={() => setActiveTab('received')} className={tabChipClass(activeTab === 'received')} data-testid="received-tab">
             <CheckCircle className="h-4 w-4" /> Received ({receivedOrders.length})
-          </Button>
+          </button>
         </div>
 
         {/* Pending Orders */}
