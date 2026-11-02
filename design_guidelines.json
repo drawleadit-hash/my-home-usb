@@ -95,8 +95,9 @@
     },
     "cards": {
       "base": "rounded-2xl border border-border bg-card shadow-xs",
-      "kpi_tile": "<SummaryCard tone=positive|negative|warning|neutral>: uppercase label, tinted icon chip top-right, large figure, coloured sub-line",
-      "hero_tile": "rounded-3xl bg-[#0B0B0C] text-white with one blurred bg-primary/25 glow (Executive Balance)"
+      "kpi_tile": "<SummaryCard> (components/SummaryCard.jsx): uppercase label, tinted icon chip top-right (or a tone dot when there is no icon), large black figure, tone-coloured sub-line; tones neutral|positive|negative|warning|info|violet; `active` for filter cards, `compact` for dense rows",
+      "hero_tile": "<SummaryCard hero> or the same markup: rounded-3xl bg-[#0B0B0C] text-white with one blurred bg-primary/25 glow and a green pill label — at most one per page, for the headline figure",
+      "channel_card": "<ChannelCard> (components/SummaryCard.jsx): coloured dot + uppercase label, figure, optional label/value rows and a bar; `danger` for negative/overdrawn, `dark` for the total card, `compact` for strips of four or more. Channel dots: Cash violet-500, HDFC Current orange-500, HDFC Savings primary, Cheque ink-700, Cash DT blue-500"
     },
     "inputs": {
       "base": "h-9 rounded-lg border-input bg-background shadow-xs hover:border-ink-300 focus-visible:border-primary focus-visible:ring-4 focus-visible:ring-ring/15"
@@ -137,7 +138,8 @@
     "4. STATUS COLOURS: amber = pending/warning, red = error/rejected, green = done/income; categorical chips may use other hues as pale tints.",
     "5. NAVIGATION: AppHeader renders the sidebar + top bar; pages only pass customNav/headerActions/backTo/hideNav.",
     "6. MOBILE FIRST: stack forms/dashboards on mobile; large touch targets on site flows.",
-    "7. DATA-TESTID: add data-testid to every interactive element."
+    "7. DATA-TESTID: add data-testid to every interactive element.",
+    "8. SUMMARY ROWS: never hand-build KPI tiles — use SummaryCard for counts/totals and ChannelCard for per-account or per-bucket figures; no tinted (bg-*-50) or left-border (border-l-4) tiles."
   ],
   "universal_guidelines": [
     "Flat tints and black/white tiles; the only gradient is the soft brand glow on dark hero tiles.",

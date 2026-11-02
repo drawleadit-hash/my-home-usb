@@ -5,6 +5,7 @@ import { useBranding } from '@/hooks/useBranding';
 import { Building2, LogOut, Package, Truck, CheckCircle, Clock, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -139,54 +140,11 @@ export default function VendorPortal() {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
-              <Card className="bg-blue-50 border-blue-200">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-gray-600">Total Orders</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center gap-2">
-                    <Package className="h-6 w-6 text-amber-600" />
-                    <span className="text-2xl font-bold text-amber-700">{stats.total_orders}</span>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-yellow-50 border-yellow-200">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-gray-600">Pending</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-6 w-6 text-yellow-600" />
-                    <span className="text-2xl font-bold text-yellow-700">{stats.pending}</span>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-purple-50 border-purple-200">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-gray-600">Dispatched</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center gap-2">
-                    <Truck className="h-6 w-6 text-purple-600" />
-                    <span className="text-2xl font-bold text-purple-700">{stats.dispatched}</span>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-green-50 border-green-200">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-gray-600">Completed</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="h-6 w-6 text-green-600" />
-                    <span className="text-2xl font-bold text-green-700">{stats.completed}</span>
-                  </div>
-                </CardContent>
-              </Card>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+              <SummaryCard label="Total Orders" icon={Package} value={stats.total_orders} />
+              <SummaryCard label="Pending" icon={Clock} tone="warning" value={stats.pending} />
+              <SummaryCard label="Dispatched" icon={Truck} tone="info" value={stats.dispatched} />
+              <SummaryCard label="Completed" icon={CheckCircle} tone="positive" value={stats.completed} />
             </div>
 
             {/* Purchase Orders Table */}

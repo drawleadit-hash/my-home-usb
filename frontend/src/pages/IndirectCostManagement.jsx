@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '../components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '../components/ui/dialog';
 import { Input } from '../components/ui/input';
@@ -215,34 +216,10 @@ export default function IndirectCostManagement() {
               <>
                 {/* Portfolio Summary */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                  <Card className="bg-blue-50 border-blue-200">
-                    <CardContent className="p-4 text-center">
-                      <Building2 className="h-5 w-5 mx-auto mb-1 text-blue-600" />
-                      <p className="text-lg font-bold text-blue-700">{fmtL(bo.portfolio_total)}</p>
-                      <p className="text-xs text-blue-600">Portfolio Total ({bo.projects?.length || 0} Projects)</p>
-                    </CardContent>
-                  </Card>
-                  <Card className="bg-orange-50 border-orange-200">
-                    <CardContent className="p-4 text-center">
-                      <PieChart className="h-5 w-5 mx-auto mb-1 text-orange-600" />
-                      <p className="text-lg font-bold text-orange-700">{fmtL(bo.total_indirect_budget)}</p>
-                      <p className="text-xs text-orange-600">{bo.indirect_cost_percent || 20}% Indirect Budget</p>
-                    </CardContent>
-                  </Card>
-                  <Card className="bg-red-50 border-red-200">
-                    <CardContent className="p-4 text-center">
-                      <TrendingUp className="h-5 w-5 mx-auto mb-1 text-red-600" />
-                      <p className="text-lg font-bold text-red-700">{fmtL(bo.total_indirect_spent)}</p>
-                      <p className="text-xs text-red-600">Indirect Spent</p>
-                    </CardContent>
-                  </Card>
-                  <Card className="bg-green-50 border-green-200">
-                    <CardContent className="p-4 text-center">
-                      <TrendingUp className="h-5 w-5 mx-auto mb-1 text-green-600" />
-                      <p className="text-lg font-bold text-green-700">{fmtL(bo.total_indirect_remaining)}</p>
-                      <p className="text-xs text-green-600">Remaining (Profit Pool)</p>
-                    </CardContent>
-                  </Card>
+                  <SummaryCard compact label="Portfolio Total" icon={Building2} value={fmtL(bo.portfolio_total)} sub={`${bo.projects?.length || 0} projects`} />
+                  <SummaryCard compact label="Indirect Budget" icon={PieChart} tone="warning" value={fmtL(bo.total_indirect_budget)} sub={`${bo.indirect_cost_percent || 20}% of portfolio`} />
+                  <SummaryCard compact label="Indirect Spent" icon={TrendingUp} tone="negative" value={fmtL(bo.total_indirect_spent)} />
+                  <SummaryCard compact label="Remaining (Profit Pool)" icon={TrendingUp} tone="positive" value={fmtL(bo.total_indirect_remaining)} />
                 </div>
 
                 {/* Per-Project Budget Table */}

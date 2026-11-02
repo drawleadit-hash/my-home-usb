@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -229,42 +230,11 @@ export default function Expenses() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
-          <Card className="bg-orange-50 border-orange-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Total Expenses</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-end justify-between">
-                <div className="text-2xl font-bold text-orange-700">₹{(totalExpenses / 100000).toFixed(2)}L</div>
-                <TrendingDown className="h-6 w-6 text-orange-600" />
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="bg-blue-50 border-blue-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Material</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-amber-700">₹{(materialExpenses / 100000).toFixed(2)}L</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-green-50 border-green-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Labour</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-green-700">₹{(labourExpenses / 100000).toFixed(2)}L</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-gray-50 border-gray-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Total Entries</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-gray-700">{filteredExpenses.length}</div>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <SummaryCard label="Total Expenses" icon={TrendingDown} tone="negative" value={`₹${(totalExpenses / 100000).toFixed(2)}L`} />
+          <SummaryCard label="Material" tone="warning" value={`₹${(materialExpenses / 100000).toFixed(2)}L`} />
+          <SummaryCard label="Labour" tone="info" value={`₹${(labourExpenses / 100000).toFixed(2)}L`} />
+          <SummaryCard label="Total Entries" value={filteredExpenses.length} />
         </div>
 
         {/* Filter */}

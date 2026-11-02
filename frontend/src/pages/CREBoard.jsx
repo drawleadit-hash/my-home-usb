@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '../components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '../components/ui/dialog';
 import { Input } from '../components/ui/input';
@@ -1044,61 +1045,11 @@ export default function CREBoard() {
                 <div className="space-y-4">
                   {/* Status Summary Cards */}
                   <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
-                    <Card
-                      className={`cursor-pointer transition-all ${feActiveTab === 'awaiting' ? 'ring-2 ring-purple-500' : 'hover:shadow-sm'}`}
-                      onClick={() => setFeActiveTab('awaiting')}
-                      data-testid="fe-status-awaiting"
-                    >
-                      <CardContent className="p-4 text-center">
-                        <Clock className="h-6 w-6 mx-auto mb-1 text-purple-600" />
-                        <p className="text-2xl font-bold text-purple-700">{counts.awaiting}</p>
-                        <p className="text-xs text-purple-600">Awaiting You</p>
-                      </CardContent>
-                    </Card>
-                    <Card
-                      className={`cursor-pointer transition-all ${feActiveTab === 'in_revision' ? 'ring-2 ring-amber-500' : 'hover:shadow-sm'}`}
-                      onClick={() => setFeActiveTab('in_revision')}
-                      data-testid="fe-status-in-revision"
-                    >
-                      <CardContent className="p-4 text-center">
-                        <RefreshCw className="h-6 w-6 mx-auto mb-1 text-amber-600" />
-                        <p className="text-2xl font-bold text-amber-700">{counts.in_revision}</p>
-                        <p className="text-xs text-amber-600">In Revision @ Planning</p>
-                      </CardContent>
-                    </Card>
-                    <Card
-                      className={`cursor-pointer transition-all ${feActiveTab === 'sent_to_client' ? 'ring-2 ring-blue-500' : 'hover:shadow-sm'}`}
-                      onClick={() => setFeActiveTab('sent_to_client')}
-                      data-testid="fe-status-sent-to-client"
-                    >
-                      <CardContent className="p-4 text-center">
-                        <Send className="h-6 w-6 mx-auto mb-1 text-blue-600" />
-                        <p className="text-2xl font-bold text-blue-700">{counts.sent_to_client}</p>
-                        <p className="text-xs text-blue-600">Sent to Client</p>
-                      </CardContent>
-                    </Card>
-                    <Card
-                      className={`cursor-pointer transition-all ${feActiveTab === 'approved' ? 'ring-2 ring-green-500' : 'hover:shadow-sm'}`}
-                      onClick={() => setFeActiveTab('approved')}
-                      data-testid="fe-status-approved"
-                    >
-                      <CardContent className="p-4 text-center">
-                        <CheckCircle2 className="h-6 w-6 mx-auto mb-1 text-green-600" />
-                        <p className="text-2xl font-bold text-green-700">{counts.approved}</p>
-                        <p className="text-xs text-green-600">Approved</p>
-                      </CardContent>
-                    </Card>
-                    <Card
-                      className={`cursor-pointer transition-all ${feActiveTab === 'all' ? 'ring-2 ring-gray-500' : 'hover:shadow-sm'}`}
-                      onClick={() => setFeActiveTab('all')}
-                      data-testid="fe-status-all"
-                    >
-                      <CardContent className="p-4 text-center">
-                        <FileText className="h-6 w-6 mx-auto mb-1 text-gray-600" />
-                        <p className="text-2xl font-bold text-gray-800">{counts.all}</p>
-                        <p className="text-xs text-gray-600">All</p>
-                      </CardContent>
-                    </Card>
+                    <SummaryCard compact label="Awaiting You" icon={Clock} tone="violet" value={counts.awaiting} testId="fe-status-awaiting" active={feActiveTab === 'awaiting'} onClick={() => setFeActiveTab('awaiting')} />
+                    <SummaryCard compact label="In Revision @ Planning" icon={RefreshCw} tone="warning" value={counts.in_revision} testId="fe-status-in-revision" active={feActiveTab === 'in_revision'} onClick={() => setFeActiveTab('in_revision')} />
+                    <SummaryCard compact label="Sent to Client" icon={Send} tone="info" value={counts.sent_to_client} testId="fe-status-sent-to-client" active={feActiveTab === 'sent_to_client'} onClick={() => setFeActiveTab('sent_to_client')} />
+                    <SummaryCard compact label="Approved" icon={CheckCircle2} tone="positive" value={counts.approved} testId="fe-status-approved" active={feActiveTab === 'approved'} onClick={() => setFeActiveTab('approved')} />
+                    <SummaryCard compact label="All" icon={FileText} value={counts.all} testId="fe-status-all" active={feActiveTab === 'all'} onClick={() => setFeActiveTab('all')} />
                   </div>
 
                   {/* Project Cards List */}

@@ -33,6 +33,7 @@ import {
 import { toast } from 'sonner';
 import MobileBottomNav from '../components/MobileBottomNav';
 import { AppHeader } from '../components/AppHeader';
+import { SummaryCard } from '../components/SummaryCard';
 import { NumericInput } from '../components/NumericInput';
 
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -1066,31 +1067,11 @@ export default function MarketingBoard() {
         </Card>
 
         {/* Stats Overview */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-brand-400 text-white">
-            <CardContent className="p-4">
-              <p className="text-blue-100 text-sm">Total Pre-Sales Leads</p>
-              <p className="text-3xl font-bold">{dashboard?.total_pre_sales_leads || 0}</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-brand-400 text-white">
-            <CardContent className="p-4">
-              <p className="text-green-100 text-sm">Total Sales Appointments</p>
-              <p className="text-3xl font-bold">{dashboard?.total_sales_leads || 0}</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-purple-400 text-white">
-            <CardContent className="p-4">
-              <p className="text-purple-100 text-sm">Pre-Sales Team</p>
-              <p className="text-3xl font-bold">{dashboard?.pre_sales_team?.length || 0}</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-orange-400 text-white">
-            <CardContent className="p-4">
-              <p className="text-orange-100 text-sm">Sales Team</p>
-              <p className="text-3xl font-bold">{dashboard?.sales_team?.length || 0}</p>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <SummaryCard label="Total Pre-Sales Leads" value={dashboard?.total_pre_sales_leads || 0} icon={UserPlus} tone="info" />
+          <SummaryCard label="Total Sales Appointments" value={dashboard?.total_sales_leads || 0} icon={Calendar} tone="positive" />
+          <SummaryCard label="Pre-Sales Team" value={dashboard?.pre_sales_team?.length || 0} icon={Users} tone="violet" />
+          <SummaryCard label="Sales Team" value={dashboard?.sales_team?.length || 0} icon={Target} tone="warning" />
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
@@ -2048,37 +2029,11 @@ export default function MarketingBoard() {
           {selectedPerson && (
             <div className="space-y-6 mt-4">
               {/* Summary Stats */}
-              <div className="grid grid-cols-4 gap-4">
-                <Card className="bg-amber-50 border-blue-200">
-                  <CardContent className="p-4 text-center">
-                    <p className="text-3xl font-bold text-amber-700">
-                      {selectedPerson.type === 'pre_sales' ? selectedPerson.total_leads : selectedPerson.total_appointments}
-                    </p>
-                    <p className="text-xs text-amber-600">Total {selectedPerson.type === 'pre_sales' ? 'Leads' : 'Appointments'}</p>
-                  </CardContent>
-                </Card>
-                <Card className="bg-green-50 border-green-200">
-                  <CardContent className="p-4 text-center">
-                    <p className="text-3xl font-bold text-green-700">
-                      {selectedPerson.type === 'pre_sales' ? selectedPerson.converted : selectedPerson.deals_closed}
-                    </p>
-                    <p className="text-xs text-green-600">{selectedPerson.type === 'pre_sales' ? 'Appt Booked' : 'Deals Closed'}</p>
-                  </CardContent>
-                </Card>
-                <Card className="bg-purple-50 border-purple-200">
-                  <CardContent className="p-4 text-center">
-                    <p className="text-3xl font-bold text-purple-700">
-                      {selectedPerson.type === 'pre_sales' ? selectedPerson.conversion_rate : selectedPerson.close_rate}%
-                    </p>
-                    <p className="text-xs text-purple-600">{selectedPerson.type === 'pre_sales' ? 'Conversion Rate' : 'Close Rate'}</p>
-                  </CardContent>
-                </Card>
-                <Card className="bg-orange-50 border-orange-200">
-                  <CardContent className="p-4 text-center">
-                    <p className="text-3xl font-bold text-orange-700">{personLeads.length}</p>
-                    <p className="text-xs text-orange-600">Filtered Results</p>
-                  </CardContent>
-                </Card>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <SummaryCard compact tone="info" label={`Total ${selectedPerson.type === 'pre_sales' ? 'Leads' : 'Appointments'}`} value={selectedPerson.type === 'pre_sales' ? selectedPerson.total_leads : selectedPerson.total_appointments} />
+                <SummaryCard compact tone="positive" label={selectedPerson.type === 'pre_sales' ? 'Appt Booked' : 'Deals Closed'} value={selectedPerson.type === 'pre_sales' ? selectedPerson.converted : selectedPerson.deals_closed} />
+                <SummaryCard compact tone="violet" label={selectedPerson.type === 'pre_sales' ? 'Conversion Rate' : 'Close Rate'} value={`${selectedPerson.type === 'pre_sales' ? selectedPerson.conversion_rate : selectedPerson.close_rate}%`} />
+                <SummaryCard compact tone="warning" label="Filtered Results" value={personLeads.length} />
               </div>
 
               {/* Stage Breakdown */}

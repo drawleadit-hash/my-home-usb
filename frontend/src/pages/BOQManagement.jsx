@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Building2, LogOut, Plus, ArrowLeft, Lock, Unlock, Edit, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -169,39 +170,11 @@ export default function BOQManagement() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
-          <Card className="bg-blue-50 border-blue-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Total Budget</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-amber-700">₹{(totalBudget / 100000).toFixed(2)}L</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-green-50 border-green-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Material Cost</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-green-700">₹{(materialTotal / 100000).toFixed(2)}L</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-orange-50 border-orange-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Labour Cost</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-orange-700">₹{(labourTotal / 100000).toFixed(2)}L</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-gray-50 border-gray-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Total Items</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-gray-700">{boqItems.length}</div>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <SummaryCard label="Total Budget" value={`₹${(totalBudget / 100000).toFixed(2)}L`} />
+          <SummaryCard label="Material Cost" tone="positive" value={`₹${(materialTotal / 100000).toFixed(2)}L`} />
+          <SummaryCard label="Labour Cost" tone="warning" value={`₹${(labourTotal / 100000).toFixed(2)}L`} />
+          <SummaryCard label="Total Items" value={boqItems.length} />
         </div>
 
         {/* BOQ Table */}

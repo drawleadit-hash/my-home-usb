@@ -683,7 +683,7 @@ export default function WORABTab({ projectId, workOrder, onOpenRabView, stageIdF
 }
 
 const SumTile = ({ label, value, accent }) => (
-  <div className="rounded-lg border border-gray-200 bg-white p-2.5">
+  <div className="rounded-xl border border-border bg-card p-2.5">
     <p className="text-[10px] uppercase tracking-wide text-gray-500 font-medium">{label}</p>
     <p className={`text-sm font-bold mt-0.5 ${accent || 'text-gray-900'}`}>{value}</p>
   </div>
@@ -691,7 +691,7 @@ const SumTile = ({ label, value, accent }) => (
 
 /** Compact 3-up stat tile for the per-stage card header. */
 const Tile = ({ label, value, color }) => (
-  <div className="rounded border border-gray-200 bg-white px-2 py-1 text-center">
+  <div className="rounded-lg border border-border bg-card px-2 py-1 text-center">
     <p className="text-[9px] uppercase tracking-wider text-gray-500 font-medium">{label}</p>
     <p className={`text-xs font-bold ${color || 'text-gray-900'}`}>{value}</p>
   </div>

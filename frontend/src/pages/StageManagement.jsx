@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '../components/ui/badge';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
@@ -178,18 +179,8 @@ export default function StageManagement() {
 
         {/* Summary */}
         <div className="grid grid-cols-2 gap-3 mb-4">
-          <Card className="cursor-pointer hover:shadow-md transition-shadow border-l-4 border-l-indigo-500" onClick={() => setActiveTab('pre_sales')}>
-            <CardContent className="p-3">
-              <p className="text-xs font-semibold text-gray-500">Pre-Sales Stages</p>
-              <p className="text-2xl font-bold text-indigo-700">{preSalesCount}</p>
-            </CardContent>
-          </Card>
-          <Card className="cursor-pointer hover:shadow-md transition-shadow border-l-4 border-l-green-500" onClick={() => setActiveTab('sales')}>
-            <CardContent className="p-3">
-              <p className="text-xs font-semibold text-gray-500">Sales Stages</p>
-              <p className="text-2xl font-bold text-green-700">{salesCount}</p>
-            </CardContent>
-          </Card>
+          <SummaryCard compact label="Pre-Sales Stages" tone="info" value={preSalesCount} active={activeTab === 'pre_sales'} onClick={() => setActiveTab('pre_sales')} />
+          <SummaryCard compact label="Sales Stages" tone="positive" value={salesCount} active={activeTab === 'sales'} onClick={() => setActiveTab('sales')} />
         </div>
 
         {/* Tabs */}

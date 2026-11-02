@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '
 import { Search, CheckCircle2, Lock, FileText, Loader2, Building2, AlertTriangle, Eye, Trash2, XCircle, Ban, RotateCcw, ChevronDown, Check } from 'lucide-react';
 import { Popover, PopoverTrigger, PopoverContent } from './ui/popover';
 import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from './ui/command';
+import { SummaryCard as SharedSummaryCard } from './SummaryCard';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -1077,32 +1078,22 @@ function ChequeTable({ rows, canOpen, canRequestOpen, canBounce, canDelete, canD
 }
 
 
+const CHEQUE_TONES = { amber: 'warning', blue: 'info', emerald: 'positive', orange: 'warning', red: 'negative' };
+
+// Cheque status card — the shared summary card with the cheque count as a pill.
 function SummaryCard({ color = 'blue', label, amount, count, onClick, isActive, testId }) {
-  const palette = {
-    amber:   { border: 'border-l-amber-500',   amountClr: 'text-amber-700',   pillBg: 'bg-amber-100',   pillTxt: 'text-amber-700',   ringClr: 'ring-amber-400'   },
-    blue:    { border: 'border-l-blue-500',    amountClr: 'text-blue-700',    pillBg: 'bg-blue-100',    pillTxt: 'text-blue-700',    ringClr: 'ring-blue-400'    },
-    emerald: { border: 'border-l-emerald-500', amountClr: 'text-emerald-700', pillBg: 'bg-emerald-100', pillTxt: 'text-emerald-700', ringClr: 'ring-emerald-400' },
-    orange:  { border: 'border-l-orange-500',  amountClr: 'text-orange-700',  pillBg: 'bg-orange-100',  pillTxt: 'text-orange-700',  ringClr: 'ring-orange-400'  },
-    red:     { border: 'border-l-red-500',     amountClr: 'text-red-700',     pillBg: 'bg-red-100',     pillTxt: 'text-red-700',     ringClr: 'ring-red-400'     },
-  };
-  const p = palette[color] || palette.blue;
   return (
-    <Card
-      className={`border-l-4 ${p.border} cursor-pointer transition-all ${isActive ? `ring-2 ${p.ringClr} shadow-md` : 'hover:shadow-md'}`}
+    <SharedSummaryCard
+      compact
+      label={label}
+      tone={CHEQUE_TONES[color] || 'info'}
+      value={fmtMoney(amount)}
+      sub={count === 1 ? '1 cheque' : `${count || 0} cheques`}
+      badge={<span className="min-w-[24px] shrink-0 rounded-full bg-muted px-2 py-0.5 text-center text-[10px] font-bold text-foreground">{count || 0}</span>}
       onClick={onClick}
-      data-testid={testId}
-    >
-      <CardContent className="p-3 sm:p-4">
-        <div className="flex items-center justify-between mb-1">
-          <p className="text-[10px] sm:text-[11px] font-semibold text-gray-500 uppercase tracking-wide">{label}</p>
-          <span className={`${p.pillBg} ${p.pillTxt} text-[10px] font-bold px-2 py-0.5 rounded-full min-w-[24px] text-center`}>
-            {count || 0}
-          </span>
-        </div>
-        <p className={`${p.amountClr} text-xl sm:text-2xl font-bold leading-tight`}>{fmtMoney(amount)}</p>
-        <p className="text-[10px] text-gray-400 mt-0.5">{count === 1 ? '1 cheque' : `${count || 0} cheques`}</p>
-      </CardContent>
-    </Card>
+      active={isActive}
+      testId={testId}
+    />
   );
 }
 

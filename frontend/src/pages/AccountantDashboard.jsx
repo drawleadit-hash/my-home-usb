@@ -19,9 +19,6 @@ import {
   TrendingDown,
   Building2,
   Users,
-  CreditCard,
-  Banknote,
-  Landmark,
   CheckCircle,
   AlertTriangle,
   Clock,
@@ -33,13 +30,13 @@ import {
   ArrowDownRight,
   Receipt,
   Coins,
-  Send,
   Shield,
   Eye,
   Plus,
   RefreshCw
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
+import { SummaryCard, ChannelCard } from '../components/SummaryCard';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -140,80 +137,38 @@ export default function AccountantDashboard() {
       <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6">
         {/* Summary Cards - Financial Overview */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          {/* Total Income */}
-          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-brand-400 text-white border-0 shadow-lg" data-testid="total-income-card">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-green-100 text-sm font-medium">Total Income</p>
-                  <p className="text-2xl font-bold mt-1">{formatLargeNumber(summary.total_income)}</p>
-                </div>
-                <div className="bg-white/20 p-3 rounded-xl">
-                  <TrendingUp className="h-6 w-6" />
-                </div>
-              </div>
-              <div className="flex items-center gap-1 mt-3 text-green-100 text-xs">
-                <ArrowUpRight className="h-3 w-3" />
-                <span>All projects combined</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Total Expense */}
-          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-red-400 text-white border-0 shadow-lg" data-testid="total-expense-card">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-red-100 text-sm font-medium">Total Expense</p>
-                  <p className="text-2xl font-bold mt-1">{formatLargeNumber(summary.total_expense)}</p>
-                </div>
-                <div className="bg-white/20 p-3 rounded-xl">
-                  <TrendingDown className="h-6 w-6" />
-                </div>
-              </div>
-              <div className="flex items-center gap-1 mt-3 text-red-100 text-xs">
-                <ArrowDownRight className="h-3 w-3" />
-                <span>Material + Labour + Services</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Total Profit */}
-          <Card className={`${summary.total_profit >= 0 ? 'bg-primary' : 'bg-red-600'} text-white border-0 shadow-lg`} data-testid="total-profit-card">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-white/80 text-sm font-medium">Net Profit</p>
-                  <p className="text-2xl font-bold mt-1">{formatLargeNumber(summary.total_profit)}</p>
-                </div>
-                <div className="bg-white/20 p-3 rounded-xl">
-                  <PieChart className="h-6 w-6" />
-                </div>
-              </div>
-              <div className="flex items-center gap-1 mt-3 text-white/80 text-xs">
-                <span>Margin: {summary.profit_margin || 0}%</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Pending Requests */}
-          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-amber-400 text-white border-0 shadow-lg" data-testid="pending-requests-card">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-amber-100 text-sm font-medium">Pending Requests</p>
-                  <p className="text-2xl font-bold mt-1">{dashboard?.pending_payment_requests || 0}</p>
-                </div>
-                <div className="bg-white/20 p-3 rounded-xl">
-                  <Clock className="h-6 w-6" />
-                </div>
-              </div>
-              <div className="flex items-center gap-1 mt-3 text-amber-100 text-xs">
-                <AlertTriangle className="h-3 w-3" />
-                <span>Require action</span>
-              </div>
-            </CardContent>
-          </Card>
+          <SummaryCard
+            label="Total Income"
+            value={formatLargeNumber(summary.total_income)}
+            sub="All projects combined"
+            icon={TrendingUp}
+            tone="positive"
+            testId="total-income-card"
+          />
+          <SummaryCard
+            label="Total Expense"
+            value={formatLargeNumber(summary.total_expense)}
+            sub="Material + Labour + Services"
+            icon={TrendingDown}
+            tone="negative"
+            testId="total-expense-card"
+          />
+          <SummaryCard
+            label="Net Profit"
+            value={<span className={summary.total_profit < 0 ? 'text-red-600' : ''}>{formatLargeNumber(summary.total_profit)}</span>}
+            sub={`Margin: ${summary.profit_margin || 0}%`}
+            icon={PieChart}
+            tone={summary.total_profit >= 0 ? 'positive' : 'negative'}
+            testId="total-profit-card"
+          />
+          <SummaryCard
+            label="Pending Requests"
+            value={dashboard?.pending_payment_requests || 0}
+            sub="Require action"
+            icon={Clock}
+            tone="warning"
+            testId="pending-requests-card"
+          />
         </div>
 
         {/* Income by Payment Method */}
@@ -225,46 +180,12 @@ export default function AccountantDashboard() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-              <div className="bg-green-50 rounded-lg p-3 border border-green-100">
-                <div className="flex items-center gap-2 mb-1">
-                  <Banknote className="h-4 w-4 text-green-600" />
-                  <span className="text-xs text-green-700 font-medium">Cash</span>
-                </div>
-                <p className="text-lg font-bold text-green-800">{formatLargeNumber(incomeByMethod.cash || 0)}</p>
-              </div>
-              
-              <div className="bg-amber-50 rounded-lg p-3 border border-blue-100">
-                <div className="flex items-center gap-2 mb-1">
-                  <FileText className="h-4 w-4 text-amber-600" />
-                  <span className="text-xs text-amber-700 font-medium">Cheque</span>
-                </div>
-                <p className="text-lg font-bold text-amber-800">{formatLargeNumber(incomeByMethod.cheque || 0)}</p>
-              </div>
-              
-              <div className="bg-purple-50 rounded-lg p-3 border border-purple-100">
-                <div className="flex items-center gap-2 mb-1">
-                  <Landmark className="h-4 w-4 text-purple-600" />
-                  <span className="text-xs text-purple-700 font-medium">Bank Transfer</span>
-                </div>
-                <p className="text-lg font-bold text-purple-800">{formatLargeNumber(incomeByMethod.bank_transfer || 0)}</p>
-              </div>
-              
-              <div className="bg-indigo-50 rounded-lg p-3 border border-indigo-100">
-                <div className="flex items-center gap-2 mb-1">
-                  <Send className="h-4 w-4 text-indigo-600" />
-                  <span className="text-xs text-indigo-700 font-medium">Escrow</span>
-                </div>
-                <p className="text-lg font-bold text-indigo-800">{formatLargeNumber(incomeByMethod.upi || 0)}</p>
-              </div>
-              
-              <div className="bg-pink-50 rounded-lg p-3 border border-pink-100">
-                <div className="flex items-center gap-2 mb-1">
-                  <CreditCard className="h-4 w-4 text-pink-600" />
-                  <span className="text-xs text-pink-700 font-medium">Credit Card</span>
-                </div>
-                <p className="text-lg font-bold text-pink-800">{formatLargeNumber(incomeByMethod.credit_card || 0)}</p>
-              </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+              <ChannelCard label="Cash" dot="bg-violet-500" value={formatLargeNumber(incomeByMethod.cash || 0)} />
+              <ChannelCard label="Cheque" dot="bg-ink-700" value={formatLargeNumber(incomeByMethod.cheque || 0)} />
+              <ChannelCard label="Bank Transfer" dot="bg-primary" value={formatLargeNumber(incomeByMethod.bank_transfer || 0)} />
+              <ChannelCard label="Escrow" dot="bg-blue-500" value={formatLargeNumber(incomeByMethod.upi || 0)} />
+              <ChannelCard label="Credit Card" dot="bg-orange-500" value={formatLargeNumber(incomeByMethod.credit_card || 0)} />
             </div>
           </CardContent>
         </Card>
@@ -272,7 +193,7 @@ export default function AccountantDashboard() {
         {/* HR & Cheque Summary Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           {/* HR Summary */}
-          <Card className="bg-violet-50 border-violet-200" data-testid="hr-summary-card">
+          <Card data-testid="hr-summary-card">
             <CardHeader className="pb-2">
               <CardTitle className="text-base flex items-center gap-2">
                 <Briefcase className="h-5 w-5 text-primary" />
@@ -301,7 +222,7 @@ export default function AccountantDashboard() {
           </Card>
 
           {/* Cheque Summary */}
-          <Card className="bg-blue-50 border-blue-200" data-testid="cheque-summary-card">
+          <Card data-testid="cheque-summary-card">
             <CardHeader className="pb-2">
               <CardTitle className="text-base flex items-center gap-2">
                 <FileText className="h-5 w-5 text-primary" />

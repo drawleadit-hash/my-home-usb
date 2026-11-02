@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '../components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '../components/ui/dialog';
 import { Input } from '../components/ui/input';
@@ -274,54 +275,13 @@ export default function ChequeManagement() {
         )}
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-6">
-          <Card className="cursor-pointer hover:shadow-md" onClick={() => setActiveTab('all')}>
-            <CardContent className="p-4 text-center">
-              <FileText className="h-6 w-6 mx-auto mb-2 text-gray-600" />
-              <p className="text-2xl font-bold">{stats.total}</p>
-              <p className="text-xs text-gray-500">Total Cheques</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="cursor-pointer hover:shadow-md bg-green-50" onClick={() => setActiveTab('incoming')}>
-            <CardContent className="p-4 text-center">
-              <p className="text-2xl font-bold text-green-700">{stats.incoming}</p>
-              <p className="text-xs text-green-600">Incoming</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="cursor-pointer hover:shadow-md bg-amber-50" onClick={() => setActiveTab('outgoing')}>
-            <CardContent className="p-4 text-center">
-              <p className="text-2xl font-bold text-amber-700">{stats.outgoing}</p>
-              <p className="text-xs text-amber-600">Outgoing</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="cursor-pointer hover:shadow-md bg-amber-50" onClick={() => setActiveTab('pending')}>
-            <CardContent className="p-4 text-center">
-              <Clock className="h-5 w-5 mx-auto mb-1 text-amber-600" />
-              <p className="text-2xl font-bold text-amber-700">{stats.pending}</p>
-              <p className="text-xs text-amber-600">Pending</p>
-              <p className="text-xs font-semibold text-amber-700">{formatCurrency(stats.pendingAmount)}</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="cursor-pointer hover:shadow-md bg-red-50" onClick={() => setActiveTab('bounced')}>
-            <CardContent className="p-4 text-center">
-              <XCircle className="h-5 w-5 mx-auto mb-1 text-red-600" />
-              <p className="text-2xl font-bold text-red-700">{stats.bounced}</p>
-              <p className="text-xs text-red-600">Bounced</p>
-              <p className="text-xs font-semibold text-red-700">{formatCurrency(stats.bouncedAmount)}</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-emerald-50">
-            <CardContent className="p-4 text-center">
-              <CheckCircle className="h-5 w-5 mx-auto mb-1 text-emerald-600" />
-              <p className="text-2xl font-bold text-emerald-700">{stats.cleared}</p>
-              <p className="text-xs text-emerald-600">Cleared</p>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 mb-6">
+          <SummaryCard compact label="Total Cheques" icon={FileText} value={stats.total} active={activeTab === 'all'} onClick={() => setActiveTab('all')} />
+          <SummaryCard compact label="Incoming" tone="positive" value={stats.incoming} active={activeTab === 'incoming'} onClick={() => setActiveTab('incoming')} />
+          <SummaryCard compact label="Outgoing" tone="warning" value={stats.outgoing} active={activeTab === 'outgoing'} onClick={() => setActiveTab('outgoing')} />
+          <SummaryCard compact label="Pending" icon={Clock} tone="warning" value={stats.pending} sub={formatCurrency(stats.pendingAmount)} active={activeTab === 'pending'} onClick={() => setActiveTab('pending')} />
+          <SummaryCard compact label="Bounced" icon={XCircle} tone="negative" value={stats.bounced} sub={formatCurrency(stats.bouncedAmount)} active={activeTab === 'bounced'} onClick={() => setActiveTab('bounced')} />
+          <SummaryCard compact label="Cleared" icon={CheckCircle} tone="positive" value={stats.cleared} />
         </div>
 
         {/* Cheques Table */}

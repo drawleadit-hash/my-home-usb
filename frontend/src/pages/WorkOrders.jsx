@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Building2, LogOut, Plus, CheckCircle, XCircle, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -201,44 +202,10 @@ export default function WorkOrders() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <Card className="bg-blue-50 border-blue-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Total Orders</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-gray-900">{workOrders.length}</div>
-            </CardContent>
-          </Card>
-          <Card className="bg-yellow-50 border-yellow-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Pending</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-yellow-700">
-                {workOrders.filter(wo => wo.status === 'submitted').length}
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="bg-green-50 border-green-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Approved</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-green-700">
-                {workOrders.filter(wo => wo.status === 'approved').length}
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="bg-red-50 border-red-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Rejected</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-red-700">
-                {workOrders.filter(wo => wo.status === 'rejected').length}
-              </div>
-            </CardContent>
-          </Card>
+          <SummaryCard label="Total Orders" value={workOrders.length} />
+          <SummaryCard label="Pending" tone="warning" value={workOrders.filter(wo => wo.status === 'submitted').length} />
+          <SummaryCard label="Approved" tone="positive" value={workOrders.filter(wo => wo.status === 'approved').length} />
+          <SummaryCard label="Rejected" tone="negative" value={workOrders.filter(wo => wo.status === 'rejected').length} />
         </div>
 
         {/* Work Orders Table */}

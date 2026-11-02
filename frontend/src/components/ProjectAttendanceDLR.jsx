@@ -8,6 +8,7 @@ import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Plus, RefreshCw, Users, Calendar, Briefcase, TrendingUp, Loader2 } from 'lucide-react';
 import MetaDateFilter from './MetaDateFilter';
+import { SummaryCard as SharedSummaryCard } from './SummaryCard';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -199,21 +200,18 @@ export default function ProjectAttendanceDLR({ projectId, user, labourAttendance
   );
 }
 
+const DLR_TONES = { blue: 'info', emerald: 'positive', amber: 'warning', violet: 'violet' };
+
 function SummaryCard({ accent, Icon, label, value, sub }) {
-  const palette = {
-    blue: 'bg-blue-50 border-blue-200 text-blue-700',
-    emerald: 'bg-emerald-50 border-emerald-200 text-emerald-700',
-    amber: 'bg-amber-50 border-amber-200 text-amber-700',
-    violet: 'bg-violet-50 border-violet-200 text-violet-700',
-  }[accent] || 'bg-gray-50 border-gray-200 text-gray-700';
   return (
-    <div className={`rounded-lg border p-3 ${palette}`} data-testid={`dlr-card-${label.toLowerCase().replace(/\s+/g, '-')}`}>
-      <div className="flex items-center justify-between">
-        <p className="text-[10px] uppercase tracking-wide font-semibold opacity-80">{label}</p>
-        <Icon className="h-4 w-4 opacity-70" />
-      </div>
-      <p className="text-xl sm:text-2xl font-bold mt-1">{value}</p>
-      {sub && <p className="text-[10px] mt-0.5 opacity-70">{sub}</p>}
-    </div>
+    <SharedSummaryCard
+      compact
+      label={label}
+      icon={Icon}
+      tone={DLR_TONES[accent] || 'neutral'}
+      value={value}
+      sub={sub}
+      testId={`dlr-card-${label.toLowerCase().replace(/\s+/g, '-')}`}
+    />
   );
 }

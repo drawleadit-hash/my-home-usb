@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -236,74 +237,13 @@ export default function ComprehensiveProjectView() {
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
-          <Card className="bg-blue-50 border-blue-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
-                <IndianRupee className="h-3 w-3" />Project Value
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-lg font-bold text-amber-700">{formatCurrency(summary.project_value)}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-green-50 border-green-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
-                <TrendingUp className="h-3 w-3" />Total Received
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-lg font-bold text-green-700">{formatCurrency(summary.total_payments)}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-orange-50 border-orange-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
-                <Receipt className="h-3 w-3" />Total Expenses
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-lg font-bold text-orange-700">{formatCurrency(summary.total_expenses)}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-purple-50 border-purple-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
-                <Wallet className="h-3 w-3" />Cash in Book
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className={`text-lg font-bold ${summary.cash_in_book >= 0 ? 'text-purple-700' : 'text-red-600'}`}>
-                {formatCurrency(summary.cash_in_book)}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-cyan-50 border-cyan-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
-                <Plus className="h-3 w-3" />Additional Cost
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-lg font-bold text-cyan-700">{formatCurrency(summary.additional_estimated)}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-red-50 border-red-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
-                <AlertCircle className="h-3 w-3" />Balance Due
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-lg font-bold text-red-700">{formatCurrency(summary.overall_balance)}</div>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-6 gap-4 mb-8">
+          <SummaryCard compact label="Project Value" icon={IndianRupee} value={formatCurrency(summary.project_value)} />
+          <SummaryCard compact label="Total Received" icon={TrendingUp} tone="positive" value={formatCurrency(summary.total_payments)} />
+          <SummaryCard compact label="Total Expenses" icon={Receipt} tone="negative" value={formatCurrency(summary.total_expenses)} />
+          <SummaryCard compact label="Cash in Book" icon={Wallet} tone={summary.cash_in_book >= 0 ? 'positive' : 'negative'} value={<span className={summary.cash_in_book < 0 ? 'text-red-600' : ''}>{formatCurrency(summary.cash_in_book)}</span>} />
+          <SummaryCard compact label="Additional Cost" icon={Plus} tone="info" value={formatCurrency(summary.additional_estimated)} />
+          <SummaryCard compact label="Balance Due" icon={AlertCircle} tone="warning" value={formatCurrency(summary.overall_balance)} />
         </div>
 
         {/* Main Content Tabs */}

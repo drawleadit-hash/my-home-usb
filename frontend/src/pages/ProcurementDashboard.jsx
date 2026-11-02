@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '../components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger, DialogFooter } from '../components/ui/dialog';
@@ -306,61 +307,12 @@ export default function ProcurementDashboard() {
 
       <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 sm:py-8">
         {/* Dashboard Metrics */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4 mb-4 sm:mb-8">
-          <Card className="bg-yellow-50 border-yellow-200 cursor-pointer active:bg-yellow-100" onClick={() => handleTabChange('pending')}>
-            <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600 flex items-center gap-1">
-                <Clock className="h-3 w-3 sm:h-4 sm:w-4" />Pending
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-2 pt-0 sm:p-6 sm:pt-0">
-              <div className="text-lg sm:text-2xl font-bold text-yellow-700">{dashboard.pending_requests || 0}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-blue-50 border-blue-200 cursor-pointer active:bg-amber-50" onClick={() => handleTabChange('pricing_in_progress')}>
-            <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600 flex items-center gap-1">
-                <IndianRupee className="h-3 w-3 sm:h-4 sm:w-4" />Pricing
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-2 pt-0 sm:p-6 sm:pt-0">
-              <div className="text-lg sm:text-2xl font-bold text-amber-700">{dashboard.pricing_in_progress || 0}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-orange-50 border-orange-200 cursor-pointer active:bg-orange-100" onClick={() => handleTabChange('waiting_accounts')}>
-            <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600 flex items-center gap-1">
-                <AlertCircle className="h-3 w-3 sm:h-4 sm:w-4" />Waiting
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-2 pt-0 sm:p-6 sm:pt-0">
-              <div className="text-lg sm:text-2xl font-bold text-orange-700">{dashboard.waiting_accounts || 0}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-green-50 border-green-200 cursor-pointer active:bg-green-100" onClick={() => handleTabChange('approved')}>
-            <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600 flex items-center gap-1">
-                <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4" />Approved
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-2 pt-0 sm:p-6 sm:pt-0">
-              <div className="text-lg sm:text-2xl font-bold text-green-700">{dashboard.approved_orders || 0}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-purple-50 border-purple-200 cursor-pointer active:bg-purple-100 col-span-2 sm:col-span-1" onClick={() => handleTabChange('delivered')}>
-            <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600 flex items-center gap-1">
-                <Package className="h-3 w-3 sm:h-4 sm:w-4" />Delivered
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-2 pt-0 sm:p-6 sm:pt-0">
-              <div className="text-lg sm:text-2xl font-bold text-purple-700">{dashboard.delivered_orders || 0}</div>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 mb-4 sm:mb-8">
+          <SummaryCard compact label="Pending" icon={Clock} tone="warning" value={dashboard.pending_requests || 0} onClick={() => handleTabChange('pending')} />
+          <SummaryCard compact label="Pricing" icon={IndianRupee} tone="info" value={dashboard.pricing_in_progress || 0} onClick={() => handleTabChange('pricing_in_progress')} />
+          <SummaryCard compact label="Waiting" icon={AlertCircle} tone="warning" value={dashboard.waiting_accounts || 0} onClick={() => handleTabChange('waiting_accounts')} />
+          <SummaryCard compact label="Approved" icon={CheckCircle} tone="positive" value={dashboard.approved_orders || 0} onClick={() => handleTabChange('approved')} />
+          <SummaryCard compact label="Delivered" icon={Package} tone="violet" value={dashboard.delivered_orders || 0} className="col-span-2 sm:col-span-1" onClick={() => handleTabChange('delivered')} />
         </div>
 
         {/* Financial Summary */}

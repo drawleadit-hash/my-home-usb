@@ -475,7 +475,7 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
     const close = () => { if (inDrawer) setDrawerOpen(false); };
     return (
       <nav
-        className={`flex-1 overflow-y-auto py-3 scrollbar-hide ${rail ? 'space-y-2 px-2' : 'space-y-1 px-3'}`}
+        className={`min-h-0 flex-1 overflow-y-auto py-3 scrollbar-hide ${rail ? 'space-y-2 px-2' : 'space-y-1 px-3'}`}
         data-testid={inDrawer ? 'drawer-nav' : 'header-nav'}
       >
         {!rail && sectionLabel('Workspace')}

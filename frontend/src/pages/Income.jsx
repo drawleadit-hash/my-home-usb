@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ChannelCard } from '../components/SummaryCard';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -361,72 +362,13 @@ export default function Income({ embedded = false }) {
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
-          <Card className="bg-green-50 border-green-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
-                <IndianRupee className="h-3 w-3" />Total Income
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-xl font-bold text-green-700">{formatCurrency(summary?.total_income)}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-emerald-50 border-emerald-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
-                <Banknote className="h-3 w-3" />Cash
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-xl font-bold text-emerald-700">{formatCurrency(summary?.cash)}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-blue-50 border-blue-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
-                <CreditCard className="h-3 w-3" />Cheque
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-xl font-bold text-amber-700">{formatCurrency(summary?.cheque)}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-purple-50 border-purple-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
-                <ArrowUpCircle className="h-3 w-3" />Bank Transfer
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-xl font-bold text-purple-700">{formatCurrency(summary?.bank_transfer)}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-orange-50 border-orange-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
-                <Wallet className="h-3 w-3" />Escrow
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-xl font-bold text-orange-700">{formatCurrency(summary?.escrow)}</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-cyan-50 border-cyan-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-medium text-gray-600 flex items-center gap-1">
-                <PiggyBank className="h-3 w-3" />Petty Cash
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-xl font-bold text-cyan-700">{formatCurrency(summary?.petty_cash)}</div>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-6 gap-3 mb-8">
+          <ChannelCard dark label="Total Income" value={formatCurrency(summary?.total_income)} />
+          <ChannelCard label="Cash" dot="bg-violet-500" value={formatCurrency(summary?.cash)} />
+          <ChannelCard label="Cheque" dot="bg-ink-700" value={formatCurrency(summary?.cheque)} />
+          <ChannelCard label="Bank Transfer" dot="bg-primary" value={formatCurrency(summary?.bank_transfer)} />
+          <ChannelCard label="Escrow" dot="bg-blue-500" value={formatCurrency(summary?.escrow)} />
+          <ChannelCard label="Petty Cash" dot="bg-orange-500" value={formatCurrency(summary?.petty_cash)} />
         </div>
 
         {/* Filters */}

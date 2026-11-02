@@ -288,7 +288,7 @@ export function RABDetailDialog({ open, onOpenChange, projectId, workOrderId, hi
 }
 
 const Tile = ({ icon: Icon, label, value, accent }) => (
-  <div className="bg-white rounded-lg border border-gray-200 p-2.5">
+  <div className="rounded-xl border border-border bg-card p-2.5">
     <div className="flex items-center gap-1.5 text-[10px] text-gray-500 uppercase tracking-wide font-medium">
       <Icon className="h-3 w-3" /> {label}
     </div>
@@ -641,7 +641,7 @@ function RABCardTabs({ rab, inr, fmtDate, releasedSiblings = [], onView, onDownl
 }
 
 const MiniStat = ({ label, value, valueClass }) => (
-  <div className="rounded-lg border border-gray-200 bg-white p-2">
+  <div className="rounded-xl border border-border bg-card p-2">
     <p className="text-[9px] text-gray-500 uppercase tracking-wide font-medium">{label}</p>
     <p className={`text-xs sm:text-sm font-bold mt-0.5 ${valueClass || 'text-gray-900'}`}>{value}</p>
   </div>

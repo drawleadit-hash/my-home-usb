@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
@@ -183,33 +184,9 @@ export default function Notifications() {
 
         {/* STAT TILES */}
         <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-5">
-          <Card className="bg-blue-50 border-blue-200">
-            <CardContent className="p-3 sm:p-4">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] sm:text-xs uppercase tracking-wide text-blue-700 font-medium">Total</span>
-                <Inbox className="h-3.5 w-3.5 text-blue-600" />
-              </div>
-              <p className="text-xl sm:text-2xl font-bold text-blue-900 mt-1" data-testid="notif-stat-total">{notifications.length}</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-amber-50 border-amber-200">
-            <CardContent className="p-3 sm:p-4">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] sm:text-xs uppercase tracking-wide text-amber-700 font-medium">Unread</span>
-                <AlertTriangle className="h-3.5 w-3.5 text-amber-600" />
-              </div>
-              <p className="text-xl sm:text-2xl font-bold text-amber-900 mt-1" data-testid="notif-stat-unread">{unreadCount}</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-emerald-50 border-emerald-200">
-            <CardContent className="p-3 sm:p-4">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] sm:text-xs uppercase tracking-wide text-emerald-700 font-medium">Today</span>
-                <Sparkles className="h-3.5 w-3.5 text-emerald-600" />
-              </div>
-              <p className="text-xl sm:text-2xl font-bold text-emerald-900 mt-1" data-testid="notif-stat-today">{todayCount}</p>
-            </CardContent>
-          </Card>
+          <SummaryCard compact label="Total" icon={Inbox} tone="info" value={<span data-testid="notif-stat-total">{notifications.length}</span>} />
+          <SummaryCard compact label="Unread" icon={AlertTriangle} tone="warning" value={<span data-testid="notif-stat-unread">{unreadCount}</span>} />
+          <SummaryCard compact label="Today" icon={Sparkles} tone="positive" value={<span data-testid="notif-stat-today">{todayCount}</span>} />
         </div>
 
         {/* FILTERS + SEARCH */}

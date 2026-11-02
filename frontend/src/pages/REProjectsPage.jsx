@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '../components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '../components/ui/dialog';
 import { Input } from '../components/ui/input';
@@ -397,60 +398,11 @@ export default function REProjectsPage({ embedded = false }) {
       <div className={embedded ? '' : 'max-w-7xl mx-auto px-4 py-6 sm:px-6'}>
         {/* Stats Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
-          <Card 
-            className={`cursor-pointer transition-all ${activeTab === 'new' ? 'ring-2 ring-blue-500' : ''}`}
-            onClick={() => setActiveTab('new')}
-          >
-            <CardContent className="p-4 text-center">
-              <Clock className="h-6 w-6 mx-auto mb-1 text-amber-600" />
-              <p className="text-2xl font-bold text-amber-700">{dashboard?.status_counts?.re_requested || 0}</p>
-              <p className="text-xs text-amber-600">New Requests</p>
-            </CardContent>
-          </Card>
-          
-          <Card 
-            className={`cursor-pointer transition-all ${activeTab === 'in_progress' ? 'ring-2 ring-yellow-500' : ''}`}
-            onClick={() => setActiveTab('in_progress')}
-          >
-            <CardContent className="p-4 text-center">
-              <RefreshCw className="h-6 w-6 mx-auto mb-1 text-yellow-600" />
-              <p className="text-2xl font-bold text-yellow-700">{dashboard?.status_counts?.re_in_progress || 0}</p>
-              <p className="text-xs text-yellow-600">In Progress</p>
-            </CardContent>
-          </Card>
-          
-          <Card 
-            className={`cursor-pointer transition-all ${activeTab === 'submitted' ? 'ring-2 ring-purple-500' : ''}`}
-            onClick={() => setActiveTab('submitted')}
-          >
-            <CardContent className="p-4 text-center">
-              <FileText className="h-6 w-6 mx-auto mb-1 text-purple-600" />
-              <p className="text-2xl font-bold text-purple-700">{dashboard?.status_counts?.re_submitted || 0}</p>
-              <p className="text-xs text-purple-600">Awaiting Approval</p>
-            </CardContent>
-          </Card>
-          
-          <Card 
-            className={`cursor-pointer transition-all ${activeTab === 'approved' ? 'ring-2 ring-green-500' : ''}`}
-            onClick={() => setActiveTab('approved')}
-          >
-            <CardContent className="p-4 text-center">
-              <CheckCircle className="h-6 w-6 mx-auto mb-1 text-green-600" />
-              <p className="text-2xl font-bold text-green-700">{dashboard?.status_counts?.re_approved || 0}</p>
-              <p className="text-xs text-green-600">Approved</p>
-            </CardContent>
-          </Card>
-          
-          <Card 
-            className={`cursor-pointer transition-all ${activeTab === 'rejected' ? 'ring-2 ring-red-500' : ''}`}
-            onClick={() => setActiveTab('rejected')}
-          >
-            <CardContent className="p-4 text-center">
-              <XCircle className="h-6 w-6 mx-auto mb-1 text-red-600" />
-              <p className="text-2xl font-bold text-red-700">{dashboard?.status_counts?.re_rejected || 0}</p>
-              <p className="text-xs text-red-600">Rejected</p>
-            </CardContent>
-          </Card>
+          <SummaryCard compact label="New Requests" icon={Clock} tone="warning" value={dashboard?.status_counts?.re_requested || 0} active={activeTab === 'new'} onClick={() => setActiveTab('new')} />
+          <SummaryCard compact label="In Progress" icon={RefreshCw} tone="info" value={dashboard?.status_counts?.re_in_progress || 0} active={activeTab === 'in_progress'} onClick={() => setActiveTab('in_progress')} />
+          <SummaryCard compact label="Awaiting Approval" icon={FileText} tone="violet" value={dashboard?.status_counts?.re_submitted || 0} active={activeTab === 'submitted'} onClick={() => setActiveTab('submitted')} />
+          <SummaryCard compact label="Approved" icon={CheckCircle} tone="positive" value={dashboard?.status_counts?.re_approved || 0} active={activeTab === 'approved'} onClick={() => setActiveTab('approved')} />
+          <SummaryCard compact label="Rejected" icon={XCircle} tone="negative" value={dashboard?.status_counts?.re_rejected || 0} active={activeTab === 'rejected'} onClick={() => setActiveTab('rejected')} />
         </div>
 
         {/* Search Bar */}

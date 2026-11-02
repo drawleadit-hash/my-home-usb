@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '../components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '../components/ui/dialog';
 import { Input } from '../components/ui/input';
@@ -269,30 +270,10 @@ export default function WorkOrderManagement() {
       <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 sm:py-8">
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
-          <Card>
-            <CardContent className="p-4 text-center">
-              <p className="text-2xl font-bold text-indigo-600">{workOrders.length}</p>
-              <p className="text-sm text-gray-500">Total Orders</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-4 text-center">
-              <p className="text-2xl font-bold text-amber-600">{workOrders.filter(w => w.order_type === 'labour').length}</p>
-              <p className="text-sm text-gray-500">Labour</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-4 text-center">
-              <p className="text-2xl font-bold text-green-600">{workOrders.filter(w => w.order_type === 'material').length}</p>
-              <p className="text-sm text-gray-500">Material</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-4 text-center">
-              <p className="text-2xl font-bold text-yellow-600">{workOrders.filter(w => w.status === 'in_progress').length}</p>
-              <p className="text-sm text-gray-500">In Progress</p>
-            </CardContent>
-          </Card>
+          <SummaryCard compact label="Total Orders" value={workOrders.length} />
+          <SummaryCard compact label="Labour" tone="warning" value={workOrders.filter(w => w.order_type === 'labour').length} />
+          <SummaryCard compact label="Material" tone="positive" value={workOrders.filter(w => w.order_type === 'material').length} />
+          <SummaryCard compact label="In Progress" tone="info" value={workOrders.filter(w => w.status === 'in_progress').length} />
         </div>
 
         {/* Work Orders List */}

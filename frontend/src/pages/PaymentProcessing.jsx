@@ -28,6 +28,7 @@ import {
   Building2
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
+import { SummaryCard } from '../components/SummaryCard';
 import { useAutoRefresh } from '../hooks/useAutoRefresh';
 import { NumericInput } from '../components/NumericInput';
 
@@ -241,37 +242,10 @@ export default function PaymentProcessing() {
       <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6">
         {/* Summary Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-amber-400 text-white">
-            <CardContent className="p-4">
-              <Clock className="h-6 w-6 mb-2 opacity-80" />
-              <p className="text-2xl font-bold">{pendingRequests.length}</p>
-              <p className="text-sm text-amber-100">Awaiting OTP</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-blue-400 text-white">
-            <CardContent className="p-4">
-              <Key className="h-6 w-6 mb-2 opacity-80" />
-              <p className="text-2xl font-bold">{verifiedRequests.length}</p>
-              <p className="text-sm text-blue-100">OTP Verified</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-brand-400 text-white">
-            <CardContent className="p-4">
-              <CheckCircle className="h-6 w-6 mb-2 opacity-80" />
-              <p className="text-2xl font-bold">{completedRequests.length}</p>
-              <p className="text-sm text-green-100">Completed</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-violet-400 text-white">
-            <CardContent className="p-4">
-              <IndianRupee className="h-6 w-6 mb-2 opacity-80" />
-              <p className="text-2xl font-bold">{formatCurrency(completedRequests.reduce((sum, r) => sum + (r.amount || 0), 0))}</p>
-              <p className="text-sm text-violet-100">Total Processed</p>
-            </CardContent>
-          </Card>
+          <SummaryCard label="Awaiting OTP" value={pendingRequests.length} icon={Clock} tone="warning" />
+          <SummaryCard label="OTP Verified" value={verifiedRequests.length} icon={Key} tone="info" />
+          <SummaryCard label="Completed" value={completedRequests.length} icon={CheckCircle} tone="positive" />
+          <SummaryCard label="Total Processed" value={formatCurrency(completedRequests.reduce((sum, r) => sum + (r.amount || 0), 0))} icon={IndianRupee} />
         </div>
 
         {/* Payment Requests Table */}

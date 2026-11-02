@@ -19,7 +19,8 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardHeader } from '@/components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -329,54 +330,11 @@ export default function ExpenseManagement() {
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 mb-4 sm:mb-8">
-          <Card className="bg-orange-50 border-orange-200">
-            <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600 flex items-center gap-1">
-                <Package className="h-3 w-3" />Material
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-2 pt-0 sm:p-6 sm:pt-0">
-              <div className="text-base sm:text-xl font-bold text-orange-700">{formatCurrency(summary?.material?.total_amount)}</div>
-              <p className="text-xs text-gray-500">{summary?.material?.count || 0} items</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-blue-50 border-blue-200">
-            <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600 flex items-center gap-1">
-                <Users className="h-3 w-3" />Labour
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-2 pt-0 sm:p-6 sm:pt-0">
-              <div className="text-base sm:text-xl font-bold text-amber-700">{formatCurrency(summary?.labour?.total_amount)}</div>
-              <p className="text-xs text-gray-500">{summary?.labour?.count || 0} entries</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-purple-50 border-purple-200">
-            <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600 flex items-center gap-1">
-                <Briefcase className="h-3 w-3" />Vendor
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-2 pt-0 sm:p-6 sm:pt-0">
-              <div className="text-base sm:text-xl font-bold text-purple-700">{formatCurrency(summary?.vendor_service?.total_amount)}</div>
-              <p className="text-xs text-gray-500">{summary?.vendor_service?.count || 0} entries</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-red-50 border-red-200">
-            <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600 flex items-center gap-1">
-                <IndianRupee className="h-3 w-3" />Total
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-2 pt-0 sm:p-6 sm:pt-0">
-              <div className="text-base sm:text-xl font-bold text-red-700">{formatCurrency(summary?.totals?.total_expenses)}</div>
-              <p className="text-xs text-gray-500">Paid: {formatCurrency(summary?.totals?.total_paid)}</p>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-8">
+          <SummaryCard compact label="Material" icon={Package} tone="warning" value={formatCurrency(summary?.material?.total_amount)} sub={`${summary?.material?.count || 0} items`} />
+          <SummaryCard compact label="Labour" icon={Users} tone="info" value={formatCurrency(summary?.labour?.total_amount)} sub={`${summary?.labour?.count || 0} entries`} />
+          <SummaryCard compact label="Vendor" icon={Briefcase} tone="violet" value={formatCurrency(summary?.vendor_service?.total_amount)} sub={`${summary?.vendor_service?.count || 0} entries`} />
+          <SummaryCard compact label="Total" icon={IndianRupee} tone="negative" value={formatCurrency(summary?.totals?.total_expenses)} sub={`Paid: ${formatCurrency(summary?.totals?.total_paid)}`} />
         </div>
 
         {/* Main Tabs */}

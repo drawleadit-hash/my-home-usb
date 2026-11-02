@@ -21,7 +21,7 @@ import DTSelectToPayDialog from '../components/DTSelectToPayDialog';
 import PhotoLightbox from '../components/PhotoLightbox';
 import { StatusPill, pillState } from '../components/StatusPill';
 import { CorrectionDialog } from '../components/CorrectionDialog';
-import { SummaryCard } from '../components/SummaryCard';
+import { SummaryCard, ChannelCard } from '../components/SummaryCard';
 import { toast } from 'sonner';
 import MobileBottomNav from '../components/MobileBottomNav';
 import { ExpenseSplitSection, MultiProjectIndirectCostDialog } from '../components/ExpenseSplitSection';
@@ -878,20 +878,9 @@ function PettyCashManagement({ onBack }) {
           <h3 className="text-sm font-semibold">{seCashbook.user?.name}'s Mini Cashbook</h3>
         </div>
         <div className="grid grid-cols-3 gap-2 sm:gap-3">
-          <Card className="border-l-4 border-l-green-500"><CardContent className="p-2 sm:p-3">
-            <p className="text-[10px] sm:text-xs text-gray-500">Total Issued</p>
-            <p className="text-base sm:text-lg font-bold text-green-700"><MaskedValue value={seCashbook.summary?.total_issued} className="text-green-700" /></p>
-          </CardContent></Card>
-          <Card className="border-l-4 border-l-red-500"><CardContent className="p-2 sm:p-3">
-            <p className="text-[10px] sm:text-xs text-gray-500">Total Spent</p>
-            <p className="text-base sm:text-lg font-bold text-red-600"><MaskedValue value={seCashbook.summary?.total_spent} className="text-red-600" /></p>
-          </CardContent></Card>
-          <Card className="border-l-4 border-l-amber-500"><CardContent className="p-2 sm:p-3">
-            <p className="text-[10px] sm:text-xs text-gray-500">Balance</p>
-            <p className={`text-base sm:text-lg font-bold ${(seCashbook.summary?.balance || 0) >= 0 ? 'text-green-700' : 'text-red-600'}`}>
-              <MaskedValue value={seCashbook.summary?.balance} className={(seCashbook.summary?.balance || 0) >= 0 ? 'text-green-700' : 'text-red-600'} />
-            </p>
-          </CardContent></Card>
+          <ChannelCard compact label="Total Issued" dot="bg-primary" value={<MaskedValue value={seCashbook.summary?.total_issued} />} />
+          <ChannelCard compact label="Total Spent" dot="bg-red-500" value={<MaskedValue value={seCashbook.summary?.total_spent} />} />
+          <ChannelCard compact label="Balance" dot="bg-ink-700" danger={(seCashbook.summary?.balance || 0) < 0} value={<MaskedValue value={seCashbook.summary?.balance} />} />
         </div>
         <Card>
           <CardContent className="p-0">
@@ -984,24 +973,10 @@ function PettyCashManagement({ onBack }) {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
-        <Card className="border-l-4 border-l-green-500"><CardContent className="p-2 sm:p-3">
-          <p className="text-[10px] sm:text-xs text-gray-500">Total Issued</p>
-          <p className="text-base sm:text-lg font-bold text-green-700"><MaskedValue value={summary.total_issued} className="text-green-700" /></p>
-        </CardContent></Card>
-        <Card className="border-l-4 border-l-red-500"><CardContent className="p-2 sm:p-3">
-          <p className="text-[10px] sm:text-xs text-gray-500">Total Spent</p>
-          <p className="text-base sm:text-lg font-bold text-red-600"><MaskedValue value={summary.total_spent} className="text-red-600" /></p>
-        </CardContent></Card>
-        <Card className="border-l-4 border-l-amber-500"><CardContent className="p-2 sm:p-3">
-          <p className="text-[10px] sm:text-xs text-gray-500">Total Balance</p>
-          <p className={`text-base sm:text-lg font-bold ${(summary.total_balance || 0) >= 0 ? 'text-green-700' : 'text-red-600'}`}>
-            <MaskedValue value={summary.total_balance} className={(summary.total_balance || 0) >= 0 ? 'text-green-700' : 'text-red-600'} />
-          </p>
-        </CardContent></Card>
-        <Card className="border-l-4 border-l-purple-500"><CardContent className="p-2 sm:p-3">
-          <p className="text-[10px] sm:text-xs text-gray-500">Pending Requests</p>
-          <p className="text-base sm:text-lg font-bold text-purple-700">{summary.pending_requests || 0}</p>
-        </CardContent></Card>
+        <ChannelCard compact label="Total Issued" dot="bg-primary" value={<MaskedValue value={summary.total_issued} />} />
+        <ChannelCard compact label="Total Spent" dot="bg-red-500" value={<MaskedValue value={summary.total_spent} />} />
+        <ChannelCard compact label="Total Balance" dot="bg-ink-700" danger={(summary.total_balance || 0) < 0} value={<MaskedValue value={summary.total_balance} />} />
+        <ChannelCard compact label="Pending Requests" dot="bg-amber-500" value={summary.pending_requests || 0} />
       </div>
 
       {/* PM-Approved / Resubmitted Requests Needing Payment Processing */}
@@ -1499,30 +1474,9 @@ function IndirectExpenseSection({ userRole }) {
     <div className="space-y-3" data-testid="indirect-expense-section">
       {/* Feb 19 2026 — Mini summary cards sourced from Cashflow Engine */}
       <div className="grid grid-cols-3 gap-2 sm:gap-3" data-testid="indirect-summary-cards">
-        <Card className="border-l-4 border-l-violet-500 bg-violet-50/40">
-          <CardContent className="p-2.5 sm:p-3">
-            <p className="text-[10px] sm:text-xs text-gray-500">Total Indirect Cost</p>
-            <p className="text-base sm:text-lg font-bold text-violet-700" data-testid="indirect-total-in">
-              <MaskedValue value={cashflowSummary?.indirect_in || 0} className="text-violet-700" />
-            </p>
-          </CardContent>
-        </Card>
-        <Card className="border-l-4 border-l-red-500 bg-red-50/40">
-          <CardContent className="p-2.5 sm:p-3">
-            <p className="text-[10px] sm:text-xs text-gray-500">Indirect Out</p>
-            <p className="text-base sm:text-lg font-bold text-red-600" data-testid="indirect-total-out">
-              <MaskedValue value={cashflowSummary?.indirect_out || 0} className="text-red-600" />
-            </p>
-          </CardContent>
-        </Card>
-        <Card className={`border-l-4 ${(cashflowSummary?.indirect_balance || 0) >= 0 ? 'border-l-emerald-500 bg-emerald-50/40' : 'border-l-amber-500 bg-amber-50/40'}`}>
-          <CardContent className="p-2.5 sm:p-3">
-            <p className="text-[10px] sm:text-xs text-gray-500">Balance</p>
-            <p className={`text-base sm:text-lg font-bold ${(cashflowSummary?.indirect_balance || 0) >= 0 ? 'text-emerald-700' : 'text-amber-700'}`} data-testid="indirect-balance">
-              <MaskedValue value={cashflowSummary?.indirect_balance || 0} className={(cashflowSummary?.indirect_balance || 0) >= 0 ? 'text-emerald-700' : 'text-amber-700'} />
-            </p>
-          </CardContent>
-        </Card>
+        <ChannelCard compact label="Total Indirect Cost" dot="bg-violet-500" value={<span data-testid="indirect-total-in"><MaskedValue value={cashflowSummary?.indirect_in || 0} /></span>} />
+        <ChannelCard compact label="Indirect Out" dot="bg-red-500" value={<span data-testid="indirect-total-out"><MaskedValue value={cashflowSummary?.indirect_out || 0} /></span>} />
+        <ChannelCard compact label="Balance" dot="bg-primary" danger={(cashflowSummary?.indirect_balance || 0) < 0} value={<span data-testid="indirect-balance"><MaskedValue value={cashflowSummary?.indirect_balance || 0} /></span>} />
       </div>
 
       {/* Cost Split Bar */}
@@ -4161,56 +4115,12 @@ function ApprovalsTab() {
       </Card>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-3">
-        <Card className="cursor-pointer hover:shadow-md transition-shadow border-l-4 border-l-purple-500" onClick={() => {}} data-testid="approvals-total-card">
-          <CardContent className="p-2 sm:p-3">
-            <div className="flex items-center gap-2 mb-0.5">
-              <ClipboardCheck className="h-3.5 w-3.5 text-purple-500" />
-              <span className="text-[10px] sm:text-xs font-semibold text-gray-500">Total Pending</span>
-            </div>
-            <p className="text-lg sm:text-xl font-bold text-purple-700">{totalPending}</p>
-          </CardContent>
-        </Card>
-        <Card className="cursor-pointer hover:shadow-md transition-shadow border-l-4 border-l-green-500" onClick={() => setActiveTab('income')} data-testid="approvals-income-card">
-          <CardContent className="p-2 sm:p-3">
-            <div className="flex items-center gap-2 mb-0.5">
-              <IndianRupee className="h-3.5 w-3.5 text-green-500" />
-              <span className="text-[10px] sm:text-xs font-semibold text-gray-500">Income</span>
-            </div>
-            <p className="text-lg sm:text-xl font-bold text-green-700">{fSummary.income_count}</p>
-            <p className="text-[10px] sm:text-xs text-green-600 font-medium"><MaskedValue value={fSummary.income_total} className="text-green-600 text-[10px] sm:text-xs" /></p>
-          </CardContent>
-        </Card>
-        <Card className="cursor-pointer hover:shadow-md transition-shadow border-l-4 border-l-amber-500" onClick={() => setActiveTab('materials')} data-testid="approvals-material-card">
-          <CardContent className="p-2 sm:p-3">
-            <div className="flex items-center gap-2 mb-0.5">
-              <Building2 className="h-3.5 w-3.5 text-amber-500" />
-              <span className="text-[10px] sm:text-xs font-semibold text-gray-500">Materials</span>
-            </div>
-            <p className="text-lg sm:text-xl font-bold text-amber-700">{fSummary.material_count}</p>
-            <p className="text-[10px] sm:text-xs text-amber-600 font-medium"><MaskedValue value={fSummary.material_total} className="text-amber-600 text-[10px] sm:text-xs" /></p>
-          </CardContent>
-        </Card>
-        <Card className="cursor-pointer hover:shadow-md transition-shadow border-l-4 border-l-blue-500" onClick={() => setActiveTab('labour')} data-testid="approvals-labour-card">
-          <CardContent className="p-2 sm:p-3">
-            <div className="flex items-center gap-2 mb-0.5">
-              <Wallet className="h-3.5 w-3.5 text-blue-500" />
-              <span className="text-[10px] sm:text-xs font-semibold text-gray-500">Labour</span>
-            </div>
-            <p className="text-lg sm:text-xl font-bold text-blue-700">{fSummary.labour_count}</p>
-            <p className="text-[10px] sm:text-xs text-blue-600 font-medium"><MaskedValue value={fSummary.labour_total} className="text-blue-600 text-[10px] sm:text-xs" /></p>
-          </CardContent>
-        </Card>
-        <Card className="cursor-pointer hover:shadow-md transition-shadow border-l-4 border-l-orange-500" onClick={() => setActiveTab('vendor')} data-testid="approvals-vendor-card">
-          <CardContent className="p-2 sm:p-3">
-            <div className="flex items-center gap-2 mb-0.5">
-              <CreditCard className="h-3.5 w-3.5 text-orange-500" />
-              <span className="text-[10px] sm:text-xs font-semibold text-gray-500">Suppliers</span>
-            </div>
-            <p className="text-lg sm:text-xl font-bold text-orange-700">{fSummary.vendor_count}</p>
-            <p className="text-[10px] sm:text-xs text-orange-600 font-medium"><MaskedValue value={fSummary.vendor_total} className="text-orange-600 text-[10px] sm:text-xs" /></p>
-          </CardContent>
-        </Card>
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
+        <SummaryCard compact label="Total Pending" icon={ClipboardCheck} tone="violet" value={totalPending} testId="approvals-total-card" />
+        <SummaryCard compact label="Income" icon={IndianRupee} tone="positive" value={fSummary.income_count} sub={<MaskedValue value={fSummary.income_total} />} onClick={() => setActiveTab('income')} testId="approvals-income-card" />
+        <SummaryCard compact label="Materials" icon={Building2} tone="warning" value={fSummary.material_count} sub={<MaskedValue value={fSummary.material_total} />} onClick={() => setActiveTab('materials')} testId="approvals-material-card" />
+        <SummaryCard compact label="Labour" icon={Wallet} tone="info" value={fSummary.labour_count} sub={<MaskedValue value={fSummary.labour_total} />} onClick={() => setActiveTab('labour')} testId="approvals-labour-card" />
+        <SummaryCard compact label="Suppliers" icon={CreditCard} tone="warning" value={fSummary.vendor_count} sub={<MaskedValue value={fSummary.vendor_total} />} onClick={() => setActiveTab('vendor')} testId="approvals-vendor-card" />
       </div>
 
       {/* Top-level Approval Category Tabs */}
@@ -5443,57 +5353,33 @@ function ProjectSummaryTab({ overview, userRole, onRefresh }) {
         return (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* Project Value Calculation */}
-            <Card className="border-t-4 border-t-indigo-300 bg-indigo-50/30">
-              <CardContent className="p-3">
-                <p className="text-[10px] uppercase tracking-wider text-indigo-700/80 font-bold mb-2">Project Value Calculation</p>
-                <div className="grid grid-cols-4 gap-2">
-                  <div className="bg-white rounded-md border border-blue-200 p-2.5 text-center" data-testid="pw-scope-value">
-                    <p className="text-[10px] uppercase text-gray-500 font-semibold">Scope Value</p>
-                    <p className="text-sm font-bold text-blue-700 mt-1 break-words"><MaskedValue value={sv} className="text-blue-700" testId="masked-scope" /></p>
-                  </div>
-                  <div className="bg-white rounded-md border border-cyan-200 p-2.5 text-center" data-testid="pw-additions">
-                    <p className="text-[10px] uppercase text-gray-500 font-semibold">Additions</p>
-                    <p className="text-sm font-bold text-cyan-700 mt-1 break-words"><MaskedValue value={ad} className="text-cyan-700" testId="masked-additions" /></p>
-                  </div>
-                  <div className="bg-white rounded-md border border-orange-200 p-2.5 text-center" data-testid="pw-deductions">
-                    <p className="text-[10px] uppercase text-gray-500 font-semibold">Deductions</p>
-                    <p className="text-sm font-bold text-orange-700 mt-1 break-words"><MaskedValue value={dd} className="text-orange-700" testId="masked-deductions" /></p>
-                  </div>
-                  <div className="bg-violet-600 rounded-md border border-violet-700 p-2.5 text-center text-white" data-testid="pw-grand-total">
-                    <p className="text-[10px] uppercase text-violet-100 font-semibold">Grand Total</p>
-                    <p className="text-sm font-bold mt-1 break-words"><MaskedValue value={gt} className="text-white" testId="masked-grand-total" /></p>
-                  </div>
-                </div>
-              </CardContent>
+            <Card className="p-4 sm:p-5">
+              <h3 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">Project Value Calculation</h3>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <ChannelCard compact label="Scope Value" dot="bg-blue-500" testId="pw-scope-value" value={<MaskedValue value={sv} testId="masked-scope" />} />
+                <ChannelCard compact label="Additions" dot="bg-primary" testId="pw-additions" value={<MaskedValue value={ad} testId="masked-additions" />} />
+                <ChannelCard compact label="Deductions" dot="bg-orange-500" testId="pw-deductions" value={<MaskedValue value={dd} testId="masked-deductions" />} />
+                <ChannelCard compact dark label="Grand Total" testId="pw-grand-total" value={<MaskedValue value={gt} testId="masked-grand-total" />} />
+              </div>
             </Card>
 
             {/* Financial Performance */}
-            <Card className="border-t-4 border-t-emerald-300 bg-emerald-50/30">
-              <CardContent className="p-3">
-                <p className="text-[10px] uppercase tracking-wider text-emerald-700/80 font-bold mb-2">Financial Performance</p>
-                <div className="grid grid-cols-4 gap-2">
-                  <div className="bg-white rounded-md border border-emerald-200 p-2.5 text-center" data-testid="pw-total-income">
-                    <p className="text-[10px] uppercase text-gray-500 font-semibold">Total Income</p>
-                    <p className="text-sm font-bold text-emerald-700 mt-1 break-words"><MaskedValue value={ti} className="text-emerald-700" testId="masked-proj-income" /></p>
-                    <p className="text-[9px] text-gray-400 mt-0.5">{pctOfValue}% of value</p>
-                  </div>
-                  <div className="bg-white rounded-md border border-rose-200 p-2.5 text-center" data-testid="pw-total-expense">
-                    <p className="text-[10px] uppercase text-gray-500 font-semibold">Total Expense</p>
-                    <p className="text-sm font-bold text-rose-700 mt-1 break-words"><MaskedValue value={te} className="text-rose-700" testId="masked-proj-expense" /></p>
-                    <p className="text-[9px] text-gray-400 mt-0.5">{pctOfIncome}% of income</p>
-                  </div>
-                  <div className="bg-white rounded-md border border-indigo-200 p-2.5 text-center" data-testid="pw-total-balance">
-                    <p className="text-[10px] uppercase text-gray-500 font-semibold">Total Balance</p>
-                    <p className={`text-sm font-bold mt-1 break-words ${tb >= 0 ? 'text-indigo-700' : 'text-rose-700'}`}><MaskedValue value={tb} className={tb >= 0 ? 'text-indigo-700' : 'text-rose-700'} testId="masked-proj-net" /></p>
-                    <p className="text-[9px] text-gray-400 mt-0.5">Income − Expense</p>
-                  </div>
-                  <div className="bg-amber-500 rounded-md border border-amber-600 p-2.5 text-center text-white" data-testid="pw-receivable">
-                    <p className="text-[10px] uppercase text-amber-100 font-semibold">Receivable</p>
-                    <p className="text-sm font-bold mt-1 break-words"><MaskedValue value={rc} className="text-white" testId="masked-receivable" /></p>
-                    <p className="text-[9px] text-amber-100 mt-0.5">Yet to receive</p>
-                  </div>
-                </div>
-              </CardContent>
+            <Card className="p-4 sm:p-5">
+              <h3 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">Financial Performance</h3>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <ChannelCard compact label="Total Income" dot="bg-primary" testId="pw-total-income" value={<MaskedValue value={ti} testId="masked-proj-income" />}>
+                  <p className="mt-1 text-[11px] text-muted-foreground">{pctOfValue}% of value</p>
+                </ChannelCard>
+                <ChannelCard compact label="Total Expense" dot="bg-red-500" testId="pw-total-expense" value={<MaskedValue value={te} testId="masked-proj-expense" />}>
+                  <p className="mt-1 text-[11px] text-muted-foreground">{pctOfIncome}% of income</p>
+                </ChannelCard>
+                <ChannelCard compact label="Total Balance" dot="bg-ink-700" danger={tb < 0} testId="pw-total-balance" value={<MaskedValue value={tb} testId="masked-proj-net" />}>
+                  <p className="mt-1 text-[11px] text-muted-foreground">Income − Expense</p>
+                </ChannelCard>
+                <ChannelCard compact label="Receivable" dot="bg-amber-500" testId="pw-receivable" value={<MaskedValue value={rc} testId="masked-receivable" />}>
+                  <p className="mt-1 text-[11px] text-muted-foreground">Yet to receive</p>
+                </ChannelCard>
+              </div>
             </Card>
           </div>
         );
@@ -5872,28 +5758,27 @@ function CarryForwardTab({ userRole }) {
   // DB keys (`current_account`, `savings`, `direct_transfer`) are kept
   // untouched so legacy closing_balance docs continue to load.
   const buckets = [
-    { key: 'cash', label: 'Cash', Icon: Banknote, accent: 'border-l-amber-500 bg-amber-50/40' },
-    { key: 'current_account', label: 'HDFC Current', Icon: Landmark, accent: 'border-l-blue-500 bg-blue-50/40' },
-    { key: 'savings', label: 'HDFC Savings', Icon: PiggyBank, accent: 'border-l-emerald-500 bg-emerald-50/40' },
-    { key: 'cheque', label: 'Cheque', Icon: FileText, accent: 'border-l-violet-500 bg-violet-50/40' },
-    { key: 'direct_transfer', label: 'Cash DT', Icon: TrendingUp, accent: 'border-l-rose-500 bg-rose-50/40' },
+    { key: 'cash', label: 'Cash', dot: 'bg-violet-500' },
+    { key: 'current_account', label: 'HDFC Current', dot: 'bg-orange-500' },
+    { key: 'savings', label: 'HDFC Savings', dot: 'bg-primary' },
+    { key: 'cheque', label: 'Cheque', dot: 'bg-ink-700' },
+    { key: 'direct_transfer', label: 'Cash DT', dot: 'bg-blue-500' },
   ];
   const bv = (k, field) => (data?.buckets?.[k]?.[field] ?? 0);
 
   return (
     <div className="space-y-4" data-testid="carry-forward-tab">
       {/* Hero card — current net amount + Open popup */}
-      <Card className="border-l-4 border-l-indigo-500 bg-white">
-        <CardContent className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div className="relative overflow-hidden rounded-3xl bg-[#0B0B0C] p-6 text-white shadow-lg">
+        <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-28 h-72 w-72 rounded-full bg-primary/25 blur-3xl" />
+        <div className="relative flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-indigo-700 font-semibold">
-              <Wallet className="h-4 w-4" /> Current Net Amount
-            </div>
-            <div className="mt-1 text-3xl sm:text-4xl font-bold text-gray-900" data-testid="carry-forward-manual-amount">
+            <span className="rounded-full bg-primary/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-300 ring-1 ring-inset ring-primary/30">Current Net Amount</span>
+            <div className="mt-5 text-[34px] font-bold leading-tight tracking-tight tabular-nums sm:text-[38px]" data-testid="carry-forward-manual-amount">
               {fmt(data?.manual_amount)}
             </div>
             {data?.locked_at && (
-              <div className="text-[11px] text-gray-500 mt-1">
+              <div className="mt-1 text-sm text-white/55">
                 Last locked {new Date(data.locked_at).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}
                 {data?.locked_by_name ? ` · by ${data.locked_by_name}` : ''}
               </div>
@@ -5902,43 +5787,42 @@ function CarryForwardTab({ userRole }) {
           {canEdit && (
             <Button
               onClick={openDialog}
-              className="bg-primary hover:bg-primary-hover gap-1.5"
+              className="h-10 gap-1.5 shadow-brand"
               data-testid="open-carry-forward-dialog"
             >
               <Lock className="h-4 w-4" /> {data?.locked_at ? 'Update Lock' : 'Lock Balance'}
             </Button>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* 5 bucket cards (Income / Expense / Balance) + Grand Total */}
-      <div className="grid grid-cols-2 lg:grid-cols-6 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-6 gap-3">
         {buckets.map((b) => (
-          <Card key={b.key} className={`border-l-4 ${b.accent}`} data-testid={`carry-forward-${b.key}`}>
-            <CardContent className="p-3">
-              <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wide text-gray-600 font-semibold">
-                <b.Icon className="h-3.5 w-3.5" /> {b.label}
-              </div>
-              <div className="mt-1.5 space-y-0.5 text-[11px]">
-                <div className="flex justify-between"><span className="text-emerald-700">Income</span><span className="font-semibold">{fmt(bv(b.key, 'income'))}</span></div>
-                <div className="flex justify-between"><span className="text-rose-700">Expense</span><span className="font-semibold">{fmt(bv(b.key, 'expense'))}</span></div>
-                <div className="flex justify-between border-t pt-0.5"><span className="font-semibold text-gray-800">Balance</span><span className={`font-bold ${bv(b.key, 'balance') >= 0 ? 'text-emerald-700' : 'text-rose-700'}`}>{fmt(bv(b.key, 'balance'))}</span></div>
-              </div>
-            </CardContent>
-          </Card>
+          <ChannelCard
+            key={b.key}
+            label={b.label}
+            dot={b.dot}
+            danger={bv(b.key, 'balance') < 0}
+            value={fmt(bv(b.key, 'balance'))}
+            rows={[
+              { label: 'Income', value: fmt(bv(b.key, 'income')) },
+              { label: 'Expense', value: fmt(bv(b.key, 'expense')), className: 'text-red-600' },
+            ]}
+            testId={`carry-forward-${b.key}`}
+          />
         ))}
-        <Card className="border-l-4 border-l-gray-800 bg-gray-900 text-white" data-testid="carry-forward-total">
-          <CardContent className="p-3">
-            <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wide text-gray-300 font-semibold">
-              <TrendingUp className="h-3.5 w-3.5" /> Total
-            </div>
-            <div className="mt-1.5 space-y-0.5 text-[11px]">
-              <div className="flex justify-between"><span className="text-emerald-300">Income</span><span className="font-semibold">{fmt(data?.total_income)}</span></div>
-              <div className="flex justify-between"><span className="text-rose-300">Expense</span><span className="font-semibold">{fmt(data?.total_expense)}</span></div>
-              <div className="flex justify-between border-t border-gray-700 pt-0.5"><span className="font-semibold">Balance</span><span className="font-bold">{fmt(data?.total_balance)}</span></div>
-            </div>
-          </CardContent>
-        </Card>
+        <ChannelCard
+          dark
+          danger={(data?.total_balance || 0) < 0}
+          label="Total"
+          value={fmt(data?.total_balance)}
+          rows={[
+            { label: 'Income', value: fmt(data?.total_income) },
+            { label: 'Expense', value: fmt(data?.total_expense), className: 'text-red-300' },
+          ]}
+          testId="carry-forward-total"
+        />
       </div>
 
       {!canEdit && (

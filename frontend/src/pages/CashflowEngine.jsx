@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import axios from 'axios';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ChannelCard } from '../components/SummaryCard';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -227,72 +228,46 @@ export default function CashflowEngine() {
 
         {/* Summary Strip — 3 cards × 3 metrics each */}
         {summary && (
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3" data-testid="cf-summary-strip">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4" data-testid="cf-summary-strip">
             {/* Card 01 — TOTAL INCOME */}
-            <Card className="bg-violet-50 border-violet-200">
-              <CardContent className="p-4 space-y-2.5">
-                <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-semibold uppercase text-violet-700">Cashflow Overview</span>
-                  {summary.net >= 0 ? <TrendingUp className="h-4 w-4 text-violet-600" /> : <TrendingDown className="h-4 w-4 text-rose-600" />}
-                </div>
-                <div className="flex items-center justify-between border-b border-violet-200/60 pb-1.5">
-                  <span className="text-[11px] text-violet-700/80">Total Income</span>
-                  <span className="text-sm font-bold text-emerald-700" data-testid="cf-card1-income">{fmt(summary.income_total)}</span>
-                </div>
-                <div className="flex items-center justify-between border-b border-violet-200/60 pb-1.5">
-                  <span className="text-[11px] text-violet-700/80">Total Expense <span className="opacity-60">(D+I)</span></span>
-                  <span className="text-sm font-bold text-rose-600" data-testid="cf-card1-expense">{fmt(summary.expense_total)}</span>
-                </div>
-                <div className="flex items-center justify-between pt-0.5">
-                  <span className="text-[12px] font-semibold text-violet-900">Balance</span>
-                  <span className={`text-lg font-extrabold ${summary.net >= 0 ? 'text-violet-800' : 'text-rose-800'}`} data-testid="cf-card1-balance">{fmt(summary.net)}</span>
-                </div>
-              </CardContent>
-            </Card>
+            <ChannelCard
+              dark
+              danger={summary.net < 0}
+              label="Cashflow Overview"
+              badge={summary.net >= 0 ? <TrendingUp className="h-4 w-4 text-brand-400" /> : <TrendingDown className="h-4 w-4 text-red-300" />}
+              value={<span data-testid="cf-card1-balance">{fmt(summary.net)}</span>}
+              rows={[
+                { label: 'Total Income', value: <span data-testid="cf-card1-income">{fmt(summary.income_total)}</span> },
+                { label: 'Total Expense (D+I)', value: <span data-testid="cf-card1-expense">{fmt(summary.expense_total)}</span>, className: 'text-red-300' },
+              ]}
+              pct={summary.income_total > 0 ? (summary.net / summary.income_total) * 100 : 0}
+            />
 
             {/* Card 02 — TOTAL DIRECT */}
-            <Card className="bg-emerald-50 border-emerald-200">
-              <CardContent className="p-4 space-y-2.5">
-                <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-semibold uppercase text-emerald-700">Direct Cost Allocation</span>
-                  <Badge className="bg-emerald-200 text-emerald-800 text-[10px]">{summary.effective_split?.direct_pct}%</Badge>
-                </div>
-                <div className="flex items-center justify-between border-b border-emerald-200/60 pb-1.5">
-                  <span className="text-[11px] text-emerald-700/80">Total Direct Allocation</span>
-                  <span className="text-sm font-bold text-emerald-700" data-testid="cf-card2-allocation">{fmt(summary.direct_in)}</span>
-                </div>
-                <div className="flex items-center justify-between border-b border-emerald-200/60 pb-1.5">
-                  <span className="text-[11px] text-emerald-700/80">Expense (Direct)</span>
-                  <span className="text-sm font-bold text-rose-600" data-testid="cf-card2-expense">{fmt(summary.direct_out)}</span>
-                </div>
-                <div className="flex items-center justify-between pt-0.5">
-                  <span className="text-[12px] font-semibold text-emerald-900">Balance</span>
-                  <span className="text-lg font-extrabold text-emerald-800" data-testid="cf-card2-balance">{fmt(summary.direct_balance)}</span>
-                </div>
-              </CardContent>
-            </Card>
+            <ChannelCard
+              label="Direct Cost Allocation"
+              dot="bg-primary"
+              badge={<Badge variant="soft" className="px-2 py-0 text-[10px]">{summary.effective_split?.direct_pct}%</Badge>}
+              value={<span data-testid="cf-card2-balance">{fmt(summary.direct_balance)}</span>}
+              rows={[
+                { label: 'Total Direct Allocation', value: <span data-testid="cf-card2-allocation">{fmt(summary.direct_in)}</span> },
+                { label: 'Expense (Direct)', value: <span data-testid="cf-card2-expense">{fmt(summary.direct_out)}</span>, className: 'text-red-600' },
+              ]}
+              pct={summary.direct_in > 0 ? (summary.direct_balance / summary.direct_in) * 100 : 0}
+            />
 
             {/* Card 03 — TOTAL INDIRECT */}
-            <Card className="bg-sky-50 border-sky-200">
-              <CardContent className="p-4 space-y-2.5">
-                <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-semibold uppercase text-sky-700">Indirect Cost Allocation</span>
-                  <Badge className="bg-sky-200 text-sky-800 text-[10px]">{summary.effective_split?.indirect_pct}%</Badge>
-                </div>
-                <div className="flex items-center justify-between border-b border-sky-200/60 pb-1.5">
-                  <span className="text-[11px] text-sky-700/80">Total Indirect Allocation</span>
-                  <span className="text-sm font-bold text-sky-700" data-testid="cf-card3-allocation">{fmt(summary.indirect_in)}</span>
-                </div>
-                <div className="flex items-center justify-between border-b border-sky-200/60 pb-1.5">
-                  <span className="text-[11px] text-sky-700/80">Expense (Indirect)</span>
-                  <span className="text-sm font-bold text-rose-600" data-testid="cf-card3-expense">{fmt(summary.indirect_out)}</span>
-                </div>
-                <div className="flex items-center justify-between pt-0.5">
-                  <span className="text-[12px] font-semibold text-sky-900">Balance</span>
-                  <span className="text-lg font-extrabold text-sky-800" data-testid="cf-card3-balance">{fmt(summary.indirect_balance)}</span>
-                </div>
-              </CardContent>
-            </Card>
+            <ChannelCard
+              label="Indirect Cost Allocation"
+              dot="bg-blue-500"
+              badge={<Badge variant="info" className="px-2 py-0 text-[10px]">{summary.effective_split?.indirect_pct}%</Badge>}
+              value={<span data-testid="cf-card3-balance">{fmt(summary.indirect_balance)}</span>}
+              rows={[
+                { label: 'Total Indirect Allocation', value: <span data-testid="cf-card3-allocation">{fmt(summary.indirect_in)}</span> },
+                { label: 'Expense (Indirect)', value: <span data-testid="cf-card3-expense">{fmt(summary.indirect_out)}</span>, className: 'text-red-600' },
+              ]}
+              pct={summary.indirect_in > 0 ? (summary.indirect_balance / summary.indirect_in) * 100 : 0}
+            />
           </div>
         )}
 

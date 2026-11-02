@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { Card, CardContent } from '../components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
@@ -427,22 +428,10 @@ export default function ContractorManagement() {
                     {summary ? (
                       <div className="space-y-4">
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                          <Card><CardContent className="p-3 text-center">
-                            <p className="text-2xl font-bold text-blue-600">{summary.stats.total_work_orders || 0}</p>
-                            <p className="text-xs text-gray-500">Work Orders</p>
-                          </CardContent></Card>
-                          <Card><CardContent className="p-3 text-center">
-                            <p className="text-2xl font-bold text-green-600">{(summary.stats.total_work_value || 0).toLocaleString('en-IN')}</p>
-                            <p className="text-xs text-gray-500">Total Value</p>
-                          </CardContent></Card>
-                          <Card><CardContent className="p-3 text-center">
-                            <p className="text-2xl font-bold text-emerald-600">{(summary.stats.total_paid || 0).toLocaleString('en-IN')}</p>
-                            <p className="text-xs text-gray-500">Paid</p>
-                          </CardContent></Card>
-                          <Card><CardContent className="p-3 text-center">
-                            <p className="text-2xl font-bold text-red-600">{(summary.stats.pending_payment || 0).toLocaleString('en-IN')}</p>
-                            <p className="text-xs text-gray-500">Pending</p>
-                          </CardContent></Card>
+                          <SummaryCard compact label="Work Orders" value={summary.stats.total_work_orders || 0} />
+                          <SummaryCard compact label="Total Value" tone="info" value={(summary.stats.total_work_value || 0).toLocaleString('en-IN')} />
+                          <SummaryCard compact label="Paid" tone="positive" value={(summary.stats.total_paid || 0).toLocaleString('en-IN')} />
+                          <SummaryCard compact label="Pending" tone="negative" value={(summary.stats.pending_payment || 0).toLocaleString('en-IN')} />
                         </div>
                       </div>
                     ) : <div className="flex justify-center py-8"><div className="animate-spin h-6 w-6 border-2 border-primary border-t-transparent rounded-full" /></div>}

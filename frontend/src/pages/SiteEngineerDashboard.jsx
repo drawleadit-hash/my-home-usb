@@ -29,6 +29,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ChannelCard } from '../components/SummaryCard';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
@@ -130,26 +131,9 @@ function MiniCashbookSection({ projects }) {
     <div className="space-y-4" data-testid="mini-cashbook-section">
       {/* Summary */}
       <div className="grid grid-cols-3 gap-3">
-        <Card className="border-l-4 border-l-green-500">
-          <CardContent className="p-3">
-            <p className="text-xs text-gray-500">Total Issued</p>
-            <p className="text-lg font-bold text-green-700">{fmtFull(summary.total_issued)}</p>
-          </CardContent>
-        </Card>
-        <Card className="border-l-4 border-l-red-500">
-          <CardContent className="p-3">
-            <p className="text-xs text-gray-500">Total Spent</p>
-            <p className="text-lg font-bold text-red-600">{fmtFull(summary.total_spent)}</p>
-          </CardContent>
-        </Card>
-        <Card className="border-l-4 border-l-amber-500">
-          <CardContent className="p-3">
-            <p className="text-xs text-gray-500">Balance</p>
-            <p className={`text-lg font-bold ${(summary.total_balance || 0) >= 0 ? 'text-green-700' : 'text-red-600'}`}>
-              {fmtFull(summary.total_balance)}
-            </p>
-          </CardContent>
-        </Card>
+        <ChannelCard compact label="Total Issued" dot="bg-primary" value={fmtFull(summary.total_issued)} />
+        <ChannelCard compact label="Total Spent" dot="bg-red-500" value={fmtFull(summary.total_spent)} />
+        <ChannelCard compact label="Balance" dot="bg-ink-700" danger={(summary.total_balance || 0) < 0} value={fmtFull(summary.total_balance)} />
       </div>
 
       {/* Project Filter */}

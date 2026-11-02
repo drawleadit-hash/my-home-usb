@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
+import { ChannelCard } from './SummaryCard';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from './ui/dialog';
@@ -326,30 +327,10 @@ export function ExpenseSplitSection({ userRole }) {
     <div className="space-y-3" data-testid="expense-split-section">
       {/* Summary mini-cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-        <Card className="border-l-4 border-l-emerald-500">
-          <CardContent className="p-3">
-            <p className="text-[10px] text-gray-500 uppercase">Indirect Pool</p>
-            <p className="text-base font-bold text-emerald-700" data-testid="es-pool">{fmtInr(data?.indirect_pool_in)}</p>
-          </CardContent>
-        </Card>
-        <Card className="border-l-4 border-l-violet-500">
-          <CardContent className="p-3">
-            <p className="text-[10px] text-gray-500 uppercase">Allocated %</p>
-            <p className={`text-base font-bold ${(data?.total_percentage || 0) > 100 ? 'text-red-600' : 'text-violet-700'}`} data-testid="es-allocated-pct">{(data?.total_percentage || 0).toFixed(1)}%</p>
-          </CardContent>
-        </Card>
-        <Card className="border-l-4 border-l-blue-500">
-          <CardContent className="p-3">
-            <p className="text-[10px] text-gray-500 uppercase">Allocated ₹</p>
-            <p className="text-base font-bold text-blue-700" data-testid="es-allocated-rs">{fmtInr(data?.total_allocated)}</p>
-          </CardContent>
-        </Card>
-        <Card className="border-l-4 border-l-red-500">
-          <CardContent className="p-3">
-            <p className="text-[10px] text-gray-500 uppercase">Spent ₹</p>
-            <p className="text-base font-bold text-red-600" data-testid="es-spent-rs">{fmtInr(data?.total_spent)}</p>
-          </CardContent>
-        </Card>
+        <ChannelCard compact label="Indirect Pool" dot="bg-primary" value={<span data-testid="es-pool">{fmtInr(data?.indirect_pool_in)}</span>} />
+        <ChannelCard compact label="Allocated %" dot="bg-violet-500" danger={(data?.total_percentage || 0) > 100} value={<span data-testid="es-allocated-pct">{(data?.total_percentage || 0).toFixed(1)}%</span>} />
+        <ChannelCard compact label="Allocated ₹" dot="bg-blue-500" value={<span data-testid="es-allocated-rs">{fmtInr(data?.total_allocated)}</span>} />
+        <ChannelCard compact label="Spent ₹" dot="bg-red-500" value={<span data-testid="es-spent-rs">{fmtInr(data?.total_spent)}</span>} />
       </div>
 
       <Card>

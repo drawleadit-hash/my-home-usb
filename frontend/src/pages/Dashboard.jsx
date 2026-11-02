@@ -3,8 +3,6 @@ import axios from 'axios';
 import {
   Plus,
   TrendingUp,
-  IndianRupee,
-  Wallet,
   FileText,
   Eye,
   Landmark,
@@ -15,6 +13,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ChannelCard } from '../components/SummaryCard';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -199,74 +198,36 @@ export default function Dashboard() {
 
         {/* ═══ Finance Summary Cards ═══ */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
-          {/* Project Value */}
-          <Card data-testid="card-project-value" className="border-l-4 border-l-amber-500">
-            <CardHeader className="pb-2 pt-4 px-4">
-              <CardTitle className="text-sm font-semibold text-gray-500 flex items-center gap-2">
-                <IndianRupee className="h-4 w-4 text-primary" /> Project Value
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="px-4 pb-4 space-y-2">
-              <div className="flex justify-between py-1.5 border-b border-dashed border-gray-100">
-                <span className="text-xs text-gray-500">Project Total</span>
-                <span className="text-sm font-bold text-gray-800">{formatCurrency(totals.project_total_value)}</span>
-              </div>
-              <div className="flex justify-between py-1.5 border-b border-dashed border-gray-100">
-                <span className="text-xs text-gray-500">Addition Cost</span>
-                <span className="text-sm font-bold text-gray-800">{formatCurrency(totals.project_addition_cost)}</span>
-              </div>
-              <div className="flex justify-between py-1.5 bg-amber-50 px-2 -mx-2 rounded">
-                <span className="text-xs font-bold text-amber-800">Total Value</span>
-                <span className="text-sm font-extrabold text-amber-700">{formatCurrency(totals.project_value_total)}</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Income */}
-          <Card data-testid="card-income" className="border-l-4 border-l-green-500">
-            <CardHeader className="pb-2 pt-4 px-4">
-              <CardTitle className="text-sm font-semibold text-gray-500 flex items-center gap-2">
-                <TrendingUp className="h-4 w-4 text-green-500" /> Income
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="px-4 pb-4 space-y-2">
-              <div className="flex justify-between py-1.5 border-b border-dashed border-gray-100">
-                <span className="text-xs text-gray-500">Project Income</span>
-                <span className="text-sm font-bold text-gray-800">{formatCurrency(totals.income_project)}</span>
-              </div>
-              <div className="flex justify-between py-1.5 border-b border-dashed border-gray-100">
-                <span className="text-xs text-gray-500">Additional Income</span>
-                <span className="text-sm font-bold text-gray-800">{formatCurrency(totals.income_additional)}</span>
-              </div>
-              <div className="flex justify-between py-1.5 bg-green-50 px-2 -mx-2 rounded">
-                <span className="text-xs font-bold text-green-800">Total Income</span>
-                <span className="text-sm font-extrabold text-green-700">{formatCurrency(totals.income_total)}</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Balance */}
-          <Card data-testid="card-balance" className="border-l-4 border-l-red-500">
-            <CardHeader className="pb-2 pt-4 px-4">
-              <CardTitle className="text-sm font-semibold text-gray-500 flex items-center gap-2">
-                <Wallet className="h-4 w-4 text-red-500" /> Balance
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="px-4 pb-4 space-y-2">
-              <div className="flex justify-between py-1.5 border-b border-dashed border-gray-100">
-                <span className="text-xs text-gray-500">Project Balance</span>
-                <span className="text-sm font-bold text-gray-800">{formatCurrency(totals.balance_project)}</span>
-              </div>
-              <div className="flex justify-between py-1.5 border-b border-dashed border-gray-100">
-                <span className="text-xs text-gray-500">Additional Balance</span>
-                <span className="text-sm font-bold text-gray-800">{formatCurrency(totals.balance_additional)}</span>
-              </div>
-              <div className="flex justify-between py-1.5 bg-red-50 px-2 -mx-2 rounded">
-                <span className="text-xs font-bold text-red-800">Grand Total</span>
-                <span className="text-sm font-extrabold text-red-700">{formatCurrency(totals.balance_grand_total)}</span>
-              </div>
-            </CardContent>
-          </Card>
+          <ChannelCard
+            label="Project Value"
+            dot="bg-orange-500"
+            value={formatCurrency(totals.project_value_total)}
+            rows={[
+              { label: 'Project Total', value: formatCurrency(totals.project_total_value) },
+              { label: 'Addition Cost', value: formatCurrency(totals.project_addition_cost) },
+            ]}
+            testId="card-project-value"
+          />
+          <ChannelCard
+            label="Income"
+            dot="bg-primary"
+            value={formatCurrency(totals.income_total)}
+            rows={[
+              { label: 'Project Income', value: formatCurrency(totals.income_project) },
+              { label: 'Additional Income', value: formatCurrency(totals.income_additional) },
+            ]}
+            testId="card-income"
+          />
+          <ChannelCard
+            dark
+            label="Balance"
+            value={formatCurrency(totals.balance_grand_total)}
+            rows={[
+              { label: 'Project Balance', value: formatCurrency(totals.balance_project) },
+              { label: 'Additional Balance', value: formatCurrency(totals.balance_additional) },
+            ]}
+            testId="card-balance"
+          />
         </div>
 
         {/* ═══ Account View — Finance Summary ═══ */}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { ChannelCard } from '../components/SummaryCard';
 import { Badge } from '../components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '../components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
@@ -1835,11 +1836,13 @@ export default function PlanningBoard({ embedded = false }) {
 
                 {/* Summary Cards */}
                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-                  <Card className="border-l-4 border-l-indigo-500"><CardContent className="p-3"><p className="text-[10px] text-gray-500 uppercase font-medium">Total Planned</p><p className="text-lg font-bold text-indigo-700">{formatCurrency(monthlySchedule.summary?.total_planned)}</p><p className="text-[10px] text-gray-400">{monthlySchedule.summary?.total_entries || 0} stages</p></CardContent></Card>
-                  <Card className="border-l-4 border-l-green-500"><CardContent className="p-3"><p className="text-[10px] text-gray-500 uppercase font-medium">Collected</p><p className="text-lg font-bold text-green-700">{formatCurrency(monthlySchedule.summary?.total_received)}</p></CardContent></Card>
-                  <Card className="border-l-4 border-l-red-500"><CardContent className="p-3"><p className="text-[10px] text-gray-500 uppercase font-medium">Balance</p><p className="text-lg font-bold text-red-700">{formatCurrency(monthlySchedule.summary?.total_balance)}</p></CardContent></Card>
-                  <Card className="border-l-4 border-l-amber-500"><CardContent className="p-3"><p className="text-[10px] text-gray-500 uppercase font-medium">Pending</p><p className="text-lg font-bold text-amber-700">{monthlySchedule.summary?.pending_count || 0}</p></CardContent></Card>
-                  <Card className="border-l-4 border-l-blue-500"><CardContent className="p-3"><p className="text-[10px] text-gray-500 uppercase font-medium">Collected</p><p className="text-lg font-bold text-blue-700">{monthlySchedule.summary?.collected_count || 0}</p></CardContent></Card>
+                  <ChannelCard compact label="Total Planned" dot="bg-blue-500" value={formatCurrency(monthlySchedule.summary?.total_planned)}>
+                    <p className="mt-1 text-[11px] text-muted-foreground">{monthlySchedule.summary?.total_entries || 0} stages</p>
+                  </ChannelCard>
+                  <ChannelCard compact label="Collected" dot="bg-primary" value={formatCurrency(monthlySchedule.summary?.total_received)} />
+                  <ChannelCard compact label="Balance" dot="bg-red-500" value={formatCurrency(monthlySchedule.summary?.total_balance)} />
+                  <ChannelCard compact label="Pending" dot="bg-amber-500" value={monthlySchedule.summary?.pending_count || 0} />
+                  <ChannelCard compact label="Collected" dot="bg-primary" value={monthlySchedule.summary?.collected_count || 0} />
                 </div>
 
                 {/* Sub-tabs: Pending | Collected | All */}

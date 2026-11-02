@@ -25,6 +25,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
 import MobileBottomNav from '../components/MobileBottomNav';
+import { SummaryCard, SummaryBar } from '../components/SummaryCard';
 import { AppHeader } from '../components/AppHeader';
 import { NumericInput } from '../components/NumericInput';
 
@@ -147,75 +148,51 @@ export default function FinancialOverview() {
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
-          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-brand-400 text-white border-0 shadow-lg">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-blue-100 flex items-center gap-2">
-                <IndianRupee className="h-4 w-4" />
-                Total Project Value
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold">{formatCurrency(summary.total_value)}</div>
-              <p className="text-blue-200 text-sm mt-1">Across {data.projects.length} projects</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-brand-400 text-white border-0 shadow-lg">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-green-100 flex items-center gap-2">
-                <TrendingUp className="h-4 w-4" />
-                Total Income
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold">{formatCurrency(summary.total_income)}</div>
-              <p className="text-green-200 text-sm mt-1">
-                {summary.total_value > 0 ? Math.round((summary.total_income / summary.total_value) * 100) : 0}% collected
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-orange-400 text-white border-0 shadow-lg">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-orange-100 flex items-center gap-2">
-                <TrendingDown className="h-4 w-4" />
-                Total Expenses
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold">{formatCurrency(summary.total_expense)}</div>
-              <p className="text-orange-200 text-sm mt-1">All project expenses</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-purple-400 text-white border-0 shadow-lg">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-purple-100 flex items-center gap-2">
-                <Receipt className="h-4 w-4" />
-                Balance Due
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold">{formatCurrency(summary.total_balance)}</div>
-              <p className="text-purple-200 text-sm mt-1">Pending collection</p>
-            </CardContent>
-          </Card>
-
-          <Card className={`border-0 shadow-lg ${summary.total_cash_in_book >= 0 ? 'bg-primary' : 'bg-red-600'} text-white`}>
-            <CardHeader className="pb-2">
-              <CardTitle className={`text-sm font-medium flex items-center gap-2 ${summary.total_cash_in_book >= 0 ? 'text-teal-100' : 'text-red-100'}`}>
-                <Wallet className="h-4 w-4" />
-                Cash in Book
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold">{formatCurrency(Math.abs(summary.total_cash_in_book))}</div>
-              <p className={`text-sm mt-1 ${summary.total_cash_in_book >= 0 ? 'text-teal-200' : 'text-red-200'}`}>
-                {summary.total_cash_in_book >= 0 ? 'Available funds' : 'Deficit'}
-              </p>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-1 gap-4 mb-8 xl:grid-cols-12">
+          <SummaryCard
+            hero
+            className="xl:col-span-5"
+            label="Cash in Book"
+            badge="All projects"
+            value={<span className={summary.total_cash_in_book < 0 ? 'text-red-300' : ''}>{formatCurrency(Math.abs(summary.total_cash_in_book))}</span>}
+            sub={summary.total_cash_in_book >= 0 ? 'Available funds' : 'Deficit'}
+          />
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:col-span-7">
+            <SummaryCard
+              label="Total Project Value"
+              value={formatCurrency(summary.total_value)}
+              sub={`Across ${data.projects.length} projects`}
+              icon={IndianRupee}
+            />
+            {(() => {
+              const collected = summary.total_value > 0 ? Math.round((summary.total_income / summary.total_value) * 100) : 0;
+              return (
+                <SummaryCard
+                  label="Total Income"
+                  value={formatCurrency(summary.total_income)}
+                  sub={`${collected}% collected`}
+                  icon={TrendingUp}
+                  tone="positive"
+                >
+                  <SummaryBar pct={collected} />
+                </SummaryCard>
+              );
+            })()}
+            <SummaryCard
+              label="Total Expenses"
+              value={formatCurrency(summary.total_expense)}
+              sub="All project expenses"
+              icon={TrendingDown}
+              tone="negative"
+            />
+            <SummaryCard
+              label="Balance Due"
+              value={formatCurrency(summary.total_balance)}
+              sub="Pending collection"
+              icon={Receipt}
+              tone="warning"
+            />
+          </div>
         </div>
 
         {/* Projects Grid */}

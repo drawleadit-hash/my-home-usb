@@ -39,6 +39,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ChannelCard } from '../components/SummaryCard';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
@@ -627,50 +628,49 @@ export default function ClientPortal() {
             const d = st.expected_payment_date || st.due_date;
             return d && d < todayIso ? s + bal : s;
           }, 0);
-          const card = (label, value, color, testid, opts = {}) => (
-            <div className={`rounded-lg border p-2.5 sm:p-3 transition-all hover:shadow-sm ${color}`} data-testid={testid}>
-              <p className={`text-[10px] uppercase tracking-wide font-medium truncate ${opts.labelClass || 'text-gray-500'}`}>{label}</p>
-              <p className={`text-sm sm:text-base lg:text-lg font-bold mt-1 ${opts.valueClass || 'text-gray-900'}`}>₹{(value || 0).toLocaleString('en-IN', { maximumFractionDigits: 0 })}</p>
-            </div>
+          const card = (label, value, dot, testid, opts = {}) => (
+            <ChannelCard
+              compact
+              label={label}
+              dot={dot}
+              dark={opts.dark}
+              testId={testid}
+              value={`₹${(value || 0).toLocaleString('en-IN', { maximumFractionDigits: 0 })}`}
+            />
           );
-          const SectionBox = ({ title, accent, children, testid, colSpan }) => (
-            <div
-              className={`rounded-xl border ${accent.border} ${accent.bg} p-3 sm:p-4 ${colSpan || ''}`}
-              data-testid={testid}
-            >
-              <h3 className={`text-[11px] sm:text-xs font-semibold ${accent.text} uppercase tracking-wider mb-2.5`}>
+          const SectionBox = ({ title, children, testid, colSpan }) => (
+            <Card className={`p-4 sm:p-5 ${colSpan || ''}`} data-testid={testid}>
+              <h3 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
                 {title}
               </h3>
               {children}
-            </div>
+            </Card>
           );
           return (
-            <div className="grid grid-cols-1 lg:grid-cols-6 gap-3 mb-6 items-stretch" data-testid="client-project-summary">
+            <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 mb-6 items-stretch" data-testid="client-project-summary">
               {/* Section 1 — Project Value Calculation (4 cards) */}
               <SectionBox
                 title="Project Value Calculation"
-                accent={{ border: 'border-blue-200', bg: 'bg-blue-50', text: 'text-blue-700' }}
                 testid="client-section-project-value"
                 colSpan="lg:col-span-4"
               >
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  {card('Scope Value',  scope,          'bg-white border-blue-200 hover:border-brand-300',     'client-proj-scope',      { valueClass: 'text-blue-700' })}
-                  {card('Additions',    additionsTotal, 'bg-white border-cyan-200 hover:border-cyan-300',     'client-proj-additions',  { valueClass: 'text-cyan-700' })}
-                  {card('Deductions',   deductionsTotal,'bg-white border-orange-200 hover:border-orange-300', 'client-proj-deductions', { valueClass: 'text-orange-700' })}
-                  {card('Grand Total',  grandTotal,     'bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-violet-400 border-violet-700 shadow-md hover:shadow-lg', 'client-proj-grandtotal', { labelClass: 'text-white/80', valueClass: 'text-white' })}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {card('Scope Value',  scope,           'bg-blue-500',   'client-proj-scope')}
+                  {card('Additions',    additionsTotal,  'bg-primary',    'client-proj-additions')}
+                  {card('Deductions',   deductionsTotal, 'bg-orange-500', 'client-proj-deductions')}
+                  {card('Grand Total',  grandTotal,      'bg-primary',    'client-proj-grandtotal', { dark: true })}
                 </div>
               </SectionBox>
 
               {/* Section 2 — Financial Performance (2 cards) */}
               <SectionBox
                 title="Financial Performance"
-                accent={{ border: 'border-emerald-200', bg: 'bg-emerald-50', text: 'text-emerald-700' }}
                 testid="client-section-financial-performance"
                 colSpan="lg:col-span-2"
               >
-                <div className="grid grid-cols-2 gap-2">
-                  {card('Total Income',   totalIncome,  'bg-white border-emerald-200 hover:border-emerald-300', 'client-proj-income',      { valueClass: 'text-emerald-700' })}
-                  {card('Yet to Receive', yetToReceive, 'bg-white border-orange-200 hover:border-orange-300',   'client-proj-receivable',  { valueClass: 'text-orange-700' })}
+                <div className="grid grid-cols-2 gap-3">
+                  {card('Total Income',   totalIncome,  'bg-primary',    'client-proj-income')}
+                  {card('Yet to Receive', yetToReceive, 'bg-orange-500', 'client-proj-receivable')}
                 </div>
               </SectionBox>
               {/* Pending Dues section removed from the top strip — it now lives

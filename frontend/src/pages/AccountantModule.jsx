@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '../components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '../components/ui/dialog';
 import { Input } from '../components/ui/input';
@@ -402,46 +403,12 @@ export default function AccountantModule() {
 
       <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6">
         {/* Summary Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
-          <Card className="bg-amber-50 border-amber-200 cursor-pointer hover:shadow-md" onClick={() => setActiveTab('requests')} data-testid="pending-requests-card">
-            <CardContent className="p-4 text-center">
-              <Clock className="h-6 w-6 mx-auto mb-1 text-amber-600" />
-              <p className="text-2xl font-bold text-amber-700">{counts.total}</p>
-              <p className="text-xs text-amber-600">Pending Requests</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-green-50 border-green-200 cursor-pointer hover:shadow-md" onClick={() => setActiveTab('income')} data-testid="income-card">
-            <CardContent className="p-4 text-center">
-              <TrendingUp className="h-6 w-6 mx-auto mb-1 text-green-600" />
-              <p className="text-xl font-bold text-green-700">{formatCurrency(incomeSummary.total || 0)}</p>
-              <p className="text-xs text-green-600">Total Income</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-red-50 border-red-200 cursor-pointer hover:shadow-md" onClick={() => setActiveTab('expense')} data-testid="expense-card">
-            <CardContent className="p-4 text-center">
-              <TrendingDown className="h-6 w-6 mx-auto mb-1 text-red-600" />
-              <p className="text-xl font-bold text-red-700">{formatCurrency(expenses.reduce((sum, e) => sum + (e.amount || 0), 0))}</p>
-              <p className="text-xs text-red-600">Total Expenses</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-orange-50 border-orange-200 cursor-pointer hover:shadow-md" onClick={() => setActiveTab('suspense')} data-testid="suspense-card">
-            <CardContent className="p-4 text-center">
-              <HelpCircle className="h-6 w-6 mx-auto mb-1 text-orange-600" />
-              <p className="text-2xl font-bold text-orange-700">{suspenseEntries.filter(s => s.status === 'pending').length}</p>
-              <p className="text-xs text-orange-600">Suspense Entries</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-violet-50 border-violet-200 cursor-pointer hover:shadow-md" onClick={() => setSuspenseDialog(true)} data-testid="add-suspense-card">
-            <CardContent className="p-4 text-center">
-              <Plus className="h-6 w-6 mx-auto mb-1 text-violet-600" />
-              <p className="text-lg font-bold text-violet-700">Add</p>
-              <p className="text-xs text-violet-600">Suspense Entry</p>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
+          <SummaryCard compact label="Pending Requests" icon={Clock} tone="warning" value={counts.total} testId="pending-requests-card" onClick={() => setActiveTab('requests')} />
+          <SummaryCard compact label="Total Income" icon={TrendingUp} tone="positive" value={formatCurrency(incomeSummary.total || 0)} testId="income-card" onClick={() => setActiveTab('income')} />
+          <SummaryCard compact label="Total Expenses" icon={TrendingDown} tone="negative" value={formatCurrency(expenses.reduce((sum, e) => sum + (e.amount || 0), 0))} testId="expense-card" onClick={() => setActiveTab('expense')} />
+          <SummaryCard compact label="Suspense Entries" icon={HelpCircle} tone="warning" value={suspenseEntries.filter(s => s.status === 'pending').length} testId="suspense-card" onClick={() => setActiveTab('suspense')} />
+          <SummaryCard compact label="Suspense Entry" icon={Plus} tone="positive" value="Add" testId="add-suspense-card" onClick={() => setSuspenseDialog(true)} />
         </div>
 
         {/* Main Tabs */}

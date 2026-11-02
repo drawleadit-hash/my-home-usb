@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '../components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '../components/ui/dialog';
@@ -444,76 +445,14 @@ export default function ProcurementBoardV2() {
 
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Dashboard Metrics */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mb-8">
-          <Card className="bg-amber-50">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2 text-amber-600 mb-2">
-                <AlertCircle className="h-5 w-5" />
-                <span className="text-sm font-medium">Approval</span>
-              </div>
-              <p className="text-2xl font-bold text-amber-700">{dashboard.pending_approval || 0}</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-blue-50">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2 text-blue-600 mb-2">
-                <Clock className="h-5 w-5" />
-                <span className="text-sm font-medium">Vendor Select</span>
-              </div>
-              <p className="text-2xl font-bold text-blue-700">{dashboard.pending_requests || 0}</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-purple-50">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2 text-purple-600 mb-2">
-                <Package className="h-5 w-5" />
-                <span className="text-sm font-medium">In Progress</span>
-              </div>
-              <p className="text-2xl font-bold text-purple-700">{dashboard.pricing_in_progress || 0}</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-yellow-50">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2 text-yellow-600 mb-2">
-                <Wallet className="h-5 w-5" />
-                <span className="text-sm font-medium">Awaiting Payment</span>
-              </div>
-              <p className="text-2xl font-bold text-yellow-700">{dashboard.waiting_accounts || 0}</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-orange-50">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2 text-orange-600 mb-2">
-                <Truck className="h-5 w-5" />
-                <span className="text-sm font-medium">In Transit</span>
-              </div>
-              <p className="text-2xl font-bold text-orange-700">{transitOrders.length}</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-red-50">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2 text-red-600 mb-2">
-                <CreditCard className="h-5 w-5" />
-                <span className="text-sm font-medium">Credit Outstanding</span>
-              </div>
-              <p className="text-2xl font-bold text-red-700">₹{(creditLedger.total_outstanding / 1000).toFixed(1)}K</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-green-50">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2 text-green-600 mb-2">
-                <CheckCircle className="h-5 w-5" />
-                <span className="text-sm font-medium">Delivered</span>
-              </div>
-              <p className="text-2xl font-bold text-green-700">{dashboard.delivered_orders || 0}</p>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-7 gap-4 mb-8">
+          <SummaryCard compact label="Approval" icon={AlertCircle} tone="warning" value={dashboard.pending_approval || 0} />
+          <SummaryCard compact label="Vendor Select" icon={Clock} tone="info" value={dashboard.pending_requests || 0} />
+          <SummaryCard compact label="In Progress" icon={Package} tone="violet" value={dashboard.pricing_in_progress || 0} />
+          <SummaryCard compact label="Awaiting Payment" icon={Wallet} tone="warning" value={dashboard.waiting_accounts || 0} />
+          <SummaryCard compact label="In Transit" icon={Truck} tone="info" value={transitOrders.length} />
+          <SummaryCard compact label="Credit Outstanding" icon={CreditCard} tone="negative" value={`₹${(creditLedger.total_outstanding / 1000).toFixed(1)}K`} />
+          <SummaryCard compact label="Delivered" icon={CheckCircle} tone="positive" value={dashboard.delivered_orders || 0} />
         </div>
 
         {/* Action Buttons */}

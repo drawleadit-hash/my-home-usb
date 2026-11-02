@@ -1,8 +1,9 @@
 import { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
-import { Wallet, Users, Package, Banknote, Plus, CheckCircle, ArrowRight, AlertTriangle, Trash2, ChevronDown, ChevronRight, Eye, ArrowDownCircle, ArrowUpCircle, FileText } from 'lucide-react';
+import { Wallet, Plus, CheckCircle, ArrowRight, AlertTriangle, Trash2, ChevronDown, ChevronRight, Eye, ArrowDownCircle, ArrowUpCircle, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ChannelCard } from '../components/SummaryCard';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -294,31 +295,36 @@ export default function SuspenseAccountPage() {
 
         {/* Summary */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
-          <Card data-testid="petty-summary" className="border-l-4 border-l-amber-500 cursor-pointer" onClick={() => setActiveTab('petty_cash')}>
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2 mb-2"><Banknote className="h-4 w-4 text-amber-500" /><span className="text-sm font-bold text-gray-700">Petty Cash</span></div>
-              <div className="grid grid-cols-4 gap-2 text-center">
-                <div><p className="text-[10px] text-gray-400">Issued</p><p className="text-sm font-bold text-amber-600">{fmt(petty.total_issued)}</p></div>
-                <div><p className="text-[10px] text-gray-400">A/C Approved</p><p className="text-sm font-bold text-blue-600">{fmt(petty.total_ac_approved || 0)}</p></div>
-                <div><p className="text-[10px] text-gray-400">Spent</p><p className="text-sm font-bold text-red-600">{fmt(petty.total_spent)}</p></div>
-                <div><p className="text-[10px] text-gray-400">Balance</p><p className="text-sm font-bold text-green-600">{fmt(petty.balance)}</p></div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card data-testid="material-summary" className="border-l-4 border-l-blue-500 cursor-pointer" onClick={() => setActiveTab('materials')}>
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2 mb-2"><Package className="h-4 w-4 text-blue-500" /><span className="text-sm font-bold text-gray-700">Material Suspense</span></div>
-              <p className="text-2xl font-extrabold text-blue-700">{fmt(matSus.total)}</p>
-              <p className="text-xs text-gray-400">{(matSus.balances || []).length} vendors with balance</p>
-            </CardContent>
-          </Card>
-          <Card data-testid="labour-summary" className="border-l-4 border-l-purple-500 cursor-pointer" onClick={() => setActiveTab('labour')}>
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2 mb-2"><Users className="h-4 w-4 text-purple-500" /><span className="text-sm font-bold text-gray-700">Labour Suspense</span></div>
-              <p className="text-2xl font-extrabold text-purple-700">{fmt(labSus.total)}</p>
-              <p className="text-xs text-gray-400">{(labSus.balances || []).length} contractors with balance</p>
-            </CardContent>
-          </Card>
+          <ChannelCard
+            label="Petty Cash"
+            dot="bg-orange-500"
+            value={fmt(petty.balance)}
+            rows={[
+              { label: 'Issued', value: fmt(petty.total_issued) },
+              { label: 'A/C Approved', value: fmt(petty.total_ac_approved || 0) },
+              { label: 'Spent', value: fmt(petty.total_spent), className: 'text-red-600' },
+            ]}
+            onClick={() => setActiveTab('petty_cash')}
+            testId="petty-summary"
+          />
+          <ChannelCard
+            label="Material Suspense"
+            dot="bg-blue-500"
+            value={fmt(matSus.total)}
+            onClick={() => setActiveTab('materials')}
+            testId="material-summary"
+          >
+            <p className="mt-1 text-xs text-muted-foreground">{(matSus.balances || []).length} vendors with balance</p>
+          </ChannelCard>
+          <ChannelCard
+            label="Labour Suspense"
+            dot="bg-violet-500"
+            value={fmt(labSus.total)}
+            onClick={() => setActiveTab('labour')}
+            testId="labour-summary"
+          >
+            <p className="mt-1 text-xs text-muted-foreground">{(labSus.balances || []).length} contractors with balance</p>
+          </ChannelCard>
         </div>
 
         {/* Tabs */}

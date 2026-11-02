@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '../components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '../components/ui/dialog';
 import { Input } from '../components/ui/input';
@@ -176,26 +177,9 @@ export default function LabourContractorManagement() {
       <div className="max-w-6xl mx-auto px-4 py-4 sm:px-6 sm:py-8">
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-6">
-          <Card>
-            <CardContent className="p-4 text-center">
-              <p className="text-2xl font-bold text-amber-600">{contractors.length}</p>
-              <p className="text-sm text-gray-500">Total Contractors</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-4 text-center">
-              <p className="text-2xl font-bold text-green-600">
-                {new Set(contractors.flatMap(c => c.work_types || [])).size}
-              </p>
-              <p className="text-sm text-gray-500">Work Types</p>
-            </CardContent>
-          </Card>
-          <Card className="col-span-2 sm:col-span-1">
-            <CardContent className="p-4 text-center">
-              <p className="text-2xl font-bold text-purple-600">{contractors.filter(c => c.is_active).length}</p>
-              <p className="text-sm text-gray-500">Active</p>
-            </CardContent>
-          </Card>
+          <SummaryCard compact label="Total Contractors" value={contractors.length} />
+          <SummaryCard compact label="Work Types" tone="info" value={new Set(contractors.flatMap(c => c.work_types || [])).size} />
+          <SummaryCard compact label="Active" tone="positive" value={contractors.filter(c => c.is_active).length} className="col-span-2 sm:col-span-1" />
         </div>
 
         {/* Contractors Grid */}

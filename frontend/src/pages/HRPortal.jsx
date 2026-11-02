@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '../components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '../components/ui/dialog';
 import { Input } from '../components/ui/input';
@@ -643,18 +644,13 @@ export default function HRPortal() {
             <div className="space-y-6">
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
                 {[
-                  { label: 'Active Employees', value: activeCount, icon: Users, color: 'border-l-amber-500' },
-                  { label: 'Total Users', value: allUsers.length, icon: Shield, color: 'border-l-blue-500' },
-                  { label: 'Present Today', value: dashboardData?.today_present || 0, icon: CheckCircle2, color: 'border-l-[#FFF44F]' },
-                  { label: 'Late Today', value: dashboardData?.today_late || 0, icon: Timer, color: 'border-l-orange-500' },
-                  { label: 'Pending Leaves', value: dashboardData?.pending_leaves || 0, icon: AlertCircle, color: 'border-l-purple-500' },
+                  { label: 'Active Employees', value: activeCount, icon: Users, tone: 'positive' },
+                  { label: 'Total Users', value: allUsers.length, icon: Shield, tone: 'info' },
+                  { label: 'Present Today', value: dashboardData?.today_present || 0, icon: CheckCircle2, tone: 'positive' },
+                  { label: 'Late Today', value: dashboardData?.today_late || 0, icon: Timer, tone: 'warning' },
+                  { label: 'Pending Leaves', value: dashboardData?.pending_leaves || 0, icon: AlertCircle, tone: 'violet' },
                 ].map((c, i) => (
-                  <Card key={i} className={`border-l-4 ${c.color}`} data-testid={`dash-card-${i}`}>
-                    <CardContent className="p-4 flex items-center gap-3">
-                      <c.icon className="h-5 w-5 text-gray-500" />
-                      <div><p className="text-xs text-gray-500">{c.label}</p><p className="text-xl font-bold">{c.value}</p></div>
-                    </CardContent>
-                  </Card>
+                  <SummaryCard key={c.label} compact label={c.label} value={c.value} icon={c.icon} tone={c.tone} testId={`dash-card-${i}`} />
                 ))}
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -1584,22 +1580,16 @@ function AttendanceTab({ monthlyAtt, attMonth, attYear, setAttMonth, setAttYear,
       {viewMode === 'daily' && (
         <>
           {/* Summary Cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 2xl:grid-cols-6 gap-3">
             {[
-              { label: 'Total Employees', value: sum.total || 0, color: 'bg-slate-50 border-slate-200', text: 'text-slate-700', icon: Users },
-              { label: 'Present', value: sum.present || 0, color: 'bg-green-50 border-green-200', text: 'text-green-700', icon: UserCheck },
-              { label: 'Work from Home', value: sum.wfh || 0, color: 'bg-purple-50 border-purple-200', text: 'text-purple-700', icon: Laptop },
-              { label: 'Yet to Login', value: sum.yet_to_login || 0, color: 'bg-amber-50 border-amber-200', text: 'text-amber-700', icon: Clock },
-              { label: 'Absent / Leave', value: (sum.absent || 0) + (sum.on_leave || 0), color: 'bg-red-50 border-red-200', text: 'text-red-700', icon: UserX },
-              { label: 'Late Arrivals', value: sum.late || 0, color: 'bg-orange-50 border-orange-200', text: 'text-orange-700', icon: Timer },
+              { label: 'Total Employees', value: sum.total || 0, tone: 'neutral', icon: Users },
+              { label: 'Present', value: sum.present || 0, tone: 'positive', icon: UserCheck },
+              { label: 'Work from Home', value: sum.wfh || 0, tone: 'violet', icon: Laptop },
+              { label: 'Yet to Login', value: sum.yet_to_login || 0, tone: 'warning', icon: Clock },
+              { label: 'Absent / Leave', value: (sum.absent || 0) + (sum.on_leave || 0), tone: 'negative', icon: UserX },
+              { label: 'Late Arrivals', value: sum.late || 0, tone: 'warning', icon: Timer },
             ].map(c => (
-              <Card key={c.label} className={`${c.color} border`}>
-                <CardContent className="p-3 flex flex-col items-center justify-center">
-                  <c.icon className={`h-5 w-5 ${c.text} mb-1`} />
-                  <p className={`text-2xl font-bold ${c.text}`}>{c.value}</p>
-                  <p className="text-[10px] text-gray-500 text-center">{c.label}</p>
-                </CardContent>
-              </Card>
+              <SummaryCard key={c.label} compact label={c.label} value={c.value} icon={c.icon} tone={c.tone} />
             ))}
           </div>
 

@@ -55,6 +55,7 @@ import {
 import { DayPicker } from 'react-day-picker';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ChannelCard } from '../components/SummaryCard';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
@@ -547,137 +548,82 @@ function ProjectCashflowTab({ projectId, isAdmin }) {
   return (
     <div className="space-y-4">
       {/* === Project Header Strip: Value + Add − Ded = Grand Total | Income − Expense = Receivable === */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3" data-testid="project-strip">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" data-testid="project-strip">
         {/* LEFT — Project Value Calculation */}
-        <Card className="border-blue-200 bg-blue-50">
-          <CardContent className="p-3">
-            <p className="text-[10px] font-bold uppercase tracking-wider text-blue-700 mb-2">Project Value Calculation</p>
-            <div className="grid grid-cols-4 gap-2 items-stretch">
-              {/* Value */}
-              <div className="rounded-md bg-white/80 border border-blue-200 p-2.5">
-                <p className="text-[10px] text-gray-500 uppercase">Scope Value</p>
-                <p className="text-base font-bold text-blue-700 mt-0.5">{fmtINR(scopeTotal)}</p>
-              </div>
-              {/* Additions */}
-              <div className="rounded-md bg-white/80 border border-cyan-200 p-2.5">
-                <p className="text-[10px] text-gray-500 uppercase">Additions</p>
-                <p className="text-base font-bold text-cyan-700 mt-0.5">{fmtINR(additionsTotal)}</p>
-              </div>
-              {/* Deductions */}
-              <div className="rounded-md bg-white/80 border border-orange-200 p-2.5">
-                <p className="text-[10px] text-gray-500 uppercase">Deductions</p>
-                <p className="text-base font-bold text-orange-700 mt-0.5">{fmtINR(deductionsTotal)}</p>
-              </div>
-              {/* Grand Total (highlighted) */}
-              <div className="rounded-md bg-violet-600 text-white p-2.5">
-                <p className="text-[10px] uppercase opacity-90">Grand Total</p>
-                <p className="text-base font-extrabold mt-0.5">{fmtINR(grandTotal)}</p>
-              </div>
-            </div>
-          </CardContent>
+        <Card className="p-4">
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">Project Value Calculation</h3>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <ChannelCard compact label="Scope Value" dot="bg-blue-500" value={fmtINR(scopeTotal)} />
+            <ChannelCard compact label="Additions" dot="bg-primary" value={fmtINR(additionsTotal)} />
+            <ChannelCard compact label="Deductions" dot="bg-orange-500" value={fmtINR(deductionsTotal)} />
+            <ChannelCard compact dark label="Grand Total" value={fmtINR(grandTotal)} />
+          </div>
         </Card>
 
         {/* RIGHT — Financial Performance */}
-        <Card className="border-emerald-200 bg-emerald-50">
-          <CardContent className="p-3">
-            <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 mb-2">Financial Performance</p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 items-stretch">
-              {/* Total Income */}
-              <div className="rounded-md bg-white/80 border border-emerald-200 p-2.5">
-                <p className="text-[10px] text-gray-500 uppercase">Total Income</p>
-                <p className="text-base font-bold text-emerald-700 mt-0.5">{fmtINR(totalIncome)}</p>
-                <p className="text-[9px] text-emerald-600 mt-0.5">{collectionPct.toFixed(1)}% of value</p>
-              </div>
-              {/* Total Expense */}
-              <div className="rounded-md bg-white/80 border border-rose-200 p-2.5">
-                <p className="text-[10px] text-gray-500 uppercase">Total Expense</p>
-                <p className="text-base font-bold text-rose-600 mt-0.5">{fmtINR(totalExpense)}</p>
-                {totalIncome > 0 && <p className="text-[9px] text-rose-600 mt-0.5">{((totalExpense / totalIncome) * 100).toFixed(1)}% of income</p>}
-              </div>
-              {/* Total Balance = Income − Expense (net cash held) */}
-              <div className={`rounded-md p-2.5 border ${(totalIncome - totalExpense) >= 0 ? 'bg-indigo-50 border-indigo-200' : 'bg-red-50 border-red-200'}`} data-testid="fin-perf-total-balance">
-                <p className="text-[10px] text-gray-500 uppercase">Total Balance</p>
-                <p className={`text-base font-extrabold mt-0.5 ${(totalIncome - totalExpense) >= 0 ? 'text-indigo-700' : 'text-red-700'}`}>{fmtINR(totalIncome - totalExpense)}</p>
-                <p className="text-[9px] text-gray-500 mt-0.5">Income − Expense</p>
-              </div>
-              {/* Receivable Balance */}
-              <div className={`rounded-md p-2.5 ${receivableBalance > 0 ? 'bg-amber-500 text-white' : 'bg-emerald-600 text-white'}`}>
-                <p className="text-[10px] uppercase opacity-90">Receivable</p>
-                <p className="text-base font-extrabold mt-0.5">{fmtINR(receivableBalance)}</p>
-                <p className="text-[9px] opacity-90 mt-0.5">Yet to receive</p>
-              </div>
-            </div>
-          </CardContent>
+        <Card className="p-4">
+          <h3 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">Financial Performance</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <ChannelCard compact label="Total Income" dot="bg-primary" value={fmtINR(totalIncome)}>
+              <p className="mt-1 text-[11px] text-primary-strong">{collectionPct.toFixed(1)}% of value</p>
+            </ChannelCard>
+            <ChannelCard compact label="Total Expense" dot="bg-red-500" value={fmtINR(totalExpense)}>
+              {totalIncome > 0 && <p className="mt-1 text-[11px] text-red-600">{((totalExpense / totalIncome) * 100).toFixed(1)}% of income</p>}
+            </ChannelCard>
+            {/* Total Balance = Income − Expense (net cash held) */}
+            <ChannelCard compact label="Total Balance" dot="bg-ink-700" danger={(totalIncome - totalExpense) < 0} value={fmtINR(totalIncome - totalExpense)} testId="fin-perf-total-balance">
+              <p className="mt-1 text-[11px] text-muted-foreground">Income − Expense</p>
+            </ChannelCard>
+            <ChannelCard compact label="Receivable" dot={receivableBalance > 0 ? 'bg-amber-500' : 'bg-primary'} value={fmtINR(receivableBalance)}>
+              <p className="mt-1 text-[11px] text-muted-foreground">Yet to receive</p>
+            </ChannelCard>
+          </div>
         </Card>
       </div>
 
       {/* 3 Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* Card 01 — Project Cashflow Overview */}
-        <Card className="bg-violet-50 border-violet-200">
-          <CardContent className="p-4 space-y-2.5">
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] font-semibold uppercase text-violet-700">Cashflow Overview</span>
-              {net >= 0 ? <TrendingUp className="h-4 w-4 text-violet-600" /> : <TrendingDown className="h-4 w-4 text-rose-600" />}
-            </div>
-            <div className="flex items-center justify-between border-b border-violet-200/60 pb-1.5">
-              <span className="text-[11px] text-violet-700/80">Total Income</span>
-              <span className="text-sm font-bold text-emerald-700">{fmtINR(data.income_total)}</span>
-            </div>
-            <div className="flex items-center justify-between border-b border-violet-200/60 pb-1.5">
-              <span className="text-[11px] text-violet-700/80">Total Expense (D+I)</span>
-              <span className="text-sm font-bold text-rose-600">{fmtINR(data.expense_total)}</span>
-            </div>
-            <div className="flex items-center justify-between pt-0.5">
-              <span className="text-[12px] font-semibold text-violet-900">Balance</span>
-              <span className={`text-lg font-extrabold ${net >= 0 ? 'text-violet-800' : 'text-rose-800'}`}>{fmtINR(net)}</span>
-            </div>
-          </CardContent>
-        </Card>
+        <ChannelCard
+          dark
+          danger={net < 0}
+          label="Cashflow Overview"
+          badge={net >= 0 ? <TrendingUp className="h-4 w-4 text-brand-400" /> : <TrendingDown className="h-4 w-4 text-red-300" />}
+          value={fmtINR(net)}
+          rows={[
+            { label: 'Total Income', value: fmtINR(data.income_total) },
+            { label: 'Total Expense (D+I)', value: fmtINR(data.expense_total), className: 'text-red-300' },
+          ]}
+          pct={data.income_total > 0 ? (net / data.income_total) * 100 : 0}
+        />
 
         {/* Card 02 — Direct */}
-        <Card className="bg-emerald-50 border-emerald-200">
-          <CardContent className="p-4 space-y-2.5">
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] font-semibold uppercase text-emerald-700">Direct Cost Allocation</span>
-              <Badge className="bg-emerald-200 text-emerald-800 text-[10px]">{data.effective_split?.direct_pct}%</Badge>
-            </div>
-            <div className="flex items-center justify-between border-b border-emerald-200/60 pb-1.5">
-              <span className="text-[11px] text-emerald-700/80">Total Direct Allocation</span>
-              <span className="text-sm font-bold text-emerald-700">{fmtINR(data.direct_in)}</span>
-            </div>
-            <div className="flex items-center justify-between border-b border-emerald-200/60 pb-1.5">
-              <span className="text-[11px] text-emerald-700/80">Expense (Direct)</span>
-              <span className="text-sm font-bold text-rose-600">{fmtINR(data.direct_out)}</span>
-            </div>
-            <div className="flex items-center justify-between pt-0.5">
-              <span className="text-[12px] font-semibold text-emerald-900">Balance</span>
-              <span className="text-lg font-extrabold text-emerald-800">{fmtINR(data.direct_balance)}</span>
-            </div>
-          </CardContent>
-        </Card>
+        <ChannelCard
+          label="Direct Cost Allocation"
+          dot="bg-primary"
+          badge={<Badge variant="soft" className="px-2 py-0 text-[10px]">{data.effective_split?.direct_pct}%</Badge>}
+          value={fmtINR(data.direct_balance)}
+          rows={[
+            { label: 'Total Direct Allocation', value: fmtINR(data.direct_in) },
+            { label: 'Expense (Direct)', value: fmtINR(data.direct_out), className: 'text-red-600' },
+          ]}
+          pct={data.direct_in > 0 ? (data.direct_balance / data.direct_in) * 100 : 0}
+        />
 
         {/* Card 03 — Indirect */}
-        <Card className="bg-sky-50 border-sky-200">
-          <CardContent className="p-4 space-y-2.5">
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] font-semibold uppercase text-sky-700">Indirect Cost Allocation</span>
-              <Badge className="bg-sky-200 text-sky-800 text-[10px]">{data.effective_split?.indirect_pct}%</Badge>
-            </div>
-            <div className="flex items-center justify-between border-b border-sky-200/60 pb-1.5">
-              <span className="text-[11px] text-sky-700/80">Total Indirect Allocation</span>
-              <span className="text-sm font-bold text-sky-700">{fmtINR(data.indirect_in)}</span>
-            </div>
-            <div className="flex items-center justify-between border-b border-sky-200/60 pb-1.5">
-              <span className="text-[11px] text-sky-700/80">Expense (Indirect)</span>
-              <span className="text-sm font-bold text-rose-600">{fmtINR(data.indirect_out)}</span>
-            </div>
-            <div className="flex items-center justify-between pt-0.5">
-              <span className="text-[12px] font-semibold text-sky-900">Balance</span>
-              <span className="text-lg font-extrabold text-sky-800">{fmtINR(data.indirect_balance)}</span>
-            </div>
-          </CardContent>
-        </Card>
+        <ChannelCard
+          label="Indirect Cost Allocation"
+          dot="bg-blue-500"
+          badge={<Badge variant="info" className="px-2 py-0 text-[10px]">{data.effective_split?.indirect_pct}%</Badge>}
+          value={fmtINR(data.indirect_balance)}
+          rows={[
+            { label: 'Total Indirect Allocation', value: fmtINR(data.indirect_in) },
+            { label: 'Expense (Indirect)', value: fmtINR(data.indirect_out), className: 'text-red-600' },
+          ]}
+          pct={data.indirect_in > 0 ? (data.indirect_balance / data.indirect_in) * 100 : 0}
+        />
       </div>
 
       {/* Allocation Editor (Super Admin) */}
@@ -797,33 +743,18 @@ function PaymentSummarySection({ user, projectId, paymentSummary, formatCurrency
       {/* Totals - Only for Super Admin & Accountant */}
       {canSeeTotals && (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3" data-testid="payment-summary-totals">
-          <Card className="border-l-4 border-l-green-500">
-            <CardContent className="p-3">
-              <p className="text-xs text-gray-500">Total Income</p>
-              <p className="text-lg font-bold text-green-700">{fmtFull(incomeSummary.total_income)}</p>
-              <p className="text-[10px] text-gray-400">{incomeEntries.length} entries</p>
-            </CardContent>
-          </Card>
-          <Card className="border-l-4 border-l-red-500">
-            <CardContent className="p-3">
-              <p className="text-xs text-gray-500">Total Expense</p>
-              <p className="text-lg font-bold text-red-600">{fmtFull(expenseSummary.total_expenses)}</p>
-            </CardContent>
-          </Card>
-          <Card className="border-l-4 border-l-blue-500">
-            <CardContent className="p-3">
-              <p className="text-xs text-gray-500">Total Paid</p>
-              <p className="text-lg font-bold text-blue-600">{fmtFull(expenseSummary.total_paid)}</p>
-            </CardContent>
-          </Card>
-          <Card className="border-l-4 border-l-amber-500">
-            <CardContent className="p-3">
-              <p className="text-xs text-gray-500">Net Balance</p>
-              <p className={`text-lg font-bold ${(incomeSummary.total_income || 0) - (expenseSummary.total_expenses || 0) >= 0 ? 'text-green-700' : 'text-red-600'}`}>
-                {fmtFull((incomeSummary.total_income || 0) - (expenseSummary.total_expenses || 0))}
-              </p>
-            </CardContent>
-          </Card>
+          <ChannelCard compact label="Total Income" dot="bg-primary" value={fmtFull(incomeSummary.total_income)}>
+            <p className="mt-1 text-[11px] text-muted-foreground">{incomeEntries.length} entries</p>
+          </ChannelCard>
+          <ChannelCard compact label="Total Expense" dot="bg-red-500" value={fmtFull(expenseSummary.total_expenses)} />
+          <ChannelCard compact label="Total Paid" dot="bg-blue-500" value={fmtFull(expenseSummary.total_paid)} />
+          <ChannelCard
+            compact
+            label="Net Balance"
+            dot="bg-ink-700"
+            danger={(incomeSummary.total_income || 0) - (expenseSummary.total_expenses || 0) < 0}
+            value={fmtFull((incomeSummary.total_income || 0) - (expenseSummary.total_expenses || 0))}
+          />
         </div>
       )}
 
@@ -4743,67 +4674,43 @@ export default function ProjectDetail() {
           const collectionPct = grandTotal > 0 ? (totalIncome / grandTotal) * 100 : 0;
           const fmtINR = (n) => `₹${Number(n || 0).toLocaleString('en-IN')}`;
           return (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-4 sm:mb-6" data-testid="project-summary-strip">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4 sm:mb-6" data-testid="project-summary-strip">
               {/* LEFT — Project Value Calculation */}
-              <Card className="border-blue-200 bg-blue-50">
-                <CardContent className="p-3">
-                  <div className="flex items-center justify-between gap-2 mb-2 flex-wrap">
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-blue-700">Project Value Calculation</p>
-                    {summary?.scope_total_pending > 0 && (
-                      <Badge variant="outline" className="text-[9px] bg-amber-50 text-amber-700 border-amber-300 font-medium" data-testid="pvc-pending-pill">
-                        Pending Client Approval · ₹{(summary.scope_total_pending || 0).toLocaleString('en-IN')}
-                      </Badge>
-                    )}
-                  </div>
-                  <div className="grid grid-cols-4 gap-2 items-stretch">
-                    <div className="rounded-md bg-white/80 border border-blue-200 p-2.5">
-                      <p className="text-[10px] text-gray-500 uppercase">Scope Value</p>
-                      <p className="text-base font-bold text-blue-700 mt-0.5">{fmtINR(scopeTotal)}</p>
-                    </div>
-                    <div className="rounded-md bg-white/80 border border-cyan-200 p-2.5">
-                      <p className="text-[10px] text-gray-500 uppercase">Additions</p>
-                      <p className="text-base font-bold text-cyan-700 mt-0.5">{fmtINR(additionsTotal)}</p>
-                    </div>
-                    <div className="rounded-md bg-white/80 border border-orange-200 p-2.5">
-                      <p className="text-[10px] text-gray-500 uppercase">Deductions</p>
-                      <p className="text-base font-bold text-orange-700 mt-0.5">{fmtINR(deductionsTotal)}</p>
-                    </div>
-                    <div className="rounded-md bg-violet-600 text-white p-2.5">
-                      <p className="text-[10px] uppercase opacity-90">Grand Total</p>
-                      <p className="text-base font-extrabold mt-0.5">{fmtINR(grandTotal)}</p>
-                    </div>
-                  </div>
-                </CardContent>
+              <Card className="p-4">
+                <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                  <h3 className="text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">Project Value Calculation</h3>
+                  {summary?.scope_total_pending > 0 && (
+                    <Badge variant="warning" className="text-[10px]" data-testid="pvc-pending-pill">
+                      Pending Client Approval · ₹{(summary.scope_total_pending || 0).toLocaleString('en-IN')}
+                    </Badge>
+                  )}
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <ChannelCard compact label="Scope Value" dot="bg-blue-500" value={fmtINR(scopeTotal)} />
+                  <ChannelCard compact label="Additions" dot="bg-primary" value={fmtINR(additionsTotal)} />
+                  <ChannelCard compact label="Deductions" dot="bg-orange-500" value={fmtINR(deductionsTotal)} />
+                  <ChannelCard compact dark label="Grand Total" value={fmtINR(grandTotal)} />
+                </div>
               </Card>
 
               {/* RIGHT — Financial Performance */}
-              <Card className="border-emerald-200 bg-emerald-50">
-                <CardContent className="p-3">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 mb-2">Financial Performance</p>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 items-stretch">
-                    <div className="rounded-md bg-white/80 border border-emerald-200 p-2.5">
-                      <p className="text-[10px] text-gray-500 uppercase">Total Income</p>
-                      <p className="text-base font-bold text-emerald-700 mt-0.5">{fmtINR(totalIncome)}</p>
-                      <p className="text-[9px] text-emerald-600 mt-0.5">{collectionPct.toFixed(1)}% of value</p>
-                    </div>
-                    <div className="rounded-md bg-white/80 border border-rose-200 p-2.5">
-                      <p className="text-[10px] text-gray-500 uppercase">Total Expense</p>
-                      <p className="text-base font-bold text-rose-600 mt-0.5">{fmtINR(totalExpense)}</p>
-                      {totalIncome > 0 && <p className="text-[9px] text-rose-600 mt-0.5">{((totalExpense / totalIncome) * 100).toFixed(1)}% of income</p>}
-                    </div>
-                    {/* Total Balance = Income − Expense */}
-                    <div className={`rounded-md p-2.5 border ${(totalIncome - totalExpense) >= 0 ? 'bg-indigo-50 border-indigo-200' : 'bg-red-50 border-red-200'}`} data-testid="fin-perf-total-balance-main">
-                      <p className="text-[10px] text-gray-500 uppercase">Total Balance</p>
-                      <p className={`text-base font-extrabold mt-0.5 ${(totalIncome - totalExpense) >= 0 ? 'text-indigo-700' : 'text-red-700'}`}>{fmtINR(totalIncome - totalExpense)}</p>
-                      <p className="text-[9px] text-gray-500 mt-0.5">Income − Expense</p>
-                    </div>
-                    <div className={`rounded-md p-2.5 ${receivableBalance > 0 ? 'bg-amber-500 text-white' : 'bg-emerald-600 text-white'}`}>
-                      <p className="text-[10px] uppercase opacity-90">Receivable</p>
-                      <p className="text-base font-extrabold mt-0.5">{fmtINR(receivableBalance)}</p>
-                      <p className="text-[9px] opacity-90 mt-0.5">Yet to receive</p>
-                    </div>
-                  </div>
-                </CardContent>
+              <Card className="p-4">
+                <h3 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">Financial Performance</h3>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <ChannelCard compact label="Total Income" dot="bg-primary" value={fmtINR(totalIncome)}>
+                    <p className="mt-1 text-[11px] text-primary-strong">{collectionPct.toFixed(1)}% of value</p>
+                  </ChannelCard>
+                  <ChannelCard compact label="Total Expense" dot="bg-red-500" value={fmtINR(totalExpense)}>
+                    {totalIncome > 0 && <p className="mt-1 text-[11px] text-red-600">{((totalExpense / totalIncome) * 100).toFixed(1)}% of income</p>}
+                  </ChannelCard>
+                  {/* Total Balance = Income − Expense (net cash held) */}
+                  <ChannelCard compact label="Total Balance" dot="bg-ink-700" danger={(totalIncome - totalExpense) < 0} value={fmtINR(totalIncome - totalExpense)} testId="fin-perf-total-balance-main">
+                    <p className="mt-1 text-[11px] text-muted-foreground">Income − Expense</p>
+                  </ChannelCard>
+                  <ChannelCard compact label="Receivable" dot={receivableBalance > 0 ? 'bg-amber-500' : 'bg-primary'} value={fmtINR(receivableBalance)}>
+                    <p className="mt-1 text-[11px] text-muted-foreground">Yet to receive</p>
+                  </ChannelCard>
+                </div>
               </Card>
             </div>
           );

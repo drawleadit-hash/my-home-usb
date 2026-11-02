@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Building2, LogOut, Plus, Package, Edit, Trash2, Search, Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
@@ -262,42 +263,11 @@ export default function MaterialManagement() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 mb-4 sm:mb-8">
-          <Card className="bg-green-50 border-green-200">
-            <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Total</CardTitle>
-            </CardHeader>
-            <CardContent className="p-2 pt-0 sm:p-6 sm:pt-0">
-              <div className="flex items-center gap-1 sm:gap-2">
-                <Package className="h-4 w-4 sm:h-6 sm:w-6 text-green-600" />
-                <span className="text-lg sm:text-2xl font-bold text-green-700">{materials.length}</span>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="bg-blue-50 border-blue-200">
-            <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Active</CardTitle>
-            </CardHeader>
-            <CardContent className="p-2 pt-0 sm:p-6 sm:pt-0">
-              <span className="text-lg sm:text-2xl font-bold text-amber-700">{activeMaterials.length}</span>
-            </CardContent>
-          </Card>
-          <Card className="bg-gray-50 border-gray-200">
-            <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Inactive</CardTitle>
-            </CardHeader>
-            <CardContent className="p-2 pt-0 sm:p-6 sm:pt-0">
-              <span className="text-lg sm:text-2xl font-bold text-gray-700">{inactiveMaterials.length}</span>
-            </CardContent>
-          </Card>
-          <Card className="bg-purple-50 border-purple-200">
-            <CardHeader className="pb-1 sm:pb-2 p-2 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Categories</CardTitle>
-            </CardHeader>
-            <CardContent className="p-2 pt-0 sm:p-6 sm:pt-0">
-              <span className="text-lg sm:text-2xl font-bold text-purple-700">{categories.length}</span>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-8">
+          <SummaryCard compact label="Total" icon={Package} value={materials.length} />
+          <SummaryCard compact label="Active" tone="positive" value={activeMaterials.length} />
+          <SummaryCard compact label="Inactive" value={inactiveMaterials.length} />
+          <SummaryCard compact label="Categories" tone="violet" value={categories.length} />
         </div>
 
         {/* Filters */}

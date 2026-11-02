@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Building2, LogOut, Plus, Users, Shield, Edit, Trash2, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
@@ -296,77 +297,11 @@ export default function UserManagement() {
 
         {/* Stats — clickable filter cards */}
         <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4 mb-4 sm:mb-8" data-testid="user-stat-cards">
-          <button
-            type="button"
-            onClick={() => setCategoryFilter(categoryFilter === 'all' ? 'all' : 'all')}
-            className={`text-left rounded-lg border bg-blue-50 transition-all ${categoryFilter === 'all' ? 'ring-2 ring-blue-400 border-blue-300 shadow-md' : 'border-blue-200 hover:shadow-md hover:-translate-y-0.5'}`}
-            data-testid="stat-card-total"
-          >
-            <div className="pb-1 sm:pb-2 p-2 sm:p-6">
-              <p className="text-xs sm:text-sm font-medium text-gray-600">Total</p>
-            </div>
-            <div className="p-2 pt-0 sm:p-6 sm:pt-0">
-              <div className="flex items-center gap-1 sm:gap-2">
-                <Users className="h-4 w-4 sm:h-6 sm:w-6 text-amber-600" />
-                <span className="text-lg sm:text-2xl font-bold text-amber-700">{users.length}</span>
-              </div>
-            </div>
-          </button>
-          <button
-            type="button"
-            onClick={() => setCategoryFilter(categoryFilter === 'admin' ? 'all' : 'admin')}
-            className={`text-left rounded-lg border bg-red-50 transition-all ${categoryFilter === 'admin' ? 'ring-2 ring-red-400 border-red-300 shadow-md' : 'border-red-200 hover:shadow-md hover:-translate-y-0.5'}`}
-            data-testid="stat-card-admins"
-          >
-            <div className="pb-1 sm:pb-2 p-2 sm:p-6">
-              <p className="text-xs sm:text-sm font-medium text-gray-600">Admins</p>
-            </div>
-            <div className="p-2 pt-0 sm:p-6 sm:pt-0">
-              <div className="flex items-center gap-1 sm:gap-2">
-                <Shield className="h-4 w-4 sm:h-6 sm:w-6 text-red-600" />
-                <span className="text-lg sm:text-2xl font-bold text-red-700">{adminCount}</span>
-              </div>
-            </div>
-          </button>
-          <button
-            type="button"
-            onClick={() => setCategoryFilter(categoryFilter === 'staff' ? 'all' : 'staff')}
-            className={`text-left rounded-lg border bg-green-50 transition-all ${categoryFilter === 'staff' ? 'ring-2 ring-green-400 border-green-300 shadow-md' : 'border-green-200 hover:shadow-md hover:-translate-y-0.5'}`}
-            data-testid="stat-card-staff"
-          >
-            <div className="pb-1 sm:pb-2 p-2 sm:p-6">
-              <p className="text-xs sm:text-sm font-medium text-gray-600">Staff</p>
-            </div>
-            <div className="p-2 pt-0 sm:p-6 sm:pt-0">
-              <span className="text-lg sm:text-2xl font-bold text-green-700">{staffCount}</span>
-            </div>
-          </button>
-          <button
-            type="button"
-            onClick={() => setCategoryFilter(categoryFilter === 'client' ? 'all' : 'client')}
-            className={`text-left rounded-lg border bg-teal-50 transition-all hidden sm:block ${categoryFilter === 'client' ? 'ring-2 ring-teal-400 border-teal-300 shadow-md' : 'border-teal-200 hover:shadow-md hover:-translate-y-0.5'}`}
-            data-testid="stat-card-clients"
-          >
-            <div className="pb-1 sm:pb-2 p-2 sm:p-6">
-              <p className="text-xs sm:text-sm font-medium text-gray-600">Clients</p>
-            </div>
-            <div className="p-2 pt-0 sm:p-6 sm:pt-0">
-              <span className="text-lg sm:text-2xl font-bold text-teal-700">{clientCount}</span>
-            </div>
-          </button>
-          <button
-            type="button"
-            onClick={() => setCategoryFilter(categoryFilter === 'vendor' ? 'all' : 'vendor')}
-            className={`text-left rounded-lg border bg-gray-50 transition-all hidden sm:block ${categoryFilter === 'vendor' ? 'ring-2 ring-gray-400 border-gray-300 shadow-md' : 'border-gray-200 hover:shadow-md hover:-translate-y-0.5'}`}
-            data-testid="stat-card-vendors"
-          >
-            <div className="pb-1 sm:pb-2 p-2 sm:p-6">
-              <p className="text-xs sm:text-sm font-medium text-gray-600">Vendors</p>
-            </div>
-            <div className="p-2 pt-0 sm:p-6 sm:pt-0">
-              <span className="text-lg sm:text-2xl font-bold text-gray-700">{vendorCount}</span>
-            </div>
-          </button>
+          <SummaryCard compact label="Total" icon={Users} value={users.length} testId="stat-card-total" active={categoryFilter === 'all'} onClick={() => setCategoryFilter('all')} />
+          <SummaryCard compact label="Admins" icon={Shield} tone="negative" value={adminCount} testId="stat-card-admins" active={categoryFilter === 'admin'} onClick={() => setCategoryFilter(categoryFilter === 'admin' ? 'all' : 'admin')} />
+          <SummaryCard compact label="Staff" tone="positive" value={staffCount} testId="stat-card-staff" active={categoryFilter === 'staff'} onClick={() => setCategoryFilter(categoryFilter === 'staff' ? 'all' : 'staff')} />
+          <SummaryCard compact label="Clients" tone="info" value={clientCount} testId="stat-card-clients" className="hidden sm:block" active={categoryFilter === 'client'} onClick={() => setCategoryFilter(categoryFilter === 'client' ? 'all' : 'client')} />
+          <SummaryCard compact label="Vendors" tone="violet" value={vendorCount} testId="stat-card-vendors" className="hidden sm:block" active={categoryFilter === 'vendor'} onClick={() => setCategoryFilter(categoryFilter === 'vendor' ? 'all' : 'vendor')} />
         </div>
 
         {/* Filters */}

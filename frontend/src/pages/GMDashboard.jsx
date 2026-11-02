@@ -49,6 +49,7 @@ import {
 import { generateREPDF } from '../utils/pdfGenerator';
 import PlanningBoard from './PlanningBoard';
 import { AppHeader } from '../components/AppHeader';
+import { SummaryCard } from '../components/SummaryCard';
 import { useAutoRefresh } from '../hooks/useAutoRefresh';
 import { NumericInput } from '../components/NumericInput';
 import { UnitSelect } from '../components/UnitSelect';
@@ -437,83 +438,70 @@ const GMDashboard = () => {
 
       <main className="max-w-7xl mx-auto px-4 py-6">
         {/* Stats Overview — each card is clickable to drill into the underlying list */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-6">
-          <Card
-            className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-brand-400 text-white cursor-pointer hover:scale-[1.02] active:scale-100 transition-transform"
-            data-testid="gm-stat-total-projects"
+        <div className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-6 gap-4 mb-6">
+          <SummaryCard
+            compact
+            label="Total Projects"
+            value={stats.totalProjects}
+            icon={Building2}
+            testId="gm-stat-total-projects"
             onClick={() => setDrillDialog({ open: true, title: 'All Projects', items: projects, emptyText: 'No projects yet.' })}
-          >
-            <CardContent className="p-4">
-              <Building2 className="h-6 w-6 mb-2 opacity-80" />
-              <p className="text-2xl font-bold">{stats.totalProjects}</p>
-              <p className="text-xs opacity-80">Total Projects</p>
-            </CardContent>
-          </Card>
-          <Card
-            className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-brand-400 text-white cursor-pointer hover:scale-[1.02] active:scale-100 transition-transform"
-            data-testid="gm-stat-active-projects"
+          />
+          <SummaryCard
+            compact
+            label="Active Projects"
+            value={stats.activeProjects}
+            icon={TrendingUp}
+            tone="positive"
+            testId="gm-stat-active-projects"
             onClick={() => setDrillDialog({
               open: true,
               title: 'Active Projects',
               items: (projects || []).filter(p => ['active', 'working', 'gm_approved'].includes(p.status)),
               emptyText: 'No active projects.'
             })}
-          >
-            <CardContent className="p-4">
-              <TrendingUp className="h-6 w-6 mb-2 opacity-80" />
-              <p className="text-2xl font-bold">{stats.activeProjects}</p>
-              <p className="text-xs opacity-80">Active Projects</p>
-            </CardContent>
-          </Card>
-          <Card
-            className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-orange-400 text-white cursor-pointer hover:scale-[1.02] active:scale-100 transition-transform"
-            data-testid="gm-stat-pending-approvals"
+          />
+          <SummaryCard
+            compact
+            label="Pending Approvals"
+            value={stats.pendingApprovals}
+            icon={ClipboardCheck}
+            tone="warning"
+            testId="gm-stat-pending-approvals"
             onClick={() => setActiveTab('final_estimate')}
-          >
-            <CardContent className="p-4">
-              <ClipboardCheck className="h-6 w-6 mb-2 opacity-80" />
-              <p className="text-2xl font-bold">{stats.pendingApprovals}</p>
-              <p className="text-xs opacity-80">Pending Approvals</p>
-            </CardContent>
-          </Card>
-          <Card
-            className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-purple-400 text-white cursor-pointer hover:scale-[1.02] active:scale-100 transition-transform"
-            data-testid="gm-stat-re-approvals"
+          />
+          <SummaryCard
+            compact
+            label="RE Approvals"
+            value={stats.pendingREApprovals}
+            icon={Calculator}
+            tone="violet"
+            testId="gm-stat-re-approvals"
             onClick={() => setActiveTab('planning')}
-          >
-            <CardContent className="p-4">
-              <Calculator className="h-6 w-6 mb-2 opacity-80" />
-              <p className="text-2xl font-bold">{stats.pendingREApprovals}</p>
-              <p className="text-xs opacity-80">RE Approvals</p>
-            </CardContent>
-          </Card>
-          <Card
-            className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-amber-400 text-white cursor-pointer hover:scale-[1.02] active:scale-100 transition-transform"
-            data-testid="gm-stat-site-requests"
+          />
+          <SummaryCard
+            compact
+            label="Site Requests"
+            value={stats.pendingSiteRequests}
+            icon={HardHat}
+            tone="warning"
+            testId="gm-stat-site-requests"
             onClick={() => setActiveTab('planning_board')}
-          >
-            <CardContent className="p-4">
-              <HardHat className="h-6 w-6 mb-2 opacity-80" />
-              <p className="text-2xl font-bold">{stats.pendingSiteRequests}</p>
-              <p className="text-xs opacity-80">Site Requests</p>
-            </CardContent>
-          </Card>
-          <Card
-            className="bg-gray-900 ring-1 ring-inset ring-white/10 [&_svg]:text-brand-400 text-white cursor-pointer hover:scale-[1.02] active:scale-100 transition-transform"
-            data-testid="gm-stat-completed"
+          />
+          <SummaryCard
+            compact
+            label="Completed"
+            value={stats.completedProjects}
+            icon={CheckCircle}
+            tone="positive"
+            testId="gm-stat-completed"
             onClick={() => setDrillDialog({
               open: true,
               title: 'Completed Projects',
               items: (projects || []).filter(p => p.status === 'completed'),
               emptyText: 'No completed projects yet.'
             })}
-          >
-            <CardContent className="p-4">
-              <CheckCircle className="h-6 w-6 mb-2 opacity-80" />
-              <p className="text-2xl font-bold">{stats.completedProjects}</p>
-              <p className="text-xs opacity-80">Completed</p>
-            </CardContent>
-          </Card>
+          />
         </div>
 
         {/* ===== Dashboard Menu — 3 peer tabs at the top: 

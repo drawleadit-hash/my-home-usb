@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Building2, LogOut, Settings as SettingsIcon, Users, Package, Truck, Save, Building, ArrowDownRight, GitBranch, Headphones } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -229,51 +230,11 @@ export default function Settings() {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 mb-4 sm:mb-8">
-          <Card className="bg-blue-50 border-blue-200 cursor-pointer hover:shadow-md transition-shadow active:bg-amber-50" onClick={() => setActiveTab('company')}>
-            <CardHeader className="pb-1 sm:pb-2 p-3 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Company Profile</CardTitle>
-            </CardHeader>
-            <CardContent className="p-3 pt-0 sm:p-6 sm:pt-0">
-              <div className="flex items-center gap-1 sm:gap-2">
-                <Building className="h-4 w-4 sm:h-6 sm:w-6 text-amber-600" />
-                <span className="text-xs sm:text-lg font-bold text-amber-700 truncate">{summary?.company_name || 'Not Set'}</span>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="bg-green-50 border-green-200 cursor-pointer hover:shadow-md transition-shadow active:bg-green-100" onClick={() => window.location.href = '/materials'}>
-            <CardHeader className="pb-1 sm:pb-2 p-3 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Materials</CardTitle>
-            </CardHeader>
-            <CardContent className="p-3 pt-0 sm:p-6 sm:pt-0">
-              <div className="flex items-center gap-1 sm:gap-2">
-                <Package className="h-4 w-4 sm:h-6 sm:w-6 text-green-600" />
-                <span className="text-lg sm:text-2xl font-bold text-green-700">{summary?.materials_count || 0}</span>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="bg-purple-50 border-purple-200 cursor-pointer hover:shadow-md transition-shadow active:bg-purple-100" onClick={() => window.location.href = '/vendor-management'}>
-            <CardHeader className="pb-1 sm:pb-2 p-3 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Vendors</CardTitle>
-            </CardHeader>
-            <CardContent className="p-3 pt-0 sm:p-6 sm:pt-0">
-              <div className="flex items-center gap-1 sm:gap-2">
-                <Truck className="h-4 w-4 sm:h-6 sm:w-6 text-purple-600" />
-                <span className="text-lg sm:text-2xl font-bold text-purple-700">{summary?.vendors_count || 0}</span>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="bg-orange-50 border-orange-200 cursor-pointer hover:shadow-md transition-shadow active:bg-orange-100" onClick={() => window.location.href = '/users'}>
-            <CardHeader className="pb-1 sm:pb-2 p-3 sm:p-6">
-              <CardTitle className="text-xs sm:text-sm font-medium text-gray-600">Users</CardTitle>
-            </CardHeader>
-            <CardContent className="p-3 pt-0 sm:p-6 sm:pt-0">
-              <div className="flex items-center gap-1 sm:gap-2">
-                <Users className="h-4 w-4 sm:h-6 sm:w-6 text-orange-600" />
-                <span className="text-lg sm:text-2xl font-bold text-orange-700">{summary?.users_count || 0}</span>
-              </div>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-8">
+          <SummaryCard compact label="Company Profile" icon={Building} value={<span className="block truncate text-base sm:text-lg">{summary?.company_name || 'Not Set'}</span>} onClick={() => setActiveTab('company')} />
+          <SummaryCard compact label="Materials" icon={Package} tone="positive" value={summary?.materials_count || 0} onClick={() => { window.location.href = '/materials'; }} />
+          <SummaryCard compact label="Vendors" icon={Truck} tone="violet" value={summary?.vendors_count || 0} onClick={() => { window.location.href = '/vendor-management'; }} />
+          <SummaryCard compact label="Users" icon={Users} tone="warning" value={summary?.users_count || 0} onClick={() => { window.location.href = '/users'; }} />
         </div>
 
         {/* Tabs */}
@@ -450,7 +411,7 @@ export default function Settings() {
                   <CardDescription className="text-xs sm:text-sm">Define project packages with scope, materials & labour</CardDescription>
                 </CardHeader>
                 <CardContent className="p-4 pt-0 sm:p-6 sm:pt-0">
-                  <p className="text-xl sm:text-2xl font-bold text-indigo-600">Packages A, B, C</p>
+                  <p className="text-xl sm:text-2xl font-bold text-foreground">Packages A, B, C</p>
                 </CardContent>
               </Card>
               
@@ -463,7 +424,7 @@ export default function Settings() {
                   <CardDescription className="text-xs sm:text-sm">Manage material master data, categories, and units</CardDescription>
                 </CardHeader>
                 <CardContent className="p-4 pt-0 sm:p-6 sm:pt-0">
-                  <p className="text-xl sm:text-2xl font-bold text-green-600">{summary?.materials_count || 0} Materials</p>
+                  <p className="text-xl sm:text-2xl font-bold text-foreground">{summary?.materials_count || 0} Materials</p>
                 </CardContent>
               </Card>
               
@@ -476,7 +437,7 @@ export default function Settings() {
                   <CardDescription className="text-xs sm:text-sm">Manage vendor master data and payment terms</CardDescription>
                 </CardHeader>
                 <CardContent className="p-4 pt-0 sm:p-6 sm:pt-0">
-                  <p className="text-xl sm:text-2xl font-bold text-purple-600">{summary?.vendors_count || 0} Vendors</p>
+                  <p className="text-xl sm:text-2xl font-bold text-foreground">{summary?.vendors_count || 0} Vendors</p>
                 </CardContent>
               </Card>
               
@@ -489,7 +450,7 @@ export default function Settings() {
                   <CardDescription className="text-xs sm:text-sm">Manage users and their role assignments</CardDescription>
                 </CardHeader>
                 <CardContent className="p-4 pt-0 sm:p-6 sm:pt-0">
-                  <p className="text-xl sm:text-2xl font-bold text-orange-600">{summary?.users_count || 0} Users</p>
+                  <p className="text-xl sm:text-2xl font-bold text-foreground">{summary?.users_count || 0} Users</p>
                 </CardContent>
               </Card>
 
@@ -502,7 +463,7 @@ export default function Settings() {
                   <CardDescription className="text-xs sm:text-sm">Manage pipeline stages for the pre-sales CRM module</CardDescription>
                 </CardHeader>
                 <CardContent className="p-4 pt-0 sm:p-6 sm:pt-0">
-                  <p className="text-xl sm:text-2xl font-bold text-indigo-600">Pipeline Config</p>
+                  <p className="text-xl sm:text-2xl font-bold text-foreground">Pipeline Config</p>
                 </CardContent>
               </Card>
 
@@ -515,7 +476,7 @@ export default function Settings() {
                   <CardDescription className="text-xs sm:text-sm">Manage pipeline stages for the sales CRM module</CardDescription>
                 </CardHeader>
                 <CardContent className="p-4 pt-0 sm:p-6 sm:pt-0">
-                  <p className="text-xl sm:text-2xl font-bold text-emerald-600">Pipeline Config</p>
+                  <p className="text-xl sm:text-2xl font-bold text-foreground">Pipeline Config</p>
                 </CardContent>
               </Card>
             </div>

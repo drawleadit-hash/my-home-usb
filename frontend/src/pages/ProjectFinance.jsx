@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { TrendingUp, TrendingDown, Wallet, Eye } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ChannelCard } from '../components/SummaryCard';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AppHeader } from '../components/AppHeader';
@@ -62,18 +63,9 @@ export default function ProjectFinance() {
 
         {/* Summary Row */}
         <div className="grid grid-cols-3 gap-3 mb-5">
-          <Card className="border-l-4 border-l-green-500"><CardContent className="p-3 sm:p-4">
-            <p className="text-xs text-gray-500">Total Income</p>
-            <p className="text-lg font-extrabold text-green-700">{fmt(totalIncome)}</p>
-          </CardContent></Card>
-          <Card className="border-l-4 border-l-red-500"><CardContent className="p-3 sm:p-4">
-            <p className="text-xs text-gray-500">Total Expense</p>
-            <p className="text-lg font-extrabold text-red-700">{fmt(totalExpense)}</p>
-          </CardContent></Card>
-          <Card className="border-l-4 border-l-amber-500"><CardContent className="p-3 sm:p-4">
-            <p className="text-xs text-gray-500">Net Profit</p>
-            <p className={`text-lg font-extrabold ${totalIncome - totalExpense >= 0 ? 'text-green-700' : 'text-red-700'}`}>{fmt(totalIncome - totalExpense)}</p>
-          </CardContent></Card>
+          <ChannelCard compact label="Total Income" dot="bg-primary" value={fmt(totalIncome)} />
+          <ChannelCard compact label="Total Expense" dot="bg-red-500" value={fmt(totalExpense)} />
+          <ChannelCard compact label="Net Profit" dot="bg-ink-700" danger={totalIncome - totalExpense < 0} value={fmt(totalIncome - totalExpense)} />
         </div>
 
         {/* Project Table */}

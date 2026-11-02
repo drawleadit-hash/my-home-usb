@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -171,24 +172,9 @@ export default function Cashbook() {
 
         {/* Summary Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
-          <Card data-testid="cb-total-income" className="border-l-4 border-l-green-500">
-            <CardContent className="p-3 sm:p-4">
-              <div className="flex items-center gap-2 mb-1"><IndianRupee className="h-4 w-4 text-green-500" /><span className="text-xs font-semibold text-gray-500">Total Income</span></div>
-              <p className="text-lg font-extrabold text-green-700">{fmt(summary.total_income)}</p>
-            </CardContent>
-          </Card>
-          <Card data-testid="cb-total-expense" className="border-l-4 border-l-red-500">
-            <CardContent className="p-3 sm:p-4">
-              <div className="flex items-center gap-2 mb-1"><TrendingDown className="h-4 w-4 text-red-500" /><span className="text-xs font-semibold text-gray-500">Total Expense</span></div>
-              <p className="text-lg font-extrabold text-red-700">{fmt(summary.total_expense)}</p>
-            </CardContent>
-          </Card>
-          <Card data-testid="cb-balance" className="border-l-4 border-l-amber-500">
-            <CardContent className="p-3 sm:p-4">
-              <div className="flex items-center gap-2 mb-1"><Wallet className="h-4 w-4 text-amber-500" /><span className="text-xs font-semibold text-gray-500">Balance</span></div>
-              <p className={`text-lg font-extrabold ${summary.balance >= 0 ? 'text-amber-700' : 'text-red-700'}`}>{fmt(summary.balance)}</p>
-            </CardContent>
-          </Card>
+          <SummaryCard compact label="Total Income" icon={IndianRupee} tone="positive" value={fmt(summary.total_income)} testId="cb-total-income" />
+          <SummaryCard compact label="Total Expense" icon={TrendingDown} tone="negative" value={fmt(summary.total_expense)} testId="cb-total-expense" />
+          <SummaryCard compact label="Balance" icon={Wallet} tone={summary.balance >= 0 ? 'positive' : 'negative'} value={<span className={summary.balance < 0 ? 'text-red-600' : ''}>{fmt(summary.balance)}</span>} testId="cb-balance" />
           <Card data-testid="cb-modes">
             <CardContent className="p-3 sm:p-4">
               <p className="text-xs font-semibold text-gray-500 mb-2">Income by Mode</p>

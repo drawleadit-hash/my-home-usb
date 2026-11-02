@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { SummaryCard } from '../components/SummaryCard';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
@@ -568,22 +569,10 @@ export default function VendorMasterManagement({ embedded = false }) {
                       <div className="space-y-4">
                         {/* Stats Cards */}
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                          <Card><CardContent className="p-3 text-center">
-                            <p className="text-2xl font-bold text-blue-600">{vendorSummary.stats.total_orders}</p>
-                            <p className="text-xs text-gray-500">Total Orders</p>
-                          </CardContent></Card>
-                          <Card><CardContent className="p-3 text-center">
-                            <p className="text-2xl font-bold text-green-600">{vendorSummary.stats.total_order_value?.toLocaleString('en-IN')}</p>
-                            <p className="text-xs text-gray-500">Order Value</p>
-                          </CardContent></Card>
-                          <Card><CardContent className="p-3 text-center">
-                            <p className="text-2xl font-bold text-emerald-600">{vendorSummary.stats.paid_amount?.toLocaleString('en-IN')}</p>
-                            <p className="text-xs text-gray-500">Paid</p>
-                          </CardContent></Card>
-                          <Card><CardContent className="p-3 text-center">
-                            <p className="text-2xl font-bold text-red-600">{vendorSummary.stats.pending_amount?.toLocaleString('en-IN')}</p>
-                            <p className="text-xs text-gray-500">Pending</p>
-                          </CardContent></Card>
+                          <SummaryCard compact label="Total Orders" value={vendorSummary.stats.total_orders} />
+                          <SummaryCard compact label="Order Value" tone="info" value={vendorSummary.stats.total_order_value?.toLocaleString('en-IN')} />
+                          <SummaryCard compact label="Paid" tone="positive" value={vendorSummary.stats.paid_amount?.toLocaleString('en-IN')} />
+                          <SummaryCard compact label="Pending" tone="negative" value={vendorSummary.stats.pending_amount?.toLocaleString('en-IN')} />
                         </div>
                         {/* Orders */}
                         <h4 className="font-semibold text-sm text-gray-700 mt-4">Recent Orders</h4>
@@ -812,30 +801,12 @@ function VendorBookDialog({ vendor, onClose }) {
             <TabsContent value="summary" className="mt-4">
               {data?.summary ? (
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  <Card><CardContent className="p-4">
-                    <p className="text-xs text-gray-500">Total Orders</p>
-                    <p className="text-2xl font-bold text-gray-900 mt-1" data-testid="vb-summary-total-orders">{data.summary.total_orders}</p>
-                  </CardContent></Card>
-                  <Card><CardContent className="p-4">
-                    <p className="text-xs text-gray-500">Total Value</p>
-                    <p className="text-2xl font-bold text-gray-900 mt-1" data-testid="vb-summary-total-value">{fmt(data.summary.total_value)}</p>
-                  </CardContent></Card>
-                  <Card><CardContent className="p-4">
-                    <p className="text-xs text-gray-500">Delivered Value</p>
-                    <p className="text-2xl font-bold text-emerald-700 mt-1" data-testid="vb-summary-delivered">{fmt(data.summary.delivered_value)}</p>
-                  </CardContent></Card>
-                  <Card><CardContent className="p-4">
-                    <p className="text-xs text-gray-500">Paid</p>
-                    <p className="text-2xl font-bold text-emerald-700 mt-1" data-testid="vb-summary-paid">{fmt(data.summary.paid_amount)}</p>
-                  </CardContent></Card>
-                  <Card><CardContent className="p-4">
-                    <p className="text-xs text-gray-500">Outstanding Credit</p>
-                    <p className="text-2xl font-bold text-amber-700 mt-1" data-testid="vb-summary-outstanding">{fmt(data.summary.outstanding_credit)}</p>
-                  </CardContent></Card>
-                  <Card><CardContent className="p-4">
-                    <p className="text-xs text-gray-500">Payment Terms</p>
-                    <p className="text-lg font-semibold text-gray-900 mt-1">{data.vendor?.payment_terms || '—'}</p>
-                  </CardContent></Card>
+                  <SummaryCard compact label="Total Orders" value={<span data-testid="vb-summary-total-orders">{data.summary.total_orders}</span>} />
+                  <SummaryCard compact label="Total Value" tone="info" value={<span data-testid="vb-summary-total-value">{fmt(data.summary.total_value)}</span>} />
+                  <SummaryCard compact label="Delivered Value" tone="positive" value={<span data-testid="vb-summary-delivered">{fmt(data.summary.delivered_value)}</span>} />
+                  <SummaryCard compact label="Paid" tone="positive" value={<span data-testid="vb-summary-paid">{fmt(data.summary.paid_amount)}</span>} />
+                  <SummaryCard compact label="Outstanding Credit" tone="warning" value={<span data-testid="vb-summary-outstanding">{fmt(data.summary.outstanding_credit)}</span>} />
+                  <SummaryCard compact label="Payment Terms" value={<span className="text-lg font-semibold">{data.vendor?.payment_terms || '—'}</span>} />
                 </div>
               ) : <p className="text-center text-xs text-gray-400 py-8">No data.</p>}
             </TabsContent>
