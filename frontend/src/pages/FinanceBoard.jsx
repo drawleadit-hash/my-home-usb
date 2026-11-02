@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { AppHeader } from '../components/AppHeader';
-import { LineChart, BarChart3, CalendarClock, FolderKanban, Banknote, Wallet } from 'lucide-react';
+import { LineChart, BarChart3, CalendarClock, FolderKanban, Banknote, Wallet, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
@@ -12,7 +12,7 @@ const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 // inner page suppresses its own AppHeader (set per-page wherever supported).
 // Iframe sandbox keeps cookies/auth flowing on same origin.
 const TABS = [
-  { value: 'accounts',  label: 'Accounts',         icon: BarChart3,    src: '/accounts-board?embedded=1&navRole=accountant' },
+  { value: 'accounts',  label: 'Accounts',         icon: BarChart3,    src: '/accounts-board?tab=cashbook&embedded=1&navRole=accountant' },
   { value: 'payments',  label: 'Payment Schedule', icon: CalendarClock, src: '/payment-schedule?embedded=1' },
   { value: 'labour',    label: 'Labour Payments',  icon: Banknote,      src: '/labour-payments?embedded=1' },
   { value: 'projects',  label: 'Project Wise',     icon: FolderKanban,  src: '/accounts-board?tab=projects&embedded=1&navRole=accountant' },
@@ -34,21 +34,21 @@ export default function FinanceBoard() {
     <div className="min-h-screen bg-gray-50 flex flex-col" data-testid="finance-board">
       <AppHeader user={user} headerActions={
         <Link to="/cashflow-engine">
-          <Button size="sm" className="h-9 bg-primary hover:bg-primary-hover text-white" data-testid="finance-cashflow-engine-btn">
-            <Wallet className="h-4 w-4 mr-1.5" /> Cashflow Engine
+          <Button className="h-10 px-4 shadow-brand" data-testid="finance-cashflow-engine-btn">
+            <Zap className="h-4 w-4" /> Cashflow Engine
           </Button>
         </Link>
       } />
 
       <Tabs value={active} onValueChange={setActive} className="flex-1 flex flex-col">
-        <div className="bg-white border-b px-4 lg:px-6">
-          <TabsList className="bg-transparent h-10 p-0 gap-1" data-testid="finance-board-tabs">
+        <div className="bg-background border-b border-border px-4 lg:px-8">
+          <TabsList className="h-auto w-full justify-start gap-5 overflow-x-auto rounded-none border-0 bg-transparent p-0 scrollbar-hide lg:gap-7" data-testid="finance-board-tabs">
             {TABS.map(t => (
               <TabsTrigger
                 key={t.value}
                 value={t.value}
                 data-testid={`fb-tab-${t.value}`}
-                className="data-[state=active]:bg-brand-50 data-[state=active]:text-primary-strong data-[state=active]:shadow-none data-[state=active]:font-semibold rounded-md px-3 py-1.5 text-sm gap-1.5"
+                className="-mb-px gap-2 rounded-none border-b-2 border-transparent px-0.5 py-3 text-sm text-muted-foreground hover:border-ink-300 data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:text-primary-strong data-[state=active]:shadow-none"
               >
                 <t.icon className="h-4 w-4" />
                 {t.label}
@@ -64,8 +64,7 @@ export default function FinanceBoard() {
                 title={t.label}
                 src={t.src}
                 data-testid={`fb-frame-${t.value}`}
-                className="w-full border-0"
-                style={{ height: 'calc(100vh - 6rem)' }}
+                className="w-full border-0 h-[calc(100vh-102px)] lg:h-[calc(100vh-122px)]"
               />
             ) : (
               <div data-testid="fb-projection-placeholder" className="h-[60vh] flex flex-col items-center justify-center text-center px-4">

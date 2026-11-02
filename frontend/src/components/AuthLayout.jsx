@@ -14,10 +14,10 @@ export function AuthLayout({ children, footer = null }) {
   const branding = useBranding();
   return (
     <div className="min-h-screen bg-background lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
-      <aside className="relative hidden overflow-hidden bg-[#07110B] p-12 text-white lg:flex lg:flex-col lg:justify-between xl:p-16">
+      <aside className="relative hidden overflow-hidden bg-[#0A0A0B] p-12 text-white lg:flex lg:flex-col lg:justify-between xl:p-16">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-          <div className="absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-[#32B46F]/25 blur-[120px]" />
-          <div className="absolute -bottom-48 right-[-120px] h-[480px] w-[480px] rounded-full bg-[#32B46F]/10 blur-[110px]" />
+          <div className="absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-[#31B46E]/25 blur-[120px]" />
+          <div className="absolute -bottom-48 right-[-120px] h-[480px] w-[480px] rounded-full bg-[#31B46E]/10 blur-[110px]" />
           <div
             className="absolute inset-0 opacity-[0.07]"
             style={{

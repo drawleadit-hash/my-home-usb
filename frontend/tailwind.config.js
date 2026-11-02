@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 
 // ─── Drawlead design system ──────────────────────────────────────────────
-// Brand green #32B46F (brand-500) with a green-tinted "ink" neutral scale.
+// Primary green #31B46E (brand-500); secondary is black & white, so the
+// "ink" neutral scale is a true gray with no tint.
 // `gray` and `slate` are re-pointed at the ink scale, and `green`/`emerald`
 // at the brand scale, so every legacy utility in the app (text-gray-500,
 // bg-green-600, …) renders in the new palette without touching page code.
@@ -11,7 +12,7 @@ const brand = {
   200: '#AFEAC9',
   300: '#7DD9A8',
   400: '#4FC686',
-  500: '#32B46F',
+  500: '#31B46E',
   600: '#25945A',
   700: '#1E7649',
   800: '#1C5E3C',
@@ -20,17 +21,17 @@ const brand = {
 };
 
 const ink = {
-  50: '#F6F8F7',
-  100: '#EEF2F0',
-  200: '#E1E7E4',
-  300: '#C9D2CD',
-  400: '#96A39C',
-  500: '#65736B',
-  600: '#4B5851',
-  700: '#37423C',
-  800: '#222B26',
-  900: '#121915',
-  950: '#090E0B',
+  50: '#FAFAFA',
+  100: '#F4F4F5',
+  200: '#E7E7E9',
+  300: '#D4D4D8',
+  400: '#A1A1AA',
+  500: '#71717A',
+  600: '#52525B',
+  700: '#3F3F46',
+  800: '#27272A',
+  900: '#18181B',
+  950: '#0A0A0B',
 };
 
 module.exports = {
@@ -52,10 +53,11 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
-        // The whole ERP is set in Inter — `font-mono` (used for amounts,
-        // codes and IDs) becomes Inter with tabular figures (see index.css).
-        mono: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        // Plus Jakarta Sans for the UI; Inter only fills glyphs it lacks.
+        sans: ['"Plus Jakarta Sans"', 'Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+        // `font-mono` (used for amounts, codes and IDs) stays in the UI face
+        // with tabular figures (see index.css).
+        mono: ['"Plus Jakarta Sans"', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         lg: ['1.125rem', { lineHeight: '1.75rem', letterSpacing: '-0.011em' }],
@@ -123,19 +125,19 @@ module.exports = {
         md: "0.5rem",
         lg: "var(--radius)",
         xl: "0.875rem",
-        "2xl": "1.125rem",
+        "2xl": "1.25rem",
         "3xl": "1.5rem",
       },
       boxShadow: {
-        xs: "0 1px 2px 0 rgb(18 25 21 / 0.04)",
-        sm: "0 1px 2px 0 rgb(18 25 21 / 0.05), 0 1px 1px 0 rgb(18 25 21 / 0.03)",
-        DEFAULT: "0 1px 3px 0 rgb(18 25 21 / 0.07), 0 1px 2px -1px rgb(18 25 21 / 0.05)",
-        md: "0 6px 16px -4px rgb(18 25 21 / 0.08), 0 2px 4px -2px rgb(18 25 21 / 0.05)",
-        lg: "0 14px 28px -8px rgb(18 25 21 / 0.12), 0 4px 10px -4px rgb(18 25 21 / 0.06)",
-        xl: "0 24px 48px -12px rgb(18 25 21 / 0.18), 0 8px 16px -8px rgb(18 25 21 / 0.08)",
-        "2xl": "0 36px 72px -18px rgb(18 25 21 / 0.28)",
-        brand: "0 6px 16px -6px rgb(50 180 111 / 0.55)",
-        ring: "0 0 0 4px rgb(50 180 111 / 0.16)",
+        xs: "0 1px 2px 0 rgb(10 10 11 / 0.03)",
+        sm: "0 1px 2px 0 rgb(10 10 11 / 0.04), 0 1px 1px 0 rgb(10 10 11 / 0.02)",
+        DEFAULT: "0 1px 3px 0 rgb(10 10 11 / 0.06), 0 1px 2px -1px rgb(10 10 11 / 0.04)",
+        md: "0 8px 20px -6px rgb(10 10 11 / 0.08), 0 2px 4px -2px rgb(10 10 11 / 0.04)",
+        lg: "0 16px 32px -10px rgb(10 10 11 / 0.12), 0 4px 10px -4px rgb(10 10 11 / 0.05)",
+        xl: "0 24px 48px -12px rgb(10 10 11 / 0.18), 0 8px 16px -8px rgb(10 10 11 / 0.07)",
+        "2xl": "0 36px 72px -18px rgb(10 10 11 / 0.28)",
+        brand: "0 8px 18px -8px rgb(49 180 110 / 0.65)",
+        ring: "0 0 0 4px rgb(49 180 110 / 0.16)",
       },
       keyframes: {
         "accordion-down": {

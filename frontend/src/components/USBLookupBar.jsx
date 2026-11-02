@@ -57,9 +57,9 @@ export default function USBLookupBar() {
 
   return (
     <>
-      <form onSubmit={submit} className="hidden md:flex items-stretch gap-1 bg-gray-50 dark:bg-gray-800 rounded-md border border-gray-200 dark:border-gray-700 px-1 py-0.5" data-testid="usb-lookup-bar">
+      <form onSubmit={submit} className="hidden md:flex items-center gap-1 bg-muted/70 rounded-xl border border-border p-1" data-testid="usb-lookup-bar">
         <Select value={prefix} onValueChange={setPrefix}>
-          <SelectTrigger className="h-7 text-xs w-[88px] border-0 bg-transparent focus:ring-0 px-2" data-testid="usb-lookup-prefix">
+          <SelectTrigger className="h-8 text-xs font-medium w-auto border-0 bg-transparent shadow-none focus:ring-0 px-2" data-testid="usb-lookup-prefix">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -72,11 +72,11 @@ export default function USBLookupBar() {
           value={num}
           onChange={(e) => setNum(e.target.value.replace(/[^0-9]/g, ''))}
           placeholder="00001"
-          className="h-7 text-xs w-[80px] border-0 bg-transparent focus-visible:ring-0 px-1 font-mono"
+          className="h-8 text-xs w-[80px] border-0 bg-transparent shadow-none focus-visible:ring-0 px-1 font-mono"
           inputMode="numeric"
           data-testid="usb-lookup-number"
         />
-        <Button type="submit" size="sm" disabled={loading} className="h-7 px-2 gap-1 bg-primary hover:bg-primary-hover text-white" data-testid="usb-lookup-submit">
+        <Button type="submit" size="sm" disabled={loading} className="h-8 w-8 px-0 shadow-none" data-testid="usb-lookup-submit">
           {loading ? <Loader2 className="h-3 w-3 animate-spin" /> : <Search className="h-3 w-3" />}
         </Button>
       </form>

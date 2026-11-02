@@ -1,5 +1,5 @@
-/* Inter is loaded from index.html (preconnect + stylesheet) so the first
- * paint already has the right face. */
+/* Plus Jakarta Sans (and Inter as glyph fallback) are loaded from index.html
+ * (preconnect + stylesheet) so the first paint already has the right face. */
 
 @tailwind base;
 @tailwind components;
@@ -22,77 +22,78 @@ input[inputmode="numeric"]::-webkit-inner-spin-button {
 
 /* ================================================================
  * DRAWLEAD DESIGN TOKENS
- * Brand green #32B46F · green-tinted ink neutrals · Inter
+ * Primary green #31B46E · secondary black & white · Plus Jakarta Sans
  * ================================================================ */
 @layer base {
     :root {
         --background: 0 0% 100%;
-        --foreground: 147 17% 9%;
-        --canvas: 150 12% 97%;
+        --foreground: 240 6% 8%;
+        --canvas: 0 0% 98%;
         --card: 0 0% 100%;
-        --card-foreground: 147 17% 9%;
+        --card-foreground: 240 6% 8%;
         --popover: 0 0% 100%;
-        --popover-foreground: 147 17% 9%;
+        --popover-foreground: 240 6% 8%;
         --primary: 148 57% 45%;
         --primary-foreground: 0 0% 100%;
         --primary-hover: 149 60% 38%;
         --primary-soft: 143 64% 96%;
         --primary-strong: 150 60% 29%;
-        --secondary: 150 17% 12%;
+        /* Secondary = black in light mode, white in dark mode. */
+        --secondary: 240 6% 6%;
         --secondary-foreground: 0 0% 100%;
-        --muted: 150 13% 95%;
-        --muted-foreground: 146 7% 42%;
+        --muted: 240 5% 96%;
+        --muted-foreground: 240 4% 46%;
         --accent: 143 64% 96%;
         --accent-foreground: 150 60% 24%;
         --destructive: 0 72% 51%;
         --destructive-foreground: 0 0% 100%;
-        --border: 150 12% 89%;
-        --input: 150 10% 85%;
+        --border: 240 5% 91%;
+        --input: 240 5% 87%;
         --ring: 148 57% 45%;
         --radius: 0.625rem;
         --success: 148 57% 45%;
         --warning: 38 92% 50%;
         --info: 210 80% 52%;
 
-        /* App shell (dark sidebar in both themes) */
-        --sidebar: 150 26% 7%;
-        --sidebar-foreground: 150 10% 84%;
-        --sidebar-muted: 150 7% 56%;
-        --sidebar-border: 150 14% 14%;
-        --sidebar-accent: 150 18% 12%;
-        --app-sidebar-w: 16rem;
+        /* App shell — white icon rail */
+        --sidebar: 0 0% 100%;
+        --sidebar-foreground: 240 4% 30%;
+        --sidebar-muted: 240 4% 56%;
+        --sidebar-border: 240 5% 92%;
+        --sidebar-accent: 143 64% 95%;
+        --app-sidebar-w: 15rem;
     }
 
     .dark {
-        --background: 150 12% 8%;
-        --foreground: 150 10% 94%;
-        --canvas: 150 14% 6%;
-        --card: 150 10% 10%;
-        --card-foreground: 150 10% 94%;
-        --popover: 150 10% 11%;
-        --popover-foreground: 150 10% 94%;
+        --background: 240 5% 7%;
+        --foreground: 0 0% 96%;
+        --canvas: 240 6% 4%;
+        --card: 240 5% 8.5%;
+        --card-foreground: 0 0% 96%;
+        --popover: 240 5% 10%;
+        --popover-foreground: 0 0% 96%;
         --primary: 148 57% 47%;
         --primary-foreground: 0 0% 100%;
         --primary-hover: 148 52% 54%;
-        --primary-soft: 150 38% 13%;
+        --primary-soft: 150 38% 12%;
         --primary-strong: 146 55% 64%;
-        --secondary: 150 10% 22%;
-        --secondary-foreground: 150 10% 94%;
-        --muted: 150 10% 15%;
-        --muted-foreground: 150 6% 64%;
-        --accent: 150 28% 15%;
+        --secondary: 0 0% 96%;
+        --secondary-foreground: 240 6% 7%;
+        --muted: 240 4% 14%;
+        --muted-foreground: 240 5% 64%;
+        --accent: 150 28% 14%;
         --accent-foreground: 146 55% 72%;
         --destructive: 0 70% 55%;
         --destructive-foreground: 0 0% 98%;
-        --border: 150 10% 18%;
-        --input: 150 10% 22%;
+        --border: 240 4% 17%;
+        --input: 240 4% 22%;
         --ring: 148 57% 47%;
 
-        --sidebar: 150 18% 4%;
-        --sidebar-foreground: 150 10% 84%;
-        --sidebar-muted: 150 6% 52%;
-        --sidebar-border: 150 12% 12%;
-        --sidebar-accent: 150 16% 10%;
+        --sidebar: 240 6% 6%;
+        --sidebar-foreground: 0 0% 80%;
+        --sidebar-muted: 240 4% 52%;
+        --sidebar-border: 240 4% 14%;
+        --sidebar-accent: 150 30% 13%;
     }
 }
 
@@ -108,13 +109,13 @@ input[inputmode="numeric"]::-webkit-inner-spin-button {
         @apply text-foreground;
         margin: 0;
         background-color: hsl(var(--canvas));
-        font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-        font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'calt';
+        font-family: 'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        font-feature-settings: 'calt';
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
     code, kbd, samp, pre {
-        font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+        font-family: 'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
         font-variant-numeric: tabular-nums slashed-zero;
     }
     h1, h2, h3, h4 {
@@ -157,7 +158,7 @@ input[inputmode="numeric"]::-webkit-inner-spin-button {
 }
 
 @layer utilities {
-    /* `font-mono` is Inter now — keep the column-aligned figures that
+    /* `font-mono` is the UI face now — keep the column-aligned figures that
      * monospace used to provide for amounts, IDs and codes. */
     .font-mono {
         font-variant-numeric: tabular-nums slashed-zero;
@@ -172,7 +173,7 @@ input[inputmode="numeric"]::-webkit-inner-spin-button {
  * AppHeader adds `has-app-sidebar` to <html> while the desktop sidebar
  * is mounted, so every page shifts right without per-page changes.
  * ================================================================ */
-html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 4.5rem; }
+html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 5.5rem; }
 @media screen and (min-width: 1024px) {
     html.has-app-sidebar body { padding-left: var(--app-sidebar-w); }
 }
@@ -251,17 +252,17 @@ html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 4.5rem; }
 }
 
 /* --- Light backgrounds → dark equivalents ------------------------- */
-.dark .bg-white { background-color: hsl(150 10% 11%); }
+.dark .bg-white { background-color: hsl(240 5% 11%); }
 .dark .bg-gray-50,
 .dark .bg-slate-50,
 .dark .bg-neutral-50,
 .dark .bg-zinc-50,
-.dark .bg-stone-50 { background-color: hsl(150 10% 13%); }
+.dark .bg-stone-50 { background-color: hsl(240 5% 13%); }
 .dark .bg-gray-100,
 .dark .bg-slate-100,
 .dark .bg-neutral-100,
 .dark .bg-zinc-100,
-.dark .bg-stone-100 { background-color: hsl(150 10% 16%); }
+.dark .bg-stone-100 { background-color: hsl(240 5% 16%); }
 
 /* Tinted pastel backgrounds (warning/info/success/danger highlight
  * cards) — keep the hue but drop luminance so they stop blinding
@@ -336,16 +337,16 @@ html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 4.5rem; }
 /* --- Light borders → subtle dark dividers ------------------------- */
 .dark .border-gray-100,
 .dark .border-slate-100,
-.dark .border-neutral-100 { border-color: hsl(150 10% 16%); }
+.dark .border-neutral-100 { border-color: hsl(240 5% 16%); }
 .dark .border-gray-200,
 .dark .border-slate-200,
 .dark .border-neutral-200,
-.dark .border-zinc-200 { border-color: hsl(150 10% 20%); }
+.dark .border-zinc-200 { border-color: hsl(240 5% 20%); }
 .dark .border-gray-300,
 .dark .border-slate-300,
-.dark .border-neutral-300 { border-color: hsl(150 10% 24%); }
-.dark .divide-gray-200 > * + * { border-color: hsl(150 10% 20%); }
-.dark .divide-gray-100 > * + * { border-color: hsl(150 10% 16%); }
+.dark .border-neutral-300 { border-color: hsl(240 5% 24%); }
+.dark .divide-gray-200 > * + * { border-color: hsl(240 5% 20%); }
+.dark .divide-gray-100 > * + * { border-color: hsl(240 5% 16%); }
 
 /* Coloured badge/pill borders paired with the -800 text above. */
 .dark .border-amber-200   { border-color: hsl(35 35% 24%); }
@@ -360,9 +361,9 @@ html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 4.5rem; }
 
 /* --- Hover states of light backgrounds --------------------------- */
 .dark .hover\:bg-gray-50:hover,
-.dark .hover\:bg-slate-50:hover { background-color: hsl(150 10% 16%); }
+.dark .hover\:bg-slate-50:hover { background-color: hsl(240 5% 16%); }
 .dark .hover\:bg-gray-100:hover,
-.dark .hover\:bg-slate-100:hover { background-color: hsl(150 10% 19%); }
+.dark .hover\:bg-slate-100:hover { background-color: hsl(240 5% 19%); }
 
 /* --- Inputs / textareas / selects forced text colour -------------- */
 .dark input,
@@ -377,7 +378,7 @@ html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 4.5rem; }
 .dark input:-webkit-autofill:focus,
 .dark textarea:-webkit-autofill {
   -webkit-text-fill-color: hsl(0 0% 96%) !important;
-  -webkit-box-shadow: 0 0 0 1000px hsl(150 10% 14%) inset !important;
+  -webkit-box-shadow: 0 0 0 1000px hsl(240 5% 14%) inset !important;
   caret-color: hsl(0 0% 96%);
 }
 
@@ -385,23 +386,23 @@ html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 4.5rem; }
 .dark .bg-white\/70,
 .dark .bg-white\/80,
 .dark .bg-white\/90,
-.dark .bg-white\/95 { background-color: hsl(150 10% 13% / 0.85); }
+.dark .bg-white\/95 { background-color: hsl(240 5% 13% / 0.85); }
 .dark .bg-white\/50,
-.dark .bg-white\/60 { background-color: hsl(150 10% 13% / 0.65); }
+.dark .bg-white\/60 { background-color: hsl(240 5% 13% / 0.65); }
 .dark .bg-white\/20,
 .dark .bg-white\/30,
-.dark .bg-white\/40 { background-color: hsl(150 10% 18% / 0.45); }
+.dark .bg-white\/40 { background-color: hsl(240 5% 18% / 0.45); }
 
 /* Shadcn popover / dropdown / dialog content already use --popover.
  * Ring colours used for focus rings on inputs across the app default
  * to slate; lighten them so they stay visible in dark. */
 .dark .ring-gray-200,
-.dark .ring-slate-200 { --tw-ring-color: hsl(150 10% 28%); }
+.dark .ring-slate-200 { --tw-ring-color: hsl(240 5% 28%); }
 
 /* Light gradients used as page backgrounds (e.g. login) — dim them. */
-.dark .from-white { --tw-gradient-from: hsl(150 10% 11%) var(--tw-gradient-from-position); }
-.dark .to-white   { --tw-gradient-to:   hsl(150 10% 11%) var(--tw-gradient-to-position); }
-.dark .via-white  { --tw-gradient-via:  hsl(150 10% 11%) var(--tw-gradient-via-position); }
+.dark .from-white { --tw-gradient-from: hsl(240 5% 11%) var(--tw-gradient-from-position); }
+.dark .to-white   { --tw-gradient-to:   hsl(240 5% 11%) var(--tw-gradient-to-position); }
+.dark .via-white  { --tw-gradient-via:  hsl(240 5% 11%) var(--tw-gradient-via-position); }
 
 /* Tinted `from-{color}-50` gradient stops (KPI summary cards) — same
  * hues as the `.dark .bg-{color}-50` overrides above so a card that
@@ -429,7 +430,7 @@ html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 4.5rem; }
 .dark .bg-rose-50\/40    { background-color: hsl(350 35% 15% / 0.6); }
 
 /* Body fallback if a page never opts into dark vars. */
-.dark body { background-color: hsl(150 10% 8%); color: hsl(0 0% 96%); }
+.dark body { background-color: hsl(240 5% 8%); color: hsl(0 0% 96%); }
 
 /* Brand tints introduced by the Drawlead redesign — same treatment as the
  * pastel remaps above so selected tabs/chips don't glow on dark pages. */
@@ -578,16 +579,16 @@ html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 4.5rem; }
 .dark [data-state="active"][class*="active]:bg-gray-50 "],
 .dark [data-state="active"][class$="active]:bg-gray-50"],
 .dark [data-state="active"][class*="active]:bg-gray-100 "],
-.dark [data-state="active"][class$="active]:bg-gray-100"] { background-color: hsl(150 10% 15%); }
+.dark [data-state="active"][class$="active]:bg-gray-100"] { background-color: hsl(240 5% 15%); }
 .dark [data-state="active"][class*="active]:text-gray-700 "],
 .dark [data-state="active"][class$="active]:text-gray-700"],
 .dark [data-state="active"][class*="active]:text-gray-800 "],
-.dark [data-state="active"][class$="active]:text-gray-800"] { color: hsl(150 35% 70%); }
+.dark [data-state="active"][class$="active]:text-gray-800"] { color: hsl(0 0% 92%); }
 .dark [data-state="active"][class*="active]:bg-slate-50 "],
 .dark [data-state="active"][class$="active]:bg-slate-50"],
 .dark [data-state="active"][class*="active]:bg-slate-100 "],
-.dark [data-state="active"][class$="active]:bg-slate-100"] { background-color: hsl(150 10% 15%); }
+.dark [data-state="active"][class$="active]:bg-slate-100"] { background-color: hsl(240 5% 15%); }
 .dark [data-state="active"][class*="active]:text-slate-700 "],
 .dark [data-state="active"][class$="active]:text-slate-700"],
 .dark [data-state="active"][class*="active]:text-slate-800 "],
-.dark [data-state="active"][class$="active]:text-slate-800"] { color: hsl(150 35% 70%); }
+.dark [data-state="active"][class$="active]:text-slate-800"] { color: hsl(0 0% 92%); }

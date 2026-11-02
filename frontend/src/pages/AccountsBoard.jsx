@@ -33,6 +33,8 @@ import {
   FileText,
   ArrowUpRight,
   ArrowDownRight,
+  ArrowDown,
+  ArrowUp,
   Download,
   TrendingUp,
   Banknote,
@@ -1976,6 +1978,10 @@ function IndirectExpenseSection({ userRole }) {
 function CashbookTab({ overview, projects, userRole, onRefresh }) {
   const location = useLocation();
   const navigate = useNavigate();
+  // Same rule as MaskedValue: ratios derived from masked figures stay hidden too.
+  const maskRole = React.useContext(MaskContext);
+  const globalUnmasked = React.useContext(UnmaskContext);
+  const figuresVisible = maskRole === 'super_admin' || globalUnmasked;
   const expenseOnly = (() => {
     const params = new URLSearchParams(location.search);
     return params.get('sub') === 'expense';
@@ -2367,64 +2373,26 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
     <div className="space-y-4" data-testid="cashbook-tab">
       {!expenseOnly && (
       <>
-      {/* Top KPI cards: Overall Income / Expense / Balance.
-          Each card is clickable — opens an itemised drilldown showing
-          every contributing row. The Expense card is especially important
-          because the headline number includes the hidden "Other" category
-          rows (e.g. uncategorised manual expenses) that aren't visible on
-          the Direct Expense tab below.
+      {/* Cashbook overview — Executive Balance + Inflow / Outflow on the left,
+          the per-channel Account Liquidity Matrix on the right. Every figure
+          is clickable and opens an itemised drilldown. The Outflow headline
+          includes the hidden "Other" category rows (e.g. uncategorised manual
+          expenses) that aren't visible on the Direct Expense tab below.
           Feb 26 2026 — Profit (all-time cumulative) card removed per user
-          request; only 3 cards now show. */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" data-testid="kpi-cards">
-        <SummaryCard
-          label="Overall Income"
-          value={<MaskedValue value={totals.total_income || 0} formatFn={fmtFull} testId="kpi-overall-income" />}
-          sub="For selected period"
-          icon={ArrowDownRight}
-          onClick={() => setDrilldown({ type: 'category', category: 'overall_income', entries: incomeEntries, label: 'Overall Income' })}
-          title="Click to see all income entries"
-          testId="kpi-card-income"
-        />
+          request.
 
-        <SummaryCard
-          label="Expense"
-          value={<MaskedValue value={totals.total_expense || 0} formatFn={fmtFull} testId="kpi-expense" />}
-          sub="For selected period"
-          icon={ArrowUpRight}
-          onClick={() => setDrilldown({ type: 'category', category: 'overall_expense', entries: allExpenseEntries, label: 'All Expense' })}
-          title="Click to see all expense entries (includes Other / uncategorised)"
-          testId="kpi-card-expense"
-        />
-
-        {(() => {
-          const bal = (totals.total_income || 0) - (totals.total_expense || 0);
-          return (
-            <SummaryCard
-              label="Balance"
-              value={<MaskedValue value={bal} formatFn={fmtFull} testId="kpi-balance" />}
-              sub="Income − Expense (period)"
-              icon={Wallet}
-              onClick={() => setDrilldown({ type: 'category', category: 'overall_expense', entries: allExpenseEntries, label: 'All Expense (Balance contribution)' })}
-              title="Click to see expense rows driving the balance"
-              testId="kpi-card-balance"
-            />
-          );
-        })()}
-      </div>
-
-      {/* Feb 26 2026 — Per-bucket Cashbook summary cards (matches the Carry
-          Forward tab visual). Each bucket Expense = live Cashbook expense
-          for that payment_mode + Carry-Forward Expense the Accountant
-          entered in the Lock Closing Balance dialog for that bucket. Same
-          for Income. So Cash Expense ≠ 0 even when no live expense rows
-          exist as long as the lock has a non-zero Cash → Expense value. */}
+          Per-bucket cards: each bucket Expense = live Cashbook expense for
+          that payment_mode + Carry-Forward Expense the Accountant entered in
+          the Lock Closing Balance dialog for that bucket. Same for Income.
+          So Cash Expense ≠ 0 even when no live expense rows exist as long as
+          the lock has a non-zero Cash → Expense value. */}
       {(() => {
         const cbBuckets = [
-          { key: 'cash',             lockKey: 'cash',             label: 'Cash',         Icon: Banknote },
-          { key: 'current_account',  lockKey: 'current_account',  label: 'HDFC Current', Icon: Landmark },
-          { key: 'savings_account',  lockKey: 'savings',          label: 'HDFC Savings', Icon: PiggyBank },
-          { key: 'cheque',           lockKey: 'cheque',           label: 'Cheque',       Icon: FileText },
-          { key: 'direct_transfer',  lockKey: 'direct_transfer',  label: 'Cash DT',      Icon: TrendingUp },
+          { key: 'cash',             lockKey: 'cash',             label: 'Cash',         dot: 'bg-violet-500' },
+          { key: 'current_account',  lockKey: 'current_account',  label: 'HDFC Current', dot: 'bg-orange-500' },
+          { key: 'savings_account',  lockKey: 'savings',          label: 'HDFC Savings', dot: 'bg-primary' },
+          { key: 'cheque',           lockKey: 'cheque',           label: 'Cheque',       dot: 'bg-ink-700' },
+          { key: 'direct_transfer',  lockKey: 'direct_transfer',  label: 'Cash DT',      dot: 'bg-blue-500' },
         ];
         const lockBuckets = cashbookData?.closing_balance_buckets || {};
         // NOTE: lock.income values flow into the live cashbook via the
@@ -2437,123 +2405,211 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
         const expFor = (b) => (exp[b.key] || 0) + cfExp(b.lockKey);
         const totalInc = cbBuckets.reduce((s, b) => s + incFor(b), 0);
         const totalExp = cbBuckets.reduce((s, b) => s + expFor(b), 0);
+        const periodIncome = totals.total_income || 0;
+        const periodExpense = totals.total_expense || 0;
+        const periodBal = periodIncome - periodExpense;
+        // Share of the period's income still on hand.
+        const retained = figuresVisible && periodIncome > 0 ? Math.max(0, Math.min(100, (periodBal / periodIncome) * 100)) : 0;
+        // A channel's bar is the balance left as a share of its income; full red when overdrawn.
+        const barPct = (i, bal) => (bal < 0 ? 100 : figuresVisible && i > 0 ? Math.min(100, (bal / i) * 100) : 0);
+        const asButton = (fn) => ({
+          role: 'button',
+          tabIndex: 0,
+          onClick: fn,
+          onKeyDown: (ev) => { if (ev.key === 'Enter' || ev.key === ' ') fn(); },
+        });
+        const openBalance = () => setDrilldown({ type: 'category', category: 'overall_expense', entries: allExpenseEntries, label: 'All Expense (Balance contribution)' });
+        const openTotal = () => setDrilldown({ type: 'mode', mode: 'all', incomeEntries: incomeEntries, expenseEntries: allExpenseEntries, label: 'All Channels (Total)' });
         return (
-          <>
-          {/* Close Books header — Accountant clicks this to record actual bank/cash
-              vs computed balance for today. Variance rolls into the audit trail. */}
-          <div className="flex items-center justify-between mb-2 gap-2">
-            <p className="text-[10px] text-gray-500 uppercase tracking-wider">Cashbook · Payment Modes</p>
-            <div className="flex items-center gap-2">
-              {dailyClosing.is_closed && (
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200" data-testid="dc-closed-badge">✓ Books closed for today</span>
-              )}
-              <Button
-                size="sm"
-                variant="outline"
-                className="h-7 text-xs gap-1"
-                onClick={() => navigate('/close-books-history')}
-                data-testid="close-books-history-btn"
+          <div className="grid grid-cols-1 gap-4 xl:grid-cols-12" data-testid="kpi-cards">
+            <div className="flex flex-col gap-4 xl:col-span-5">
+              {/* Executive Balance — stays dark in both themes. */}
+              <div
+                className="group relative cursor-pointer overflow-hidden rounded-3xl bg-[#0B0B0C] p-6 text-white shadow-lg transition-shadow hover:shadow-xl"
+                {...asButton(openBalance)}
+                title="Click to see expense rows driving the balance"
+                data-testid="kpi-card-balance"
               >
-                <CalendarDays className="h-3.5 w-3.5" /> Close Books
-              </Button>
-              <Button
-                size="sm"
-                className={`h-7 text-xs gap-1 ${dailyClosing.is_closed ? 'bg-slate-600 hover:bg-slate-700' : 'bg-primary hover:bg-primary-hover'} text-white`}
-                onClick={() => setCloseDialogOpen(true)}
-                data-testid="close-books-btn"
-              >
-                {dailyClosing.is_closed ? 'Update Today\u2019s Close' : 'Close Today\u2019s Books'}
-              </Button>
+                <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-28 h-72 w-72 rounded-full bg-primary/25 blur-3xl" />
+                <div className="relative flex items-center justify-between gap-3">
+                  <span className="rounded-full bg-primary/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-300 ring-1 ring-inset ring-primary/30">Executive Balance</span>
+                  <span className="text-xs text-white/50">Selected period</span>
+                </div>
+                <p className="relative mt-6 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/55">Total net available</p>
+                <div className={`relative mt-1 text-[34px] font-bold leading-tight tracking-tight tabular-nums sm:text-[40px] ${periodBal < 0 ? 'text-red-300' : 'text-white'}`}>
+                  <MaskedValue value={periodBal} formatFn={fmtFull} testId="kpi-balance" />
+                </div>
+                <p className="relative mt-1 flex items-center gap-1.5 text-sm text-white/60">
+                  <TrendingUp className="h-4 w-4 text-brand-400" />
+                  {figuresVisible
+                    ? <><span className="font-semibold text-brand-400">{retained.toFixed(1)}%</span> of income retained</>
+                    : 'Unmask figures to see retention'}
+                </p>
+                <div className="relative mt-6 flex items-center gap-4 border-t border-white/10 pt-5">
+                  <div className="relative h-14 w-14 shrink-0">
+                    <svg viewBox="0 0 36 36" className="h-14 w-14 -rotate-90" aria-hidden="true">
+                      <circle cx="18" cy="18" r="15.5" fill="none" stroke="rgb(255 255 255 / 0.1)" strokeWidth="3" />
+                      {retained > 0 && (
+                        <circle cx="18" cy="18" r="15.5" fill="none" stroke="#31B46E" strokeWidth="3" strokeLinecap="round" strokeDasharray={`${(retained / 100) * 97.4} 97.4`} />
+                      )}
+                    </svg>
+                    <span className="absolute inset-0 flex items-center justify-center text-[11px] font-bold">{figuresVisible ? `${Math.round(retained)}%` : '••'}</span>
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-semibold uppercase tracking-[0.08em]">Cash retention</p>
+                    <p className="truncate text-sm text-white/55">Income − Expense for the period</p>
+                  </div>
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10 transition-colors group-hover:bg-white/20">
+                    <ChevronRight className="h-5 w-5" />
+                  </span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <SummaryCard
+                  label="Inflow"
+                  value={<MaskedValue value={periodIncome} formatFn={fmtFull} testId="kpi-overall-income" />}
+                  sub={`${incomeEntries.length} income entries`}
+                  icon={ArrowDown}
+                  tone="positive"
+                  onClick={() => setDrilldown({ type: 'category', category: 'overall_income', entries: incomeEntries, label: 'Overall Income' })}
+                  title="Click to see all income entries"
+                  testId="kpi-card-income"
+                />
+                <SummaryCard
+                  label="Outflow"
+                  value={<MaskedValue value={periodExpense} formatFn={fmtFull} testId="kpi-expense" />}
+                  sub={`${allExpenseEntries.length} expense entries`}
+                  icon={ArrowUp}
+                  tone="negative"
+                  onClick={() => setDrilldown({ type: 'category', category: 'overall_expense', entries: allExpenseEntries, label: 'All Expense' })}
+                  title="Click to see all expense entries (includes Other / uncategorised)"
+                  testId="kpi-card-expense"
+                />
+              </div>
             </div>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2.5" data-testid="cashbook-bucket-cards">
-            {cbBuckets.map(b => {
-              const i = incFor(b);
-              const e = expFor(b);
-              const bal = i - e;
-              const Icon = b.Icon;
-              const hasCf = cfExp(b.lockKey) > 0;
-              return (
-                <div
-                  key={b.key}
-                  className="rounded-[6px] border border-border/80 bg-card p-3 shadow-sm cursor-pointer hover:shadow-md hover:scale-[1.02] transition-all"
-                  data-testid={`cb-bucket-${b.key}`}
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => handleModeClick(b.key)}
-                  onKeyDown={(ev) => { if (ev.key === 'Enter' || ev.key === ' ') handleModeClick(b.key); }}
-                  title={`View all ${b.label} income & expense entries`}
-                >
-                  <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-gray-600 font-semibold mb-2">
-                    <Icon className="h-3 w-3" /> {b.label}
-                    {hasCf && <span className="ml-auto text-[8px] font-bold text-violet-600 bg-violet-100 px-1 rounded">+CF</span>}
-                  </div>
-                  <div className="flex items-baseline justify-between text-[11px]">
-                    <span className="text-emerald-700">Income</span>
-                    <span className="font-semibold text-emerald-700"><MaskedValue value={i} className="text-emerald-700" /></span>
-                  </div>
-                  <div className="flex items-baseline justify-between text-[11px] mt-0.5">
-                    <span className="text-rose-700">Expense</span>
-                    <span className="font-semibold text-rose-700"><MaskedValue value={e} className="text-rose-700" /></span>
-                  </div>
-                  <div className="border-t mt-2 pt-1.5 flex items-baseline justify-between text-[11px]">
-                    <span className="text-gray-700">Balance</span>
-                    <span className={`font-bold ${bal >= 0 ? 'text-gray-900' : 'text-rose-700'}`}><MaskedValue value={bal} className={bal >= 0 ? 'text-gray-900' : 'text-rose-700'} /></span>
-                  </div>
-                  {/* Daily-closing variance strip — shows the accountant-entered
-                      actual balance vs computed book. Green=match, blue=surplus,
-                      red=shortfall. Rendered only if today has been closed. */}
-                  {(() => {
-                    const dcToday = dailyClosing.today?.[b.key];
-                    if (!dcToday) return null;
-                    const v = Number(dcToday.variance || 0);
-                    const style = v === 0
-                      ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
-                      : v > 0
-                      ? 'bg-blue-50 text-blue-800 border-blue-200'
-                      : 'bg-red-50 text-red-800 border-red-200';
-                    const label = v === 0 ? 'Matched' : (v > 0 ? `Surplus ₹${Math.abs(v).toLocaleString('en-IN')}` : `Shortfall ₹${Math.abs(v).toLocaleString('en-IN')}`);
-                    return (
-                      <div className={`mt-1 rounded border px-1.5 py-0.5 text-[10px] font-semibold ${style}`} data-testid={`cb-bucket-variance-${b.key}`}>
-                        <span className="flex items-center justify-between">
-                          <span>Δ {label}</span>
-                          <span className="text-[9px] font-normal opacity-70">Actual ₹{Number(dcToday.actual_balance || 0).toLocaleString('en-IN')}</span>
+
+            {/* Account Liquidity Matrix. The Close Books buttons let the
+                Accountant record actual bank/cash vs computed balance for
+                today; the variance rolls into the audit trail. */}
+            <Card className="xl:col-span-7" data-testid="cashbook-liquidity-matrix">
+              <div className="flex flex-wrap items-start justify-between gap-3 p-5 pb-4 sm:p-6 sm:pb-4">
+                <div className="min-w-0">
+                  <h3 className="text-lg font-bold tracking-tight text-foreground">Account Liquidity Matrix</h3>
+                  <p className="mt-0.5 text-sm text-muted-foreground">Balances by payment channel for the selected period</p>
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  {dailyClosing.is_closed && (
+                    <Badge variant="soft" data-testid="dc-closed-badge">✓ Books closed for today</Badge>
+                  )}
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="h-9 gap-1.5"
+                    onClick={() => navigate('/close-books-history')}
+                    data-testid="close-books-history-btn"
+                  >
+                    <CalendarDays className="h-4 w-4" /> Close Books
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    className="h-9"
+                    onClick={() => setCloseDialogOpen(true)}
+                    data-testid="close-books-btn"
+                  >
+                    {dailyClosing.is_closed ? 'Update Today’s Close' : 'Close Today’s Books'}
+                  </Button>
+                </div>
+              </div>
+              <div className="grid grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-3 px-5 pb-5 sm:px-6 sm:pb-6" data-testid="cashbook-bucket-cards">
+                {cbBuckets.map(b => {
+                  const i = incFor(b);
+                  const e = expFor(b);
+                  const bal = i - e;
+                  const hasCf = cfExp(b.lockKey) > 0;
+                  // Daily-closing variance — accountant-entered actual balance vs
+                  // computed book. Green=match, blue=surplus, red=shortfall.
+                  // Rendered only if today has been closed.
+                  const dcToday = dailyClosing.today?.[b.key];
+                  const v = Number(dcToday?.variance || 0);
+                  return (
+                    <div
+                      key={b.key}
+                      className={`cursor-pointer rounded-2xl border p-4 transition-[box-shadow,border-color] hover:shadow-md ${bal < 0 ? 'border-red-200 bg-red-50/50 dark:border-red-500/30 dark:bg-red-500/10' : 'border-border bg-card hover:border-ink-300'}`}
+                      data-testid={`cb-bucket-${b.key}`}
+                      {...asButton(() => handleModeClick(b.key))}
+                      title={`View all ${b.label} income & expense entries`}
+                    >
+                      <div className="flex items-center gap-1.5">
+                        <span className={`h-2 w-2 shrink-0 rounded-full ${bal < 0 ? 'bg-red-500' : b.dot}`} />
+                        <span className="truncate text-[11px] font-semibold uppercase tracking-[0.06em] text-foreground">{b.label}</span>
+                        <span className="ml-auto flex shrink-0 items-center gap-1">
+                          {hasCf && <span className="rounded-md bg-violet-100 px-1.5 py-0.5 text-[10px] font-bold text-violet-700">+CF</span>}
+                          {bal < 0 && <Badge variant="danger" className="px-1.5 py-0 text-[10px]">Overdrawn</Badge>}
                         </span>
                       </div>
-                    );
-                  })()}
+                      <div className={`mt-3 text-xl font-bold tracking-tight tabular-nums ${bal < 0 ? 'text-red-600' : 'text-foreground'}`}>
+                        <MaskedValue value={bal} />
+                      </div>
+                      <div className="mt-3 space-y-1 border-t border-border/70 pt-3 text-[13px]">
+                        <div className="flex items-baseline justify-between gap-2">
+                          <span className="text-muted-foreground">Income</span>
+                          <MaskedValue value={i} className="font-semibold text-foreground" />
+                        </div>
+                        <div className="flex items-baseline justify-between gap-2">
+                          <span className="text-muted-foreground">Expense</span>
+                          <MaskedValue value={e} className="font-semibold text-red-600" />
+                        </div>
+                      </div>
+                      <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-muted">
+                        <div className={`h-full rounded-full ${bal < 0 ? 'bg-red-500' : b.dot}`} style={{ width: `${barPct(i, bal)}%` }} />
+                      </div>
+                      {dcToday && (
+                        <div
+                          className={`mt-3 flex items-center justify-between gap-2 rounded-lg border px-2 py-1 text-[11px] font-semibold ${
+                            v === 0 ? 'border-brand-200 bg-brand-50 text-brand-700' : v > 0 ? 'border-blue-200 bg-blue-50 text-blue-700' : 'border-red-200 bg-red-50 text-red-700'
+                          }`}
+                          data-testid={`cb-bucket-variance-${b.key}`}
+                        >
+                          <span>Δ {v === 0 ? 'Matched' : (v > 0 ? `Surplus ₹${Math.abs(v).toLocaleString('en-IN')}` : `Shortfall ₹${Math.abs(v).toLocaleString('en-IN')}`)}</span>
+                          <span className="font-normal opacity-70">Actual ₹{Number(dcToday.actual_balance || 0).toLocaleString('en-IN')}</span>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+                {/* Total — combined Income+Expense drilldown across all modes. */}
+                <div
+                  className="cursor-pointer rounded-2xl bg-[#0B0B0C] p-4 text-white shadow-sm transition-shadow hover:shadow-md"
+                  data-testid="cb-bucket-total"
+                  {...asButton(openTotal)}
+                  title="View all income & expense entries across every channel"
+                >
+                  <div className="flex items-center gap-1.5">
+                    <span className="h-2 w-2 shrink-0 rounded-full bg-primary" />
+                    <span className="truncate text-[11px] font-semibold uppercase tracking-[0.06em] text-white/80">Total · All channels</span>
+                  </div>
+                  <div className={`mt-3 text-xl font-bold tracking-tight tabular-nums ${(totalInc - totalExp) >= 0 ? 'text-white' : 'text-red-300'}`}>
+                    <MaskedValue value={totalInc - totalExp} />
+                  </div>
+                  <div className="mt-3 space-y-1 border-t border-white/10 pt-3 text-[13px]">
+                    <div className="flex items-baseline justify-between gap-2">
+                      <span className="text-white/55">Income</span>
+                      <MaskedValue value={totalInc} className="font-semibold text-white" />
+                    </div>
+                    <div className="flex items-baseline justify-between gap-2">
+                      <span className="text-white/55">Expense</span>
+                      <MaskedValue value={totalExp} className="font-semibold text-red-300" />
+                    </div>
+                  </div>
+                  <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/10">
+                    <div className={`h-full rounded-full ${(totalInc - totalExp) < 0 ? 'bg-red-400' : 'bg-primary'}`} style={{ width: `${barPct(totalInc, totalInc - totalExp)}%` }} />
+                  </div>
                 </div>
-              );
-            })}
-            {/* Total card — dark theme to match the Carry Forward tab.
-                Clicking opens a combined Income+Expense drilldown across all modes. */}
-            <div
-              className="rounded-[6px] border border-slate-900 p-3 shadow-sm bg-slate-900 text-white cursor-pointer hover:shadow-md hover:scale-[1.02] transition-all"
-              data-testid="cb-bucket-total"
-              role="button"
-              tabIndex={0}
-              onClick={() => setDrilldown({ type: 'mode', mode: 'all', incomeEntries: incomeEntries, expenseEntries: allExpenseEntries, label: 'All Channels (Total)' })}
-              onKeyDown={(ev) => { if (ev.key === 'Enter' || ev.key === ' ') setDrilldown({ type: 'mode', mode: 'all', incomeEntries: incomeEntries, expenseEntries: allExpenseEntries, label: 'All Channels (Total)' }); }}
-              title="View all income & expense entries across every channel"
-            >
-              <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-slate-300 font-semibold mb-2">
-                <TrendingUp className="h-3 w-3" /> Total
               </div>
-              <div className="flex items-baseline justify-between text-[11px]">
-                <span className="text-emerald-300">Income</span>
-                <span className="font-semibold"><MaskedValue value={totalInc} className="text-white" /></span>
-              </div>
-              <div className="flex items-baseline justify-between text-[11px] mt-0.5">
-                <span className="text-rose-300">Expense</span>
-                <span className="font-semibold"><MaskedValue value={totalExp} className="text-white" /></span>
-              </div>
-              <div className="border-t border-slate-700 mt-2 pt-1.5 flex items-baseline justify-between text-[11px]">
-                <span className="text-slate-300">Balance</span>
-                <span className={`font-bold ${(totalInc - totalExp) >= 0 ? 'text-white' : 'text-rose-300'}`}><MaskedValue value={totalInc - totalExp} className={(totalInc - totalExp) >= 0 ? 'text-white' : 'text-rose-300'} /></span>
-              </div>
-            </div>
+            </Card>
           </div>
-          </>
         );
       })()}
 

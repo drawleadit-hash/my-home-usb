@@ -79,7 +79,7 @@ export default function SetupWizard() {
 
   if (checking) {
     return (
-      <div className="min-h-screen bg-[#07110B] bg-[radial-gradient(900px_520px_at_15%_-10%,rgba(50,180,111,0.28),transparent_70%)] flex items-center justify-center">
+      <div className="min-h-screen bg-[#0A0A0B] bg-[radial-gradient(900px_520px_at_15%_-10%,rgba(49,180,110,0.24),transparent_70%)] flex items-center justify-center">
         <div className="text-white text-sm">Checking setup status...</div>
       </div>
     );
@@ -87,7 +87,7 @@ export default function SetupWizard() {
 
   if (setupLocked) {
     return (
-      <div className="min-h-screen bg-[#07110B] bg-[radial-gradient(900px_520px_at_15%_-10%,rgba(50,180,111,0.28),transparent_70%)] flex items-center justify-center px-4" data-testid="setup-locked">
+      <div className="min-h-screen bg-[#0A0A0B] bg-[radial-gradient(900px_520px_at_15%_-10%,rgba(49,180,110,0.24),transparent_70%)] flex items-center justify-center px-4" data-testid="setup-locked">
         <Card className="max-w-md w-full rounded-2xl border-0 shadow-2xl text-center">
           <CardContent className="py-12">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-100 mb-4">
@@ -110,7 +110,7 @@ export default function SetupWizard() {
   }
 
   return (
-    <div className="min-h-screen bg-[#07110B] bg-[radial-gradient(900px_520px_at_15%_-10%,rgba(50,180,111,0.28),transparent_70%)] flex items-center justify-center px-4" data-testid="setup-wizard">
+    <div className="min-h-screen bg-[#0A0A0B] bg-[radial-gradient(900px_520px_at_15%_-10%,rgba(49,180,110,0.24),transparent_70%)] flex items-center justify-center px-4" data-testid="setup-wizard">
       <div className="w-full max-w-lg">
 
         {/* Logo / Brand */}

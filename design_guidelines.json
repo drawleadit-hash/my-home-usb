@@ -1,22 +1,23 @@
 {
   "identity": {
     "name": "Drawlead Construction ERP",
-    "tone": "Calm, precise, brand-led (Drawlead green + ink)",
+    "tone": "Calm, precise, brand-led (Drawlead green on black & white)",
     "reference": "https://drawlead.com",
     "principles": [
-      "One brand colour (#32B46F) for actions, selection and focus; status colours only carry meaning",
-      "Flat surfaces — no gradients; soft borders and layered shadows",
-      "Data is the hero: tabular figures, uppercase table heads, dense but breathable",
-      "Dark ink sidebar shell, light canvas content"
+      "One brand colour (#31B46E) for actions, selection and focus; status colours only carry meaning",
+      "Secondary is black & white: black buttons, avatars and hero tiles in light mode (white in dark mode)",
+      "Generous radii (cards rounded-2xl, hero tiles rounded-3xl), hairline borders, near-flat shadows",
+      "Data is the hero: tabular figures, uppercase letter-spaced labels and table heads, airy rows",
+      "White icon-rail shell (expandable), large page title with an uppercase eyebrow, light canvas content"
     ]
   },
   "typography": {
-    "primary_font": "Inter",
-    "secondary_font": "Inter",
-    "mono_font": "Inter (font-mono = Inter with tabular-nums slashed-zero)",
-    "features": "font-feature-settings: 'cv02','cv03','cv04','cv11'",
+    "primary_font": "Plus Jakarta Sans",
+    "secondary_font": "Plus Jakarta Sans (Inter as glyph fallback)",
+    "mono_font": "Plus Jakarta Sans (font-mono = UI face with tabular-nums slashed-zero)",
+    "features": "font-feature-settings: 'calt'",
     "scale": {
-      "h1": "text-3xl font-semibold tracking-tight",
+      "h1": "text-[22px]–text-2xl font-bold tracking-tight (page title in AppHeader)",
       "h2": "text-2xl font-semibold tracking-tight",
       "h3": "text-lg font-semibold",
       "body": "text-sm leading-relaxed",
@@ -27,38 +28,38 @@
   "colors": {
     "palette": {
       "primary": {
-        "DEFAULT": "#32B46F",
+        "DEFAULT": "#31B46E",
         "foreground": "#FFFFFF",
         "hover": "hsl(149 60% 38%)",
         "strong": "#1E7649 (text on light)",
         "soft": "#EEFBF3"
       },
       "secondary": {
-        "DEFAULT": "#1A221E (ink)",
-        "foreground": "#FFFFFF"
+        "DEFAULT": "#0E0E10 (black; white in dark mode)",
+        "foreground": "#FFFFFF (black in dark mode)"
       },
       "background": "#FFFFFF",
-      "canvas": "#F6F8F7",
-      "foreground": "#121915",
+      "canvas": "#FAFAFA",
+      "foreground": "#131316",
       "muted": {
-        "DEFAULT": "#EEF2F0",
-        "foreground": "#65736B"
+        "DEFAULT": "#F4F4F5",
+        "foreground": "#71717A"
       },
-      "border": "#E1E7E4",
-      "ring": "#32B46F",
-      "sidebar": "#0D1611"
+      "border": "#E7E7E9",
+      "ring": "#31B46E",
+      "sidebar": "#FFFFFF (white icon rail)"
     },
     "scales": {
-      "brand": "brand-50…950 (500 = #32B46F); green and emerald alias brand",
-      "ink": "ink-50…950; gray and slate alias ink"
+      "brand": "brand-50…950 (500 = #31B46E); green and emerald alias brand",
+      "ink": "ink-50…950 true neutral gray; gray and slate alias ink"
     },
     "status": {
-      "success": "#32B46F",
+      "success": "#31B46E",
       "warning": "#F59E0B (amber = pending/warning only)",
       "error": "#DC2626",
       "info": "#2E8BE6"
     },
-    "gradients": "none — use flat tints (bg-*-50) or ink tiles"
+    "gradients": "none on surfaces — exceptions: the dark hero tile may carry one soft blurred brand glow"
   },
   "layout": {
     "grid_system": {
@@ -74,39 +75,48 @@
     "radius": {
       "default": "rounded-lg (10px)",
       "button": "rounded-lg; rounded-xl for large CTAs",
-      "card": "rounded-xl",
+      "card": "rounded-2xl (20px)",
+      "hero": "rounded-3xl (24px)",
       "badge": "rounded-full",
       "dialog": "rounded-2xl"
     },
     "shell": {
-      "desktop": "Fixed dark sidebar (16rem, collapsible to 4.5rem rail) rendered by AppHeader + sticky blurred top bar with page title",
+      "desktop": "Fixed white sidebar: 5.5rem icon rail by default (tooltips, green logo tile, light-green active tile, black avatar + logout at the foot), expandable to 15rem with labels; sticky 76px top bar with eyebrow (role/module · Financial Year) and page title",
       "mobile": "Top bar with hamburger drawer + MobileBottomNav"
     }
   },
   "components": {
     "buttons": {
-      "primary": "<Button> default: bg-primary text-white font-semibold hover:bg-primary-hover",
-      "secondary": "variant=\"secondary\": ink bg, white text",
-      "outline": "border-input bg-background hover:bg-muted",
+      "primary": "<Button> default: bg-primary text-white font-semibold shadow-sm hover:bg-primary-hover; add shadow-brand for the green glow on hero CTAs",
+      "secondary": "variant=\"secondary\": black bg, white text (inverts in dark mode)",
+      "soft": "variant=\"soft\": bg-primary-soft text-primary-strong (e.g. + New Voucher)",
+      "outline": "border-border bg-background hover:bg-muted",
       "ghost": "hover:bg-muted"
     },
     "cards": {
-      "base": "rounded-xl border border-border/80 bg-card shadow-sm",
-      "kpi_tile": "bg-gray-900 text-white ring-1 ring-inset ring-white/10 [&_svg]:text-<accent>-400"
+      "base": "rounded-2xl border border-border bg-card shadow-xs",
+      "kpi_tile": "<SummaryCard tone=positive|negative|warning|neutral>: uppercase label, tinted icon chip top-right, large figure, coloured sub-line",
+      "hero_tile": "rounded-3xl bg-[#0B0B0C] text-white with one blurred bg-primary/25 glow (Executive Balance)"
     },
     "inputs": {
       "base": "h-9 rounded-lg border-input bg-background shadow-xs hover:border-ink-300 focus-visible:border-primary focus-visible:ring-4 focus-visible:ring-ring/15"
     },
     "tabs": {
-      "segmented": "TabsList rounded-xl bg-muted p-1; active trigger bg-background shadow-sm",
-      "underline": "border-b-2 border-primary text-foreground"
+      "segmented": "TabsList h-11 rounded-2xl border bg-muted/80 p-1; active trigger rounded-xl bg-background shadow",
+      "underline": "border-b-2 border-primary text-primary-strong font-semibold, items spaced gap-5/gap-7"
     },
     "tables": {
-      "head": "text-[11px] font-semibold uppercase tracking-[0.06em] text-muted-foreground bg-muted/60"
+      "head": "h-11 px-4 text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground, no fill",
+      "cell": "px-4 py-3.5"
+    },
+    "badges": {
+      "solid": "<Badge> default (solid green; call sites pass their own bg-*)",
+      "soft": "variant soft|warning|danger|info: pale tint + matching -200 border",
+      "neutral": "variant=\"secondary\": bg-muted text-ink-700"
     }
   },
   "visual_enhancers": {
-    "shadows": "tailwind shadow-xs…2xl (tinted ink), shadow-brand for brand glow",
+    "shadows": "tailwind shadow-xs…2xl (neutral black), shadow-brand for the green glow on primary buttons and the logo tile",
     "borders": {
       "default": "border border-border"
     }
@@ -122,7 +132,7 @@
   },
   "instructions_to_main_agent": [
     "1. THEME: tokens live in frontend/src/index.css (:root/.dark) and tailwind.config.js — never hard-code the brand hex in pages; use bg-primary / text-primary-strong / brand-*.",
-    "2. FONT: Inter only (loaded in public/index.html).",
+    "2. FONT: Plus Jakarta Sans, Inter as glyph fallback (both loaded in public/index.html).",
     "3. ACTIONS: primary actions use the default <Button>; destructive stays red; avoid per-page rainbow button colours.",
     "4. STATUS COLOURS: amber = pending/warning, red = error/rejected, green = done/income; categorical chips may use other hues as pale tints.",
     "5. NAVIGATION: AppHeader renders the sidebar + top bar; pages only pass customNav/headerActions/backTo/hideNav.",
@@ -130,7 +140,7 @@
     "7. DATA-TESTID: add data-testid to every interactive element."
   ],
   "universal_guidelines": [
-    "No gradients — flat tints and ink tiles.",
+    "Flat tints and black/white tiles; the only gradient is the soft brand glow on dark hero tiles.",
     "Selected/active state = brand green (tint or solid).",
     "Keep figures tabular; right-align amounts.",
     "Respect dark mode: prefer tokens (bg-background, text-foreground, border-border) over raw white/gray."

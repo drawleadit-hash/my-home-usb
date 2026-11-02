@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTitle, SheetDescription } from '@/components/ui/sheet';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import axios from 'axios';
 import { useTheme } from '../hooks/useTheme';
 import USBLookupBar from './USBLookupBar';
@@ -206,29 +207,35 @@ function titleFromPath(pathname) {
 
 const initialsOf = (name) => (name || '').split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('');
 
+// Indian financial year (April–March) for today, e.g. "2026-27".
+const financialYear = (d = new Date()) => {
+  const start = d.getMonth() >= 3 ? d.getFullYear() : d.getFullYear() - 1;
+  return `${start}-${String((start + 1) % 100).padStart(2, '0')}`;
+};
+
 // Short role names read as acronyms ("hr" → "HR", "cre" → "CRE").
 const displayRole = (r) => {
   const label = roleLabel(r);
   return label.length <= 3 ? label.toUpperCase() : label;
 };
 
-const COLLAPSE_KEY = 'usb_sidebar_collapsed';
-// Remembered choice wins; otherwise start as the icon rail on narrower
-// desktops so wide tables keep their room.
+// v2: the icon rail is the default shell, so earlier saved choices are reset once.
+const COLLAPSE_KEY = 'usb_sidebar_collapsed_v2';
+// Remembered choice wins; otherwise start as the icon rail.
 const readCollapsed = () => {
   try {
     const saved = window.localStorage.getItem(COLLAPSE_KEY);
     if (saved === '1' || saved === '0') return saved === '1';
   } catch { /* ignore */ }
-  return typeof window !== 'undefined' && window.innerWidth < 1280;
+  return true;
 };
 
 // Underline tab used by the sub-navigation strips.
 const stripTabClass = (active) =>
-  `relative -mb-px whitespace-nowrap border-b-2 px-3 py-2.5 text-[13px] font-medium transition-colors ${
+  `relative -mb-px inline-flex items-center gap-2 whitespace-nowrap border-b-2 px-0.5 py-3 text-sm transition-colors ${
     active
-      ? 'border-primary text-foreground'
-      : 'border-transparent text-muted-foreground hover:border-ink-300 hover:text-foreground'
+      ? 'border-primary font-semibold text-primary-strong'
+      : 'border-transparent font-medium text-muted-foreground hover:border-ink-300 hover:text-foreground'
   }`;
 
 export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, onCustomNavChange, headerActions, hideNav = false, backTo = null }) {
@@ -290,7 +297,8 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
   const isMainActive = (path) => {
     if (subMenus) {
       const mk = getModuleKey(currentPath, role);
-      return mk === path;
+      // Pages outside every module (e.g. /finance-board) match their own item below.
+      if (mk) return mk === path;
     }
     // If path contains query string (e.g. ?tab=cashbook), match full path+search
     if (path.includes('?')) {
@@ -395,8 +403,8 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
         && (tparams.get('sub') || '') === (cparams.get('sub') || '');
     };
     return (
-      <div className="sticky top-0 z-40 border-b border-border bg-background/90 px-3 backdrop-blur-md lg:px-6" data-testid="embedded-sub-nav">
-        <nav className="flex items-center gap-1 overflow-x-auto scrollbar-hide">
+      <div className="sticky top-0 z-40 border-b border-border bg-background/90 px-3 backdrop-blur-md lg:px-8" data-testid="embedded-sub-nav">
+        <nav className="flex items-center gap-5 overflow-x-auto scrollbar-hide lg:gap-7">
           {embeddedNav.map((item) => {
             // Preserve embedded flags when navigating between sub-nav items
             const sep = item.path.includes('?') ? '&' : '?';
@@ -419,16 +427,17 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
 
   // ── Sidebar building blocks (desktop rail + mobile drawer) ──
   const renderBrand = (rail, withTestId) => (
-    <div className={`flex h-14 shrink-0 items-center border-b border-sidebar-border ${rail ? 'justify-center' : 'px-4'}`}>
+    <div className={`flex h-[76px] shrink-0 items-center ${rail ? 'justify-center' : 'px-5'}`}>
       <button
         type="button"
         onClick={() => { goHome(); setDrawerOpen(false); }}
-        className="flex min-w-0 items-center gap-3 rounded-lg text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        className="flex min-w-0 items-center gap-3 rounded-xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         data-testid={withTestId ? 'header-brand' : undefined}
+        title={rail ? appName : undefined}
       >
-        <AppMark branding={branding} className="h-8 w-8 shrink-0" />
+        <AppMark branding={branding} className="h-11 w-11 shrink-0 rounded-[12px] shadow-brand" />
         {!rail && (
-          <span className="line-clamp-2 min-w-0 text-[14px] font-bold leading-tight tracking-tight text-white" title={appName} data-testid="sidebar-app-name">
+          <span className="line-clamp-2 min-w-0 text-[15px] font-bold leading-tight tracking-tight text-foreground" title={appName} data-testid="sidebar-app-name">
             {appName}
           </span>
         )}
@@ -437,53 +446,64 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
   );
 
   const renderRoleChip = () => (
-    <div className="px-3 pt-4">
-      <div className="flex items-center gap-2.5 rounded-lg bg-primary/10 px-3 py-2 ring-1 ring-inset ring-primary/20">
-        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary shadow-[0_0_0_3px_rgba(50,180,111,0.22)]" />
-        <span className="truncate text-[11px] font-semibold uppercase tracking-[0.1em] text-brand-300">{roleLabel(role)}</span>
+    <div className="px-3 pb-2">
+      <div className="flex items-center gap-2.5 rounded-xl bg-sidebar-accent px-3 py-2">
+        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary shadow-[0_0_0_3px_rgb(49_180_110/0.2)]" />
+        <span className="truncate text-[11px] font-semibold uppercase tracking-[0.1em] text-primary-strong">{roleLabel(role)}</span>
       </div>
     </div>
   );
 
   const sectionLabel = (text) => (
-    <p className="px-3 pb-2 pt-1 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-sidebar-muted/80">{text}</p>
+    <p className="px-3 pb-2 pt-1 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-sidebar-muted">{text}</p>
   );
 
   const navButtonClass = (active, rail) =>
-    `group relative flex w-full items-center gap-3 rounded-lg text-[13.5px] font-medium transition-colors ${
-      rail ? 'h-10 justify-center' : 'px-3 py-2'
+    `group relative flex items-center rounded-xl text-[13.5px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
+      rail ? 'mx-auto h-11 w-11 justify-center' : 'w-full gap-3 px-3 py-2.5'
     } ${
       active
-        ? 'bg-primary text-white shadow-[0_8px_20px_-10px_rgba(50,180,111,0.9)]'
-        : 'text-sidebar-foreground/80 hover:bg-white/[0.06] hover:text-white'
+        ? 'bg-sidebar-accent font-semibold text-primary-strong'
+        : 'font-medium text-sidebar-foreground hover:bg-muted hover:text-foreground'
     }`;
+
+  const navIconClass = (active) =>
+    `h-[19px] w-[19px] shrink-0 ${active ? 'text-primary' : 'text-sidebar-muted group-hover:text-foreground'}`;
 
   const renderNav = (inDrawer) => {
     const rail = collapsed && !inDrawer;
     const close = () => { if (inDrawer) setDrawerOpen(false); };
     return (
       <nav
-        className={`flex-1 space-y-0.5 overflow-y-auto py-4 ${rail ? 'px-2.5' : 'px-3'}`}
+        className={`flex-1 overflow-y-auto py-3 scrollbar-hide ${rail ? 'space-y-2 px-2' : 'space-y-1 px-3'}`}
         data-testid={inDrawer ? 'drawer-nav' : 'header-nav'}
       >
         {!rail && sectionLabel('Workspace')}
         {sidebarItems.map((item) => {
           const Icon = item.icon;
           const showChildren = item.active && item.children && !rail;
+          const button = (
+            <button
+              type="button"
+              data-testid={inDrawer ? `drawer-${item.testid}` : item.testid}
+              onClick={() => { item.onSelect(); close(); }}
+              aria-current={item.active ? 'page' : undefined}
+              className={navButtonClass(item.active, rail)}
+            >
+              <Icon className={navIconClass(item.active)} />
+              {rail ? <span className="sr-only">{item.label}</span> : <span className="truncate">{item.label}</span>}
+            </button>
+          );
           return (
             <div key={item.key}>
-              <button
-                type="button"
-                data-testid={inDrawer ? `drawer-${item.testid}` : item.testid}
-                onClick={() => { item.onSelect(); close(); }}
-                title={rail ? item.label : undefined}
-                className={navButtonClass(item.active, rail)}
-              >
-                <Icon className={`h-[18px] w-[18px] shrink-0 ${item.active ? 'text-white' : 'text-sidebar-muted group-hover:text-white'}`} />
-                {rail ? <span className="sr-only">{item.label}</span> : <span className="truncate">{item.label}</span>}
-              </button>
+              {rail ? (
+                <Tooltip>
+                  <TooltipTrigger asChild>{button}</TooltipTrigger>
+                  <TooltipContent side="right" sideOffset={10}>{item.label}</TooltipContent>
+                </Tooltip>
+              ) : button}
               {showChildren && (
-                <div className="mb-2 ml-[21px] mt-1 space-y-0.5 border-l border-white/10 pl-3">
+                <div className="mb-2 ml-[22px] mt-1 space-y-0.5 border-l border-sidebar-border pl-3">
                   {item.children.map((child) => {
                     const childActive = isSubActive(child.path);
                     return (
@@ -492,11 +512,11 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
                         key={child.path}
                         data-testid={`${inDrawer ? 'drawer-' : ''}sidenav-${child.label.toLowerCase().replace(/\s/g, '-')}`}
                         onClick={() => { navigate(child.path); close(); }}
-                        className={`flex w-full items-center gap-2.5 rounded-md px-2.5 py-1.5 text-left text-[13px] transition-colors ${
-                          childActive ? 'bg-white/[0.07] font-medium text-white' : 'text-sidebar-foreground/65 hover:bg-white/[0.04] hover:text-white'
+                        className={`flex w-full items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-left text-[13px] transition-colors ${
+                          childActive ? 'bg-muted font-semibold text-foreground' : 'text-sidebar-foreground hover:bg-muted/70 hover:text-foreground'
                         }`}
                       >
-                        <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${childActive ? 'bg-primary' : 'bg-white/20'}`} />
+                        <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${childActive ? 'bg-primary' : 'bg-ink-300'}`} />
                         <span className="truncate">{child.label}</span>
                       </button>
                     );
@@ -511,12 +531,12 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
           <div className="pt-5">
             {sectionLabel('Account')}
             <button type="button" onClick={() => { navigate('/notifications'); close(); }} className={navButtonClass(currentPath === '/notifications', false)} data-testid="drawer-notifications">
-              <Bell className="h-[18px] w-[18px] shrink-0 text-sidebar-muted group-hover:text-white" />
+              <Bell className={navIconClass(currentPath === '/notifications')} />
               <span className="flex-1 text-left">Notifications</span>
               {unreadNotifs > 0 && <span className="rounded-full bg-red-500 px-1.5 text-[10px] font-semibold text-white">{unreadNotifs}</span>}
             </button>
             <button type="button" onClick={() => { navigate('/profile'); close(); }} className={navButtonClass(currentPath === '/profile', false)} data-testid="drawer-profile">
-              <UserCircle className="h-[18px] w-[18px] shrink-0 text-sidebar-muted group-hover:text-white" />
+              <UserCircle className={navIconClass(currentPath === '/profile')} />
               <span>Profile</span>
             </button>
           </div>
@@ -527,37 +547,52 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
 
   const renderFooter = (inDrawer) => {
     const rail = collapsed && !inDrawer;
+    const avatar = (
+      <button
+        type="button"
+        onClick={() => { navigate('/profile'); if (inDrawer) setDrawerOpen(false); }}
+        title="Profile"
+        aria-label="Profile"
+        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-secondary text-[13px] font-bold tracking-wide text-secondary-foreground shadow-md transition-transform hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30"
+      >
+        {initials}
+      </button>
+    );
+    const logout = (
+      <button
+        type="button"
+        onClick={handleLogout}
+        title="Log out"
+        aria-label="Log out"
+        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-sidebar-muted transition-colors hover:bg-red-50 hover:text-red-600"
+        data-testid={inDrawer ? 'drawer-logout' : 'header-logout'}
+      >
+        <LogOut className="h-[18px] w-[18px]" />
+      </button>
+    );
     return (
-      <div className="shrink-0 border-t border-sidebar-border p-3">
-        <div className={`flex items-center gap-3 rounded-xl ${rail ? 'flex-col gap-2' : 'bg-white/[0.04] p-2.5 ring-1 ring-inset ring-white/[0.05]'}`}>
-          <button
-            type="button"
-            onClick={() => { navigate('/profile'); if (inDrawer) setDrawerOpen(false); }}
-            title="Profile"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/20 text-xs font-semibold text-brand-200 ring-1 ring-inset ring-primary/30 transition-colors hover:bg-primary/30"
-          >
-            {initials}
-          </button>
-          <div className={rail ? 'sr-only' : 'min-w-0 flex-1 leading-tight'}>
-            <p className="truncate text-sm font-semibold text-white" data-testid={inDrawer ? 'drawer-username' : 'header-username'}>{userName}</p>
-            <p className="truncate text-[11px] capitalize text-sidebar-muted">{displayRole(role)}</p>
+      <div className={`shrink-0 pb-4 pt-3 ${rail ? 'px-2' : 'px-3'}`}>
+        {rail ? (
+          <div className="flex flex-col items-center gap-3">
+            {avatar}
+            <p className="sr-only" data-testid="header-username">{userName}</p>
+            {logout}
           </div>
-          <button
-            type="button"
-            onClick={handleLogout}
-            title="Log out"
-            aria-label="Log out"
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-sidebar-muted transition-colors hover:bg-red-500/15 hover:text-red-300"
-            data-testid={inDrawer ? 'drawer-logout' : 'header-logout'}
-          >
-            <LogOut className="h-4 w-4" />
-          </button>
-        </div>
+        ) : (
+          <div className="flex items-center gap-3 rounded-2xl border border-sidebar-border p-2">
+            {avatar}
+            <div className="min-w-0 flex-1 leading-tight">
+              <p className="truncate text-sm font-semibold text-foreground" data-testid={inDrawer ? 'drawer-username' : 'header-username'}>{userName}</p>
+              <p className="truncate text-[11px] capitalize text-sidebar-muted">{displayRole(role)}</p>
+            </div>
+            {logout}
+          </div>
+        )}
         {!inDrawer && (
           <button
             type="button"
             onClick={toggleCollapsed}
-            className={`mt-2 flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-medium text-sidebar-muted transition-colors hover:bg-white/[0.05] hover:text-white ${rail ? 'justify-center px-0' : ''}`}
+            className={`mt-3 flex w-full items-center gap-2 rounded-lg py-1.5 text-xs font-medium text-sidebar-muted transition-colors hover:bg-muted hover:text-foreground ${rail ? 'justify-center' : 'px-3'}`}
             title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             data-testid="sidebar-collapse-toggle"
           >
@@ -576,10 +611,12 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
           style={{ width: 'var(--app-sidebar-w)' }}
           data-testid="app-sidebar"
         >
-          {renderBrand(collapsed, true)}
-          {!collapsed && renderRoleChip()}
-          {renderNav(false)}
-          {renderFooter(false)}
+          <TooltipProvider delayDuration={120}>
+            {renderBrand(collapsed, true)}
+            {!collapsed && renderRoleChip()}
+            {renderNav(false)}
+            {renderFooter(false)}
+          </TooltipProvider>
         </aside>,
         document.body
       )}
@@ -588,7 +625,7 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
         <Sheet open={drawerOpen} onOpenChange={setDrawerOpen}>
           <SheetContent
             side="left"
-            className="flex w-[288px] flex-col gap-0 border-sidebar-border bg-sidebar p-0 text-sidebar-foreground sm:max-w-[288px] [&>button]:text-sidebar-muted [&>button:hover]:bg-white/10 [&>button:hover]:text-white"
+            className="flex w-[288px] flex-col gap-0 border-sidebar-border bg-sidebar p-0 text-sidebar-foreground sm:max-w-[288px]"
           >
             <SheetTitle className="sr-only">Navigation</SheetTitle>
             <SheetDescription className="sr-only">Main navigation</SheetDescription>
@@ -601,8 +638,8 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
       )}
 
       <div className="sticky top-0 z-50">
-        <header data-testid="app-header" className="border-b border-border bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/75">
-          <div className="flex h-14 items-center gap-2 px-3 sm:px-4 lg:px-6">
+        <header data-testid="app-header" className="border-b border-border bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/80">
+          <div className={`flex h-14 items-center gap-2 px-3 sm:px-4 lg:px-8 ${hasSidebar ? 'lg:h-[76px]' : ''}`}>
             {/* Left: menu (mobile) · brand (when there is no sidebar) · Back · page title */}
             <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3">
               {hasSidebar && (
@@ -642,15 +679,19 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
                 </Button>
               )}
               {hasSidebar && (
-                <div className="hidden min-w-0 leading-tight lg:block">
-                  <p className="truncate text-[11px] font-medium capitalize text-muted-foreground">{pageParent}</p>
-                  <h1 className="truncate text-[15px] font-semibold tracking-tight text-foreground" data-testid="header-page-title">{pageTitle}</h1>
+                <div className="hidden min-w-0 lg:block">
+                  <p className="flex min-w-0 items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    <span className="truncate">{pageParent}</span>
+                    <span className="h-1 w-1 shrink-0 rounded-full bg-ink-300" aria-hidden="true" />
+                    <span className="shrink-0 text-primary-strong" data-testid="header-financial-year">Financial Year {financialYear()}</span>
+                  </p>
+                  <h1 className="mt-0.5 truncate text-[22px] font-bold leading-tight tracking-tight text-foreground" data-testid="header-page-title">{pageTitle}</h1>
                 </div>
               )}
             </div>
 
             {/* Right: lookup · page actions · theme · notifications · profile */}
-            <div className="flex shrink-0 items-center gap-1 sm:gap-1.5">
+            <div className="flex shrink-0 items-center gap-1 sm:gap-2">
               {role === 'super_admin' && <USBLookupBar />}
               {headerActions}
               {(headerActions || role === 'super_admin') && <div className="mx-1 hidden h-6 w-px bg-border sm:block" />}
@@ -678,10 +719,11 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
                   <span className="absolute right-0.5 top-0.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-semibold text-white ring-2 ring-background">{unreadNotifs}</span>
                 )}
               </Button>
+              {/* On desktop the profile avatar lives at the foot of the sidebar. */}
               <button
                 type="button"
                 onClick={() => navigate('/profile')}
-                className="ml-0.5 flex h-9 w-9 items-center justify-center rounded-full bg-brand-100 text-xs font-semibold text-brand-800 ring-2 ring-transparent transition-shadow hover:ring-brand-200 focus-visible:outline-none focus-visible:ring-primary/40 dark:bg-brand-900/60 dark:text-brand-200"
+                className={`ml-0.5 flex h-9 w-9 items-center justify-center rounded-full bg-secondary text-xs font-bold text-secondary-foreground transition-transform hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30 ${hasSidebar ? 'lg:hidden' : ''}`}
                 data-testid="header-profile"
                 title="Profile"
                 aria-label="Profile"
@@ -706,8 +748,8 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
         {/* Sub-navigation strip — for super_admin we surface the page's customNav
             here so the Super Admin shell stays visible at the top. */}
         {!hideNav && customNavAsSub && customNav && customNav.length > 0 && (
-          <div className="border-b border-border bg-background/90 px-3 backdrop-blur-md sm:px-4 lg:px-6" data-testid="sub-nav">
-            <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide">
+          <div className="border-b border-border bg-background/90 px-3 backdrop-blur-md sm:px-4 lg:px-8" data-testid="sub-nav">
+            <div className="flex items-center gap-5 overflow-x-auto scrollbar-hide lg:gap-7">
               {customNav.map((item) => (
                 <button
                   key={item.value}
@@ -725,8 +767,8 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
         {/* Module sub-pages (roles with sub-menus). On desktop these live in the
             expanded sidebar, so the strip is only needed on smaller screens. */}
         {!hideNav && !hasCustomNav && subItems && subItems.length > 1 && (
-          <div className={`border-b border-border bg-background/90 px-3 backdrop-blur-md sm:px-4 lg:px-6 ${moduleInSidebar ? 'lg:hidden' : ''}`} data-testid="sub-nav">
-            <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide">
+          <div className={`border-b border-border bg-background/90 px-3 backdrop-blur-md sm:px-4 lg:px-8 ${moduleInSidebar ? 'lg:hidden' : ''}`} data-testid="sub-nav">
+            <div className="flex items-center gap-5 overflow-x-auto scrollbar-hide lg:gap-7">
               {subItems.map((item) => (
                 <button
                   key={item.path}
