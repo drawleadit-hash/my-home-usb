@@ -1,14 +1,14 @@
 {
   "identity": {
     "name": "Drawlead Construction ERP",
-    "tone": "Calm, precise, brand-led (Drawlead green on black & white)",
+    "tone": "Warm, confident and practical — one brick red against calm warm stone greys (brick, clay, stone)",
     "reference": "https://drawlead.com",
     "principles": [
-      "One brand colour (#31B46E) for actions, selection and focus; status colours only carry meaning",
-      "Secondary is black & white: black buttons, avatars and hero tiles in light mode (white in dark mode)",
-      "Generous radii (cards rounded-2xl, hero tiles rounded-3xl), hairline borders, near-flat shadows",
-      "Data is the hero: tabular figures, uppercase letter-spaced labels and table heads, airy rows",
-      "White icon-rail shell (expandable), large page title with an uppercase eyebrow, light canvas content"
+      "One brand colour (brick #B14E2F) for actions, selection, focus and \"handled\" states; status colours only carry meaning",
+      "Neutrals are warm stone greys (text #171310), never cool blue-greys; secondary is near-black #0D0B09 (warm white in dark mode)",
+      "Dark–light rhythm: near-black sidebar, hero tiles and auth panel against white cards on a #FAFAF9 canvas",
+      "Rounded but not bubbly: buttons and fields 12px, cards 14–20px, pills fully round; soft warm-tinted shadows",
+      "Data is the hero: tabular figures, uppercase letter-spaced labels and table heads, airy rows"
     ]
   },
   "typography": {
@@ -28,38 +28,39 @@
   "colors": {
     "palette": {
       "primary": {
-        "DEFAULT": "#31B46E",
+        "DEFAULT": "#B14E2F",
         "foreground": "#FFFFFF",
-        "hover": "hsl(149 60% 38%)",
-        "strong": "#1E7649 (text on light)",
-        "soft": "#EEFBF3"
+        "hover": "#923F26 (brand-600)",
+        "strong": "hsl(14 59% 33%) (brick text on light)",
+        "soft": "#FBF3EF (blush)"
       },
       "secondary": {
-        "DEFAULT": "#0E0E10 (black; white in dark mode)",
-        "foreground": "#FFFFFF (black in dark mode)"
+        "DEFAULT": "#0D0B09 (warm near-black; warm white in dark mode)",
+        "foreground": "#FFFFFF (near-black in dark mode)"
       },
       "background": "#FFFFFF",
-      "canvas": "#FAFAFA",
-      "foreground": "#131316",
+      "canvas": "#FAFAF9",
+      "foreground": "#171310",
       "muted": {
-        "DEFAULT": "#F4F4F5",
-        "foreground": "#71717A"
+        "DEFAULT": "#F5F5F4",
+        "foreground": "#78716C"
       },
-      "border": "#E7E7E9",
-      "ring": "#31B46E",
-      "sidebar": "#FFFFFF (white icon rail)"
+      "border": "#E7E5E4",
+      "ring": "#B14E2F",
+      "sidebar": "#0D0B09 (near-black rail; tokens --sidebar-*, incl. accent, accent-foreground, hover, strong)"
     },
     "scales": {
-      "brand": "brand-50…950 (500 = #31B46E); green and emerald alias brand",
-      "ink": "ink-50…950 true neutral gray; gray and slate alias ink"
+      "brand": "brand-50…950: #FBF3EF #F6E2DA #EDC5B6 #DF9E86 #CD7051 #B14E2F #923F26 #773320 #5D291A #461E14 #2D120B (500 = #B14E2F); green and emerald alias brand, so legacy success utilities render brick",
+      "ink": "ink-50…950 warm stone grey (#FAFAF9 … #171310, #0D0B09); gray, slate, zinc, neutral and stone alias ink"
     },
     "status": {
-      "success": "#31B46E",
-      "warning": "#F59E0B (amber = pending/warning only)",
-      "error": "#DC2626",
-      "info": "#2E8BE6"
+      "success": "#B14E2F — brick means handled (approved, paid, synced, profit)",
+      "warning": "#F59E0B (amber = pending only)",
+      "error": "#DC2626 (red = missed / rejected)",
+      "info": "blue and violet = labels and categories",
+      "toasts": "sonner richColors success toasts are re-tinted brick in index.css"
     },
-    "gradients": "none on surfaces — exceptions: the dark hero tile may carry one soft blurred brand glow"
+    "gradients": "none on surfaces — exception: dark hero tiles and the auth panel carry one soft blurred brick glow"
   },
   "layout": {
     "grid_system": {
@@ -73,22 +74,23 @@
       "component_gap": "gap-4"
     },
     "radius": {
-      "default": "rounded-lg (10px)",
-      "button": "rounded-lg; rounded-xl for large CTAs",
-      "card": "rounded-2xl (20px)",
+      "default": "rounded-lg (12px, --radius)",
+      "button": "rounded-lg (12px) at every size",
+      "input": "rounded-lg (12px)",
+      "card": "rounded-2xl (20px); rounded-xl (14px) for nested panels",
       "hero": "rounded-3xl (24px)",
       "badge": "rounded-full",
       "dialog": "rounded-2xl"
     },
     "shell": {
-      "desktop": "Fixed white sidebar: 5.5rem icon rail by default (tooltips, green logo tile, light-green active tile, black avatar + logout at the foot), expandable to 15rem with labels; sticky 76px top bar with eyebrow (role/module · Financial Year) and page title",
+      "desktop": "Fixed near-black sidebar (#0D0B09): 5.5rem icon rail by default (tooltips, brick logo tile with glow), expandable to 15rem with labels; active item = brick-tinted tile, light-brick label and a 3px brick accent bar; brick avatar + logout at the foot; sticky 76px light top bar with eyebrow (module · Financial Year in brick) and page title",
       "mobile": "Top bar with hamburger drawer + MobileBottomNav"
     }
   },
   "components": {
     "buttons": {
-      "primary": "<Button> default: bg-primary text-white font-semibold shadow-sm hover:bg-primary-hover; add shadow-brand for the green glow on hero CTAs",
-      "secondary": "variant=\"secondary\": black bg, white text (inverts in dark mode)",
+      "primary": "<Button> default: bg-primary text-white font-semibold shadow-brand (brick glow) hover:bg-primary-hover hover:shadow-brand-lg",
+      "secondary": "variant=\"secondary\": near-black bg, white text (inverts in dark mode)",
       "soft": "variant=\"soft\": bg-primary-soft text-primary-strong (e.g. + New Voucher)",
       "outline": "border-border bg-background hover:bg-muted",
       "ghost": "hover:bg-muted"
@@ -96,14 +98,14 @@
     "cards": {
       "base": "rounded-2xl border border-border bg-card shadow-xs",
       "kpi_tile": "<SummaryCard> (components/SummaryCard.jsx): uppercase label, tinted icon chip top-right (or a tone dot when there is no icon), large black figure, tone-coloured sub-line; tones neutral|positive|negative|warning|info|violet; `active` for filter cards, `compact` for dense rows",
-      "hero_tile": "<SummaryCard hero> or the same markup: rounded-3xl bg-[#0B0B0C] text-white with one blurred bg-primary/25 glow and a green pill label — at most one per page, for the headline figure",
+      "hero_tile": "<SummaryCard hero> or the same markup: rounded-3xl bg-ink-950 text-white with one blurred bg-primary/25 glow and a brick pill label — at most one per page, for the headline figure",
       "channel_card": "<ChannelCard> (components/SummaryCard.jsx): coloured dot + uppercase label, figure, optional label/value rows and a bar; `danger` for negative/overdrawn, `dark` for the total card, `compact` for strips of four or more. Channel dots: Cash violet-500, HDFC Current orange-500, HDFC Savings primary, Cheque ink-700, Cash DT blue-500"
     },
     "inputs": {
-      "base": "h-9 rounded-lg border-input bg-background shadow-xs hover:border-ink-300 focus-visible:border-primary focus-visible:ring-4 focus-visible:ring-ring/15"
+      "base": "h-9 rounded-lg border-input bg-background shadow-xs hover:border-ink-300 focus-visible:border-primary focus-visible:ring-4 focus-visible:ring-ring/15 (faint brick outline)"
     },
     "tabs": {
-      "style": "Every tab is its own bordered pill (rounded-full border px-4 py-2 text-sm): idle bg-card border-border text-muted-foreground; active bg-primary-soft border-primary/50 text-primary-strong font-semibold. Tabs sit apart with gap-2 — no shared track, no underline.",
+      "style": "Every tab is its own bordered pill (rounded-full border px-4 py-2 text-sm): idle bg-card border-border text-muted-foreground; active bg-primary-soft (blush) border-primary/50 (brick) text-primary-strong font-semibold. Tabs sit apart with gap-2 — no shared track, no underline.",
       "radix": "<TabsList>/<TabsTrigger> render the pill by default — pass only layout classes (grid, flex-1, w-full, text size, px), never colours, borders or data-[state=active] styles.",
       "buttons": "Hand-rolled tab buttons and nav strips use tabChipClass(active, 'size/layout classes') from components/ui/tabs.jsx."
     },
@@ -112,31 +114,33 @@
       "cell": "px-4 py-3.5"
     },
     "badges": {
-      "solid": "<Badge> default (solid green; call sites pass their own bg-*)",
+      "solid": "<Badge> default (solid brick; call sites pass their own bg-*)",
       "soft": "variant soft|warning|danger|info: pale tint + matching -200 border",
       "neutral": "variant=\"secondary\": bg-muted text-ink-700"
     }
   },
   "visual_enhancers": {
-    "shadows": "tailwind shadow-xs…2xl (neutral black), shadow-brand for the green glow on primary buttons and the logo tile",
+    "shadows": "tailwind shadow-xs…2xl with a warm brown-black tint; shadow-brand / shadow-brand-lg = brick glow on primary buttons, the logo tile and the avatar; shadow-ring = faint brick focus outline",
     "borders": {
       "default": "border border-border"
     }
   },
   "motion": {
-    "transitions": "transition-all duration-200 ease-in-out",
-    "hover_lift": "hover:-translate-y-1",
-    "page_enter": "animate-in fade-in slide-in-from-bottom-4 duration-500"
+    "entrance": "animate-rise — cards slide up 10px and fade in on mount (SummaryCard, ChannelCard)",
+    "hover_lift": ".card-lift — clickable cards lift 2px and draw a brick accent line along the top edge",
+    "live": ".live-dot — pulsing ring for live or urgent items (e.g. <span class=\"live-dot h-1.5 w-1.5 bg-red-500\" />)",
+    "reduced_motion": "prefers-reduced-motion switches all of this off (spinners keep turning)",
+    "transitions": "transition-colors / 150–250ms, cubic-bezier(0.22,1,0.36,1) for movement"
   },
   "icons": {
     "library": "lucide-react",
-    "style": "default stroke; section-title icons text-primary"
+    "style": "Lucide thin outline icons, default stroke; section-title icons text-primary"
   },
   "instructions_to_main_agent": [
     "1. THEME: tokens live in frontend/src/index.css (:root/.dark) and tailwind.config.js — never hard-code the brand hex in pages; use bg-primary / text-primary-strong / brand-*.",
     "2. FONT: Plus Jakarta Sans, Inter as glyph fallback (both loaded in public/index.html).",
     "3. ACTIONS: primary actions use the default <Button>; destructive stays red; avoid per-page rainbow button colours.",
-    "4. STATUS COLOURS: amber = pending/warning, red = error/rejected, green = done/income; categorical chips may use other hues as pale tints.",
+    "4. STATUS COLOURS: brick (brand / green / emerald utilities) = done, approved, income, synced; amber = pending; red = missed/rejected; blue and violet = labels; categorical chips may use other hues as pale tints.",
     "5. NAVIGATION: AppHeader renders the sidebar + top bar; pages only pass customNav/headerActions/backTo/hideNav.",
     "6. MOBILE FIRST: stack forms/dashboards on mobile; large touch targets on site flows.",
     "7. DATA-TESTID: add data-testid to every interactive element.",
@@ -144,8 +148,8 @@
     "9. TABS: use <TabsTrigger> or tabChipClass — never underline tabs, segmented tracks or per-page active colours."
   ],
   "universal_guidelines": [
-    "Flat tints and black/white tiles; the only gradient is the soft brand glow on dark hero tiles.",
-    "Selected/active state = brand green (tint or solid).",
+    "Flat tints on light surfaces; near-black for the sidebar and hero tiles; the only gradient is the soft brick glow on dark tiles.",
+    "Selected/active state = brick (blush tint + brick border, or solid).",
     "Keep figures tabular; right-align amounts.",
     "Respect dark mode: prefer tokens (bg-background, text-foreground, border-border) over raw white/gray."
   ]

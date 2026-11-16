@@ -9,13 +9,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        // Brick with a soft brick-coloured glow.
         default:
-          "bg-primary font-semibold text-primary-foreground shadow-sm hover:bg-primary-hover",
+          "bg-primary font-semibold text-primary-foreground shadow-brand hover:bg-primary-hover hover:shadow-brand-lg",
         destructive:
           "bg-destructive font-semibold text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
           "border border-border bg-background text-foreground shadow-xs hover:border-ink-300 hover:bg-muted",
-        // Black in light mode, white in dark mode.
+        // Warm near-black in light mode, warm white in dark mode.
         secondary:
           "bg-secondary font-semibold text-secondary-foreground shadow-sm hover:bg-secondary/85",
         soft:
@@ -26,7 +27,7 @@ const buttonVariants = cva(
       size: {
         default: "h-9 px-4",
         sm: "h-8 rounded-lg px-3 text-xs",
-        lg: "h-11 rounded-xl px-6 text-[15px]",
+        lg: "h-11 rounded-lg px-6 text-[15px]",
         icon: "h-9 w-9",
       },
     },

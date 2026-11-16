@@ -433,7 +433,7 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
       >
         <AppMark branding={branding} className="h-11 w-11 shrink-0 rounded-[12px] shadow-brand" />
         {!rail && (
-          <span className="line-clamp-2 min-w-0 text-[15px] font-bold leading-tight tracking-tight text-foreground" title={appName} data-testid="sidebar-app-name">
+          <span className="line-clamp-2 min-w-0 text-[15px] font-bold leading-tight tracking-tight text-sidebar-strong" title={appName} data-testid="sidebar-app-name">
             {appName}
           </span>
         )}
@@ -444,8 +444,8 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
   const renderRoleChip = () => (
     <div className="px-3 pb-2">
       <div className="flex items-center gap-2.5 rounded-xl bg-sidebar-accent px-3 py-2">
-        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary shadow-[0_0_0_3px_rgb(49_180_110/0.2)]" />
-        <span className="truncate text-[11px] font-semibold uppercase tracking-[0.1em] text-primary-strong">{roleLabel(role)}</span>
+        <span className="live-dot h-1.5 w-1.5 bg-brand-400" />
+        <span className="truncate text-[11px] font-semibold uppercase tracking-[0.1em] text-sidebar-accent-foreground">{roleLabel(role)}</span>
       </div>
     </div>
   );
@@ -454,17 +454,19 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
     <p className="px-3 pb-2 pt-1 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-sidebar-muted">{text}</p>
   );
 
+  // Active item: brick-tinted tile, light-brick label and a brick accent bar
+  // on its left edge (labelled sidebar only).
   const navButtonClass = (active, rail) =>
-    `group relative flex items-center rounded-xl text-[13.5px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
+    `group relative flex items-center rounded-xl text-[13.5px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 ${
       rail ? 'mx-auto h-11 w-11 justify-center' : 'w-full gap-3 px-3 py-2.5'
     } ${
       active
-        ? 'bg-sidebar-accent font-semibold text-primary-strong'
-        : 'font-medium text-sidebar-foreground hover:bg-muted hover:text-foreground'
+        ? `bg-sidebar-accent font-semibold text-sidebar-accent-foreground ${rail ? '' : "before:absolute before:left-0 before:top-1/2 before:h-5 before:w-[3px] before:-translate-y-1/2 before:rounded-r-full before:bg-primary before:content-['']"}`
+        : 'font-medium text-sidebar-foreground hover:bg-sidebar-hover hover:text-sidebar-strong'
     }`;
 
   const navIconClass = (active) =>
-    `h-[19px] w-[19px] shrink-0 ${active ? 'text-primary' : 'text-sidebar-muted group-hover:text-foreground'}`;
+    `h-[19px] w-[19px] shrink-0 ${active ? 'text-brand-400' : 'text-sidebar-muted group-hover:text-sidebar-strong'}`;
 
   const renderNav = (inDrawer) => {
     const rail = collapsed && !inDrawer;
@@ -509,10 +511,10 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
                         data-testid={`${inDrawer ? 'drawer-' : ''}sidenav-${child.label.toLowerCase().replace(/\s/g, '-')}`}
                         onClick={() => { navigate(child.path); close(); }}
                         className={`flex w-full items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-left text-[13px] transition-colors ${
-                          childActive ? 'bg-muted font-semibold text-foreground' : 'text-sidebar-foreground hover:bg-muted/70 hover:text-foreground'
+                          childActive ? 'bg-sidebar-hover font-semibold text-sidebar-strong' : 'text-sidebar-foreground hover:bg-sidebar-hover hover:text-sidebar-strong'
                         }`}
                       >
-                        <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${childActive ? 'bg-primary' : 'bg-ink-300'}`} />
+                        <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${childActive ? 'bg-brand-400' : 'bg-sidebar-muted/60'}`} />
                         <span className="truncate">{child.label}</span>
                       </button>
                     );
@@ -549,7 +551,7 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
         onClick={() => { navigate('/profile'); if (inDrawer) setDrawerOpen(false); }}
         title="Profile"
         aria-label="Profile"
-        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-secondary text-[13px] font-bold tracking-wide text-secondary-foreground shadow-md transition-transform hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30"
+        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-[13px] font-bold tracking-wide text-primary-foreground shadow-brand transition-transform hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30"
       >
         {initials}
       </button>
@@ -560,7 +562,7 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
         onClick={handleLogout}
         title="Log out"
         aria-label="Log out"
-        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-sidebar-muted transition-colors hover:bg-red-50 hover:text-red-600"
+        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-sidebar-muted transition-colors hover:bg-red-500/15 hover:text-red-400"
         data-testid={inDrawer ? 'drawer-logout' : 'header-logout'}
       >
         <LogOut className="h-[18px] w-[18px]" />
@@ -578,7 +580,7 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
           <div className="flex items-center gap-3 rounded-2xl border border-sidebar-border p-2">
             {avatar}
             <div className="min-w-0 flex-1 leading-tight">
-              <p className="truncate text-sm font-semibold text-foreground" data-testid={inDrawer ? 'drawer-username' : 'header-username'}>{userName}</p>
+              <p className="truncate text-sm font-semibold text-sidebar-strong" data-testid={inDrawer ? 'drawer-username' : 'header-username'}>{userName}</p>
               <p className="truncate text-[11px] capitalize text-sidebar-muted">{displayRole(role)}</p>
             </div>
             {logout}
@@ -588,7 +590,7 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
           <button
             type="button"
             onClick={toggleCollapsed}
-            className={`mt-3 flex w-full items-center gap-2 rounded-lg py-1.5 text-xs font-medium text-sidebar-muted transition-colors hover:bg-muted hover:text-foreground ${rail ? 'justify-center' : 'px-3'}`}
+            className={`mt-3 flex w-full items-center gap-2 rounded-lg py-1.5 text-xs font-medium text-sidebar-muted transition-colors hover:bg-sidebar-hover hover:text-sidebar-strong ${rail ? 'justify-center' : 'px-3'}`}
             title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             data-testid="sidebar-collapse-toggle"
           >

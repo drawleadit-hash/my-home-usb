@@ -47,7 +47,7 @@ export const SortableTableRow = ({ id, children, className = '' }) => {
     opacity: isDragging ? 0.5 : 1,
     zIndex: isDragging ? 10 : undefined,
     position: 'relative',
-    backgroundColor: isDragging ? '#EEFBF3' : undefined,
+    backgroundColor: isDragging ? '#FBF3EF' : undefined,
   };
 
   return (
@@ -76,7 +76,7 @@ export const SortableItem = ({ id, children, className = '' }) => {
     opacity: isDragging ? 0.5 : 1,
     zIndex: isDragging ? 10 : undefined,
     position: 'relative',
-    backgroundColor: isDragging ? '#EEFBF3' : undefined,
+    backgroundColor: isDragging ? '#FBF3EF' : undefined,
   };
 
   return (
