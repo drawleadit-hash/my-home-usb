@@ -8,7 +8,7 @@ import { Badge } from "./ui/badge";
  * Maps a wide variety of legacy backend statuses onto exactly 4 visual states:
  *   - awaiting   (amber)  — pending accountant review
  *   - rejected   (red)    — accountant rejected; original requester must edit + resubmit
- *   - approved   (green)  — approved and counting in cashbook / cashflow / totals
+ *   - approved   (brick)  — approved and counting in cashbook / cashflow / totals
  *   - correction (red)    — was approved, accountant pulled it back. Cashflow rolled back.
  */
 const STATE_MAP = {
@@ -58,8 +58,9 @@ const STYLES = {
   rejected: {
     label: "Rejected",
     cls: "bg-red-100 text-red-800 border border-red-300",
-    dot: "bg-red-500 animate-pulse",
+    dot: "bg-red-500 live-dot",
   },
+  // Brand brick = "handled".
   approved: {
     label: "Approved",
     cls: "bg-emerald-100 text-emerald-800 border border-emerald-300",
@@ -68,12 +69,12 @@ const STYLES = {
   correction: {
     label: "Under Correction",
     cls: "bg-red-100 text-red-800 border border-red-300",
-    dot: "bg-red-500 animate-pulse",
+    dot: "bg-red-500 live-dot",
   },
   bounced: {
     label: "Cheque Bounced",
     cls: "bg-rose-100 text-rose-800 border border-rose-300",
-    dot: "bg-rose-500 animate-pulse",
+    dot: "bg-rose-500 live-dot",
   },
 };
 

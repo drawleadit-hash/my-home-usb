@@ -20,8 +20,11 @@ const keyActivate = (fn) => (ev) => {
 // `active` marks the selected card in a row of filter cards; `children` render
 // under the sub-line (e.g. a progress bar).
 //
-// `hero` draws the dark Executive Balance style — use it for at most one
+// `hero` draws the near-black Executive Balance style — use it for at most one
 // headline figure per page.
+//
+// Cards slide up into place on mount (animate-rise); clickable ones lift and
+// draw a brick accent line on hover (card-lift, see index.css).
 export function SummaryCard({
   label, value, sub, icon: Icon, tone = 'neutral', onClick, title, testId,
   compact = false, active = false, hero = false, badge, className = '', children,
@@ -34,7 +37,7 @@ export function SummaryCard({
   if (hero) {
     return (
       <div
-        className={`group relative overflow-hidden rounded-3xl bg-[#0B0B0C] text-white shadow-lg ${compact ? 'p-5' : 'p-6'} ${onClick ? 'cursor-pointer transition-shadow hover:shadow-xl' : ''} ${className}`}
+        className={`group relative animate-rise overflow-hidden rounded-3xl bg-ink-950 text-white shadow-lg ${compact ? 'p-5' : 'p-6'} ${onClick ? 'card-lift cursor-pointer hover:shadow-xl' : ''} ${className}`}
         title={title}
         data-testid={testId}
         {...interactive}
@@ -62,7 +65,7 @@ export function SummaryCard({
 
   return (
     <Card
-      className={`group ${onClick ? 'cursor-pointer transition-[box-shadow,border-color] hover:border-ink-300 hover:shadow-md' : ''} ${active ? 'border-primary ring-2 ring-primary/20 hover:border-primary' : ''} ${className}`}
+      className={`group animate-rise ${onClick ? 'card-lift cursor-pointer hover:border-ink-300' : ''} ${active ? 'border-primary ring-2 ring-primary/20 hover:border-primary' : ''} ${className}`}
       title={title}
       data-testid={testId}
       {...interactive}
@@ -107,13 +110,13 @@ export function ChannelCard({
     ? { role: 'button', tabIndex: 0, onClick, onKeyDown: keyActivate(onClick) }
     : {};
   const surface = dark
-    ? 'border-transparent bg-[#0B0B0C] text-white shadow-sm'
+    ? 'border-transparent bg-ink-950 text-white shadow-sm'
     : danger
       ? 'border-red-200 bg-red-50/50 dark:border-red-500/30 dark:bg-red-500/10'
       : `border-border bg-card ${onClick ? 'hover:border-ink-300' : ''}`;
   return (
     <div
-      className={`rounded-2xl border ${compact ? 'p-3' : 'p-4'} ${surface} ${onClick ? 'cursor-pointer transition-[box-shadow,border-color] hover:shadow-md' : ''} ${className}`}
+      className={`animate-rise rounded-2xl border ${compact ? 'p-3' : 'p-4'} ${surface} ${onClick ? 'card-lift cursor-pointer' : ''} ${className}`}
       title={title}
       data-testid={testId}
       {...interactive}

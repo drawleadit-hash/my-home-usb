@@ -1,37 +1,40 @@
 /** @type {import('tailwindcss').Config} */
 
 // ─── Drawlead design system ──────────────────────────────────────────────
-// Primary green #31B46E (brand-500); secondary is black & white, so the
-// "ink" neutral scale is a true gray with no tint.
-// `gray` and `slate` are re-pointed at the ink scale, and `green`/`emerald`
-// at the brand scale, so every legacy utility in the app (text-gray-500,
-// bg-green-600, …) renders in the new palette without touching page code.
+// Brick red #B14E2F (brand-500) against warm stone greys — the warmth of
+// brick, clay and stone. The "ink" neutral scale is a warm stone grey
+// (text #171310, near-black #0D0B09), never a cool blue-grey.
+// `gray`, `slate`, `zinc`, `neutral` and `stone` are re-pointed at the ink
+// scale, and `green`/`emerald` at the brand scale, so every legacy utility in
+// the app (text-gray-500, bg-green-600, …) renders in the new palette without
+// touching page code. "Good" states therefore read brick: the brand colour
+// stands for "handled". Red = missed, amber = pending, blue/violet = labels.
 const brand = {
-  50: '#EEFBF3',
-  100: '#D6F5E3',
-  200: '#AFEAC9',
-  300: '#7DD9A8',
-  400: '#4FC686',
-  500: '#31B46E',
-  600: '#25945A',
-  700: '#1E7649',
-  800: '#1C5E3C',
-  900: '#184D33',
-  950: '#0A2B1B',
+  50: '#FBF3EF',
+  100: '#F6E2DA',
+  200: '#EDC5B6',
+  300: '#DF9E86',
+  400: '#CD7051',
+  500: '#B14E2F',
+  600: '#923F26',
+  700: '#773320',
+  800: '#5D291A',
+  900: '#461E14',
+  950: '#2D120B',
 };
 
 const ink = {
-  50: '#FAFAFA',
-  100: '#F4F4F5',
-  200: '#E7E7E9',
-  300: '#D4D4D8',
-  400: '#A1A1AA',
-  500: '#71717A',
-  600: '#52525B',
-  700: '#3F3F46',
-  800: '#27272A',
-  900: '#18181B',
-  950: '#0A0A0B',
+  50: '#FAFAF9',
+  100: '#F5F5F4',
+  200: '#E7E5E4',
+  300: '#D6D3D1',
+  400: '#A8A29E',
+  500: '#78716C',
+  600: '#57534E',
+  700: '#44403C',
+  800: '#292524',
+  900: '#171310',
+  950: '#0D0B09',
 };
 
 module.exports = {
@@ -72,6 +75,9 @@ module.exports = {
         ink,
         gray: ink,
         slate: ink,
+        zinc: ink,
+        neutral: ink,
+        stone: ink,
         green: brand,
         emerald: brand,
         border: "hsl(var(--border))",
@@ -117,8 +123,13 @@ module.exports = {
           muted: "hsl(var(--sidebar-muted))",
           border: "hsl(var(--sidebar-border))",
           accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          hover: "hsl(var(--sidebar-hover))",
+          strong: "hsl(var(--sidebar-strong))",
         },
       },
+      // Rounded but not bubbly: buttons/inputs 12px (lg), cards 14–20px
+      // (xl–2xl), pills and chips fully round.
       borderRadius: {
         sm: "0.375rem",
         DEFAULT: "0.5rem",
@@ -128,16 +139,19 @@ module.exports = {
         "2xl": "1.25rem",
         "3xl": "1.5rem",
       },
+      // Soft shadows with a warm (brown-black) tint; `brand` is the brick glow
+      // under primary buttons, `ring` the faint brick outline on focus.
       boxShadow: {
-        xs: "0 1px 2px 0 rgb(10 10 11 / 0.03)",
-        sm: "0 1px 2px 0 rgb(10 10 11 / 0.04), 0 1px 1px 0 rgb(10 10 11 / 0.02)",
-        DEFAULT: "0 1px 3px 0 rgb(10 10 11 / 0.06), 0 1px 2px -1px rgb(10 10 11 / 0.04)",
-        md: "0 8px 20px -6px rgb(10 10 11 / 0.08), 0 2px 4px -2px rgb(10 10 11 / 0.04)",
-        lg: "0 16px 32px -10px rgb(10 10 11 / 0.12), 0 4px 10px -4px rgb(10 10 11 / 0.05)",
-        xl: "0 24px 48px -12px rgb(10 10 11 / 0.18), 0 8px 16px -8px rgb(10 10 11 / 0.07)",
-        "2xl": "0 36px 72px -18px rgb(10 10 11 / 0.28)",
-        brand: "0 8px 18px -8px rgb(49 180 110 / 0.65)",
-        ring: "0 0 0 4px rgb(49 180 110 / 0.16)",
+        xs: "0 1px 2px 0 rgb(45 30 20 / 0.04)",
+        sm: "0 1px 2px 0 rgb(45 30 20 / 0.05), 0 1px 1px 0 rgb(45 30 20 / 0.03)",
+        DEFAULT: "0 1px 3px 0 rgb(45 30 20 / 0.07), 0 1px 2px -1px rgb(45 30 20 / 0.05)",
+        md: "0 8px 20px -6px rgb(45 30 20 / 0.10), 0 2px 4px -2px rgb(45 30 20 / 0.05)",
+        lg: "0 16px 32px -10px rgb(45 30 20 / 0.14), 0 4px 10px -4px rgb(45 30 20 / 0.06)",
+        xl: "0 24px 48px -12px rgb(45 30 20 / 0.20), 0 8px 16px -8px rgb(45 30 20 / 0.08)",
+        "2xl": "0 36px 72px -18px rgb(45 30 20 / 0.30)",
+        brand: "0 6px 16px -6px rgb(177 78 47 / 0.55)",
+        "brand-lg": "0 10px 24px -8px rgb(177 78 47 / 0.6)",
+        ring: "0 0 0 4px rgb(177 78 47 / 0.14)",
       },
       keyframes: {
         "accordion-down": {
@@ -148,10 +162,18 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        // Cards and sections slide up into place.
+        rise: {
+          from: { opacity: "0", transform: "translateY(10px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        // `backwards`, not `both`: once finished the card drops the animated
+        // transform, so the .card-lift hover can move it again.
+        rise: "rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) backwards",
       },
     },
   },

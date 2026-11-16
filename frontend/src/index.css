@@ -22,78 +22,85 @@ input[inputmode="numeric"]::-webkit-inner-spin-button {
 
 /* ================================================================
  * DRAWLEAD DESIGN TOKENS
- * Primary green #31B46E · secondary black & white · Plus Jakarta Sans
+ * Brick red #B14E2F on warm stone greys · near-black #0D0B09 panels
+ * Plus Jakarta Sans (Inter fallback)
  * ================================================================ */
 @layer base {
     :root {
         --background: 0 0% 100%;
-        --foreground: 240 6% 8%;
-        --canvas: 0 0% 98%;
+        --foreground: 26 18% 8%;            /* #171310 warm near-black */
+        --canvas: 60 9% 98%;                /* #FAFAF9 faint off-white */
         --card: 0 0% 100%;
-        --card-foreground: 240 6% 8%;
+        --card-foreground: 26 18% 8%;
         --popover: 0 0% 100%;
-        --popover-foreground: 240 6% 8%;
-        --primary: 148 57% 45%;
+        --popover-foreground: 26 18% 8%;
+        --primary: 14 58% 44%;              /* #B14E2F brick */
         --primary-foreground: 0 0% 100%;
-        --primary-hover: 149 60% 38%;
-        --primary-soft: 143 64% 96%;
-        --primary-strong: 150 60% 29%;
-        /* Secondary = black in light mode, white in dark mode. */
-        --secondary: 240 6% 6%;
+        --primary-hover: 14 59% 36%;        /* brand-600 */
+        --primary-soft: 20 60% 96%;         /* #FBF3EF blush */
+        --primary-strong: 14 59% 33%;       /* brick text on light */
+        /* Secondary = near-black in light mode, warm white in dark mode. */
+        --secondary: 30 18% 4%;             /* #0D0B09 */
         --secondary-foreground: 0 0% 100%;
-        --muted: 240 5% 96%;
-        --muted-foreground: 240 4% 46%;
-        --accent: 143 64% 96%;
-        --accent-foreground: 150 60% 24%;
+        --muted: 60 5% 96%;
+        --muted-foreground: 25 5% 45%;      /* #78716C stone */
+        --accent: 20 60% 96%;
+        --accent-foreground: 13 58% 30%;
         --destructive: 0 72% 51%;
         --destructive-foreground: 0 0% 100%;
-        --border: 240 5% 91%;
-        --input: 240 5% 87%;
-        --ring: 148 57% 45%;
-        --radius: 0.625rem;
-        --success: 148 57% 45%;
+        --border: 20 6% 91%;
+        --input: 24 6% 85%;
+        --ring: 14 58% 44%;
+        --radius: 0.75rem;                  /* 12px buttons & fields */
+        --success: 14 58% 44%;              /* "handled" = brand */
         --warning: 38 92% 50%;
         --info: 210 80% 52%;
 
-        /* App shell — white icon rail */
-        --sidebar: 0 0% 100%;
-        --sidebar-foreground: 240 4% 30%;
-        --sidebar-muted: 240 4% 56%;
-        --sidebar-border: 240 5% 92%;
-        --sidebar-accent: 143 64% 95%;
+        /* App shell — near-black rail, like the site's hero */
+        --sidebar: 30 18% 4%;
+        --sidebar-foreground: 30 8% 74%;
+        --sidebar-muted: 28 6% 52%;
+        --sidebar-border: 30 10% 12%;
+        --sidebar-accent: 14 42% 15%;
+        --sidebar-accent-foreground: 16 62% 76%;
+        --sidebar-hover: 30 10% 10%;
+        --sidebar-strong: 40 20% 97%;
         --app-sidebar-w: 15rem;
     }
 
     .dark {
-        --background: 240 5% 7%;
-        --foreground: 0 0% 96%;
-        --canvas: 240 6% 4%;
-        --card: 240 5% 8.5%;
-        --card-foreground: 0 0% 96%;
-        --popover: 240 5% 10%;
-        --popover-foreground: 0 0% 96%;
-        --primary: 148 57% 47%;
+        --background: 30 10% 7%;
+        --foreground: 40 10% 96%;
+        --canvas: 30 14% 4%;
+        --card: 30 9% 8.5%;
+        --card-foreground: 40 10% 96%;
+        --popover: 30 9% 10%;
+        --popover-foreground: 40 10% 96%;
+        --primary: 14 57% 47%;
         --primary-foreground: 0 0% 100%;
-        --primary-hover: 148 52% 54%;
-        --primary-soft: 150 38% 12%;
-        --primary-strong: 146 55% 64%;
-        --secondary: 0 0% 96%;
-        --secondary-foreground: 240 6% 7%;
-        --muted: 240 4% 14%;
-        --muted-foreground: 240 5% 64%;
-        --accent: 150 28% 14%;
-        --accent-foreground: 146 55% 72%;
+        --primary-hover: 15 58% 54%;
+        --primary-soft: 14 35% 12%;
+        --primary-strong: 16 65% 68%;
+        --secondary: 40 10% 96%;
+        --secondary-foreground: 30 18% 6%;
+        --muted: 30 6% 14%;
+        --muted-foreground: 30 6% 64%;
+        --accent: 14 28% 14%;
+        --accent-foreground: 16 62% 74%;
         --destructive: 0 70% 55%;
         --destructive-foreground: 0 0% 98%;
-        --border: 240 4% 17%;
-        --input: 240 4% 22%;
-        --ring: 148 57% 47%;
+        --border: 30 6% 17%;
+        --input: 30 6% 22%;
+        --ring: 14 57% 50%;
 
-        --sidebar: 240 6% 6%;
-        --sidebar-foreground: 0 0% 80%;
-        --sidebar-muted: 240 4% 52%;
-        --sidebar-border: 240 4% 14%;
-        --sidebar-accent: 150 30% 13%;
+        --sidebar: 30 14% 6%;
+        --sidebar-foreground: 30 8% 74%;
+        --sidebar-muted: 28 6% 50%;
+        --sidebar-border: 30 8% 13%;
+        --sidebar-accent: 14 40% 14%;
+        --sidebar-accent-foreground: 16 62% 76%;
+        --sidebar-hover: 30 9% 11%;
+        --sidebar-strong: 40 20% 97%;
     }
 }
 
@@ -166,6 +173,98 @@ input[inputmode="numeric"]::-webkit-inner-spin-button {
     }
     .scrollbar-hide { scrollbar-width: none; }
     .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+    /* Small all-caps label above a section title. */
+    .eyebrow {
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 1.3;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: hsl(var(--muted-foreground));
+    }
+}
+
+/* ================================================================
+ * MOTION — cards lift with a brick accent line, live dots pulse.
+ * Everything here switches off under prefers-reduced-motion.
+ * ================================================================ */
+
+/* Interactive cards: lift slightly and draw a brick accent line on top. */
+.card-lift {
+    position: relative;
+    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.card-lift::after {
+    content: "";
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    top: -1px;
+    height: 2px;
+    border-radius: 0 0 2px 2px;
+    background: hsl(var(--primary));
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+}
+.card-lift:hover,
+.card-lift:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px -12px rgb(45 30 20 / 0.18), 0 2px 6px -2px rgb(45 30 20 / 0.06);
+}
+.card-lift.overflow-hidden::after { top: 0; }
+.card-lift:hover::after,
+.card-lift:focus-visible::after { transform: scaleX(1); }
+.dark .card-lift:hover,
+.dark .card-lift:focus-visible { box-shadow: 0 12px 28px -12px rgb(0 0 0 / 0.6); }
+
+/* Pulsing dot for live or urgent items: <span class="live-dot bg-red-500" />.
+ * The ring takes the dot's own colour. */
+.live-dot {
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+    border-radius: 9999px;
+}
+.live-dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: inherit;
+    animation: live-dot-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes live-dot-ping {
+    0% { transform: scale(1); opacity: 0.7; }
+    75%, 100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* Success toasts (sonner richColors) read brick, like every "handled" state.
+ * `html` lifts specificity above the styles sonner injects at runtime. */
+html [data-sonner-toaster][data-sonner-theme=light] {
+    --success-bg: hsl(20 60% 96%);
+    --success-border: hsl(17 60% 86%);
+    --success-text: hsl(14 59% 33%);
+}
+html [data-sonner-toaster][data-sonner-theme=dark] {
+    --success-bg: hsl(14 40% 9%);
+    --success-border: hsl(14 40% 18%);
+    --success-text: hsl(16 62% 74%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    /* Loading spinners keep turning — they carry meaning. */
+    *:not(.animate-spin), *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .live-dot::after { display: none; }
+    .card-lift:hover,
+    .card-lift:focus-visible { transform: none; }
 }
 
 /* ================================================================
@@ -252,17 +351,17 @@ html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 5.5rem; }
 }
 
 /* --- Light backgrounds → dark equivalents ------------------------- */
-.dark .bg-white { background-color: hsl(240 5% 11%); }
+.dark .bg-white { background-color: hsl(30 6% 11%); }
 .dark .bg-gray-50,
 .dark .bg-slate-50,
 .dark .bg-neutral-50,
 .dark .bg-zinc-50,
-.dark .bg-stone-50 { background-color: hsl(240 5% 13%); }
+.dark .bg-stone-50 { background-color: hsl(30 6% 13%); }
 .dark .bg-gray-100,
 .dark .bg-slate-100,
 .dark .bg-neutral-100,
 .dark .bg-zinc-100,
-.dark .bg-stone-100 { background-color: hsl(240 5% 16%); }
+.dark .bg-stone-100 { background-color: hsl(30 6% 16%); }
 
 /* Tinted pastel backgrounds (warning/info/success/danger highlight
  * cards) — keep the hue but drop luminance so they stop blinding
@@ -278,10 +377,10 @@ html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 5.5rem; }
 .dark .bg-rose-50     { background-color: hsl(350 35% 15%); }
 .dark .bg-rose-100    { background-color: hsl(350 35% 18%); }
 .dark .bg-pink-50     { background-color: hsl(330 35% 15%); }
-.dark .bg-green-50    { background-color: hsl(140 25% 13%); }
-.dark .bg-green-100   { background-color: hsl(140 25% 17%); }
-.dark .bg-emerald-50  { background-color: hsl(160 25% 13%); }
-.dark .bg-emerald-100 { background-color: hsl(160 25% 17%); }
+.dark .bg-green-50    { background-color: hsl(14 33% 13%); }
+.dark .bg-green-100   { background-color: hsl(14 33% 17%); }
+.dark .bg-emerald-50  { background-color: hsl(14 33% 13%); }
+.dark .bg-emerald-100 { background-color: hsl(14 33% 17%); }
 .dark .bg-teal-50     { background-color: hsl(170 25% 13%); }
 .dark .bg-cyan-50     { background-color: hsl(190 25% 13%); }
 .dark .bg-sky-50      { background-color: hsl(200 30% 14%); }
@@ -302,23 +401,23 @@ html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 5.5rem; }
 .dark .text-slate-800,
 .dark .text-neutral-900,
 .dark .text-zinc-900,
-.dark .text-stone-900 { color: hsl(0 0% 96%); }
+.dark .text-stone-900 { color: hsl(35 8% 96%); }
 .dark .text-gray-700,
 .dark .text-slate-700,
 .dark .text-neutral-700,
-.dark .text-zinc-700 { color: hsl(0 0% 86%); }
+.dark .text-zinc-700 { color: hsl(35 8% 86%); }
 .dark .text-gray-600,
 .dark .text-slate-600,
 .dark .text-neutral-600,
-.dark .text-zinc-600 { color: hsl(0 0% 74%); }
+.dark .text-zinc-600 { color: hsl(35 8% 74%); }
 .dark .text-gray-500,
 .dark .text-slate-500,
 .dark .text-neutral-500,
-.dark .text-zinc-500 { color: hsl(0 0% 64%); }
+.dark .text-zinc-500 { color: hsl(35 8% 64%); }
 .dark .text-gray-400,
 .dark .text-slate-400,
 .dark .text-neutral-400,
-.dark .text-zinc-400 { color: hsl(0 0% 58%); }
+.dark .text-zinc-400 { color: hsl(35 8% 58%); }
 
 /* Coloured badge/pill text (e.g. "Surplus"/"Shortfall" chips that pair
  * `bg-{color}-50 text-{color}-800`). Once the -50 background above goes
@@ -328,8 +427,8 @@ html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 5.5rem; }
 .dark .text-orange-800  { color: hsl(24 70% 65%); }
 .dark .text-red-800     { color: hsl(0 70% 70%); }
 .dark .text-rose-800    { color: hsl(350 70% 72%); }
-.dark .text-green-800   { color: hsl(140 45% 60%); }
-.dark .text-emerald-800 { color: hsl(160 45% 60%); }
+.dark .text-green-800   { color: hsl(16 62% 70%); }
+.dark .text-emerald-800 { color: hsl(16 62% 70%); }
 .dark .text-blue-800    { color: hsl(217 70% 72%); }
 .dark .text-violet-800  { color: hsl(265 60% 75%); }
 .dark .text-purple-800  { color: hsl(275 60% 75%); }
@@ -337,72 +436,72 @@ html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 5.5rem; }
 /* --- Light borders → subtle dark dividers ------------------------- */
 .dark .border-gray-100,
 .dark .border-slate-100,
-.dark .border-neutral-100 { border-color: hsl(240 5% 16%); }
+.dark .border-neutral-100 { border-color: hsl(30 6% 16%); }
 .dark .border-gray-200,
 .dark .border-slate-200,
 .dark .border-neutral-200,
-.dark .border-zinc-200 { border-color: hsl(240 5% 20%); }
+.dark .border-zinc-200 { border-color: hsl(30 6% 20%); }
 .dark .border-gray-300,
 .dark .border-slate-300,
-.dark .border-neutral-300 { border-color: hsl(240 5% 24%); }
-.dark .divide-gray-200 > * + * { border-color: hsl(240 5% 20%); }
-.dark .divide-gray-100 > * + * { border-color: hsl(240 5% 16%); }
+.dark .border-neutral-300 { border-color: hsl(30 6% 24%); }
+.dark .divide-gray-200 > * + * { border-color: hsl(30 6% 20%); }
+.dark .divide-gray-100 > * + * { border-color: hsl(30 6% 16%); }
 
 /* Coloured badge/pill borders paired with the -800 text above. */
 .dark .border-amber-200   { border-color: hsl(35 35% 24%); }
 .dark .border-orange-200  { border-color: hsl(24 35% 24%); }
 .dark .border-red-200     { border-color: hsl(0 35% 24%); }
 .dark .border-rose-200    { border-color: hsl(350 35% 24%); }
-.dark .border-green-200   { border-color: hsl(140 25% 22%); }
-.dark .border-emerald-200 { border-color: hsl(160 25% 22%); }
+.dark .border-green-200   { border-color: hsl(14 33% 22%); }
+.dark .border-emerald-200 { border-color: hsl(14 33% 22%); }
 .dark .border-blue-200    { border-color: hsl(217 30% 24%); }
 .dark .border-violet-200  { border-color: hsl(265 30% 25%); }
 .dark .border-purple-200  { border-color: hsl(275 30% 25%); }
 
 /* --- Hover states of light backgrounds --------------------------- */
 .dark .hover\:bg-gray-50:hover,
-.dark .hover\:bg-slate-50:hover { background-color: hsl(240 5% 16%); }
+.dark .hover\:bg-slate-50:hover { background-color: hsl(30 6% 16%); }
 .dark .hover\:bg-gray-100:hover,
-.dark .hover\:bg-slate-100:hover { background-color: hsl(240 5% 19%); }
+.dark .hover\:bg-slate-100:hover { background-color: hsl(30 6% 19%); }
 
 /* --- Inputs / textareas / selects forced text colour -------------- */
 .dark input,
 .dark textarea,
 .dark select { color-scheme: dark; }
 .dark input::placeholder,
-.dark textarea::placeholder { color: hsl(0 0% 50%); }
+.dark textarea::placeholder { color: hsl(35 8% 50%); }
 
 /* Chrome autofill leaks white background — paint it dark. */
 .dark input:-webkit-autofill,
 .dark input:-webkit-autofill:hover,
 .dark input:-webkit-autofill:focus,
 .dark textarea:-webkit-autofill {
-  -webkit-text-fill-color: hsl(0 0% 96%) !important;
-  -webkit-box-shadow: 0 0 0 1000px hsl(240 5% 14%) inset !important;
-  caret-color: hsl(0 0% 96%);
+  -webkit-text-fill-color: hsl(35 8% 96%) !important;
+  -webkit-box-shadow: 0 0 0 1000px hsl(30 6% 14%) inset !important;
+  caret-color: hsl(35 8% 96%);
 }
 
 /* --- Translucent / blurred panels (glassmorphism) ----------------- */
 .dark .bg-white\/70,
 .dark .bg-white\/80,
 .dark .bg-white\/90,
-.dark .bg-white\/95 { background-color: hsl(240 5% 13% / 0.85); }
+.dark .bg-white\/95 { background-color: hsl(30 6% 13% / 0.85); }
 .dark .bg-white\/50,
-.dark .bg-white\/60 { background-color: hsl(240 5% 13% / 0.65); }
+.dark .bg-white\/60 { background-color: hsl(30 6% 13% / 0.65); }
 .dark .bg-white\/20,
 .dark .bg-white\/30,
-.dark .bg-white\/40 { background-color: hsl(240 5% 18% / 0.45); }
+.dark .bg-white\/40 { background-color: hsl(30 6% 18% / 0.45); }
 
 /* Shadcn popover / dropdown / dialog content already use --popover.
  * Ring colours used for focus rings on inputs across the app default
  * to slate; lighten them so they stay visible in dark. */
 .dark .ring-gray-200,
-.dark .ring-slate-200 { --tw-ring-color: hsl(240 5% 28%); }
+.dark .ring-slate-200 { --tw-ring-color: hsl(30 6% 28%); }
 
 /* Light gradients used as page backgrounds (e.g. login) — dim them. */
-.dark .from-white { --tw-gradient-from: hsl(240 5% 11%) var(--tw-gradient-from-position); }
-.dark .to-white   { --tw-gradient-to:   hsl(240 5% 11%) var(--tw-gradient-to-position); }
-.dark .via-white  { --tw-gradient-via:  hsl(240 5% 11%) var(--tw-gradient-via-position); }
+.dark .from-white { --tw-gradient-from: hsl(30 6% 11%) var(--tw-gradient-from-position); }
+.dark .to-white   { --tw-gradient-to:   hsl(30 6% 11%) var(--tw-gradient-to-position); }
+.dark .via-white  { --tw-gradient-via:  hsl(30 6% 11%) var(--tw-gradient-via-position); }
 
 /* Tinted `from-{color}-50` gradient stops (KPI summary cards) — same
  * hues as the `.dark .bg-{color}-50` overrides above so a card that
@@ -412,8 +511,8 @@ html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 5.5rem; }
 .dark .from-orange-50  { --tw-gradient-from: hsl(24 35% 14%)  var(--tw-gradient-from-position); }
 .dark .from-red-50     { --tw-gradient-from: hsl(0 35% 15%)   var(--tw-gradient-from-position); }
 .dark .from-rose-50    { --tw-gradient-from: hsl(350 35% 15%) var(--tw-gradient-from-position); }
-.dark .from-green-50   { --tw-gradient-from: hsl(140 25% 13%) var(--tw-gradient-from-position); }
-.dark .from-emerald-50 { --tw-gradient-from: hsl(160 25% 13%) var(--tw-gradient-from-position); }
+.dark .from-green-50   { --tw-gradient-from: hsl(14 33% 13%) var(--tw-gradient-from-position); }
+.dark .from-emerald-50 { --tw-gradient-from: hsl(14 33% 13%) var(--tw-gradient-from-position); }
 .dark .from-blue-50    { --tw-gradient-from: hsl(217 30% 14%) var(--tw-gradient-from-position); }
 .dark .from-violet-50  { --tw-gradient-from: hsl(265 30% 15%) var(--tw-gradient-from-position); }
 .dark .from-purple-50  { --tw-gradient-from: hsl(275 30% 15%) var(--tw-gradient-from-position); }
@@ -425,26 +524,26 @@ html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 5.5rem; }
  * fall through as a literal light colour glassed over the dark page. */
 .dark .bg-amber-50\/40   { background-color: hsl(35 35% 15% / 0.6); }
 .dark .bg-blue-50\/40    { background-color: hsl(217 30% 14% / 0.6); }
-.dark .bg-emerald-50\/40 { background-color: hsl(160 25% 13% / 0.6); }
+.dark .bg-emerald-50\/40 { background-color: hsl(14 33% 13% / 0.6); }
 .dark .bg-violet-50\/40  { background-color: hsl(265 30% 15% / 0.6); }
 .dark .bg-rose-50\/40    { background-color: hsl(350 35% 15% / 0.6); }
 
 /* Body fallback if a page never opts into dark vars. */
-.dark body { background-color: hsl(240 5% 8%); color: hsl(0 0% 96%); }
+.dark body { background-color: hsl(30 6% 8%); color: hsl(35 8% 96%); }
 
 /* Brand tints introduced by the Drawlead redesign — same treatment as the
  * pastel remaps above so selected tabs/chips don't glow on dark pages. */
 .dark .bg-brand-50,
 .dark .bg-brand-50\/40,
 .dark .bg-brand-50\/50,
-.dark .bg-brand-50\/60 { background-color: hsl(150 38% 13%); }
-.dark .bg-brand-100   { background-color: hsl(150 38% 16%); }
-.dark .hover\:bg-brand-50:hover { background-color: hsl(150 38% 14%); }
-.dark .border-brand-200 { border-color: hsl(150 30% 22%); }
-.dark .border-brand-300 { border-color: hsl(150 32% 28%); }
+.dark .bg-brand-50\/60 { background-color: hsl(14 40% 13%); }
+.dark .bg-brand-100   { background-color: hsl(14 40% 16%); }
+.dark .hover\:bg-brand-50:hover { background-color: hsl(14 40% 14%); }
+.dark .border-brand-200 { border-color: hsl(14 38% 22%); }
+.dark .border-brand-300 { border-color: hsl(14 40% 28%); }
 .dark .text-brand-800,
-.dark .text-brand-900 { color: hsl(146 55% 70%); }
-.dark .ring-brand-200 { --tw-ring-color: hsl(150 30% 24%); }
+.dark .text-brand-900 { color: hsl(16 62% 70%); }
+.dark .ring-brand-200 { --tw-ring-color: hsl(14 38% 24%); }
 
 /* Radix tabs whose active state uses a pastel (data-[state=active]:bg-green-100 …):
  * the plain .bg-* remaps above don't reach variant classes. */
@@ -499,27 +598,27 @@ html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 5.5rem; }
 .dark [data-state="active"][class*="active]:bg-green-50 "],
 .dark [data-state="active"][class$="active]:bg-green-50"],
 .dark [data-state="active"][class*="active]:bg-green-100 "],
-.dark [data-state="active"][class$="active]:bg-green-100"] { background-color: hsl(148 32% 15%); }
+.dark [data-state="active"][class$="active]:bg-green-100"] { background-color: hsl(14 40% 15%); }
 .dark [data-state="active"][class*="active]:text-green-700 "],
 .dark [data-state="active"][class$="active]:text-green-700"],
 .dark [data-state="active"][class*="active]:text-green-800 "],
-.dark [data-state="active"][class$="active]:text-green-800"] { color: hsl(148 57% 70%); }
+.dark [data-state="active"][class$="active]:text-green-800"] { color: hsl(16 62% 70%); }
 .dark [data-state="active"][class*="active]:bg-emerald-50 "],
 .dark [data-state="active"][class$="active]:bg-emerald-50"],
 .dark [data-state="active"][class*="active]:bg-emerald-100 "],
-.dark [data-state="active"][class$="active]:bg-emerald-100"] { background-color: hsl(150 32% 15%); }
+.dark [data-state="active"][class$="active]:bg-emerald-100"] { background-color: hsl(14 40% 15%); }
 .dark [data-state="active"][class*="active]:text-emerald-700 "],
 .dark [data-state="active"][class$="active]:text-emerald-700"],
 .dark [data-state="active"][class*="active]:text-emerald-800 "],
-.dark [data-state="active"][class$="active]:text-emerald-800"] { color: hsl(150 57% 70%); }
+.dark [data-state="active"][class$="active]:text-emerald-800"] { color: hsl(16 62% 70%); }
 .dark [data-state="active"][class*="active]:bg-brand-50 "],
 .dark [data-state="active"][class$="active]:bg-brand-50"],
 .dark [data-state="active"][class*="active]:bg-brand-100 "],
-.dark [data-state="active"][class$="active]:bg-brand-100"] { background-color: hsl(148 32% 15%); }
+.dark [data-state="active"][class$="active]:bg-brand-100"] { background-color: hsl(14 40% 15%); }
 .dark [data-state="active"][class*="active]:text-brand-700 "],
 .dark [data-state="active"][class$="active]:text-brand-700"],
 .dark [data-state="active"][class*="active]:text-brand-800 "],
-.dark [data-state="active"][class$="active]:text-brand-800"] { color: hsl(148 57% 70%); }
+.dark [data-state="active"][class$="active]:text-brand-800"] { color: hsl(16 62% 70%); }
 .dark [data-state="active"][class*="active]:bg-teal-50 "],
 .dark [data-state="active"][class$="active]:bg-teal-50"],
 .dark [data-state="active"][class*="active]:bg-teal-100 "],
@@ -579,16 +678,16 @@ html.has-app-sidebar.app-sidebar-collapsed { --app-sidebar-w: 5.5rem; }
 .dark [data-state="active"][class*="active]:bg-gray-50 "],
 .dark [data-state="active"][class$="active]:bg-gray-50"],
 .dark [data-state="active"][class*="active]:bg-gray-100 "],
-.dark [data-state="active"][class$="active]:bg-gray-100"] { background-color: hsl(240 5% 15%); }
+.dark [data-state="active"][class$="active]:bg-gray-100"] { background-color: hsl(30 6% 15%); }
 .dark [data-state="active"][class*="active]:text-gray-700 "],
 .dark [data-state="active"][class$="active]:text-gray-700"],
 .dark [data-state="active"][class*="active]:text-gray-800 "],
-.dark [data-state="active"][class$="active]:text-gray-800"] { color: hsl(0 0% 92%); }
+.dark [data-state="active"][class$="active]:text-gray-800"] { color: hsl(35 8% 92%); }
 .dark [data-state="active"][class*="active]:bg-slate-50 "],
 .dark [data-state="active"][class$="active]:bg-slate-50"],
 .dark [data-state="active"][class*="active]:bg-slate-100 "],
-.dark [data-state="active"][class$="active]:bg-slate-100"] { background-color: hsl(240 5% 15%); }
+.dark [data-state="active"][class$="active]:bg-slate-100"] { background-color: hsl(30 6% 15%); }
 .dark [data-state="active"][class*="active]:text-slate-700 "],
 .dark [data-state="active"][class$="active]:text-slate-700"],
 .dark [data-state="active"][class*="active]:text-slate-800 "],
-.dark [data-state="active"][class$="active]:text-slate-800"] { color: hsl(0 0% 92%); }
+.dark [data-state="active"][class$="active]:text-slate-800"] { color: hsl(35 8% 92%); }

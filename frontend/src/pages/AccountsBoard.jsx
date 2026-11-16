@@ -2379,7 +2379,7 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
             <div className="flex flex-col gap-4 xl:col-span-5">
               {/* Executive Balance — stays dark in both themes. */}
               <div
-                className="group relative cursor-pointer overflow-hidden rounded-3xl bg-[#0B0B0C] p-6 text-white shadow-lg transition-shadow hover:shadow-xl"
+                className="group relative cursor-pointer overflow-hidden rounded-3xl bg-ink-950 p-6 text-white shadow-lg transition-shadow hover:shadow-xl"
                 {...asButton(openBalance)}
                 title="Click to see expense rows driving the balance"
                 data-testid="kpi-card-balance"
@@ -2404,7 +2404,7 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
                     <svg viewBox="0 0 36 36" className="h-14 w-14 -rotate-90" aria-hidden="true">
                       <circle cx="18" cy="18" r="15.5" fill="none" stroke="rgb(255 255 255 / 0.1)" strokeWidth="3" />
                       {retained > 0 && (
-                        <circle cx="18" cy="18" r="15.5" fill="none" stroke="#31B46E" strokeWidth="3" strokeLinecap="round" strokeDasharray={`${(retained / 100) * 97.4} 97.4`} />
+                        <circle cx="18" cy="18" r="15.5" fill="none" stroke="#B14E2F" strokeWidth="3" strokeLinecap="round" strokeDasharray={`${(retained / 100) * 97.4} 97.4`} />
                       )}
                     </svg>
                     <span className="absolute inset-0 flex items-center justify-center text-[11px] font-bold">{figuresVisible ? `${Math.round(retained)}%` : '••'}</span>
@@ -2535,7 +2535,7 @@ function CashbookTab({ overview, projects, userRole, onRefresh }) {
                 })}
                 {/* Total — combined Income+Expense drilldown across all modes. */}
                 <div
-                  className="cursor-pointer rounded-2xl bg-[#0B0B0C] p-4 text-white shadow-sm transition-shadow hover:shadow-md"
+                  className="cursor-pointer rounded-2xl bg-ink-950 p-4 text-white shadow-sm transition-shadow hover:shadow-md"
                   data-testid="cb-bucket-total"
                   {...asButton(openTotal)}
                   title="View all income & expense entries across every channel"
@@ -5769,7 +5769,7 @@ function CarryForwardTab({ userRole }) {
   return (
     <div className="space-y-4" data-testid="carry-forward-tab">
       {/* Hero card — current net amount + Open popup */}
-      <div className="relative overflow-hidden rounded-3xl bg-[#0B0B0C] p-6 text-white shadow-lg">
+      <div className="relative overflow-hidden rounded-3xl bg-ink-950 p-6 text-white shadow-lg">
         <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-28 h-72 w-72 rounded-full bg-primary/25 blur-3xl" />
         <div className="relative flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>

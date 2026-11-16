@@ -120,7 +120,7 @@ export default function ProjectFinance() {
                       <td className="px-4 py-3 text-right text-sm text-purple-600">{fmt(p.expenses.vendor)}</td>
                       <td className="px-4 py-3 text-right text-sm text-gray-500">{fmt(p.expenses.petty_cash + p.expenses.other)}</td>
                       <td className="px-4 py-3 text-right text-sm font-semibold text-red-600">{fmt(p.expenses.total)}</td>
-                      <td className="px-4 py-3 text-right text-sm font-bold" style={{ color: p.profit >= 0 ? '#16a34a' : '#dc2626' }}>{fmt(p.profit)}</td>
+                      <td className="px-4 py-3 text-right text-sm font-bold" style={{ color: p.profit >= 0 ? '#923F26' : '#dc2626' }}>{fmt(p.profit)}</td>
                       <td className="px-4 py-3 text-center">
                         <Button variant="ghost" size="sm" onClick={() => window.location.href = `/projects/${p.project_id}`}>
                           <Eye className="h-3.5 w-3.5" />

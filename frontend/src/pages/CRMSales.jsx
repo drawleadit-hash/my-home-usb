@@ -1258,7 +1258,7 @@ export default function CRMSales() {
                 onClick={() => setActiveStage('all')}
                 data-testid="stage-chip-all"
                 className={`flex flex-col items-center justify-center rounded-2xl px-1.5 py-2.5 sm:py-3 shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5 ${activeStage === 'all' ? 'ring-2 ring-emerald-500' : ''}`}
-                style={{ backgroundColor: '#10b981', color: '#fff' }}
+                style={{ backgroundColor: '#B14E2F', color: '#fff' }}
               >
                 <span className="text-[9px] sm:text-[10px] font-medium opacity-90 truncate w-full text-center">All Leads</span>
                 <span className="text-base sm:text-xl font-bold mt-0.5 leading-tight">{filteredLeads.length}</span>
