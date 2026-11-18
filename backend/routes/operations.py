@@ -11,6 +11,7 @@ from enum import Enum
 import uuid
 import os
 import io
+import re
 import json
 import asyncio
 import logging
@@ -4144,6 +4145,105 @@ async def get_cheque_reminders(user: User = Depends(get_current_user)):
 
 # ==================== HR / STAFF ENDPOINTS ====================
 
+# Login accounts that are not company employees — never auto-added to HR.
+_NON_EMPLOYEE_ROLES = {"vendor", "client", "prospect", "super_admin", "drawlead_marketing"}
+
+# role -> (department, designation) for auto-created employee records.
+# Departments match the HR Portal's DEPARTMENTS list.
+_ROLE_TO_DEPT = {
+    "general_manager": ("Operations", "General Manager"),
+    "project_manager": ("Operations", "Project Manager"),
+    "associate_pm": ("Operations", "Associate Project Manager"),
+    "sr_site_engineer": ("Operations", "Senior Site Engineer"),
+    "site_engineer": ("Operations", "Site Engineer"),
+    "planning": ("Planning", "Planning Head"),
+    "planning_person": ("Planning", "Planning Engineer"),
+    "procurement": ("Purchase", "Procurement Executive"),
+    "accountant": ("Accounts", "Accountant"),
+    "cre": ("Sales", "CRE"),
+    "cro": ("Sales", "CRO"),
+    "pre_sales": ("Sales", "Pre-Sales Executive"),
+    "sales": ("Sales", "Sales Executive"),
+    "marketing_head": ("Marketing", "Marketing Head"),
+    "architect": ("Architecture", "Architect"),
+    "super_architect": ("Architecture", "Senior Architect"),
+    "hr": ("HR", "HR Executive"),
+    "quality_check": ("Quality", "Quality Engineer"),
+}
+
+
+async def _sync_staff_from_users(created_by: str) -> int:
+    """Create an HR employee record for every active internal login account
+    that has none, linked via staff.linked_user_id.
+
+    Each user is claimed once with an atomic `hr_staff_synced` flag, so
+    concurrent calls can't create duplicates and an employee record HR later
+    deletes is never resurrected. An existing unlinked staff record with the
+    same email is linked instead of creating a second one.
+    """
+    linked_ids = set(await db.staff.distinct("linked_user_id", {"linked_user_id": {"$nin": [None, ""]}}))
+    candidates = await db.users.find(
+        {
+            "is_active": {"$ne": False},
+            "role": {"$nin": list(_NON_EMPLOYEE_ROLES)},
+            "hr_staff_synced": {"$ne": True},
+        },
+        {"_id": 0, "user_id": 1, "name": 1, "email": 1, "phone": 1, "role": 1},
+    ).to_list(1000)
+    candidates = [u for u in candidates if u.get("user_id") and u["user_id"] not in linked_ids]
+    if not candidates:
+        return 0
+
+    # Next free EMPxxxx code (max existing + 1, so deleted rows can't cause collisions)
+    max_code = 0
+    for code in await db.staff.distinct("employee_code"):
+        if isinstance(code, str) and code.startswith("EMP") and code[3:].isdigit():
+            max_code = max(max_code, int(code[3:]))
+
+    created = 0
+    for u in candidates:
+        claimed = await db.users.find_one_and_update(
+            {"user_id": u["user_id"], "hr_staff_synced": {"$ne": True}},
+            {"$set": {"hr_staff_synced": True}},
+        )
+        if not claimed:
+            continue
+        now_iso = datetime.now(timezone.utc).isoformat()
+        email = (u.get("email") or "").strip().lower()
+        if email:
+            existing = await db.staff.find_one(
+                {"email": {"$regex": f"^{re.escape(email)}$", "$options": "i"},
+                 "linked_user_id": {"$in": [None, ""]}},
+                {"_id": 0, "staff_id": 1},
+            )
+            if existing:
+                await db.staff.update_one(
+                    {"staff_id": existing["staff_id"]},
+                    {"$set": {"linked_user_id": u["user_id"], "updated_at": now_iso}},
+                )
+                continue
+        role = u.get("role") or ""
+        dept, desig = _ROLE_TO_DEPT.get(role, (None, role.replace("_", " ").title() or None))
+        max_code += 1
+        staff = Staff(
+            employee_code=f"EMP{str(max_code).zfill(4)}",
+            name=u.get("name") or email.split("@")[0] or "Employee",
+            email=email or None,
+            phone=u.get("phone") or None,
+            department=dept,
+            designation=desig,
+            linked_user_id=u["user_id"],
+            created_by=created_by,
+        )
+        doc = staff.model_dump()
+        doc["created_at"] = doc["created_at"].isoformat()
+        doc["updated_at"] = doc["updated_at"].isoformat()
+        doc["auto_created_from_user"] = True
+        await db.staff.insert_one(doc)
+        created += 1
+    return created
+
+
 @router.get("/hr/staff")
 async def get_staff_list(
     department: Optional[str] = None,
@@ -4153,7 +4253,13 @@ async def get_staff_list(
     """Get all staff members"""
     if user.role not in [UserRole.SUPER_ADMIN, UserRole.ACCOUNTANT, UserRole.HR]:
         raise HTTPException(status_code=403, detail="Permission denied")
-    
+
+    # Every active internal login account should appear as an employee.
+    try:
+        await _sync_staff_from_users(user.user_id)
+    except Exception as e:  # never block the list on a sync problem
+        logging.getLogger(__name__).error(f"staff sync from users failed: {e}", exc_info=True)
+
     query = {}
     if department:
         query["department"] = department
