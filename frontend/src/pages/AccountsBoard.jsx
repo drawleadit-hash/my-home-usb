@@ -1526,7 +1526,7 @@ function IndirectExpenseSection({ userRole }) {
       </Card>
 
       {/* Feb 19 2026 — Section toggle: Expenses | Expense Split */}
-      <div className="flex items-center gap-2 border-b" data-testid="indirect-section-tabs">
+      <div className="flex flex-wrap items-center gap-2" data-testid="indirect-section-tabs">
         {[
           { key: 'expenses', label: 'Expenses' },
           { key: 'split', label: 'Expense Split' },
@@ -1535,9 +1535,7 @@ function IndirectExpenseSection({ userRole }) {
             key={t.key}
             onClick={() => setSection(t.key)}
             data-testid={`indirect-section-${t.key}`}
-            className={`px-3 py-1.5 text-xs font-medium transition-colors border-b-2 -mb-px ${
-              section === t.key ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-gray-700'
-            }`}
+            className={tabChipClass(section === t.key, 'px-3 py-1.5 text-xs')}
           >
             {t.label}
           </button>

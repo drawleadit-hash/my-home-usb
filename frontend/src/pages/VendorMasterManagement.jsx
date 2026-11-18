@@ -10,7 +10,7 @@ import { Label } from '../components/ui/label';
 import { Badge } from '../components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '../components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger, tabChipClass } from '../components/ui/tabs';
 import { Textarea } from '../components/ui/textarea';
 import { AppHeader } from '../components/AppHeader';
 import MobileBottomNav from '../components/MobileBottomNav';
@@ -702,12 +702,12 @@ function VendorBookDialog({ vendor, onClose }) {
                 )}
               </div>
 
-              <div className="flex gap-1 border-b">
+              <div className="flex flex-wrap gap-2">
                 {BUCKETS.map(b => (
                   <button
                     key={b.key}
                     onClick={() => setOrderBucket(b.key)}
-                    className={`px-3 py-2 text-xs font-medium border-b-2 transition-colors ${orderBucket === b.key ? 'border-primary text-primary-strong bg-brand-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+                    className={tabChipClass(orderBucket === b.key, 'px-3 py-2 text-xs')}
                     data-testid={`vb-order-bucket-${b.key}`}
                   >
                     {b.label} <Badge variant="outline" className="ml-1 text-[10px]">{data?.orders?.[b.key]?.length || 0}</Badge>

@@ -51,7 +51,7 @@ import {
   ArrowUpDown
 } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/tabs';
+import { Tabs, TabsList, TabsTrigger, TabsContent, tabChipClass } from '../components/ui/tabs';
 import { Popover, PopoverContent, PopoverTrigger } from '../components/ui/popover';
 import { DayPicker } from 'react-day-picker';
 import { generateREPDF } from '../utils/pdfGenerator';
@@ -423,7 +423,12 @@ export default function CRMSales() {
       
       // Block manual move to Project Onboarded
       if (stage?.stage_id === 'stg_project_onboarded') {
-        toast.error('Project Onboarded is auto-moved after accountant approval');
+        const lead = leads.find(l => l.lead_id === leadId);
+        if (lead?.current_stage_id === 'stg_payment_collect') {
+          toast.error('Collect the advance first — use "Collect Advance & Send to Accountant". Project Onboarded happens automatically after accountant approval.');
+        } else {
+          toast.error('Project Onboarded is auto-moved after accountant approval');
+        }
         return;
       }
       
@@ -697,7 +702,7 @@ export default function CRMSales() {
     try {
       if (reClientAction === 'approved') {
         await axios.post(`${API}/crm/leads/${reClientLead.lead_id}/re-client-approve`);
-        toast.success('Client approved RE! Lead moved to Negotiation.');
+        toast.success('Client approved RE! Lead moved to Deal Close — collect the advance to send it to the Accountant.');
       } else if (reClientAction === 'revision') {
         if (!reClientRevisionReason.trim()) {
           toast.error('Please enter a revision reason');
@@ -1497,13 +1502,9 @@ export default function CRMSales() {
           <div className="bg-white rounded-lg border shadow-sm">
             {/* Stage Tabs */}
             <div className="border-b overflow-x-auto pb-1.5 crm-scroll-tabs">
-              <div className="flex min-w-max">
+              <div className="flex min-w-max gap-2 p-2">
                 <button
-                  className={`px-4 py-2.5 text-xs font-medium whitespace-nowrap border-b-2 transition-colors ${
-                    activeStage === 'all' 
-                      ? 'border-emerald-500 text-emerald-600 bg-emerald-50' 
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'
-                  }`}
+                  className={tabChipClass(activeStage === 'all', 'px-4 py-2.5 text-xs whitespace-nowrap')}
                   onClick={() => setActiveStage('all')}
                 >
                   All ({leads.length})
@@ -1511,11 +1512,7 @@ export default function CRMSales() {
                 {stages.map(stage => (
                   <button
                     key={stage.stage_id}
-                    className={`px-4 py-2.5 text-xs font-medium whitespace-nowrap border-b-2 transition-colors ${
-                      activeStage === stage.stage_id 
-                        ? 'border-emerald-500 text-emerald-600 bg-emerald-50' 
-                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'
-                    }`}
+                    className={tabChipClass(activeStage === stage.stage_id, 'px-4 py-2.5 text-xs whitespace-nowrap')}
                     onClick={() => setActiveStage(stage.stage_id)}
                     style={{ borderBottomColor: activeStage === stage.stage_id ? stage.color : undefined }}
                   >
@@ -1528,11 +1525,7 @@ export default function CRMSales() {
                 ))}
                 {/* Revision tab */}
                 <button
-                  className={`px-4 py-2.5 text-xs font-medium whitespace-nowrap border-b-2 transition-colors ${
-                    activeStage === 'revision' 
-                      ? 'border-orange-500 text-orange-600 bg-orange-50' 
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'
-                  }`}
+                  className={tabChipClass(activeStage === 'revision', 'px-4 py-2.5 text-xs whitespace-nowrap')}
                   onClick={() => setActiveStage('revision')}
                   data-testid="revision-tab"
                 >
@@ -1877,6 +1870,20 @@ export default function CRMSales() {
                               <p className="text-[10px] text-red-600 mt-0.5 italic">by {lead.advance_payment?.rejected_by_name || lead.rejected_by_name}</p>
                             )}
                           </div>
+                        )}
+
+                        {/* Deal Close with no advance yet (e.g. after RE client-approve) — the
+                            advance must be entered via the Convert Deal dialog, which creates
+                            the income row the Accountant approves. */}
+                        {lead.current_stage_id === 'stg_payment_collect' && user?.role !== 'accountant' && (
+                          <button
+                            data-testid={`collect-advance-card-${lead.lead_id}`}
+                            className="mt-2 w-full py-1.5 rounded bg-green-600 hover:bg-green-700 text-white text-xs font-medium transition flex items-center justify-center gap-1"
+                            onClick={(e) => { e.stopPropagation(); openConvertDealFromSales(lead); }}
+                          >
+                            <IndianRupee className="h-3 w-3" />
+                            {lead.onboarding_status === 'accountant_rejected' ? 'Re-enter Advance' : 'Collect Advance'}
+                          </button>
                         )}
 
                         {/* Payment summary for Payment Collect / Accountant Approval stages */}
@@ -2347,7 +2354,18 @@ export default function CRMSales() {
                         </div>
                       )}
                       <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm text-amber-700">
-                        {selectedLead.current_stage_id === 'stg_payment_collect' && 'This lead is in Payment Collect stage. It will move automatically after advance is collected.'}
+                        {selectedLead.current_stage_id === 'stg_payment_collect' && 'Deal Closed — collect the advance to send this lead to the Accountant for approval. It moves to Project Onboarded automatically once the Accountant verifies it.'}
+                        {selectedLead.current_stage_id === 'stg_payment_collect' && user?.role !== 'accountant' && (
+                          <Button
+                            size="sm"
+                            className="mt-2 h-8 bg-green-600 hover:bg-green-700 text-white"
+                            onClick={() => openConvertDealFromSales(selectedLead)}
+                            data-testid={`collect-advance-detail-${selectedLead.lead_id}`}
+                          >
+                            <IndianRupee className="h-3.5 w-3.5 mr-1" />
+                            {selectedLead.onboarding_status === 'accountant_rejected' ? 'Re-enter Advance & Send to Accountant' : 'Collect Advance & Send to Accountant'}
+                          </Button>
+                        )}
                         {selectedLead.current_stage_id === 'stg_accountant_approval' && 'Waiting for Accountant verification. Lead will move to Project Onboarded automatically after approval.'}
                         {selectedLead.advance_payment && (
                           <div className="mt-2 pt-2 border-t border-amber-200">

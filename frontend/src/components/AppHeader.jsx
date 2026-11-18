@@ -113,12 +113,9 @@ const ROLE_SUB_MENUS = {
     '/hr-portal': [
       { label: 'HR Portal', path: '/hr-portal' },
     ],
-    '/planning-board': [
-      { label: 'Planning Board', path: '/planning-board' },
-      { label: 'BOQ', path: '/planning-board?tab=boq' },
-      { label: 'Vendors', path: '/vendor-management' },
-      { label: 'Contractors', path: '/contractor-management' },
-    ],
+    // Planning opens straight into the Planning Board — BOQ, vendors and
+    // contractors live in its own tabs, so no sidebar sub-items.
+    '/planning-board': [{ label: 'Planning Board', path: '/planning-board' }],
     '/marketing-board': [
       { label: 'Marketing Board', path: '/marketing-board' },
       { label: 'CRE Board', path: '/cre-board' },
@@ -161,7 +158,7 @@ function getModuleKey(pathname, role) {
   const pathMap = buildPathMap(subMenus);
   if (pathMap[pathname]) return pathMap[pathname];
   if (pathname.startsWith('/projects/')) return '/projects';
-  if (pathname.startsWith('/boq/')) return '/planning-board';
+  if (pathname.startsWith('/boq/') || pathname === '/contractor-management') return '/planning-board';
   return null;
 }
 

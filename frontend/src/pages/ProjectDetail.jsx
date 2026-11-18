@@ -4227,9 +4227,7 @@ export default function ProjectDetail() {
     const tabBtn = (key, label) => (
       <button
         onClick={() => setActiveTab(key)}
-        className={`px-3 py-2 text-sm font-medium border-b-2 ${
-          current === key ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-gray-700'
-        }`}
+        className={tabChipClass(current === key, 'px-3 py-2 text-sm')}
         data-testid={`fe-subnav-${key}`}
       >
         {label}
@@ -11863,12 +11861,10 @@ export default function ProjectDetail() {
                     const canManageDocs = user && ['super_admin', 'planning', 'project_manager'].includes(user.role);
                     return (
                       <>
-                        <div className="flex gap-1 border-b mb-3">
+                        <div className="flex flex-wrap gap-2 mb-3">
                           <button
                             onClick={() => setDocsSubTab('final_drawing')}
-                            className={`px-3 py-2 text-sm font-medium border-b-2 transition-colors flex items-center gap-1.5 ${
-                              docsSubTab === 'final_drawing' ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-gray-700'
-                            }`}
+                            className={tabChipClass(docsSubTab === 'final_drawing', 'px-3 py-2 text-sm flex gap-1.5')}
                             data-testid="docs-subtab-final-drawing"
                           >
                             <Layers className="h-4 w-4" />
@@ -11877,9 +11873,7 @@ export default function ProjectDetail() {
                           </button>
                           <button
                             onClick={() => setDocsSubTab('documents')}
-                            className={`px-3 py-2 text-sm font-medium border-b-2 transition-colors flex items-center gap-1.5 ${
-                              docsSubTab === 'documents' ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-gray-700'
-                            }`}
+                            className={tabChipClass(docsSubTab === 'documents', 'px-3 py-2 text-sm flex gap-1.5')}
                             data-testid="docs-subtab-documents"
                           >
                             <Folder className="h-4 w-4" />
@@ -11888,9 +11882,7 @@ export default function ProjectDetail() {
                           </button>
                           <button
                             onClick={() => setDocsSubTab('process_images')}
-                            className={`px-3 py-2 text-sm font-medium border-b-2 transition-colors flex items-center gap-1.5 ${
-                              docsSubTab === 'process_images' ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-gray-700'
-                            }`}
+                            className={tabChipClass(docsSubTab === 'process_images', 'px-3 py-2 text-sm flex gap-1.5')}
                             data-testid="docs-subtab-process-images"
                           >
                             <ImageIcon className="h-4 w-4" />

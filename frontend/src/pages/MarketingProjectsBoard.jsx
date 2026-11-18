@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Building2, Eye, Search, RefreshCw } from 'lucide-react';
 import { AppHeader } from '../components/AppHeader';
 import MobileBottomNav from '../components/MobileBottomNav';
+import { tabChipClass } from '../components/ui/tabs';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -142,16 +143,12 @@ export default function MarketingProjectsBoard() {
               </div>
             </div>
 
-            <div className="flex gap-1 mt-3 border-b">
+            <div className="flex flex-wrap gap-2 mt-3">
               {TABS.map(tab => (
                 <button
                   key={tab.key}
                   onClick={() => setActiveTab(tab.key)}
-                  className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
-                    activeTab === tab.key
-                      ? 'border-primary text-primary-strong bg-brand-50'
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'
-                  }`}
+                  className={tabChipClass(activeTab === tab.key, 'px-4 py-2 text-sm')}
                   data-testid={`mkt-subtab-${tab.key}`}
                 >
                   {tab.label}

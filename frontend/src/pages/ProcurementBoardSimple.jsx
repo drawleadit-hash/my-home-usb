@@ -2125,11 +2125,7 @@ function AssignVendorDialog({ item, readOnly, onClose, onDone, onReject }) {
           <button
             type="button"
             onClick={() => setDialogTab('details')}
-            className={`px-3 py-2 text-xs font-medium border-b-2 transition-colors ${
-              dialogTab === 'details'
-                ? 'border-primary text-primary-strong'
-                : 'border-transparent text-gray-500 hover:text-gray-700'
-            }`}
+            className={tabChipClass(dialogTab === 'details', 'px-3 py-2 text-xs')}
             data-testid="proc-dialog-tab-details"
           >
             <Package className="h-3 w-3 inline mr-1" /> Details
@@ -2137,11 +2133,7 @@ function AssignVendorDialog({ item, readOnly, onClose, onDone, onReject }) {
           <button
             type="button"
             onClick={() => setDialogTab('timeline')}
-            className={`px-3 py-2 text-xs font-medium border-b-2 transition-colors ${
-              dialogTab === 'timeline'
-                ? 'border-primary text-primary-strong'
-                : 'border-transparent text-gray-500 hover:text-gray-700'
-            }`}
+            className={tabChipClass(dialogTab === 'timeline', 'px-3 py-2 text-xs')}
             data-testid="proc-dialog-tab-timeline"
           >
             <FileClock className="h-3 w-3 inline mr-1" /> Timeline

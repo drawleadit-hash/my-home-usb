@@ -8,7 +8,7 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Textarea } from '../components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger, tabChipClass } from '../components/ui/tabs';
 import { Popover, PopoverContent, PopoverTrigger } from '../components/ui/popover';
 import { DayPicker } from 'react-day-picker';
 import { toast } from 'sonner';
@@ -917,13 +917,9 @@ export default function CRMPreSales() {
           <div className="bg-white rounded-lg border shadow-sm">
             {/* Stage Tabs */}
             <div className="border-b overflow-x-auto pb-1.5 crm-scroll-tabs">
-              <div className="flex min-w-max">
+              <div className="flex min-w-max gap-2 p-2">
                 <button
-                  className={`px-4 py-2.5 text-xs font-medium whitespace-nowrap border-b-2 transition-colors ${
-                    activeStage === 'all' 
-                      ? 'border-primary text-primary-strong bg-brand-50' 
-                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'
-                  }`}
+                  className={tabChipClass(activeStage === 'all', 'px-4 py-2.5 text-xs whitespace-nowrap')}
                   onClick={() => setActiveStage('all')}
                 >
                   All ({leadsAfterNonStageFilters.length})
@@ -931,11 +927,7 @@ export default function CRMPreSales() {
                 {stages.map(stage => (
                   <button
                     key={stage.stage_id}
-                    className={`px-4 py-2.5 text-xs font-medium whitespace-nowrap border-b-2 transition-colors ${
-                      activeStage === stage.stage_id 
-                        ? 'border-primary text-primary-strong bg-brand-50' 
-                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'
-                    }`}
+                    className={tabChipClass(activeStage === stage.stage_id, 'px-4 py-2.5 text-xs whitespace-nowrap')}
                     onClick={() => setActiveStage(stage.stage_id)}
                     style={{ borderBottomColor: activeStage === stage.stage_id ? stage.color : undefined }}
                   >

@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Eye, CheckCircle, XCircle, Banknote, Pencil } from 'lucide-react';
 import { toast } from 'sonner';
+import { tabChipClass } from './ui/tabs';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 const fmt = (n) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(n || 0);
@@ -151,14 +152,12 @@ export default function PlanningLabourPayments({ mode = 'all' }) {
       {/* Labour Payments queue — shown for 'payments' or 'all' modes */}
       {(mode === 'payments' || mode === 'all') && (
       <>
-      <div className="flex gap-1 border-b bg-white rounded-t-lg px-2 pt-1">
+      <div className="flex flex-wrap gap-2">
         {tabs.map(t => (
           <button
             key={t.key}
             onClick={() => setTab(t.key)}
-            className={`px-3 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
-              tab === t.key ? 'border-primary text-primary-strong bg-brand-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'
-            }`}
+            className={tabChipClass(tab === t.key, 'px-3 py-2 text-xs sm:text-sm whitespace-nowrap')}
             data-testid={`pls-tab-${t.key}`}
           >
             {t.label}

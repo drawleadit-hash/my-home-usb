@@ -1302,7 +1302,7 @@ export default function PlanningBoard({ embedded = false }) {
       <div className={embedded ? '' : 'max-w-7xl mx-auto px-4 py-4 sm:px-6'}>
         {/* When embedded, we render our own slim top-level nav since AppHeader is suppressed. */}
         {embedded && (
-          <div className="flex gap-1 border-b mb-3 bg-white rounded-t-lg px-2 pt-1 overflow-x-auto" data-testid="planning-embedded-nav">
+          <div className="flex gap-2 mb-3 overflow-x-auto pb-1" data-testid="planning-embedded-nav">
             {[
               { value: 'dashboard', label: 'Dashboard' },
               { value: 'packages', label: 'Packages' },
@@ -1314,7 +1314,7 @@ export default function PlanningBoard({ embedded = false }) {
               <button
                 key={t.value}
                 onClick={() => handleTabChange(t.value)}
-                className={`px-3 py-1.5 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${activeTab === t.value ? 'border-primary text-primary-strong' : 'border-transparent text-gray-500 hover:text-gray-700'}`}
+                className={tabChipClass(activeTab === t.value, 'px-3 py-1.5 text-sm whitespace-nowrap')}
                 data-testid={`planning-embedded-tab-${t.value}`}
               >
                 {t.label}
@@ -1327,7 +1327,7 @@ export default function PlanningBoard({ embedded = false }) {
           {/* ==================== DASHBOARD ==================== */}
           <TabsContent value="dashboard">
             {/* Dashboard sub-tabs */}
-            <div className="flex gap-1 border-b mb-3 bg-white rounded-t-lg px-2 pt-1">
+            <div className="flex flex-wrap gap-2 mb-3">
               {[
                 { key: 'all_projects', label: 'All Projects', badge: newProjectCount },
                 { key: 'requests', label: 'Requests', badge: requestCount },
@@ -1340,9 +1340,7 @@ export default function PlanningBoard({ embedded = false }) {
                 <button
                   key={tab.key}
                   onClick={() => handleDashSubTabChange(tab.key)}
-                  className={`px-3 py-2 text-xs sm:text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
-                    dashSubTab === tab.key ? 'border-primary text-primary-strong bg-brand-50/50' : 'border-transparent text-gray-500 hover:text-gray-700'
-                  }`}
+                  className={tabChipClass(dashSubTab === tab.key, 'px-3 py-2 text-xs sm:text-sm')}
                   data-testid={`dash-subtab-${tab.key}`}
                 >
                   {tab.label}{tab.badge > 0 ? <CountBadge count={tab.badge} /> : null}
@@ -1360,7 +1358,7 @@ export default function PlanningBoard({ embedded = false }) {
                   </CardTitle>
                 </div>
                 {/* Sub-tabs */}
-                <div className="flex gap-1 mt-3 border-b">
+                <div className="flex flex-wrap gap-2 mt-3">
                   {[
                     { key: 'new', label: 'New Projects', badgeCls: 'bg-green-100 text-green-700 border-green-200' },
                     { key: 'active', label: 'Current Projects', badgeCls: 'bg-amber-100 text-amber-700 border-amber-200' },
@@ -1370,16 +1368,12 @@ export default function PlanningBoard({ embedded = false }) {
                     <button
                       key={tab.key}
                       onClick={() => handleProjectSubTabChange(tab.key)}
-                      className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
-                        projectSubTab === tab.key
-                          ? 'border-primary text-primary-strong bg-brand-50'
-                          : 'border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-50'
-                      }`}
+                      className={tabChipClass(projectSubTab === tab.key)}
                       data-testid={`subtab-${tab.key}`}
                     >
                       {tab.label}
                       <span
-                        className={`ml-2 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 rounded-full text-[11px] font-semibold border ${tab.badgeCls}`}
+                        className={`inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 rounded-full text-[11px] font-semibold border ${tab.badgeCls}`}
                         data-testid={`subtab-${tab.key}-count`}
                       >
                         {projectSubTab === tab.key ? subTabProjects.length : (subTabCounts[tab.key] ?? 0)}

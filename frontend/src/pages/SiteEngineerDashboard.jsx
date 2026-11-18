@@ -2169,7 +2169,7 @@ export default function SiteEngineerDashboard() {
                       )}
 
                       {/* Inner sub-tab pills: Req Petty Cash | Record Expense */}
-                      <div className="flex items-center gap-1 mb-3 border-b" data-testid="req-status-subtabs">
+                      <div className="flex flex-wrap items-center gap-2 mb-3" data-testid="req-status-subtabs">
                         {[
                           { key: 'petty_cash', label: 'Req Petty Cash', count: filteredPC.length, tone: 'text-green-700 border-green-600' },
                           { key: 'expense',    label: 'Record Expense', count: filteredExp.length, tone: 'text-orange-700 border-orange-600' },
@@ -2180,9 +2180,7 @@ export default function SiteEngineerDashboard() {
                               key={t.key}
                               type="button"
                               onClick={() => setReqStatusSubTab(t.key)}
-                              className={`px-3 py-2 text-xs font-medium border-b-2 -mb-px transition-colors ${
-                                active ? t.tone : 'border-transparent text-gray-500 hover:text-gray-700'
-                              }`}
+                              className={tabChipClass(active, 'px-3 py-2 text-xs')}
                               data-testid={`req-status-subtab-${t.key}`}
                             >
                               {t.label} <span className={`ml-1 inline-block px-1.5 py-0.5 rounded-full text-[10px] ${active ? 'bg-gray-100 text-gray-800' : 'bg-gray-100 text-gray-500'}`}>{t.count}</span>
