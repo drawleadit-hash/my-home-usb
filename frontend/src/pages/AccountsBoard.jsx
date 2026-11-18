@@ -3763,12 +3763,11 @@ function ApprovalsTab() {
   const [activeTab, setActiveTab] = useState('income');
   const [rejectDialog, setRejectDialog] = useState({ open: false, type: '', id: '', reason: '' });
   const [processing, setProcessing] = useState(null);
-  // Default date filter to current month
-  const _a_today = new Date();
-  const _a_mStart = `${_a_today.getFullYear()}-${String(_a_today.getMonth() + 1).padStart(2, '0')}-01`;
-  const _a_mEnd = (() => { const d = new Date(_a_today.getFullYear(), _a_today.getMonth() + 1, 0); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; })();
-  const [appDateFrom, setAppDateFrom] = useState(_a_mStart);
-  const [appDateTo, setAppDateTo] = useState(_a_mEnd);
+  // No default date filter: this is an action queue, and a pending request
+  // raised last month still needs approving. Defaulting to the current month
+  // hid older pending rows and made every summary card read 0.
+  const [appDateFrom, setAppDateFrom] = useState('');
+  const [appDateTo, setAppDateTo] = useState('');
   // Income review dialog
   const [reviewDialog, setReviewDialog] = useState({ open: false, income: null });
   // Pay-approval dialog (unified Pay & Settle for material / labour / petty_cash)
@@ -4045,6 +4044,12 @@ function ApprovalsTab() {
     petty_cash_total: filteredPettyCash.reduce((sum, x) => sum + (x.amount_requested || x.amount_issued || 0), 0),
   };
   const totalPending = fSummary.income_count + fSummary.material_count + fSummary.labour_count + fSummary.vendor_count + fSummary.petty_cash_count + filteredRecordedExpenses.length;
+  // Rows in the current status queue (project filter applied) that the date
+  // filter is hiding — surfaced so the accountant never misses older items.
+  const unfilteredByDateCount = [
+    data.income, data.materials, data.labour, data.vendor, data.petty_cash, data.recorded_expenses,
+  ].reduce((sum, rows) => sum + byProject(rows || []).length, 0) + byProject(woStagePayments).length;
+  const hiddenByDate = (appDateFrom || appDateTo) ? Math.max(0, unfilteredByDateCount - totalPending) : 0;
   // Keep s in scope for any downstream usage (e.g., non-filtered pieces)
   void s;
 
@@ -4111,6 +4116,22 @@ function ApprovalsTab() {
           </div>
         </CardContent>
       </Card>
+
+      {hiddenByDate > 0 && (
+        <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-800" data-testid="approvals-hidden-by-date">
+          <span>
+            {hiddenByDate} {statusFilter === 'all' ? '' : statusFilter.replace('_', ' ') + ' '}item{hiddenByDate === 1 ? '' : 's'} outside the selected dates {hiddenByDate === 1 ? 'is' : 'are'} not counted below.
+          </span>
+          <button
+            type="button"
+            className="font-semibold underline hover:text-amber-900"
+            onClick={() => { setAppDateFrom(''); setAppDateTo(''); }}
+            data-testid="approvals-show-all-dates"
+          >
+            Show all dates
+          </button>
+        </div>
+      )}
 
       {/* Summary Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
