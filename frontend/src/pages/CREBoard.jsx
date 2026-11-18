@@ -84,6 +84,32 @@ const PAYMENT_MODES = [
   { value: 'direct_transfer', label: 'Direct Transfer (DT)' }
 ];
 
+// ── Payment Schedule row rules (shared by the table and the tab badge) ──
+// CRE sees ONLY entries Planning actively REQUESTED for payment (or ones
+// already collected / partly collected, for history). Auto-templated dates
+// not yet acted on, and no-date stages, stay hidden.
+const isPsCollectible = (e) => {
+  if (e.no_date_set) return false;
+  const alreadyTouched =
+    (e.amount_received || 0) > 0 ||
+    ['paid', 'collected'].includes(e.stage_status);
+  if (alreadyTouched) return true;
+  return !!e.requested_at || ['requested', 'pending_collection'].includes(e.workflow_status);
+};
+// Collected only when balance is effectively zero AND the cached status
+// agrees AND there are no open approvals. status='partial' is never treated
+// as Collected (legacy rows can carry corrupt amount fields).
+const isPsCollected = (e) => {
+  if ((e.pending_approval_count || 0) > 0) return false;
+  const balance = (e.amount || 0) - (e.amount_received || 0);
+  const s = (e.stage_status || e.status || '').toLowerCase();
+  const ws = (e.workflow_status || '').toLowerCase();
+  if (balance > 1) return false;
+  if (s === 'paid' || s === 'collected') return true;
+  if (ws === 'collected') return true;
+  return false;
+};
+
 export default function CREBoard() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
@@ -235,6 +261,9 @@ export default function CREBoard() {
   const [psYear, setPsYear] = useState(todayPS.getFullYear());
   const [psAllMonths, setPsAllMonths] = useState(true);
   const [psData, setPsData] = useState({ entries: [], summary: {} });
+  // All-months entries, always loaded, so the tab badge counts the same
+  // Pending rows the table shows — whichever month is being viewed.
+  const [psAllEntries, setPsAllEntries] = useState([]);
   const [psLoading, setPsLoading] = useState(false);
   const [psSubTab, setPsSubTab] = useState('pending'); // pending | partial | collected | all
   // Payment Schedule local quick filters (extra to the global date filter)
@@ -298,6 +327,13 @@ export default function CREBoard() {
         : { month: m, year: y, _: Date.now() };
       const r = await axios.get(`${API}/planning/monthly-schedule`, { params });
       setPsData(r.data || { entries: [], summary: {} });
+      if (psAllMonths) {
+        setPsAllEntries(r.data?.entries || []);
+      } else {
+        axios.get(`${API}/planning/monthly-schedule`, { params: { all_months: true, _: Date.now() } })
+          .then(all => setPsAllEntries(all.data?.entries || []))
+          .catch(() => {});
+      }
     } catch (err) {
       toast.error(err.response?.data?.detail || 'Failed to load payment schedule');
     } finally {
@@ -933,7 +969,12 @@ export default function CREBoard() {
                   payment_schedule: () => (
                     <TabsTrigger key="payment_schedule" value="payment_schedule" className="text-xs sm:text-sm gap-1.5" data-testid="tab-payment-schedule">
                       Payment Schedule {(() => {
-                        const c = (paymentRequests || []).filter(r => inDateRange(r.requested_at || r.created_at)).length;
+                        // Same rows as the table's Pending tab, across all months.
+                        const c = psAllEntries
+                          .filter(isPsCollectible)
+                          .filter(e => !isPsCollected(e))
+                          .filter(e => !(dateRange.from || dateRange.to) || inDateRange(e.expected_payment_date))
+                          .length;
                         return c > 0 ? <Badge className="bg-red-500 text-white text-[10px] h-5 min-w-[20px] px-1.5 flex items-center justify-center rounded-full">{c}</Badge> : null;
                       })()}
                     </TabsTrigger>
@@ -1032,6 +1073,8 @@ export default function CREBoard() {
                   default: return feInRange;
                 }
               })();
+              // Mirrors the statuses POST /cre/final-estimates/{id}/approve|review accept.
+              const FE_ACTIONABLE_STATUSES = ['pending_cre_review', 'pending_client_review', 'feedback_received', 'review_pending'];
               const statusBadgeFor = (status) => {
                 if (status === 'approved') return { cls: 'bg-green-100 text-green-700 border-green-200', label: 'Approved' };
                 if (status === 'review_pending') return { cls: 'bg-amber-100 text-amber-700 border-amber-200', label: 'In Revision @ Planning' };
@@ -1063,7 +1106,11 @@ export default function CREBoard() {
                           : feActiveTab === 'approved' ? 'Approved'
                           : 'All'}
                       </CardTitle>
-                      <p className="text-xs text-gray-500 mt-1">Planning has prepared the Final Estimate. Approve directly or send a Review back to Planning.</p>
+                      <p className="text-xs text-gray-500 mt-1">
+                        {feActiveTab === 'approved'
+                          ? 'Approved Final Estimates. Use Revision to request changes after approval.'
+                          : 'Planning has prepared the Final Estimate. Approve directly or send a Review back to Planning.'}
+                      </p>
                     </CardHeader>
                     <CardContent className="p-0">
                       <div className="divide-y">
@@ -1142,23 +1189,29 @@ export default function CREBoard() {
                                       <RefreshCw className="h-4 w-4 mr-1" /> Revision
                                     </Button>
                                   )}
-                                  <Button
-                                    size="sm"
-                                    className="bg-primary hover:bg-primary-hover"
-                                    onClick={() => handleFeApprove(p)}
-                                    data-testid={`fe-approve-${p.project_id}`}
-                                  >
-                                    <CheckCircle2 className="h-4 w-4 mr-1" /> Approve
-                                  </Button>
-                                  <Button
-                                    size="sm"
-                                    variant="outline"
-                                    className="border-brand-300 text-primary-strong hover:bg-brand-50"
-                                    onClick={() => setReviewDialog({ open: true, project: p, text: '' })}
-                                    data-testid={`fe-review-${p.project_id}`}
-                                  >
-                                    <MessageSquare className="h-4 w-4 mr-1" /> Review
-                                  </Button>
+                                  {/* Approve / Review only while the FE is in flight — the backend
+                                      rejects both once approved (use Revision instead). */}
+                                  {FE_ACTIONABLE_STATUSES.includes(fe.status) && (
+                                    <>
+                                      <Button
+                                        size="sm"
+                                        className="bg-primary hover:bg-primary-hover"
+                                        onClick={() => handleFeApprove(p)}
+                                        data-testid={`fe-approve-${p.project_id}`}
+                                      >
+                                        <CheckCircle2 className="h-4 w-4 mr-1" /> Approve
+                                      </Button>
+                                      <Button
+                                        size="sm"
+                                        variant="outline"
+                                        className="border-brand-300 text-primary-strong hover:bg-brand-50"
+                                        onClick={() => setReviewDialog({ open: true, project: p, text: '' })}
+                                        data-testid={`fe-review-${p.project_id}`}
+                                      >
+                                        <MessageSquare className="h-4 w-4 mr-1" /> Review
+                                      </Button>
+                                    </>
+                                  )}
                                 </div>
                               </div>
                             </div>
@@ -1190,19 +1243,7 @@ export default function CREBoard() {
               // also show so the CRE can see history. Everything else
               // (auto-templated dates not yet acted on, no-date stages) stays
               // hidden until Planning actively requests it.
-              const collectibleEntries = allEntries.filter(e => {
-                if (e.no_date_set) return false;
-                // Already collected / partially collected → keep visible
-                const alreadyTouched =
-                  (e.amount_received || 0) > 0 ||
-                  ["paid", "collected"].includes(e.stage_status);
-                if (alreadyTouched) return true;
-                // Otherwise must be an active Planning-initiated request
-                const requested =
-                  !!e.requested_at ||
-                  ["requested", "pending_collection"].includes(e.workflow_status);
-                return requested;
-              });
+              const collectibleEntries = allEntries.filter(isPsCollectible);
               // Apply global date filter to entries (by expected_payment_date)
               const globallyDateFiltered = (dateRange.from || dateRange.to)
                 ? collectibleEntries.filter(e => inDateRange(e.expected_payment_date))
@@ -1231,21 +1272,7 @@ export default function CREBoard() {
               // We do NOT treat status='partial' as Collected even when amount==received,
               // because some legacy rows store status='partial' with corrupt amount fields.
               // Such rows must be flagged for the user to fix manually.
-              const isCollectedEntry = (e) => {
-                const hasPendingApproval = (e.pending_approval_count || 0) > 0;
-                if (hasPendingApproval) return false;
-                const balance = (e.amount || 0) - (e.amount_received || 0);
-                const s = (e.stage_status || e.status || '').toLowerCase();
-                const ws = (e.workflow_status || '').toLowerCase();
-                // Only treat as Collected when balance is effectively zero AND
-                // the cached status agrees. This filters out partial-bounce
-                // rows where stage_status may still be "collected" even though
-                // amount_received has been reduced.
-                if (balance > 1) return false;
-                if (s === 'paid' || s === 'collected') return true;
-                if (ws === 'collected') return true;
-                return false;
-              };
+              const isCollectedEntry = isPsCollected;
               // Partial = some money received but balance > 0 and no pending approval.
               const isPartialEntry = (e) => {
                 const hasPendingApproval = (e.pending_approval_count || 0) > 0;
@@ -1260,6 +1287,13 @@ export default function CREBoard() {
               // Pending = everything NOT collected (still actionable). Partial rows
               // ALSO appear here so CRE can finish collecting them.
               const pendingEntries = dateFiltered.filter(e => !isCollectedEntry(e));
+              // Pending rows in other months (what the tab badge counts but
+              // this month view can't show) — ignores the local search/date
+              // so the note only ever talks about other months.
+              const pendingOtherMonths = psAllMonths ? 0 : Math.max(0,
+                psAllEntries.filter(isPsCollectible).filter(e => !isPsCollected(e))
+                  .filter(e => !(dateRange.from || dateRange.to) || inDateRange(e.expected_payment_date)).length
+                - globallyDateFiltered.filter(e => !isCollectedEntry(e)).length);
               const entries = psSubTab === 'pending'   ? pendingEntries
                             : psSubTab === 'partial'   ? partialEntries
                             : psSubTab === 'collected' ? collectedEntries
@@ -1314,6 +1348,22 @@ export default function CREBoard() {
                       </div>
                     </CardContent>
                   </Card>
+
+                  {pendingOtherMonths > 0 && (
+                    <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-800" data-testid="ps-other-months-note">
+                      <span>
+                        {pendingOtherMonths} pending payment{pendingOtherMonths === 1 ? '' : 's'} {pendingOtherMonths === 1 ? 'is' : 'are'} scheduled in other months.
+                      </span>
+                      <button
+                        type="button"
+                        className="font-semibold underline hover:text-amber-900"
+                        onClick={() => setPsAllMonths(true)}
+                        data-testid="ps-other-months-show-all"
+                      >
+                        View all months
+                      </button>
+                    </div>
+                  )}
 
                   {/* Sub-tabs + Date filter + Search + Delete Selected */}
                   <div className="flex items-center justify-between gap-2 flex-wrap">
@@ -1418,7 +1468,7 @@ export default function CREBoard() {
                             </thead>
                             <tbody className="divide-y">
                               {entries.length === 0 ? (
-                                <tr><td colSpan="9" className="p-8 text-center text-gray-400">No payments scheduled for {MONTHS[psMonth - 1]} {psYear}.</td></tr>
+                                <tr><td colSpan="9" className="p-8 text-center text-gray-400">{psAllMonths ? 'No payments in this view.' : `No payments scheduled for ${MONTHS[psMonth - 1]} ${psYear}.`}</td></tr>
                               ) : entries.map((e) => {
                                 const balance = (e.amount || 0) - (e.amount_received || 0);
                                 const pendingApprovalAmt = e.pending_approval_amount || 0;
