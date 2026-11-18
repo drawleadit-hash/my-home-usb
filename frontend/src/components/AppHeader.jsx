@@ -565,6 +565,23 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
         <LogOut className="h-[18px] w-[18px]" />
       </button>
     );
+    // Desktop sidebar: the profile card lives in the header (right of the
+    // notifications bell), so the sidebar foot only keeps the collapse toggle.
+    if (!inDrawer) {
+      return (
+        <div className={`shrink-0 pb-4 pt-3 ${rail ? 'px-2' : 'px-3'}`}>
+          <button
+            type="button"
+            onClick={toggleCollapsed}
+            className={`flex w-full items-center gap-2 rounded-lg py-1.5 text-xs font-medium text-sidebar-muted transition-colors hover:bg-sidebar-hover hover:text-sidebar-strong ${rail ? 'justify-center' : 'px-3'}`}
+            title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            data-testid="sidebar-collapse-toggle"
+          >
+            {collapsed ? <ChevronsRight className="h-4 w-4" /> : <><ChevronsLeft className="h-4 w-4" /> Collapse</>}
+          </button>
+        </div>
+      );
+    }
     return (
       <div className={`shrink-0 pb-4 pt-3 ${rail ? 'px-2' : 'px-3'}`}>
         {rail ? (
@@ -582,17 +599,6 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
             </div>
             {logout}
           </div>
-        )}
-        {!inDrawer && (
-          <button
-            type="button"
-            onClick={toggleCollapsed}
-            className={`mt-3 flex w-full items-center gap-2 rounded-lg py-1.5 text-xs font-medium text-sidebar-muted transition-colors hover:bg-sidebar-hover hover:text-sidebar-strong ${rail ? 'justify-center' : 'px-3'}`}
-            title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-            data-testid="sidebar-collapse-toggle"
-          >
-            {collapsed ? <ChevronsRight className="h-4 w-4" /> : <><ChevronsLeft className="h-4 w-4" /> Collapse</>}
-          </button>
         )}
       </div>
     );
@@ -714,28 +720,45 @@ export function AppHeader({ user, unreadNotifs = 0, customNav, activeCustomNav, 
                   <span className="absolute right-0.5 top-0.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-semibold text-white ring-2 ring-background">{unreadNotifs}</span>
                 )}
               </Button>
-              {/* On desktop the profile avatar lives at the foot of the sidebar. */}
+              {/* Mobile / tablet: avatar only (full card is in the drawer). */}
               <button
                 type="button"
                 onClick={() => navigate('/profile')}
-                className={`ml-0.5 flex h-9 w-9 items-center justify-center rounded-full bg-secondary text-xs font-bold text-secondary-foreground transition-transform hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30 ${hasSidebar ? 'lg:hidden' : ''}`}
+                className="ml-0.5 flex h-9 w-9 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground transition-transform hover:scale-[1.04] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30 lg:hidden"
                 data-testid="header-profile"
                 title="Profile"
                 aria-label="Profile"
               >
                 {initials}
               </button>
-              {!hasSidebar && (
-                <div className="ml-1 hidden items-center gap-2 border-l border-border pl-3 lg:flex">
-                  <div className="text-right leading-tight">
-                    <p className="text-sm font-semibold text-foreground" data-testid="header-username">{userName}</p>
-                    <p className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">{roleLabel(role)}</p>
-                  </div>
-                  <Button variant="ghost" size="icon" onClick={handleLogout} className="h-9 w-9 rounded-full text-muted-foreground hover:bg-red-50 hover:text-red-600" data-testid="header-logout" aria-label="Log out">
-                    <LogOut className="h-4 w-4" />
-                  </Button>
-                </div>
-              )}
+              {/* Desktop: profile card — avatar · name · role · logout */}
+              <div className="ml-1 hidden items-center gap-2.5 rounded-2xl border border-border bg-card py-1.5 pl-1.5 pr-1 lg:flex" data-testid="header-profile-card">
+                <button
+                  type="button"
+                  onClick={() => navigate('/profile')}
+                  className="flex min-w-0 items-center gap-2.5 rounded-xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                  title="Profile"
+                  aria-label="Profile"
+                >
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold tracking-wide text-primary-foreground shadow-brand">
+                    {initials}
+                  </span>
+                  <span className="min-w-0 max-w-[10rem] leading-tight">
+                    <span className="block truncate text-sm font-semibold text-foreground" data-testid="header-username">{userName}</span>
+                    <span className="block truncate text-[11px] capitalize text-muted-foreground">{displayRole(role)}</span>
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  title="Log out"
+                  aria-label="Log out"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl text-muted-foreground transition-colors hover:bg-red-500/10 hover:text-red-600"
+                  data-testid="header-logout"
+                >
+                  <LogOut className="h-4 w-4" />
+                </button>
+              </div>
             </div>
           </div>
         </header>
